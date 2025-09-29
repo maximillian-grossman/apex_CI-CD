@@ -1,0 +1,1073 @@
+---
+- # ====== List: Administration ================================
+  id: 4553167541938396307
+  identification: 
+    name: Administration
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Feedback Preference ==========================
+    id: 4553167840934396312
+    label: 
+      label: Feedback Preference
+
+    icon: 
+      image/icon-css-classes: fa-bullhorn
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.::::'
+        page: 25 # Preferences
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Enable or disable Feedback for the application
+      2.: '&P33_FEEDBACK_STATUS.'
+
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 4553168310819396313
+    label: 
+      label: Manage Sample Data
+
+    icon: 
+      image/icon-css-classes: fa-database
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.:RP:::'
+        page: 26 # Manage Sample Data
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Re-create or remove sample data delivered with this application.
+
+  - # ====== Entry: Theme Style ==================================
+    id: 4553169128199396314
+    label: 
+      label: Theme Style
+
+    icon: 
+      image/icon-css-classes: fa-desktop
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::::'
+        page: 27 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: true
+      1.: Change user interface theme style for all users.
+
+- # ====== List: Admin Reports =================================
+  id: 4553169774230396317
+  identification: 
+    name: Admin Reports
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Activity Calendar ============================
+    id: 4553170120387396318
+    label: 
+      label: Activity Calendar
+
+    icon: 
+      image/icon-css-classes: fa-calendar
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.:28:::'
+        page: 28 # Activity Calendar
+        clear-cache: 28
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: View page views by user in a monthly calendar
+
+  - # ====== Entry: Page Views ===================================
+    id: 4553170524376396318
+    label: 
+      label: Page Views
+
+    icon: 
+      image/icon-css-classes: fa-eye
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.:29:::'
+        page: 29 # Page Views
+        clear-cache: 29
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Report page view for this application
+      2.: '&P33_PAGE_VIEWS.'
+
+  - # ====== Entry: Top Users ====================================
+    id: 4553170900846396318
+    label: 
+      label: Top Users
+
+    icon: 
+      image/icon-css-classes: fa-users
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.:30:::'
+        page: 30 # Top Users
+        clear-cache: 30
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Report user activity for this application
+      2.: '&P33_USER_COUNT.'
+
+- # ====== List: Task Actions ==================================
+  id: 4634396070724450853
+  identification: 
+    name: Task Actions
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Add To Do ====================================
+    id: 4634397102471450856
+    label: 
+      label: Add To Do
+
+    icon: 
+      image/icon-css-classes: fa-list
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:15:P15_PROJECT_ID,P15_TASK_ID:&P31_PROJECT_ID.,&P31_TASK_ID.:'
+        page: 15 # To Do Detail
+        clear-cache: 15
+        values: 
+          p15_project_id: '&P31_PROJECT_ID.'
+          p15_task_id: '&P31_TASK_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Link =====================================
+    id: 4634397490587450857
+    label: 
+      label: Add Link
+
+    icon: 
+      image/icon-css-classes: fa-link
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.:23:P23_PROJECT_ID,P23_TASK_ID:&P31_PROJECT_ID.,&P31_TASK_ID.:'
+        page: 23 # Link Detail
+        clear-cache: 23
+        values: 
+          p23_project_id: '&P31_PROJECT_ID.'
+          p23_task_id: '&P31_TASK_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Master Detail Pages ===========================
+  id: 4638086436780857749
+  identification: 
+    name: Master Detail Pages
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Side by Side =================================
+    id: 95997419481014667
+    label: 
+      label: Side by Side
+
+    icon: 
+      image/icon-css-classes: fa-layout-header-sidebar-left
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+        page: 2 # Side by Side
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A single page master-detail utilizing side by side layout and report regions with modal edit windows.
+
+  - # ====== Entry: Stacked with Sub Detail ======================
+    id: 3957371389631527488
+    label: 
+      label: Stacked with Sub Detail
+
+    icon: 
+      image/icon-css-classes: fa-layers
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Stacked with Sub Detail
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A single page master-detail-subdetail utilizing editable Interactive Grids.
+
+  - # ====== Entry: Stacked ======================================
+    id: 5417818837917707646
+    label: 
+      label: Stacked
+
+    icon: 
+      image/icon-css-classes: fa-layers
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+        page: 33 # Stacked
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A single page master-detail utilizing editable Interactive Grids.
+
+  - # ====== Entry: Drill Down ===================================
+    id: 5421843516531106893
+    label: 
+      label: Drill Down
+
+    icon: 
+      image/icon-css-classes: fa-clone
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 48
+      - 49
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:48:&SESSION.::&DEBUG.::::'
+        page: 48 # Drill Down
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Consists of a report page that drills down to a page where the selected master is standard form items, and the detail tables use editable Interactive Grids.
+
+  - # ====== Entry: Report and Marquee ===========================
+    id: 49160929960886331258
+    label: 
+      label: Report and Marquee
+
+    icon: 
+      image/icon-css-classes: fa-cards
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 4
+      - 5
+      - 11
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Report and Marquee - Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Consists of a report page that drills down to a marquee page. On the marquee page each of the detail tables are shown using a classic report.
+
+- # ====== List: Project Actions ===============================
+  id: 30943226012678707387
+  identification: 
+    name: Project Actions
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Add To Do ====================================
+    id: 4924386937354106436
+    label: 
+      label: Add To Do
+
+    icon: 
+      image/icon-css-classes: fa-list
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:15:P15_PROJECT_ID:&P11_PROJECT_ID.:'
+        page: 15 # To Do Detail
+        clear-cache: 15
+        values: 
+          p15_project_id: '&P11_PROJECT_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Link =====================================
+    id: 4924387276966107784
+    label: 
+      label: Add Link
+
+    icon: 
+      image/icon-css-classes: fa-link
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.:23:P23_PROJECT_ID:&P11_PROJECT_ID.:'
+        page: 23 # Link Detail
+        clear-cache: 23
+        values: 
+          p23_project_id: '&P11_PROJECT_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Milestone ================================
+    id: 30943226207865707388
+    label: 
+      label: Add Milestone
+
+    icon: 
+      image/icon-css-classes: fa-flag-o
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:7:P7_PROJECT_ID:&P11_PROJECT_ID.:'
+        page: 7 # Milestone Detail
+        clear-cache: 7
+        values: 
+          p7_project_id: '&P11_PROJECT_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Task =====================================
+    id: 30943226604896707389
+    label: 
+      label: Add Task
+
+    icon: 
+      image/icon-css-classes: fa-check-square-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:9:P9_PROJECT_ID:&P11_PROJECT_ID.:'
+        page: 9 # Task Detail
+        clear-cache: 9
+        values: 
+          p9_project_id: '&P11_PROJECT_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Comment ==================================
+    id: 32238727388510188402
+    label: 
+      label: Add Comment
+
+    icon: 
+      image/icon-css-classes: fa-comment-o
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.:13:P13_PROJECT_ID:&P11_PROJECT_ID.:'
+        page: 13 # Add Comment
+        clear-cache: 13
+        values: 
+          p13_project_id: '&P11_PROJECT_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Desktop Navigation Menu =======================
+  id: 48377076732981062539
+  identification: 
+    name: Desktop Navigation Menu
+
+  subscription: 
+    version-number: 45586032614632
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: test =========================================
+    id: 22624758345381866
+    label: 
+      label: test
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 150
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 3
+      - 20
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+        page: 3 # test
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: test_region_display ==========================
+    id: 22656988038091382
+    label: 
+      label: test_region_display
+
+    icon: 
+      image/icon-css-classes: fa-file-o
+
+    layout: 
+      sequence: 160
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 32
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&APP_SESSION.::&DEBUG.:::'
+        page: 32 # test_region_display
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Side by Side =================================
+    id: 94886259131694532
+    label: 
+      label: Side by Side
+
+    icon: 
+      image/icon-css-classes: fa-layout-header-sidebar-left
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 2
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+        page: 2 # Side by Side
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Report and Marquee ===========================
+    id: 3854387846994707673
+    label: 
+      label: Report and Marquee
+
+    icon: 
+      image/icon-css-classes: fa-cards
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 4
+      - 5
+      - 11
+      - 31
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Report and Marquee - Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Stacked ======================================
+    id: 3854388302840715680
+    label: 
+      label: Stacked
+
+    icon: 
+      image/icon-css-classes: fa-layers
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+        page: 33 # Stacked
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Drill Down ===================================
+    id: 3854388779190719904
+    label: 
+      label: Drill Down
+
+    icon: 
+      image/icon-css-classes: fa-clone
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 48
+      - 49
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:48:&SESSION.::&DEBUG.::::'
+        page: 48 # Drill Down
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Stacked with Sub Detail ======================
+    id: 3957341174885513000
+    label: 
+      label: Stacked with Sub Detail
+
+    icon: 
+      image/icon-css-classes: fa-layers
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 17
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Stacked with Sub Detail
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Administration ===============================
+    id: 4553164330685396271
+    label: 
+      label: Administration
+
+    icon: 
+      image/icon-css-classes: fa-cog
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Feedback =====================================
+    id: 4568601681405188368
+    label: 
+      label: Feedback
+
+    layout: 
+      sequence: 80
+      parent-entry: Administration # 4553164330685396271
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 25
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.'
+        page: 25 # Preferences
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Sample Data ==================================
+    id: 4568608718538196546
+    label: 
+      label: Sample Data
+
+    layout: 
+      sequence: 90
+      parent-entry: Administration # 4553164330685396271
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 26
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.'
+        page: 26 # Manage Sample Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Theme Style ==================================
+    id: 4568617942664202678
+    label: 
+      label: Theme Style
+
+    layout: 
+      sequence: 100
+      parent-entry: Administration # 4553164330685396271
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 27
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.'
+        page: 27 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Activity Calendar ============================
+    id: 4572064284924594546
+    label: 
+      label: Activity Calendar
+
+    layout: 
+      sequence: 120
+      parent-entry: Reports # 4572094988812621296
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.::::'
+        page: 28 # Activity Calendar
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Page Views ===================================
+    id: 4572069147955601507
+    label: 
+      label: Page Views
+
+    layout: 
+      sequence: 130
+      parent-entry: Reports # 4572094988812621296
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.::::'
+        page: 29 # Page Views
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Top Users ====================================
+    id: 4572079617988606156
+    label: 
+      label: Top Users
+
+    layout: 
+      sequence: 140
+      parent-entry: Reports # 4572094988812621296
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # Top Users
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Reports ======================================
+    id: 4572094988812621296
+    label: 
+      label: Reports
+
+    layout: 
+      sequence: 110
+      parent-entry: Administration # 4553164330685396271
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::#adminReports'
+        page: 24 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 48377130500293062628
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 1
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Desktop Navigation Bar ========================
+  id: 48377128999138062611
+  identification: 
+    name: Desktop Navigation Bar
+
+  subscription: 
+    version-number: 1089079371
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Feedback =====================================
+    id: 4568646217655339757
+    label: 
+      label: Feedback
+
+    icon: 
+      image/icon-css-classes: fa-bullhorn
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:102:&SESSION.::&DEBUG.:102:P102_APPLICATION_ID,P102_PAGE_ID:&APP_ID.,&APP_PAGE_ID.:'
+        page: 102 # Feedback
+        clear-cache: 102
+        values: 
+          p102_application_id: '&APP_ID.'
+          p102_page_id: '&APP_PAGE_ID.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: "nvl(:ENABLE_FEEDBACK,'NO') = 'YES'"
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 27409392100354904260
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: Log Out ======================================
+    id: 48377129222801062613
+    label: 
+      label: Log Out
+
+    layout: 
+      sequence: 35
+      parent-entry: '&APP_USER.' # 27409392100354904260
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+

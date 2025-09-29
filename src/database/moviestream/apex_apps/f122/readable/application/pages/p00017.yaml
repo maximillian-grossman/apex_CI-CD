@@ -1,0 +1,1341 @@
+---
+# ====== Page: Background Load ===============================
+id: 17
+identification: 
+  name: Background Load
+  alias: BACKGROUND-LOAD
+  title: Background Load
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Button Bar ==================================
+  id: 3349099206975829628
+  identification: 
+    name: Button Bar
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--noUI
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P17_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Data Source =================================
+  id: 3349101241330829647
+  identification: 
+    name: Data Source
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: CREATE JOB priv available # 3356337372479038665
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Upload a File ===============================
+  id: 3349101639061829648
+  identification: 
+    name: Upload a File
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: Data Source # 3349101241330829647
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P17_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Loaded File =================================
+  id: 3349103720140829660
+  identification: 
+    name: Loaded File
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: Data Source # 3349101241330829647
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form--large
+    - t-Form--stretchInputs
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P17_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Preview =====================================
+  id: 3349105184021829678
+  identification: 
+    name: Preview
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select p.line_number,
+             p.col001, p.col002, p.col003, p.col004, p.col005, p.col006, p.col007, p.col008, p.col009, p.col010
+             -- add more columns (col011 to col300) here.
+        from apex_application_temp_files f, 
+             table( apex_data_parser.parse(
+                        p_content          => eba_demo_data_load.zip_to_csv(
+                                                  p_blob_content => f.blob_content,
+                                                  p_mime_type    => f.mime_type ),
+                        p_file_name        => f.filename,
+                        p_file_type        => 2,  -- csv file type
+                        p_add_headers_row  => 'Y',
+                        p_csv_enclosed     => '"',
+                        p_file_charset     => 'WE8ISO8859P1',
+                        p_max_rows         => 10 ) ) p
+       where f.name = :P17_FILE
+       and p.line_number > 1;
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P17_FILE
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 50
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlight
+      - t-Report--horizontalBorders
+      - t-Report--hideNoPagination
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 500
+
+    messages: 
+      when-no-data-found: no data found
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: PL/SQL Function Body
+      pl/sql-function-body: |
+        declare
+            l_col_headers varchar2(32767);
+        begin
+            select p.line_number || ':' || 
+               p.col001 || ':' || p.col002 || ':' || p.col003 || ':' || p.col004 || ':' || p.col005 || ':' || 
+               p.col006 || ':' || p.col007 || ':' || p.col008 || ':' || p.col009 || ':' || p.col010
+            into l_col_headers
+               -- add more columns (col011 to col300) here.
+             from apex_application_temp_files f, 
+                  table( apex_data_parser.parse(
+                             p_content          => eba_demo_data_load.zip_to_csv(
+                                                       p_blob_content => f.blob_content,
+                                                       p_mime_type    => f.mime_type ),
+                             p_file_name        => f.filename,
+                             p_file_type        => 2,  -- csv file type
+                             p_add_headers_row  => 'Y',
+                             p_csv_enclosed     => '"',
+                             p_file_charset     => 'WE8ISO8859P1',
+                             p_max_rows         => 10 ) ) p
+            where f.name = :P17_FILE
+            and p.line_number = 1;
+        
+            return l_col_headers;
+        end;
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: LINE_NUMBER =================================
+    id: 3349105648765829735
+    identification: 
+      column-name: LINE_NUMBER
+      type: Plain Text
+
+    heading: 
+      heading: Line Number
+      alignment: end
+
+    layout: 
+      sequence: 1
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL001 ======================================
+    id: 3349106039483829739
+    identification: 
+      column-name: COL001
+      type: Plain Text
+
+    heading: 
+      heading: Col001
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL002 ======================================
+    id: 3349106436346829739
+    identification: 
+      column-name: COL002
+      type: Plain Text
+
+    heading: 
+      heading: Col002
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL003 ======================================
+    id: 3349106796405829740
+    identification: 
+      column-name: COL003
+      type: Plain Text
+
+    heading: 
+      heading: Col003
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL004 ======================================
+    id: 3349107152839829742
+    identification: 
+      column-name: COL004
+      type: Plain Text
+
+    heading: 
+      heading: Col004
+      alignment: start
+
+    layout: 
+      sequence: 5
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL005 ======================================
+    id: 3349107576870829742
+    identification: 
+      column-name: COL005
+      type: Plain Text
+
+    heading: 
+      heading: Col005
+      alignment: start
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL006 ======================================
+    id: 3349107956703829742
+    identification: 
+      column-name: COL006
+      type: Plain Text
+
+    heading: 
+      heading: Col006
+      alignment: start
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL007 ======================================
+    id: 3349108407393829742
+    identification: 
+      column-name: COL007
+      type: Plain Text
+
+    heading: 
+      heading: Col007
+      alignment: start
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL008 ======================================
+    id: 3349108752051829743
+    identification: 
+      column-name: COL008
+      type: Plain Text
+
+    heading: 
+      heading: Col008
+      alignment: start
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL009 ======================================
+    id: 3349109212208829743
+    identification: 
+      column-name: COL009
+      type: Plain Text
+
+    heading: 
+      heading: Col009
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL010 ======================================
+    id: 3349109569355829743
+    identification: 
+      column-name: COL010
+      type: Plain Text
+
+    heading: 
+      heading: Col010
+      alignment: start
+
+    layout: 
+      sequence: 11
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Create Job Privilege is Missing =============
+  id: 3355783456997310644
+  identification: 
+    name: Create Job Privilege is Missing
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>To use this page, your application parsing schema must have <em>CREATE JOB</em> privilege. Contact your database administrator to get the <strong>CREATE JOB</strong> privilege granted using the following SQL statement.</p>
+      <pre>grant CREATE JOB to #OWNER#;</pre>
+      <p>Then log out and back into the application and revisit this page. </p>
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--warning
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: MODEL.LOV.NOT_W_ARGUMENT # 3356337372479038665
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About this page =============================
+  id: 4223795490869072031
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>If you are loading large datasets, the loading can run into a long running page process.  
+         If the instance is set up with a resource limit, you will see the maximum limit has been reached for this type of load. To load large data efficiently, 
+         you can run the loading process in the background.</p>
+      <p>This page illustrates how to use a process of the <strong>Execution Chain</strong> type to send the
+         Data Loading execution to the background. The status of the background loading operation can be 
+         monitored in the <strong>APEX_APPL_PAGE_BG_PROC_STATUS</strong> APEX view. You can also review
+         currently running background executions by clicking <strong>Session</strong> in the 
+         <strong>Developer Toolbar</strong> and then viewing <strong>Background Executions</strong>.
+         </p>
+      
+      <p>Download sample <a href="#APP_IMAGES#SalesData.zip">SalesData.zip</a> file.</a> This page uses <em>APEX_ZIP</em> package to unzip the zip file.  You can upload either the ZIP or CSV file.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--info
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 5852357724088681368
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 11539353657713410830
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+page-items: 
+- # ====== Page Item: P17_LOAD_EXEC_ID =========================
+  id: 1843305241074732269
+  identification: 
+    name: P17_LOAD_EXEC_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: About this page # 4223795490869072031
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_PROCESSED_ROWS =======================
+  id: 1843305314398732270
+  identification: 
+    name: P17_PROCESSED_ROWS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: About this page # 4223795490869072031
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_ERROR_ROWS ===========================
+  id: 1843305546527732272
+  identification: 
+    name: P17_ERROR_ROWS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: About this page # 4223795490869072031
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_FILE =================================
+  id: 3349102026588829649
+  identification: 
+    name: P17_FILE
+    type: File Upload
+
+  label: 
+    label: Upload a File
+    alignment: Left
+
+  display: 
+    display-as: Block Dropzone
+    dropzone-title: Drag and Drop Sales Data
+    dropzone-description: Supported formats CSV, TXT, ZIP
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+    maximum-file-size: 10000
+
+  layout: 
+    sequence: 10
+    region: Upload a File # 3349101639061829648
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_FILE_NAME ============================
+  id: 3349104116459829662
+  identification: 
+    name: P17_FILE_NAME
+    type: Display Only
+
+  label: 
+    label: Loaded File
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: Loaded File # 3349103720140829660
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Above
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: Pasted Data
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CLEAR =======================================
+  id: 3349099655457829638
+  identification: 
+    button-name: CLEAR
+    label: Clear
+
+  layout: 
+    sequence: 10
+    region: Button Bar # 3349099206975829628
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: LOAD ========================================
+  id: 3349099954707829640
+  identification: 
+    button-name: LOAD
+    label: Load Data
+
+  layout: 
+    sequence: 20
+    region: Button Bar # 3349099206975829628
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Upload a File =======================
+  id: 3349102789513829658
+  identification: 
+    name: Upload a File
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P17_FILE
+
+  client-side-condition: 
+    type: Item is not null
+    item: P17_FILE
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 3349103290701829659
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: Upload a File # 3349102789513829658
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: Is valid file type ======================
+  id: 3349104860617829672
+  identification: 
+    name: Is valid file type
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: |
+      if apex_data_parser.assert_file_type(
+             p_file_name => :P17_FILE_NAME,
+             p_file_type => apex_data_parser.c_file_type_csv ) or
+         lower( :P17_FILE_NAME ) like '%.zip'
+      then
+          return true;
+      else
+          :P17_FILE := null;
+          return false;
+      end if;
+    always-execute: false
+
+  error: 
+    error-message: Invalid file type. Supported file types CSV, TXT, ZIP.
+    display-location: Inline with Field and in Notification
+    associated-item: P17_FILE # 3349102026588829649
+
+computations: 
+- # ====== Computation: P17_FILE_NAME ==========================
+  id: 3349104494472829663
+  identification: 
+    item-name: P17_FILE_NAME
+
+  execution: 
+    sequence: 10
+    point: After Submit
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select filename
+        from apex_application_temp_files 
+       where name = :P17_FILE
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P17_FILE
+
+processes: 
+- # ====== Process: Load Data Background =======================
+  id: 1843305644969732273
+  identification: 
+    name: Load Data Background
+    type: Execution Chain
+    execution-chain: None
+
+  settings: 
+    run-in-background: true
+    return-id-into-item: P17_LOAD_EXEC_ID
+    temporary-file-handling: Move
+    temporary-file-items: 
+    - P17_FILE
+    executions-limit: 1
+    submit-immediately: true
+
+  serialization: 
+    serialize: true
+    when-already-running: Wait
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Data Loading task kicked off for execution.
+
+  error: 
+    error-message: Only one file can be loaded at a time.
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 3349099954707829640
+    type: Item is NOT NULL
+    item: P17_FILE
+
+- # ====== Process: Unpack ZIP Archive =========================
+  id: 1843305712704732274
+  identification: 
+    name: Unpack ZIP Archive
+    type: Execute Code
+    execution-chain: Load Data Background # 1843305644969732273
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_file      blob;
+          l_mime_type apex_application_temp_files.mime_type%type;
+      begin
+          select mime_type,
+                 blob_content
+            into l_mime_type,
+                 l_file
+            from apex_application_temp_files
+           where name = :P17_FILE;
+      
+          if l_mime_type = 'application/zip' then
+              l_file := eba_demo_data_load.zip_to_csv( p_blob_content => l_file, p_mime_type => l_mime_type );
+          end if;
+      
+          eba_demo_data_load.set_file_blob( l_file );
+      end;
+
+  execution: 
+    sequence: 10
+
+- # ====== Process: Load Data ==================================
+  id: 1843305842318732275
+  identification: 
+    name: Load Data
+    type: Data Loading
+    execution-chain: Load Data Background # 1843305644969732273
+
+  settings: 
+    data-load-definition: Sales Data Load # 3354384084115221396
+    source-data-type: SQL Query
+    sql-query: select eba_demo_data_load.get_file_blob from sys.dual
+    processed-row-count-item: 
+    - P17_PROCESSED_ROWS
+    error-row-count-item: P17_ERROR_ROWS
+
+  execution: 
+    sequence: 20
+
+  success-message: 
+    success-message: '{"rows_processed": &P17_PROCESSED_ROWS., "rows_with_error": &P17_ERROR_ROWS. }  '
+
+- # ====== Process: Report Loading Results =====================
+  id: 1843305921825732276
+  identification: 
+    name: Report Loading Results
+    type: Execute Code
+    execution-chain: Load Data Background # 1843305644969732273
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: "apex_background_process.set_status( '{\"rows_processed\":' || :P17_PROCESSED_ROWS || ',\"rows_with_error\":' || :P17_ERROR_ROWS || '}' );"
+
+  execution: 
+    sequence: 30
+
+- # ====== Process: Clear Cache ================================
+  id: 3349100907180829644
+  identification: 
+    name: Clear Cache
+    type: Clear Session State
+    execution-chain: None
+
+  settings: 
+    type: Clear all Items on the Current Page
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: CLEAR # 3349099655457829638
+
+branches: 
+- # ====== Branch: View Load Status ============================
+  id: 3352991272024115668
+  identification: 
+    name: View Load Status
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:17,18,SALES_DATA_LOAD_ERR:P18_LOAD_EXEC_ID:&P17_LOAD_EXEC_ID.&success_msg=#SUCCESS_MSG#'
+      page: 18 # Load Status
+      clear-cache: 17,18,SALES_DATA_LOAD_ERR
+      values: 
+        p18_load_exec_id: '&P17_LOAD_EXEC_ID.'
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 3349099954707829640
+

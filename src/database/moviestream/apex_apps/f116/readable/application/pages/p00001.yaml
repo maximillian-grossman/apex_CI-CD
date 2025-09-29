@@ -1,0 +1,1133 @@
+---
+# ====== Page: Home ==========================================
+id: 1
+identification: 
+  name: Home
+  alias: HOME
+  title: DOC_UNDERSTANDING_RAFFLE
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: DOC_UNDERSTANDING_RAFFLE ====================
+  id: 20620889553332686
+  identification: 
+    name: DOC_UNDERSTANDING_RAFFLE
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-512.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Raffle Upload ===============================
+  id: 20694681529602733
+  identification: 
+    name: Raffle Upload
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: RAFFLE_UPLOAD
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: false
+
+page-items: 
+- # ====== Page Item: P1_ID ====================================
+  id: 20694879124602735
+  identification: 
+    name: P1_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: ID
+    data-type: NUMBER
+    query-only: true
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_FILE_NAME =============================
+  id: 20694951369602736
+  identification: 
+    name: P1_FILE_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: FILE_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_MIME_TYPE =============================
+  id: 20695077317602737
+  identification: 
+    name: P1_MIME_TYPE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: MIME_TYPE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_OBJECT_STORAGE_URL ====================
+  id: 20695169179602738
+  identification: 
+    name: P1_OBJECT_STORAGE_URL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: OBJECT_STORAGE_URL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_CREATED ===============================
+  id: 20695290611602739
+  identification: 
+    name: P1_CREATED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: CREATED
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_CREATED_BY ============================
+  id: 20695341784602740
+  identification: 
+    name: P1_CREATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: CREATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_UPDATED ===============================
+  id: 20695489574602741
+  identification: 
+    name: P1_UPDATED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: UPDATED
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_UPDATED_BY ============================
+  id: 20695518981602742
+  identification: 
+    name: P1_UPDATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 90
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: UPDATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_STATUS ================================
+  id: 20695640128602743
+  identification: 
+    name: P1_STATUS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 100
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: STATUS
+    data-type: VARCHAR2
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_DOC_AI_JSON ===========================
+  id: 20695767944602744
+  identification: 
+    name: P1_DOC_AI_JSON
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 110
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Raffle Upload # 20694681529602733
+    column: DOC_AI_JSON
+    data-type: CLOB
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: CLOB
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_COMPARTMENT_ID ========================
+  id: 20695887884602745
+  identification: 
+    name: P1_COMPARTMENT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 120
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: ocid1.compartment.oc1..aaaaaaaasa6moe3ldbzpclpex4kftyoyrarii7lispzqm4ueyaxbtxhorhca
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_CRED_STATIC_ID ========================
+  id: 20695951923602746
+  identification: 
+    name: P1_CRED_STATIC_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 130
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: DOC_UNDERSTANDING_KEY
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_NAMESPACE_NAME ========================
+  id: 20696038191602747
+  identification: 
+    name: P1_NAMESPACE_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 140
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: natdcshjumpstartprod
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_BUCKET_NAME ===========================
+  id: 20696166130602748
+  identification: 
+    name: P1_BUCKET_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 150
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: docunderstanding
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_FEATURE_TYPE ==========================
+  id: 20696292198602749
+  identification: 
+    name: P1_FEATURE_TYPE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 160
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: KEY_VALUE_EXTRACTION
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_REGION ================================
+  id: 20696307460602750
+  identification: 
+    name: P1_REGION
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 170
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: us-ashburn-1
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_RESPONSE ==============================
+  id: 20930049844783801
+  identification: 
+    name: P1_RESPONSE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 180
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: CLOB
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_EMP_NO ================================
+  id: 20930119644783802
+  identification: 
+    name: P1_EMP_NO
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 190
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_FILE_BLOB =============================
+  id: 20930235556783803
+  identification: 
+    name: P1_FILE_BLOB
+    type: File Upload
+
+  label: 
+    label: File Blob
+    alignment: Left
+
+  display: 
+    display-as: Block Dropzone
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+    file-types: image/jpeg,image/png,application/pdf
+
+  layout: 
+    sequence: 20
+    region: Raffle Upload # 20694681529602733
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Process_Document ============================
+  id: 20930354320783804
+  identification: 
+    button-name: Process_Document
+    label: Process Document
+
+  layout: 
+    sequence: 200
+    region: Raffle Upload # 20694681529602733
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+processes: 
+- # ====== Process: Initialize form Home =======================
+  id: 20694744453602734
+  identification: 
+    name: Initialize form Home
+    type: Form - Initialization
+    execution-chain: None
+    form-region: Raffle Upload # 20694681529602733
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Process Raffle =============================
+  id: 20930401434783805
+  identification: 
+    name: Process Raffle
+    type: Execution Chain
+    execution-chain: None
+
+  settings: 
+    run-in-background: false
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Upload to Object Storage ===================
+  id: 20930523275783806
+  identification: 
+    name: Upload to Object Storage
+    type: Invoke API
+    execution-chain: Process Raffle # 20930401434783805
+
+  settings: 
+    type: PL/SQL Procedure or Function
+    owner: PARSING SCHEMA
+    procedure-or-function: UPLOAD_FILE
+
+  execution: 
+    sequence: 10
+
+  parameters: 
+  - # ====== Parameter: p_file_content ===========================
+    id: 20930677753783807
+    identification: 
+      name: p_file_content
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P1_FILE_BLOB
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_static_id ==============================
+    id: 20930740149783808
+    identification: 
+      name: p_static_id
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P1_CRED_STATIC_ID
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_namespace ==============================
+    id: 20930819241783809
+    identification: 
+      name: p_namespace
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P1_NAMESPACE_NAME
+
+    advanced: 
+      display-sequence: 30
+
+  - # ====== Parameter: p_bucket =================================
+    id: 20930925262783810
+    identification: 
+      name: p_bucket
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P1_BUCKET_NAME
+
+    advanced: 
+      display-sequence: 40
+
+  - # ====== Parameter: p_region =================================
+    id: 20931059990783811
+    identification: 
+      name: p_region
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P1_REGION
+
+    advanced: 
+      display-sequence: 50
+
+  - # ====== Parameter: p_object_storage_url =====================
+    id: 20931129161783812
+    identification: 
+      name: p_object_storage_url
+
+    parameter: 
+      direction: Out
+      data-type: VARCHAR2
+      ignore-output: false
+
+    value: 
+      item: P1_OBJECT_STORAGE_URL
+
+    advanced: 
+      display-sequence: 60
+
+  - # ====== Parameter: p_file_name ==============================
+    id: 20931212916783813
+    identification: 
+      name: p_file_name
+
+    parameter: 
+      direction: Out
+      data-type: VARCHAR2
+      ignore-output: false
+
+    value: 
+      item: P1_FILE_NAME
+
+    advanced: 
+      display-sequence: 70
+
+  - # ====== Parameter: p_mime_type ==============================
+    id: 20931388042783814
+    identification: 
+      name: p_mime_type
+
+    parameter: 
+      direction: Out
+      data-type: VARCHAR2
+      ignore-output: false
+
+    value: 
+      item: P1_MIME_TYPE
+
+    advanced: 
+      display-sequence: 80
+
+- # ====== Process: Automatic DML ==============================
+  id: 20931443802783815
+  identification: 
+    name: Automatic DML
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: Process Raffle # 20930401434783805
+    form-region: Raffle Upload # 20694681529602733
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 20
+
+- # ====== Process: Integrate Document Understanding API =======
+  id: 20931577003783816
+  identification: 
+    name: Integrate Document Understanding API
+    type: Invoke API
+    execution-chain: Process Raffle # 20930401434783805
+
+  settings: 
+    type: REST Source
+    rest-source: Doc Understanding API # 20672657290449062
+    operation: POST # 20673204664449068
+
+  execution: 
+    sequence: 30
+
+  parameters: 
+  - # ====== Parameter: BUCKET_NAME ==============================
+    id: 20932930321783830
+    identification: 
+      name: BUCKET_NAME # 20675841226460562
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P1_BUCKET_NAME
+
+  - # ====== Parameter: COMPARTMENT_ID ===========================
+    id: 20933019826783831
+    identification: 
+      name: COMPARTMENT_ID # 20674817958460561
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P1_COMPARTMENT_ID
+
+  - # ====== Parameter: FEATURE_TYPE =============================
+    id: 20933166714783832
+    identification: 
+      name: FEATURE_TYPE # 20676808998460564
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P1_FEATURE_TYPE
+
+  - # ====== Parameter: NAMESPACE_NAME ===========================
+    id: 20933209224783833
+    identification: 
+      name: NAMESPACE_NAME # 20675356778460562
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P1_NAMESPACE_NAME
+
+  - # ====== Parameter: OBJECT_NAME ==============================
+    id: 20933369675783834
+    identification: 
+      name: OBJECT_NAME # 20676384576460563
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P1_FILE_NAME
+
+  - # ====== Parameter: RESPONSE =================================
+    id: 20933466763783835
+    identification: 
+      name: RESPONSE # 20677778669487040
+
+    parameter: 
+      direction: Out
+      ignore-output: false
+
+    value: 
+      item: P1_RESPONSE
+
+- # ====== Process: New ========================================
+  id: 20932217389783823
+  identification: 
+    name: New
+    type: Execute Code
+    execution-chain: Process Raffle # 20930401434783805
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      INSERT INTO DOCAI_RESPONSE
+              (
+                  document_id,
+                  field_type_code,
+                  field_label,
+                  label_score,
+                  field_value
+              )
+       SELECT :P1_ID,
+         field_type_code,
+         field_label,
+         label_score,
+         field_value
+         FROM   JSON_TABLE(:P1_RESPONSE, '$.pages[*]'
+               COLUMNS (page_number       NUMBER        PATH '$.pageNumber',
+                        NESTED PATH '$.documentFields[*]' COLUMNS
+                         (field_type_code VARCHAR2(50)   PATH '$.fieldType',
+                          field_label     VARCHAR2(100)  PATH '$.fieldLabel.name',
+                          label_score     NUMBER         PATH '$.fieldLabel.confidence',
+                          field_value     VARCHAR2(1000) PATH '$.fieldValue.value'
+                          ))) jt
+        WHERE  jt.field_type_code = 'KEY_VALUE';
+
+  execution: 
+    sequence: 40
+

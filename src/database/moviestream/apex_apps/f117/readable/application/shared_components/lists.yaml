@@ -1,0 +1,783 @@
+---
+- # ====== List: User Interface ================================
+  id: 982123892127984073
+  identification: 
+    name: User Interface
+
+  subscription: 
+    version-number: 2491839794
+
+  source: 
+    type: Static Values
+
+  configuration: 
+    build-option: 'Feature: Theme Style Selection' # 982117930104984006
+
+  entries: 
+  - # ====== Entry: Manage Laptop Stock ==========================
+    id: 41549428544764030
+    label: 
+      label: Manage Laptop Stock
+
+    icon: 
+      image/icon-css-classes: fa-laptop
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # Manage Laptop Stock
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Manage laptop stock amounts
+
+  - # ====== Entry: Theme Style Selection ========================
+    id: 982124372142984073
+    label: 
+      label: Theme Style Selection
+
+    icon: 
+      image/icon-css-classes: fa-paint-brush
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10010:&SESSION.::&DEBUG.:10010:::'
+        page: 10010 # Theme Style Selection
+        clear-cache: 10010
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Set the default application look and feel
+
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 982125272312990666
+    label: 
+      label: Manage Sample Data
+
+    icon: 
+      image/icon-css-classes: fa-pencil-square-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.::::'
+        page: 18 # Manage Sample Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Reset the data for the sample
+
+  - # ====== Entry: Email Settings ===============================
+    id: 982137583372232961
+    label: 
+      label: Email Settings
+
+    icon: 
+      image/icon-css-classes: fa-envelope-wrench
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Email Settings
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Configure an email address to notify for job changes as well as laptop approval and delivery.
+
+  - # ====== Entry: Salary Change Approvers ======================
+    id: 982138397243246455
+    label: 
+      label: Salary Change Approvers
+
+    icon: 
+      image/icon-css-classes: fa-badge-check
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Approvers
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Manage and test salary change approver assignments
+
+- # ====== List: Navigation Menu ===============================
+  id: 1275354262220086480
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 2497227090
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Workflow Dashboard ===========================
+    id: 35415339558577006
+    label: 
+      label: Workflow Dashboard
+
+    icon: 
+      image/icon-css-classes: fa-dashboard
+
+    layout: 
+      sequence: 105
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # Workflow Dashboard
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Operations Team # 1275551282813086744
+
+  - # ====== Entry: My Requests ==================================
+    id: 41595786113274628
+    label: 
+      label: My Requests
+
+    icon: 
+      image/icon-css-classes: fa-tasks
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # My Requests
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Manage Vacation Rules ========================
+    id: 353141457521037332
+    label: 
+      label: Manage Vacation Rules
+
+    icon: 
+      image/icon-css-classes: fa-plane
+
+    layout: 
+      sequence: 120
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 20
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+        page: 20 # Manage Vacation Rules
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Operations Team # 1275551282813086744
+
+  - # ====== Entry: Setup ========================================
+    id: 982115484549972223
+    label: 
+      label: Setup
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 130
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 21
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Setup
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Home =========================================
+    id: 982142124009330918
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 1
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Pending Approvals ============================
+    id: 982333579543067642
+    label: 
+      label: Pending Approvals
+
+    icon: 
+      image/icon-css-classes: fa-hourglass-2
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 12
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Pending Approvals
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: More Information =============================
+    id: 1204278601492788506
+    label: 
+      label: More Information
+
+    icon: 
+      image/icon-css-classes: fa-info-square-o
+
+    layout: 
+      sequence: 5
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 14
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.::::'
+        page: 14 # More Information
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: My Tasks =====================================
+    id: 1246888608709468326
+    label: 
+      label: My Tasks
+
+    icon: 
+      image/icon-css-classes: fa-tasks
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 3
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+        page: 3 # My Tasks
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Task Administration ==========================
+    id: 1266202530001804571
+    label: 
+      label: Task Administration
+
+    icon: 
+      image/icon-css-classes: fa-tasks
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 6
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+        page: 6 # Task Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Employees ====================================
+    id: 1275557756721086795
+    label: 
+      label: Employees
+
+    icon: 
+      image/icon-css-classes: fa-users-alt
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
+        page: 8 # Employees
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Laptop Order Management ======================
+    id: 1315003313670974208
+    label: 
+      label: Laptop Order Management
+
+    icon: 
+      image/icon-css-classes: fa-laptop
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 23
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.::::'
+        page: 23 # Laptop Order Management
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+    security: 
+      authorization-scheme: Operations Team # 1275551282813086744
+
+  - # ====== Entry: Switch User ==================================
+    id: 1515052747807743318
+    label: 
+      label: Switch User
+
+    icon: 
+      image/icon-css-classes: fa-user-pointer
+
+    layout: 
+      sequence: 110
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # Sample Login
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Login ========================================
+    id: 1515092965413098828
+    label: 
+      label: Login
+
+    icon: 
+      image/icon-css-classes: fa-lock-user
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # Sample Login
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is the Public User (user has not authenticated)
+
+  - # ====== Entry: Pending Actions ==============================
+    id: 1528177872958903067
+    label: 
+      label: Pending Actions
+
+    icon: 
+      image/icon-css-classes: fa-user-clock
+
+    layout: 
+      sequence: 55
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 25
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.::::'
+        page: 25 # Pending Actions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Appraisal History ============================
+    id: 1535250679432541954
+    label: 
+      label: Appraisal History
+
+    icon: 
+      image/icon-css-classes: fa-server-clock
+
+    layout: 
+      sequence: 35
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 29
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.::::'
+        page: 29 # Appraisal History
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Workflow Debug Messages ======================
+    id: 1545578970954536934
+    label: 
+      label: Workflow Debug Messages
+
+    icon: 
+      image/icon-css-classes: fa-bug
+
+    layout: 
+      sequence: 90
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::::'
+        page: 27 # Workflow Debug Messages
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Operations Team # 1275551282813086744
+
+  - # ====== Entry: Workflow Status ==============================
+    id: 1545579424165541702
+    label: 
+      label: Workflow Status
+
+    icon: 
+      image/icon-css-classes: fa-workflow
+
+    layout: 
+      sequence: 100
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.::::'
+        page: 19 # Workflow Status
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    security: 
+      authorization-scheme: Operations Team # 1275551282813086744
+
+- # ====== List: Navigation Bar ================================
+  id: 1275548194199086712
+  identification: 
+    name: Navigation Bar
+
+  subscription: 
+    version-number: 738866123
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 981908858168800232
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 15
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:HELP:&SESSION.::&DEBUG.::::'
+        page: HELP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Install App ==================================
+    id: 1275560664096086839
+    label: 
+      label: Install App
+
+    icon: 
+      image/icon-css-classes: fa-cloud-download
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Never
+
+    link: 
+      target: '#action$a-pwa-install'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: a-pwaInstall
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 1275560897515086839
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: --- ==========================================
+    id: 1275561344686086840
+    label: 
+      label: '---'
+
+    layout: 
+      sequence: 30
+      parent-entry: '&APP_USER.' # 1275560897515086839
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: separator
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Sign Out =====================================
+    id: 1275561711235086840
+    label: 
+      label: Sign Out
+
+    icon: 
+      image/icon-css-classes: fa-sign-out
+
+    layout: 
+      sequence: 40
+      parent-entry: '&APP_USER.' # 1275560897515086839
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+

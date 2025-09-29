@@ -1,0 +1,41 @@
+---
+- # ====== Install Script: EMP and DEPT tables =================
+  id: 1334864997962292061
+  identification: 
+    name: EMP and DEPT tables
+
+  execution: 
+    sequence: 50
+
+- # ====== Install Script: Pipelined Function Package ==========
+  id: 1335111998016146648
+  identification: 
+    name: Pipelined Function Package
+
+  execution: 
+    sequence: 60
+
+- # ====== Install Script: Create Table ========================
+  id: 2603904021735714931
+  identification: 
+    name: Create Table
+
+  execution: 
+    sequence: 30
+
+- # ====== Install Script: Load Data ===========================
+  id: 2603931016990717142
+  identification: 
+    name: Load Data
+
+  execution: 
+    sequence: 80
+
+- # ====== Install Script: Set plscope_settings ================
+  id: 3377329629528162140
+  identification: 
+    name: Set plscope_settings
+
+  execution: 
+    sequence: 10
+

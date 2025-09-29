@@ -1,0 +1,95 @@
+---
+- # ====== Application Process: Delete Conversation ============
+  id: 104036065358707552
+  identification: 
+    name: Delete Conversation
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DELETE FROM OCW23_CONVERSATIONS WHERE ID = :P1_CONV_ID;
+      :P1_CONV_ID := NULL;
+
+  execution: 
+    sequence: 1
+    point: Before Header
+
+  server-side-condition: 
+    type: Request = Value
+    value: DELETE_CONVERSATION
+
+  subscription: 
+    version-number: 41042850903695
+
+- # ====== Application Process: GET_RESPONSE ===================
+  id: 106671209643777075
+  identification: 
+    name: GET_RESPONSE
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+          l_response ocw23_prompts.response%type;
+      begin
+          select response into l_response from ocw23_prompts where id = apex_application.g_x01;
+         
+      
+         apex_json.open_object;
+         apex_json.write('id',apex_application.g_x01 );
+         apex_json.write('response',l_response );
+         apex_json.close_object;
+       end;
+
+  execution: 
+    sequence: 1
+    point: Ajax Callback
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
+  subscription: 
+    version-number: 41042850903809
+
+- # ====== Application Process: GET_SQL_RESULTS ================
+  id: 110033177911314238
+  identification: 
+    name: GET_SQL_RESULTS
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+          l_context apex_exec.t_context;
+          l_sql VARCHAR2(4000);
+      begin
+          SELECT showsql into l_sql from ocw23_prompts where id = apex_application.g_x01;
+          l_context := apex_exec.open_query_context( 
+                           p_location   => apex_exec.c_location_local_db,
+                           p_sql_query  => l_sql,
+                           p_max_rows => 10,
+                           p_total_row_count => true);
+      
+         apex_json.open_object;
+         apex_json.write('id',apex_application.g_x01 );
+         apex_json.write('totalRowCount',apex_exec.get_total_row_count(l_context) );
+         apex_json.write_context( p_name => 'results', p_context => l_context, p_write_null=> true);
+         apex_json.close_object;
+       end;
+
+  execution: 
+    sequence: 1
+    point: Ajax Callback
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
+  subscription: 
+    version-number: 41042850903818
+

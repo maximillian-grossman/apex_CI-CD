@@ -1,0 +1,24 @@
+---
+- # ====== Authentication: APEX Auth ===========================
+  id: 10563475101487172413
+  identification: 
+    name: APEX Auth
+
+  subscription: 
+    version-number: 187801247
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: URL
+    invalid-session-url: 
+      url: 'f?p=&APP_ID.:101:&SESSION.'
+      page: 101 # Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+

@@ -1,0 +1,13 @@
+---
+- # ====== Shortcut: DELETE_CONFIRM_MSG ========================
+  id: 1358552933092569069
+  identification: 
+    name: DELETE_CONFIRM_MSG
+
+  subscription: 
+    version-number: 1089079763
+
+  source: 
+    type: Text with JavaScript Escaped Single Quotes
+    text: Would you like to perform this delete action?
+

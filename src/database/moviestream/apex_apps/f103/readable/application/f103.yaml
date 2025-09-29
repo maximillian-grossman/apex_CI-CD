@@ -1,0 +1,278 @@
+---
+# ====== Application: Sample Document Generator ==============
+id: 103
+identification: 
+  name: Sample Document Generator
+  alias: SAMPLE-DOCGEN
+  version: 24.1.0
+  application-group: Sample Apps # 8966220573157898
+
+row-search: 
+  tokenize: true
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Native Printing
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: false
+  logging: true
+  debugging: true
+  compatibility-mode: 21.2 to 24.1
+  accessible-read-only-items: false
+  pass-ecid: Y
+  copyright-banner: |
+    Name: #APP_NAME#
+    Copyright (c) 2012, #YEAR# Oracle and/or its affiliates.
+    Licensed under the Universal Permissive License v 1.0
+    as shown at https://oss.oracle.com/licenses/upl/
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Oracle APEX Accounts # 2623126047317129492
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Disabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+
+database-session: 
+  parsing-schema: MOVIESTREAM
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Left-To-Right
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Text
+  text: Sample Document Generator
+
+progressive-web-app: 
+  enable: true
+  installable: false
+  display: Standalone
+  screen-orientation: Any
+  ios-status-bar-style: Default
+  enable-push-notifications: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+    page: 1 # Home
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - js-defaultCollapsed
+  - js-navCollapsed--hidden
+  - t-TreeNav--styleA
+  list-position: Side
+  list: Navigation Menu # 2623126801248129492
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 2623410641011129678
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  include-jquery-migrate: false
+
+attributes: 
+  theme: Universal Theme # 42
+  global-page: 0
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: true
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 45013138383416
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: Sample Document Generator
+
+component-settings: 
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 1458143507103564
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 44702215372725
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 44124371787560065
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 37167715869266
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 44124817526560066
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 37167715869266
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 44125153173560066
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 37167715869266
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 1853927513986438489
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 41012170054636
+
+- # ====== Component Setting: PLUGIN_COM.ORACLE.APEX.DOCGEN ====
+  id: 1866089687529649484
+  identification: 
+    name: PLUGIN_COM.ORACLE.APEX.DOCGEN
+    type: Process
+
+  settings: 
+    attribute-3: out/
+    attribute-7: template/
+
+  subscription: 
+    version-number: 37167168977835
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 2623123032179129490
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 2623123360465129490
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 2623123657420129490
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 2623123969959129490
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 2623124222414129491
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 2623124549772129491
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 2623124856761129491
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 2623125183152129491
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 1
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 2623125490025129491
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 1
+

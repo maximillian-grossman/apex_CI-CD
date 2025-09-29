@@ -1,0 +1,43 @@
+---
+- # ====== Email Template: Laptop Delivered Notification =======
+  id: 41536661482570782
+  identification: 
+    name: Laptop Delivered Notification
+    email-subject: '#P_LAPTOP_TYPE# Laptop for #P_ENAME# Completed'
+
+  html-format: 
+    header: '<b style="font-size: 24px;">Sample Workflow, Approvals, and Tasks</b>'
+    body: |
+      Dear &P_ENAME.,<br><br>
+      
+      Congratulations, your new #P_LAPTOP_TYPE# laptop has been delivered. <br><br>
+      
+      {if P_DELIVERED_FROM_STOCK/}We used stock on hand to get it to you more quickly.<br><br>{endif/}
+      
+      Best Regards,
+        The backoffice team
+
+  advanced: 
+    static-id: LAPTOP_DELIVERED_NOTIFICATION
+
+  subscription: 
+    version-number: 2483266481
+
+- # ====== Email Template: Job Change Notification =============
+  id: 1292051519560422884
+  identification: 
+    name: Job Change Notification
+    email-subject: 'Job Change for #P_ENAME# Completed'
+
+  html-format: 
+    header: '<b style="font-size: 24px;">Sample Workflow, Approvals, and Tasks</b>'
+    body: |
+      Hello,<br>
+      The job change for #P_ENAME# from #P_JOB_BEFORE# to #P_JOB_AFTER# has been approved and is now complete.
+
+  advanced: 
+    static-id: JOB_CHANGE_NOTIFICATION
+
+  subscription: 
+    version-number: 37166378296041
+

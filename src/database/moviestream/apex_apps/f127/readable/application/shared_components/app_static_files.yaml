@@ -1,0 +1,68 @@
+---
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 566044255719326499
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 566044516523326536
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 566044748543326554
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: reports_ir.png =============
+  id: 853411054564462041
+  identification: 
+    file-name: reports_ir.png
+
+  attributes: 
+    mime-type: image/png
+
+- # ====== Static Application File: reports_classic.png ========
+  id: 978331658481579947
+  identification: 
+    file-name: reports_classic.png
+
+  attributes: 
+    mime-type: image/png
+
+- # ====== Static Application File: reports_usecases.jpg =======
+  id: 978331918053579954
+  identification: 
+    file-name: reports_usecases.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+
+- # ====== Static Application File: reports_filter.png =========
+  id: 978332210488579961
+  identification: 
+    file-name: reports_filter.png
+
+  attributes: 
+    mime-type: image/png
+
+- # ====== Static Application File: fs-sprite.png ==============
+  id: 978332424096580111
+  identification: 
+    file-name: fs-sprite.png
+
+  attributes: 
+    mime-type: image/png
+

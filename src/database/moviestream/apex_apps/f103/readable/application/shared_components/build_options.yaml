@@ -1,0 +1,30 @@
+---
+- # ====== Build Option: Commented Out =========================
+  id: 2623125728584129492
+  identification: 
+    name: Commented Out
+
+  status: 
+    status: Exclude
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  subscription: 
+    version-number: 1
+
+- # ====== Build Option: Feature: About Page ===================
+  id: 2623413813061129685
+  identification: 
+    name: 'Feature: About Page'
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  comments: 
+    comments: About this application page.
+
+  subscription: 
+    version-number: 1
+

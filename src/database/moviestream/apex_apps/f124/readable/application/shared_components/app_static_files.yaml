@@ -1,0 +1,199 @@
+---
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 562253417681121853
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 562253580245121865
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 562253887156121880
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/map-placehol
+  id: 806437999769063057
+  identification: 
+    file-name: map-screenshots/map-placeholder.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-sample-maps.png ========
+  id: 816317291902967797
+  identification: 
+    file-name: app-sample-maps.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-sample-maps-32x32.png ==
+  id: 816317577018968502
+  identification: 
+    file-name: app-sample-maps-32x32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-sample-maps-16x16.png ==
+  id: 816317902477969158
+  identification: 
+    file-name: app-sample-maps-16x16.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-sample-maps.ico ========
+  id: 816318170820969928
+  identification: 
+    file-name: app-sample-maps.ico
+
+  attributes: 
+    mime-type: image/x-icon
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-icon.svg ===============
+  id: 816319612275037756
+  identification: 
+    file-name: app-icon.svg
+
+  attributes: 
+    mime-type: image/svg+xml
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/circle-searc
+  id: 862598933784572256
+  identification: 
+    file-name: map-screenshots/circle-search.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/clickable-ma
+  id: 862599218881571651
+  identification: 
+    file-name: map-screenshots/clickable-map.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/faceted-sear
+  id: 862599588942571189
+  identification: 
+    file-name: map-screenshots/faceted-search.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/heat-map.jpg
+  id: 862599880347570548
+  identification: 
+    file-name: map-screenshots/heat-map.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/legacy.jpg =
+  id: 862600169211570124
+  identification: 
+    file-name: map-screenshots/legacy.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/us-states-an
+  id: 862600446628569587
+  identification: 
+    file-name: map-screenshots/us-states-and-large-airports.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/us-states-ex
+  id: 862601201225568002
+  identification: 
+    file-name: map-screenshots/us-states-extruded.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/map-and-repo
+  id: 862601502279567467
+  identification: 
+    file-name: map-screenshots/map-and-report.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/nearest-neig
+  id: 862602198450565653
+  identification: 
+    file-name: map-screenshots/nearest-neighbor.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/us-states-fl
+  id: 862602496849565090
+  identification: 
+    file-name: map-screenshots/us-states-flat.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/us-states-wi
+  id: 862602777993564646
+  identification: 
+    file-name: map-screenshots/us-states-with-links.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: map-screenshots/search-and-s
+  id: 862603112082564150
+  identification: 
+    file-name: map-screenshots/search-and-show.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app-icon.css ===============
+  id: 1575657180024930243
+  identification: 
+    file-name: app-icon.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+

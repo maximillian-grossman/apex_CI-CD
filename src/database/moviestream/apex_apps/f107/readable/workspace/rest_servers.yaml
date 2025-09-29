@@ -1,0 +1,13 @@
+---
+- # ====== REST Data Source Server: natdcshjumpstartprod-objects
+  id: 17215765532805571
+  identification: 
+    name: natdcshjumpstartprod-objectstorage-us-ashburn-1-oci-customer-oci-com-n-natdcshjumpstartprod
+
+  endpoint-url: 
+    url: 'https://natdcshjumpstartprod.objectstorage.us-ashburn-1.oci.customer-oci.com/n/natdcshjumpstartprod/'
+
+  advanced: 
+    static-id: natdcshjumpstartprod_objectstorage_us_ashburn_1_oci_customer_oci_com_n_natdcshjumpstartprod
+    prompt-on-install: false
+

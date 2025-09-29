@@ -1,0 +1,1393 @@
+---
+# ====== Page: Load Data using PL/SQL API ====================
+id: 32
+identification: 
+  name: Load Data using PL/SQL API
+  alias: LOAD-DATA-USING-PL-SQL-API
+  title: Load Data using PL/SQL API
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+javascript: 
+  function-and-global-variable-declaration: |
+    function set_item() {
+        $x('P32_DATA').value= $v('P32_SAMPLE_DATA');
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 3551989307471910912
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 11539353657713410830
+
+  layout: 
+    sequence: 1
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Failed Rows =================================
+  id: 3551991462638932234
+  identification: 
+    name: Failed Rows
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select 
+             ORA_ERR_NUMBER$  F_ORA_ERR_NUMBER$,
+             ORA_ERR_MESG$    F_ORA_ERR_MESG$,
+             ORA_ERR_ROWID$   F_ORA_ERR_ROWID$,
+             ORA_ERR_OPTYP$   F_ORA_ERR_OPTYP$,
+             ORA_ERR_TAG$     F_ORA_ERR_TAG$,
+             EMPNO            F_EMPNO,
+             ENAME            F_ENAME,
+             JOB              F_JOB,
+             MGR              F_MGR,
+             HIREDATE         F_HIREDATE,
+             SAL              F_SAL,
+             COMM             F_COMM,
+             DEPTNO           F_DEPTNO,
+             CREATED          F_CREATED,
+             LAST_UPDATED     F_LAST_UPDATED
+        from EBA_DEMO_LOAD_EMP_ERR$
+      
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: failed_rows
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: select * from eba_demo_load_emp_err$
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlightOff
+      - t-Report--horizontalBorders
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: The EBA_DEMO_LOAD_EMP table is empty.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: F_ORA_ERR_NUMBER$ ===========================
+    id: 3740531271176003777
+    identification: 
+      column-name: F_ORA_ERR_NUMBER$
+      type: Hidden
+
+    layout: 
+      sequence: 16
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_ORA_ERR_MESG$ =============================
+    id: 3740531314898003778
+    identification: 
+      column-name: F_ORA_ERR_MESG$
+      type: Plain Text
+
+    heading: 
+      heading: Message
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_ORA_ERR_ROWID$ ============================
+    id: 3740531403552003779
+    identification: 
+      column-name: F_ORA_ERR_ROWID$
+      type: Hidden
+
+    layout: 
+      sequence: 17
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_ORA_ERR_OPTYP$ ============================
+    id: 3740531571240003780
+    identification: 
+      column-name: F_ORA_ERR_OPTYP$
+      type: Hidden
+
+    layout: 
+      sequence: 18
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_ORA_ERR_TAG$ ==============================
+    id: 3740531575113003781
+    identification: 
+      column-name: F_ORA_ERR_TAG$
+      type: Hidden
+
+    layout: 
+      sequence: 19
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_EMPNO =====================================
+    id: 3778168103588842932
+    identification: 
+      column-name: F_EMPNO
+      type: Plain Text
+
+    heading: 
+      heading: Empno
+      alignment: start
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_ENAME =====================================
+    id: 3778168212170842933
+    identification: 
+      column-name: F_ENAME
+      type: Plain Text
+
+    heading: 
+      heading: Ename
+      alignment: start
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_JOB =======================================
+    id: 3778168331669842934
+    identification: 
+      column-name: F_JOB
+      type: Plain Text
+
+    heading: 
+      heading: Job
+      alignment: start
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_MGR =======================================
+    id: 3778168441842842935
+    identification: 
+      column-name: F_MGR
+      type: Plain Text
+
+    heading: 
+      heading: Mgr
+      alignment: start
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_HIREDATE ==================================
+    id: 3778168503614842936
+    identification: 
+      column-name: F_HIREDATE
+      type: Plain Text
+
+    heading: 
+      heading: Hiredate
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_SAL =======================================
+    id: 3778168594940842937
+    identification: 
+      column-name: F_SAL
+      type: Plain Text
+
+    heading: 
+      heading: Sal
+      alignment: start
+
+    layout: 
+      sequence: 11
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_COMM ======================================
+    id: 3778168744211842938
+    identification: 
+      column-name: F_COMM
+      type: Plain Text
+
+    heading: 
+      heading: Comm
+      alignment: start
+
+    layout: 
+      sequence: 12
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_DEPTNO ====================================
+    id: 3778168843862842939
+    identification: 
+      column-name: F_DEPTNO
+      type: Plain Text
+
+    heading: 
+      heading: Deptno
+      alignment: start
+
+    layout: 
+      sequence: 13
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_CREATED ===================================
+    id: 3778168952569842940
+    identification: 
+      column-name: F_CREATED
+      type: Hidden
+
+    layout: 
+      sequence: 14
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: F_LAST_UPDATED ==============================
+    id: 3778169058242842941
+    identification: 
+      column-name: F_LAST_UPDATED
+      type: Hidden
+
+    layout: 
+      sequence: 15
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Data Loading SQL Statement ==================
+  id: 3551993078741932251
+  identification: 
+    name: Data Loading SQL Statement
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      Clicking the <strong>Load Data</strong> will execute the following SQL Statement:
+      </p>
+      <pre>
+      insert into EBA_DEMO_LOAD_EMP (empno, ename, job, mgr, hiredate, sal, comm, deptno ) (
+      <span style="color: blue">    select to_number( col001 ),
+                 upper( col002 ),
+                 upper( col003 ),        
+                 (select empno from eba_demo_load_emp where ename = upper( col004 ) ),
+                 to_date( col005 ), 
+                 to_number( col006 ), 
+                 to_number( col007 ), 
+                 (select deptno from eba_demo_load_dept where dname = upper( col008 ) )
+            from table( apex_data_parser.parse(
+                     p_content   => to_blob( <em>{- the data -}</em> ),
+                     p_skip_rows => 1,
+                     p_file_type => apex_data_parser.c_file_type_csv ) )</span> 
+      )
+      log errors into EBA_DEMO_LOAD_EMP_ERR$ 
+      reject limit unlimited;
+      </pre>
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Load Data ===================================
+  id: 3728880724369033565
+  identification: 
+    name: Load Data
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Employees ===================================
+  id: 3728881418683033572
+  identification: 
+    name: Employees
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    include-rowid-column: false
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlightOff
+      - t-Report--horizontalBorders
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: The EBA_DEMO_LOAD_EMP table is empty.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: LAST_UPDATED ================================
+    id: 3551991195831932232
+    identification: 
+      column-name: LAST_UPDATED
+      type: Plain Text
+
+    heading: 
+      heading: Last Updated
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: EMPNO =======================================
+    id: 3728881566332033573
+    identification: 
+      column-name: EMPNO
+      type: Plain Text
+
+    heading: 
+      heading: Empno
+      alignment: start
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Descending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ENAME =======================================
+    id: 3728881655516033574
+    identification: 
+      column-name: ENAME
+      type: Plain Text
+
+    heading: 
+      heading: Ename
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: JOB =========================================
+    id: 3728881761662033575
+    identification: 
+      column-name: JOB
+      type: Plain Text
+
+    heading: 
+      heading: Job
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MGR =========================================
+    id: 3728881831567033576
+    identification: 
+      column-name: MGR
+      type: Plain Text
+
+    heading: 
+      heading: Mgr
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: HIREDATE ====================================
+    id: 3728881945145033577
+    identification: 
+      column-name: HIREDATE
+      type: Plain Text
+
+    heading: 
+      heading: Hiredate
+      alignment: start
+
+    layout: 
+      sequence: 5
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: SAL =========================================
+    id: 3728882046975033578
+    identification: 
+      column-name: SAL
+      type: Plain Text
+
+    heading: 
+      heading: Sal
+      alignment: start
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMM ========================================
+    id: 3728882114995033579
+    identification: 
+      column-name: COMM
+      type: Plain Text
+
+    heading: 
+      heading: Comm
+      alignment: start
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DEPTNO ======================================
+    id: 3728882233931033580
+    identification: 
+      column-name: DEPTNO
+      type: Plain Text
+
+    heading: 
+      heading: Deptno
+      alignment: start
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CREATED =====================================
+    id: 3728882333814033581
+    identification: 
+      column-name: CREATED
+      type: Plain Text
+
+    heading: 
+      heading: Created
+      alignment: start
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Page Instructions ===========================
+  id: 4526800918441358091
+  identification: 
+    name: Page Instructions
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      This page uploads data into an existing table (<strong>EBA_DEMO_LOAD_EMP</strong>) using a SQL INSERT statement and the <strong>APEX_DATA_PARSER.PARSE</strong> PL/SQL function. Unlike using the APEX Data Loading wizard, this approach allows to implement "single-step" data loading, without any further end user interaction. On the other hand, uploaded data has to match the target table structure.
+      After load, table contents can be reviewed below. Failed rows will be placed into the <strong>EBA_DEMO_LOAD_EMP_ERR$</strong> table, which can be reviewed in report at the bottom of the page.</p>
+      <p><a href="javascript:set_item();">Click here</b></a> to copy and paste, or select the text below and paste it into the <b>Copy and Paste Delimited Data</b> section. One row (<code>9000,DOE,MARKERING_ANALYST...</code>) is supposed to be rejected; it will show up as <strong>Failed Row</strong> after loading.
+      </p>
+      <pre>
+      &P32_SAMPLE_DATA.
+      </pre>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P32_SAMPLE_DATA ==========================
+  id: 3551987318245884460
+  identification: 
+    name: P32_SAMPLE_DATA
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Page Instructions # 4526800918441358091
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Static Value
+    static-value: |
+      Empno,Ename,Job,Mgr,Hiredate,Sal,Comm,Deptno
+      8011,Campbell,CLERK,King,1-Nov-11,1300,,ACCOUNTING
+      8021,Chevy,ANALYST,Ford,20-Oct-11,3000,,RESEARCH
+      8118,BENZ,ANALYST,FORD,10-Oct-11,2800,,ACCOUNTING
+      9000,DOE,MARKERING_ANALYST,KING,10-jan-12,0,0,ACCOUNTING
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P32_ROWS_LOADED ==========================
+  id: 3551993006189932250
+  identification: 
+    name: P32_ROWS_LOADED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Load Data # 3728880724369033565
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P32_ROWS_FAILED ==========================
+  id: 3551993250779932252
+  identification: 
+    name: P32_ROWS_FAILED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Load Data # 3728880724369033565
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P32_DATA =================================
+  id: 3728880819943033566
+  identification: 
+    name: P32_DATA
+    type: Textarea
+
+  label: 
+    label: Copy and Paste Delimited Data
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 30
+    region: Load Data # 3728880724369033565
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 5
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: LOAD_DATA ===================================
+  id: 3728881058186033568
+  identification: 
+    button-name: LOAD_DATA
+    label: Load Data
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 3551989307471910912
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Load Data ==================================
+  id: 3551991338220932233
+  identification: 
+    name: Load Data
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_error_log_exists boolean := false;
+          l_data             raw(32767);
+      begin
+          l_data := sys.utl_raw.cast_to_raw( :P32_DATA );
+      
+          delete from EBA_DEMO_LOAD_EMP_ERR$;
+          
+          insert into EBA_DEMO_LOAD_EMP (empno, ename, job, mgr, hiredate, sal, comm, deptno ) (
+              select to_number( col001 ),
+                     upper( col002 ),
+                     upper( col003 ),        
+                     (select empno from eba_demo_load_emp where ename = upper( col004 ) ),
+                     to_date( col005 ), 
+                     to_number( col006 ), 
+                     to_number( col007 ), 
+                     (select deptno from eba_demo_load_dept where dname = upper( col008 ) )
+                from table( apex_data_parser.parse(
+                         p_content   => to_blob( l_data ),
+                         p_skip_rows => 1,
+                         p_file_type => apex_data_parser.c_file_type_csv ) ) )
+         log errors into EBA_DEMO_LOAD_EMP_ERR$ 
+         reject limit unlimited;
+         
+         :P32_ROWS_LOADED := sql%rowcount;
+         
+         select count(*) 
+           into :P32_ROWS_FAILED
+           from EBA_DEMO_LOAD_EMP_ERR$;
+      
+      end;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: '&P32_ROWS_LOADED. row(s) loaded successfully into EBA_DEMO_LOAD_EMP; &P32_ROWS_FAILED. row(s) failed.'
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: LOAD_DATA # 3728881058186033568
+

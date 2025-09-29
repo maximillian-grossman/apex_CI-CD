@@ -1,0 +1,755 @@
+---
+- # ====== Breadcrumb:  Breadcrumb =============================
+  id: 1342165149965603159
+  identification: 
+    name: ' Breadcrumb'
+
+  entries: 
+  - # ====== Entry: Administration ===============================
+    id: 733781891316425214
+    identification: 
+      name: Administration
+      page-number: 24
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.:::'
+        page: 24 # Administration
+
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 733789497019460514
+    identification: 
+      name: Manage Sample Data
+      page-number: 25
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 733781891316425214
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.:::'
+        page: 25 # Manage Sample Data
+
+  - # ====== Entry: Application Theme Style ======================
+    id: 733849972294485060
+    identification: 
+      name: Application Theme Style
+      page-number: 26
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 733781891316425214
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.:::'
+        page: 26 # Application Theme Style
+
+  - # ====== Entry: Basic Reporting ==============================
+    id: 735038553139173383
+    identification: 
+      name: Basic Reporting
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Basic Reporting
+
+  - # ====== Entry: Column Groups ================================
+    id: 735088597937282546
+    identification: 
+      name: Column Groups
+      page-number: 4
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::'
+        page: 4 # Column Groups
+
+  - # ====== Entry: Reporting ====================================
+    id: 738134456137565695
+    identification: 
+      name: Reporting
+      page-number: 37
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.:::'
+        page: 37 # Read Only Reports
+
+  - # ====== Entry: Add Toolbar Button ===========================
+    id: 738158672460826486
+    identification: 
+      name: Add Toolbar Button
+      page-number: 5
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.:::'
+        page: 5 # Add Toolbar Button
+
+  - # ====== Entry: Row Header ===================================
+    id: 738159289304834073
+    identification: 
+      name: Row Header
+      page-number: 6
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+        page: 6 # Row Header
+
+  - # ====== Entry: Sequence Row Header ==========================
+    id: 738159660479837996
+    identification: 
+      name: Sequence Row Header
+      page-number: 7
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+        page: 7 # Sequence Row Header
+
+  - # ====== Entry: Multiple Selection ===========================
+    id: 738159877680840555
+    identification: 
+      name: Multiple Selection
+      page-number: 8
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:::'
+        page: 8 # Multiple Selection
+
+  - # ====== Entry: Saved Reports ================================
+    id: 738160283367842153
+    identification: 
+      name: Saved Reports
+      page-number: 9
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
+        page: 9 # Saved Reports
+
+  - # ====== Entry: Single Row View ==============================
+    id: 738160456696843793
+    identification: 
+      name: Single Row View
+      page-number: 10
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.:::'
+        page: 10 # Single Row View
+
+  - # ====== Entry: Traditional ==================================
+    id: 738160693851845366
+    identification: 
+      name: Traditional
+      page-number: 11
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:::'
+        page: 11 # Traditional Paging
+
+  - # ====== Entry: Pagination ===================================
+    id: 738179707556890935
+    identification: 
+      name: Pagination
+      page-number: 38
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.:::'
+        page: 38 # Pagination
+
+  - # ====== Entry: Icon and Detail Views ========================
+    id: 738186313895932163
+    identification: 
+      name: Icon and Detail Views
+      page-number: 13
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.:::'
+        page: 13 # Icon and Detail Views
+
+  - # ====== Entry: Traditional (Total Rows) =====================
+    id: 738186670083940054
+    identification: 
+      name: Traditional (Total Rows)
+      page-number: 12
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:::'
+        page: 12 # Traditional Paging (Total Rows)
+
+  - # ====== Entry: Traditional (Custom) =========================
+    id: 738186915384942886
+    identification: 
+      name: Traditional (Custom)
+      page-number: 17
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:::'
+        page: 17 # Traditional Paging (Custom)
+
+  - # ====== Entry: Traditional (Select List) ====================
+    id: 738187044757945331
+    identification: 
+      name: Traditional (Select List)
+      page-number: 18
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:::'
+        page: 18 # Traditional Paging (Select List)
+
+  - # ====== Entry: Scroll =======================================
+    id: 738187247291947111
+    identification: 
+      name: Scroll
+      page-number: 19
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:::'
+        page: 19 # Scroll Paging
+
+  - # ====== Entry: Load More ====================================
+    id: 738187480922949337
+    identification: 
+      name: Load More
+      page-number: 20
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.:::'
+        page: 20 # Load More Paging
+
+  - # ====== Entry: Full Page with Maximize ======================
+    id: 738187639192951734
+    identification: 
+      name: Full Page with Maximize
+      page-number: 21
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.:::'
+        page: 21 # Full Page with Maximize
+
+  - # ====== Entry: Scroll with Maximize =========================
+    id: 738187853075955058
+    identification: 
+      name: Scroll with Maximize
+      page-number: 22
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.:::'
+        page: 22 # Scroll with Maximize
+
+  - # ====== Entry: Editing ======================================
+    id: 738225444681074621
+    identification: 
+      name: Editing
+      page-number: 39
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.:::'
+        page: 39 # Editing
+
+  - # ====== Entry: Advanced =====================================
+    id: 738265905716210394
+    identification: 
+      name: Advanced
+      page-number: 40
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.:::'
+        page: 40 # Advanced
+
+  - # ====== Entry: Basic Editing ================================
+    id: 738270670610223657
+    identification: 
+      name: Basic Editing
+      page-number: 30
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.:::'
+        page: 30 # Basic Editing
+
+  - # ====== Entry: Validation ===================================
+    id: 738270852474225237
+    identification: 
+      name: Validation
+      page-number: 31
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.:::'
+        page: 31 # Validation
+
+  - # ====== Entry: Other Column Types ===========================
+    id: 738271083188227670
+    identification: 
+      name: Other Column Types
+      page-number: 36
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:36:&SESSION.::&DEBUG.:::'
+        page: 36 # Other Column Types
+
+  - # ====== Entry: Delete Only ==================================
+    id: 738271286834229544
+    identification: 
+      name: Delete Only
+      page-number: 32
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.:::'
+        page: 32 # Delete Only
+
+  - # ====== Entry: Protected Rows ===============================
+    id: 738271500479231134
+    identification: 
+      name: Protected Rows
+      page-number: 33
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.:::'
+        page: 33 # Protected Rows
+
+  - # ====== Entry: Form with Grid ===============================
+    id: 738271633987232915
+    identification: 
+      name: Form with Grid
+      page-number: 34
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:34:&SESSION.::&DEBUG.:::'
+        page: 34 # Form with Grid
+
+  - # ====== Entry: Master Detail ================================
+    id: 738271897987234509
+    identification: 
+      name: Master Detail
+      page-number: 35
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.:::'
+        page: 35 # Master Detail
+
+  - # ====== Entry: Feature Customization ========================
+    id: 738748434483920082
+    identification: 
+      name: Feature Customization
+      page-number: 50
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:50:&SESSION.'
+        page: 50 # Feature Customization
+
+  - # ====== Entry: Client Validation ============================
+    id: 741927243351037893
+    identification: 
+      name: Client Validation
+      page-number: 51
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:51:&SESSION.'
+        page: 51 # Client Validation
+
+  - # ====== Entry: Tooltips =====================================
+    id: 741994440781397619
+    identification: 
+      name: Tooltips
+      page-number: 52
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:52:&SESSION.'
+        page: 52 # Tooltips
+
+  - # ====== Entry: Advanced Delete ==============================
+    id: 742923224702105642
+    identification: 
+      name: Advanced Delete
+      page-number: 53
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:53:&SESSION.'
+        page: 53 # Advanced Delete
+
+  - # ====== Entry: People (paging) ==============================
+    id: 777869604884014883
+    identification: 
+      name: People (paging)
+      page-number: 60
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:60:&SESSION.'
+        page: 60 # People (paging)
+
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1050137400117454254
+    identification: 
+      name: Linking to Interactive Grids
+      page-number: 15
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&APP_SESSION.::&DEBUG.:::'
+        page: 15 # Linking to Interactive Grids
+
+  - # ====== Entry: Oracle Text ==================================
+    id: 1176169900731038834
+    identification: 
+      name: Oracle Text
+      page-number: 70
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:70:&SESSION.'
+        page: 70 # Oracle Text
+
+  - # ====== Entry: Home =========================================
+    id: 1342165562250603164
+    identification: 
+      name: Home
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.'
+        page: 1 # Home
+
+  - # ====== Entry: Progressive Scroll ===========================
+    id: 1536201767867325508
+    identification: 
+      name: Progressive Scroll
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Pagination # 738179707556890935
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.'
+        page: 2 # Progressive Scroll
+
+  - # ====== Entry: Chart View ===================================
+    id: 1691874729658234966
+    identification: 
+      name: Chart View
+      page-number: 14
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Reporting # 738134456137565695
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.'
+        page: 14 # Chart View
+
+  - # ====== Entry: Edit (Dialog) ================================
+    id: 1876935901904330037
+    identification: 
+      name: Edit (Dialog)
+      page-number: 54
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:54:&SESSION.::&DEBUG.:54,55::'
+        page: 54 # Editing (Dialog)
+        clear-cache: 54,55
+
+  - # ====== Entry: Item Type Plug-Ins ===========================
+    id: 1888814059924132207
+    identification: 
+      name: Item Type Plug-Ins
+      page-number: 56
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:56:&SESSION.'
+        page: 56 # Item Type Plug-Ins
+
+  - # ====== Entry: Custom Server Processing =====================
+    id: 1888918219906538397
+    identification: 
+      name: Custom Server Processing
+      page-number: 57
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Advanced # 738265905716210394
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:57:&SESSION.'
+        page: 57 # Custom Server Processing
+
+  - # ====== Entry: Dynamic Actions ==============================
+    id: 1960658438026687382
+    identification: 
+      name: Dynamic Actions
+      page-number: 58
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Editing # 738225444681074621
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:58:&SESSION.'
+        page: 58 # Dynamic Actions
+

@@ -1,0 +1,27 @@
+---
+- # ====== Application Item: LAST_VIEW =========================
+  id: 3957101155630476015
+  identification: 
+    name: LAST_VIEW
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166093881851
+
+- # ====== Application Item: ENABLE_FEEDBACK ===================
+  id: 4568628148485261287
+  identification: 
+    name: ENABLE_FEEDBACK
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166093881851
+

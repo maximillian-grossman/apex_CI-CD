@@ -1,0 +1,2080 @@
+---
+# ====== Page: Repository Details ============================
+id: 222
+identification: 
+  name: Repository Details
+  alias: REPOSITORY-DETAILS
+  title: Repository Details
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+  - ui-dialog--stretch
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Commits (Report) ============================
+  id: 90009596648606462
+  identification: 
+    name: Commits (Report)
+    type: Classic Report
+
+  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Repository Commits # 91410258280483379
+    page-items-to-submit: 
+    - P222_REPO
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  parameters: 
+  - # ====== Parameter: repo =====================================
+    id: 91433171485511923
+    identification: 
+      name: repo # 91410929875483381
+
+    operation: 
+      http-method: All
+      database-operation: All
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P222_REPO
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--altRowsDefault
+      - t-Report--rowHighlight
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No commits found for this repository.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: NAME ========================================
+    id: 90009681390606463
+    identification: 
+      column-name: NAME
+      type: Link
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '#HTML_URL#'
+      link-text: '#NAME#'
+      link-attributes: target="_blank"
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: EMAIL =======================================
+    id: 90009842733606464
+    identification: 
+      column-name: EMAIL
+      type: Hidden
+
+    layout: 
+      sequence: 2
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DATE_ =======================================
+    id: 90009966400606465
+    identification: 
+      column-name: DATE_
+      type: Plain Text
+
+    heading: 
+      heading: Commit
+      alignment: start
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_NAME ==============================
+    id: 90010047870606466
+    identification: 
+      column-name: COMMITTER_NAME
+      type: Hidden
+
+    layout: 
+      sequence: 5
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MESSAGE =====================================
+    id: 90010187086606468
+    identification: 
+      column-name: MESSAGE
+      type: Plain Text
+
+    heading: 
+      heading: Message
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    column-formatting: 
+      html-expression: |
+        <pre style="width: 30%">
+        #MESSAGE#
+        </pre>
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMENT_COUNT ===============================
+    id: 90010322288606469
+    identification: 
+      column-name: COMMENT_COUNT
+      type: Plain Text
+
+    heading: 
+      heading: Comments
+      alignment: end
+
+    layout: 
+      sequence: 6
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: HTML_URL ====================================
+    id: 91432851184511920
+    identification: 
+      column-name: HTML_URL
+      type: Hidden
+
+    layout: 
+      sequence: 7
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_LOGIN =============================
+    id: 91432949625511921
+    identification: 
+      column-name: COMMITTER_LOGIN
+      type: Hidden
+
+    layout: 
+      sequence: 8
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_IMAGE =============================
+    id: 91433043757511922
+    identification: 
+      column-name: COMMITTER_IMAGE
+      type: Hidden
+
+    layout: 
+      sequence: 9
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Commits (Calendar) =========================
+  id: 91435531483511947
+  identification: 
+    name: Commits (Calendar)
+    type: Calendar
+
+  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Repository Commits # 91410258280483379
+    page-items-to-submit: 
+    - P222_REPO
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      display-column: NAME
+      start-date-column: DATE_
+      event-sorting: Automatic
+      show-time: false
+      supplemental-information: '&MESSAGE.'
+      multiple-line-events: true
+      show-tooltip: true
+      additional-calendar-views: 'list:navigation'
+      view-/-edit-link: '&HTML_URL.'
+      maximum-events-/-day: 10
+      show-weekend: true
+
+    performance: 
+      lazy-loading: true
+
+  parameters: 
+  - # ====== Parameter: repo =====================================
+    id: 91435591220511948
+    identification: 
+      name: repo # 91410929875483381
+
+    operation: 
+      http-method: All
+      database-operation: All
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P222_REPO
+
+- # ====== Region: Commits (Chart) =============================
+  id: 100451510482784145
+  identification: 
+    name: Commits (Chart)
+    type: Chart
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 100451586703784146
+    chart: 
+      type: Donut
+
+    layout: 
+      height: 500
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: false
+
+    settings: 
+      pie-selection-effect: Highlight
+
+    value: 
+      pie-chart-other-threshold: 0
+      format: Decimal
+      decimal-places: 0
+      format-scaling: Automatic
+
+    animation: 
+      on-display: None
+      on-data-change: None
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-value: true
+
+    legend: 
+      show: true
+      position: Automatic
+      hide-and-show-behavior: None
+
+    series: 
+    - # ====== Series: Commits by Name =============================
+      id: 100451757158784147
+      identification: 
+        name: Commits by Name
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: REST Source
+        rest-source: Sample Application - Github Repository Commits # 91410258280483379
+
+      column-mapping: 
+        label: NAME
+        value-aggregation: Count
+
+      label: 
+        show: false
+
+      parameters: 
+      - # ====== Parameter: repo =====================================
+        id: 100451983809784150
+        identification: 
+          name: repo # 91410929875483381
+
+        operation: 
+          http-method: All
+          database-operation: All
+
+        parameter: 
+          direction: In
+          data-type: String
+
+        value: 
+          type: Item
+          item: P222_REPO
+
+- # ====== Region: Pull Requests ===============================
+  id: 137238670389773610
+  identification: 
+    name: Pull Requests
+    type: Classic Report
+
+  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Repository Pulls # 762749052283123290
+    page-items-to-submit: 
+    - P222_REPO
+
+  local-post-processing: 
+    type: SQL Query
+    sql-query: |
+      select ID,
+             HTML_URL as card_link, 
+             NUMBER_,
+             STATE as card_title,
+             apex_string.get_initials(login) as card_initials ,
+             LOGIN as card_text,
+             title as card_subtext,
+             ID_2,
+             AVATAR_URL as card_image,
+             GRAVATAR_ID,
+             ASSIGNEE_LOGIN,
+             ASSIGNEE_ID
+        from #APEX$SOURCE_DATA#
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  parameters: 
+  - # ====== Parameter: repo =====================================
+    id: 90009478990606461
+    identification: 
+      name: repo # 762749773814123291
+
+    operation: 
+      http-method: All
+      database-operation: All
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P222_REPO
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Cards
+      template-options: 
+      - '#DEFAULT#'
+      - u-colors
+      - t-Cards--compact
+      - t-Cards--displayInitials
+      - t-Cards--3cols
+      - t-Cards--animColorFill
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No Pull requests found
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: ID ==========================================
+    id: 90568179378186909
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    layout: 
+      sequence: 3
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NUMBER_ =====================================
+    id: 90568668597186910
+    identification: 
+      column-name: NUMBER_
+      type: Hidden
+
+    layout: 
+      sequence: 6
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ID_2 ========================================
+    id: 90570244961186911
+    identification: 
+      column-name: ID_2
+      type: Hidden
+
+    layout: 
+      sequence: 4
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: GRAVATAR_ID =================================
+    id: 90571017592186911
+    identification: 
+      column-name: GRAVATAR_ID
+      type: Hidden
+
+    layout: 
+      sequence: 5
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE_LOGIN ==============================
+    id: 90571461467186912
+    identification: 
+      column-name: ASSIGNEE_LOGIN
+      type: Plain Text
+
+    heading: 
+      heading: Assignee
+      alignment: start
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE_ID =================================
+    id: 90571819961186912
+    identification: 
+      column-name: ASSIGNEE_ID
+      type: Hidden
+
+    layout: 
+      sequence: 2
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_LINK ===================================
+    id: 759227163212536263
+    identification: 
+      column-name: CARD_LINK
+      type: Plain Text
+
+    heading: 
+      heading: Card link
+      alignment: center
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_INITIALS ===============================
+    id: 759227181051536264
+    identification: 
+      column-name: CARD_INITIALS
+      type: Plain Text
+
+    heading: 
+      heading: Card initials
+      alignment: center
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TEXT ===================================
+    id: 759227288400536265
+    identification: 
+      column-name: CARD_TEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card text
+      alignment: center
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_SUBTEXT ================================
+    id: 759227375040536266
+    identification: 
+      column-name: CARD_SUBTEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card subtext
+      alignment: center
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_IMAGE ==================================
+    id: 759227507736536267
+    identification: 
+      column-name: CARD_IMAGE
+      type: Plain Text
+
+    heading: 
+      heading: Card image
+      alignment: center
+
+    layout: 
+      sequence: 11
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TITLE ==================================
+    id: 759227592210536268
+    identification: 
+      column-name: CARD_TITLE
+      type: Plain Text
+
+    heading: 
+      heading: Card title
+      alignment: center
+
+    layout: 
+      sequence: 12
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Commits (Cards) =============================
+  id: 759227774020536269
+  identification: 
+    name: Commits (Cards)
+    type: Classic Report
+
+  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Repository Commits # 91410258280483379
+    page-items-to-submit: 
+    - P222_REPO
+
+  local-post-processing: 
+    type: SQL Query
+    sql-query: |
+      select NAME as card_text,
+             apex_string.get_initials(name) as card_initials,
+             EMAIL,
+             DATE_ as card_title,
+             COMMITTER_NAME,
+             MESSAGE as card_subtext,
+             COMMENT_COUNT,
+             '#' as card_link,
+             COMMITTER_LOGIN,
+             COMMITTER_IMAGE
+        from #APEX$SOURCE_DATA#
+       order by date_ desc
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  parameters: 
+  - # ====== Parameter: repo =====================================
+    id: 100449001967784120
+    identification: 
+      name: repo # 91410929875483381
+
+    operation: 
+      http-method: All
+      database-operation: All
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P222_REPO
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Cards
+      template-options: 
+      - '#DEFAULT#'
+      - u-colors
+      - t-Cards--featured force-fa-lg
+      - t-Cards--displayInitials
+      - t-Cards--5cols
+      - t-Cards--animColorFill
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No commits found for this repository.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: EMAIL =======================================
+    id: 100449213394784122
+    identification: 
+      column-name: EMAIL
+      type: Hidden
+
+    layout: 
+      sequence: 1
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_NAME ==============================
+    id: 100449416614784124
+    identification: 
+      column-name: COMMITTER_NAME
+      type: Hidden
+
+    layout: 
+      sequence: 2
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMENT_COUNT ===============================
+    id: 100449631885784126
+    identification: 
+      column-name: COMMENT_COUNT
+      type: Plain Text
+
+    heading: 
+      heading: Comments
+      alignment: end
+
+    layout: 
+      sequence: 3
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_LOGIN =============================
+    id: 100449815259784128
+    identification: 
+      column-name: COMMITTER_LOGIN
+      type: Hidden
+
+    layout: 
+      sequence: 4
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMITTER_IMAGE =============================
+    id: 100449917580784129
+    identification: 
+      column-name: COMMITTER_IMAGE
+      type: Hidden
+
+    layout: 
+      sequence: 5
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TEXT ===================================
+    id: 100450042790784130
+    identification: 
+      column-name: CARD_TEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card text
+      alignment: center
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_INITIALS ===============================
+    id: 100450142717784131
+    identification: 
+      column-name: CARD_INITIALS
+      type: Plain Text
+
+    heading: 
+      heading: Card initials
+      alignment: center
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TITLE ==================================
+    id: 100450217616784132
+    identification: 
+      column-name: CARD_TITLE
+      type: Plain Text
+
+    heading: 
+      heading: Card title
+      alignment: center
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_SUBTEXT ================================
+    id: 100450354443784133
+    identification: 
+      column-name: CARD_SUBTEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card subtext
+      alignment: center
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_LINK ===================================
+    id: 100450384822784134
+    identification: 
+      column-name: CARD_LINK
+      type: Plain Text
+
+    heading: 
+      heading: Card link
+      alignment: center
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Issues =====================================
+  id: 810001609723305962
+  identification: 
+    name: Issues
+    type: Classic Report
+
+  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Repository Issues # 762635347000116693
+    page-items-to-submit: 
+    - P222_REPO
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  parameters: 
+  - # ====== Parameter: repo =====================================
+    id: 90009303692606459
+    identification: 
+      name: repo # 762636068003116693
+
+    operation: 
+      http-method: All
+      database-operation: All
+
+    parameter: 
+      direction: In
+      data-type: String
+
+    value: 
+      type: Item
+      item: P222_REPO
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--altRowsDefault
+      - t-Report--rowHighlight
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No Issues found.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: HTML_URL ====================================
+    id: 90009213411606458
+    identification: 
+      column-name: HTML_URL
+      type: Hidden
+
+    layout: 
+      sequence: 20
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ID ==========================================
+    id: 90573026268187825
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    layout: 
+      sequence: 1
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NUMBER_ =====================================
+    id: 90573389473187825
+    identification: 
+      column-name: NUMBER_
+      type: Hidden
+
+    layout: 
+      sequence: 2
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: TITLE =======================================
+    id: 90573867253187826
+    identification: 
+      column-name: TITLE
+      type: Link
+
+    heading: 
+      heading: Title
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '#HTML_URL#'
+      link-text: '#TITLE#'
+      link-attributes: target="_blank"
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: USER_LOGIN ==================================
+    id: 90574234979187826
+    identification: 
+      column-name: USER_LOGIN
+      type: Plain Text
+
+    heading: 
+      heading: User
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: USER_ID =====================================
+    id: 90574637750187826
+    identification: 
+      column-name: USER_ID
+      type: Hidden
+
+    layout: 
+      sequence: 8
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: USER_AVATAR_URL =============================
+    id: 90575004354187826
+    identification: 
+      column-name: USER_AVATAR_URL
+      type: Plain Text
+
+    heading: 
+      heading: User
+      alignment: center
+
+    layout: 
+      sequence: 5
+      column-alignment: center
+
+    accessibility: 
+      value-identifies-row: false
+
+    column-formatting: 
+      html-expression: <img alt="User Avatar" src="#USER_AVATAR_URL#" width="120">
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: USER_TYPE ===================================
+    id: 90575410566187827
+    identification: 
+      column-name: USER_TYPE
+      type: Hidden
+
+    layout: 
+      sequence: 9
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: STATE =======================================
+    id: 90575804751187827
+    identification: 
+      column-name: STATE
+      type: Hidden
+
+    layout: 
+      sequence: 10
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: LOCKED ======================================
+    id: 90576201235187827
+    identification: 
+      column-name: LOCKED
+      type: Hidden
+
+    layout: 
+      sequence: 11
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE ====================================
+    id: 90576605166187828
+    identification: 
+      column-name: ASSIGNEE
+      type: Hidden
+
+    layout: 
+      sequence: 12
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MILESTONE ===================================
+    id: 90577072790187828
+    identification: 
+      column-name: MILESTONE
+      type: Hidden
+
+    layout: 
+      sequence: 13
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMMENTS ====================================
+    id: 90577384718187828
+    identification: 
+      column-name: COMMENTS
+      type: Plain Text
+
+    heading: 
+      heading: Comments Count
+      alignment: end
+
+    layout: 
+      sequence: 19
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CREATED_AT ==================================
+    id: 90577794216187829
+    identification: 
+      column-name: CREATED_AT
+      type: Plain Text
+
+    heading: 
+      heading: Created
+      alignment: start
+
+    layout: 
+      sequence: 14
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: UPDATED_AT ==================================
+    id: 90578205698187829
+    identification: 
+      column-name: UPDATED_AT
+      type: Hidden
+
+    layout: 
+      sequence: 15
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CLOSED_AT ===================================
+    id: 90578660808187829
+    identification: 
+      column-name: CLOSED_AT
+      type: Plain Text
+
+    heading: 
+      heading: Closed
+      alignment: start
+
+    layout: 
+      sequence: 16
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: AUTHOR_ASSOCIATION ==========================
+    id: 90579047440187830
+    identification: 
+      column-name: AUTHOR_ASSOCIATION
+      type: Hidden
+
+    layout: 
+      sequence: 17
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE_LOGIN ==============================
+    id: 90579453802187830
+    identification: 
+      column-name: ASSIGNEE_LOGIN
+      type: Plain Text
+
+    heading: 
+      heading: Assignee
+      alignment: start
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE_ID =================================
+    id: 90579861667187831
+    identification: 
+      column-name: ASSIGNEE_ID
+      type: Hidden
+
+    layout: 
+      sequence: 18
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ASSIGNEE_AVATAR_URL =========================
+    id: 90580240742187831
+    identification: 
+      column-name: ASSIGNEE_AVATAR_URL
+      type: Hidden
+
+    layout: 
+      sequence: 7
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: RDS =========================================
+  id: 810103127810507916
+  identification: 
+    name: RDS
+    type: Region Display Selector
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - js-showMaximizeButton
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    - t-Form--stretchInputs
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      mode: View Single Region
+      display-region-icons: false
+      include-'show-all': false
+      remember-selection: No
+
+page-items: 
+- # ====== Page Item: P222_REPO ================================
+  id: 90008212314606448
+  identification: 
+    name: P222_REPO
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: RDS # 810103127810507916
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Show Issues =========================
+  id: 90008394538606450
+  identification: 
+    name: Show Issues
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P222_DETAIL
+
+  client-side-condition: 
+    type: Item = Value
+    item: P222_DETAIL
+    value: ISSUES
+
+  actions: 
+  - # ====== Action: Show ========================================
+    id: 90008493735606451
+    identification: 
+      action: Show
+
+    affected-elements: 
+      selection-type: Region
+      region: Issues # 810001609723305962
+
+    execution: 
+      sequence: 10
+      event: Show Issues # 90008394538606450
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Hide ========================================
+    id: 90008611872606452
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Issues # 810001609723305962
+
+    execution: 
+      sequence: 10
+      event: Show Issues # 90008394538606450
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+- # ====== Dynamic Action: Show Pulls ==========================
+  id: 90008761687606453
+  identification: 
+    name: Show Pulls
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P222_DETAIL
+
+  client-side-condition: 
+    type: Item = Value
+    item: P222_DETAIL
+    value: PULLS
+
+  actions: 
+  - # ====== Action: Show ========================================
+    id: 90008839653606454
+    identification: 
+      action: Show
+
+    affected-elements: 
+      selection-type: Region
+      region: Pull Requests # 137238670389773610
+
+    execution: 
+      sequence: 10
+      event: Show Pulls # 90008761687606453
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Hide ========================================
+    id: 90008915917606455
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Pull Requests # 137238670389773610
+
+    execution: 
+      sequence: 10
+      event: Show Pulls # 90008761687606453
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+

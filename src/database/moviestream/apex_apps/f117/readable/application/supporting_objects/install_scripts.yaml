@@ -1,0 +1,41 @@
+---
+- # ====== Install Script: InstallSampleData ===================
+  id: 981729152070332034
+  identification: 
+    name: InstallSampleData
+
+  execution: 
+    sequence: 30
+
+- # ====== Install Script: DropTables ==========================
+  id: 982131668482101021
+  identification: 
+    name: DropTables
+
+  execution: 
+    sequence: 1
+
+- # ====== Install Script: InstallOtherSchemaObjects ===========
+  id: 1287562306602833148
+  identification: 
+    name: InstallOtherSchemaObjects
+
+  execution: 
+    sequence: 15
+
+- # ====== Install Script: InstallLaptopRequestsTrigger ========
+  id: 1547979629452227426
+  identification: 
+    name: InstallLaptopRequestsTrigger
+
+  execution: 
+    sequence: 20
+
+- # ====== Install Script: InstallLaptopRequestsTable ==========
+  id: 1547984728829271793
+  identification: 
+    name: InstallLaptopRequestsTable
+
+  execution: 
+    sequence: 10
+

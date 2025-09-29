@@ -1,0 +1,262 @@
+---
+# ====== Application: Sample Reporting =======================
+id: 127
+identification: 
+  name: Sample Reporting
+  alias: SAMPLE-REPORTING
+  version: 24.2.0
+  application-group: Sample Apps # 8966220573157898
+
+row-search: 
+  tokenize: false
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Use Instance Settings
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: false
+  logging: true
+  debugging: true
+  compatibility-mode: 24.2
+  accessible-read-only-items: true
+  pass-ecid: N
+  copyright-banner: |
+    Name: #APP_NAME#
+    Copyright (c) 2012, #YEAR# Oracle and/or its affiliates.
+    Licensed under the Universal Permissive License v 1.0
+    as shown at https://oss.oracle.com/licenses/upl/
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: APEX Auth # 6307138847777747086
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Enabled for Public Sessions
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Enabled
+  browser-cache: Disabled
+  embed-in-frames: Allow from same origin
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+  runtime-api-usage: 
+  - Modify This Application
+
+database-session: 
+  parsing-schema: MOVIESTREAM
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Left-To-Right
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Text
+  text: Sample Reporting
+
+progressive-web-app: 
+  enable: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:10:&SESSION.'
+    page: 10 # Home
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - js-defaultCollapsed
+  - js-navCollapsed--hidden
+  - t-TreeNav--styleA
+  list-position: Side
+  list: Navigation Menu # 1607232903838493498
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 1607441255996592135
+  list-template: Navigation Bar
+
+javascript: 
+  include-jquery-migrate: false
+
+css: 
+  file-urls: 
+  - '#IMAGE_PREFIX#pkgapp_ui/css/5.0#MIN#.css'
+
+attributes: 
+  theme: Universal Theme # 42
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: true
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 187822509
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: Sample Reporting
+
+- # ====== Substitution: GETTING_STARTED_URL ===================
+  id: 2
+  identification: 
+    name: GETTING_STARTED_URL
+
+  value: 
+    static-value: 'http://www.oracle.com/technetwork/developer-tools/apex/index.html'
+
+component-settings: 
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 35063525507290126
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 187812336
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 36579850157808509
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 36608693017769304
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 37167665069019
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 36609105759769305
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 37167665069019
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 36632118284615177
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 155465231
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 134908872754179021
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 156455782965662686
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 158278134789768583
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 211193676265796937
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 641841811249993796
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 37166093866910
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 1156275210181795911
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 1802656649776681525
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 1869356803665963625
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 37166093866919
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 1955243980451909532
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 37166093866919
+

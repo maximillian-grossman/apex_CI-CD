@@ -1,0 +1,209 @@
+---
+- # ====== Breadcrumb: breadcrumbs =============================
+  id: 3175199817478182526
+  identification: 
+    name: breadcrumbs
+
+  entries: 
+  - # ====== Entry: Web Sources and PL/SQL =======================
+    id: 92473630923120131
+    identification: 
+      name: Web Sources and PL/SQL
+      page-number: 223
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:223:&SESSION.::&DEBUG.:::'
+        page: 223 # PL/SQL Access
+
+  - # ====== Entry: Github Repositories ==========================
+    id: 100388393111707377
+    identification: 
+      name: Github Repositories
+      page-number: 221
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:221:&SESSION.::&DEBUG.:::'
+        page: 221 # Github Repositories
+
+  - # ====== Entry: REST Endpoints Status ========================
+    id: 101218451070224103
+    identification: 
+      name: REST Endpoints Status
+      page-number: 301
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 3175206189357217304
+
+    link: 
+      target: 
+        url: 'f?p=&FLOW_ID.:301:&SESSION.'
+        app: '&FLOW_ID.'
+        page: 301
+
+  - # ====== Entry: Join Local Data ==============================
+    id: 114954140255849540
+    identification: 
+      name: Join Local Data
+      page-number: 224
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:224:&SESSION.::&DEBUG.:::'
+        page: 224 # Combine with local data
+
+  - # ====== Entry: Local REST Data ==============================
+    id: 1865568646243781234
+    identification: 
+      name: Local REST Data
+      page-number: 11
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:::'
+        page: 11 # Local REST Data
+
+  - # ====== Entry: Sample REST Services =========================
+    id: 1865568801670783273
+    identification: 
+      name: Sample REST Services
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+        page: 1 # Example REST Application
+
+  - # ====== Entry: Simple Report ================================
+    id: 1865569098891785312
+    identification: 
+      name: Simple Report
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
+        page: 2 # Simple Report
+
+  - # ====== Entry: Report with Pagination =======================
+    id: 1865569634899786692
+    identification: 
+      name: Report with Pagination
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Report with Pagination
+
+  - # ====== Entry: Report with Query ============================
+    id: 1865570101768791163
+    identification: 
+      name: Report with Query
+      page-number: 4
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::'
+        page: 4 # Report with Query
+
+  - # ====== Entry: Reset Data ===================================
+    id: 3175205494887213966
+    identification: 
+      name: Reset Data
+      page-number: 39
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 3175206189357217304
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.:::'
+        page: 39 # Reset Data
+
+  - # ====== Entry: Administration ===============================
+    id: 3175206189357217304
+    identification: 
+      name: Administration
+      page-number: 35
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Sample REST Services # 1865568801670783273
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.:::'
+        page: 35 # Administration
+
+  - # ====== Entry: Application Theme Style ======================
+    id: 3983677239684063140
+    identification: 
+      name: Application Theme Style
+      page-number: 5
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 3175206189357217304
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.'
+        page: 5 # Application Theme Style
+

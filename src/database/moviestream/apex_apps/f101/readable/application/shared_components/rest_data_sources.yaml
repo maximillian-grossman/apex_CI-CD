@@ -1,0 +1,580 @@
+---
+- # ====== REST Data Source: OpenAI ============================
+  id: 106041628562127565
+  identification: 
+    name: OpenAI
+
+  subscription: 
+    version-number: 41807807648639
+
+  source: 
+    type: HTTP
+    remote-server: api-openai-com # 62426771183626119
+    url-path-prefix: /v1/completions
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  authentication: 
+    credentials: Credentials for OpenAI # 62426431733626116
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: openai
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 106040554421127557
+    identification: 
+      name: OpenAI
+
+    data-profile: 
+      format: JSON
+      row-selector: items
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COLUMN_1_ID =================================
+      id: 106040737372127562
+      identification: 
+        column-name: COLUMN_1_ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        path-expression: id
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: COLUMN_2_NAME ===============================
+      id: 106041044605127562
+      identification: 
+        column-name: COLUMN_2_NAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 2000
+        primary-key: false
+
+      parsing: 
+        path-expression: name
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: COLUMN_3_HIREDATE ===========================
+      id: 106041364797127563
+      identification: 
+        column-name: COLUMN_3_HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: hire-date
+        format-mask: 'YYYY-MM-DD"T"HH24:MI:SS'
+        has-time-zone: false
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 106041907548127567
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+  - # ====== Operation: POST =====================================
+    id: 106042275819127570
+    label: 
+      label: POST
+
+    operation: 
+      url-pattern: .
+      http-method: POST
+      database-operation: Not Mapped
+      request-body-template: |
+        {
+        "prompt":"#PROMPT#", "model":"text-davinci-003", "temperature":0.7,"max_tokens":2000
+        }
+
+    parameters: 
+    - # ====== Parameter: PROMPT ===================================
+      id: 106043728711135416
+      identification: 
+        name: PROMPT
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: Content-Type =============================
+      id: 106044317364137906
+      identification: 
+        name: Content-Type
+
+      parameter: 
+        type: HTTP Header
+        data-type: String
+
+      value: 
+        direction: In
+        static: true
+        value: application/json
+
+      advanced: 
+        omit-when-value-is-empty: false
+
+    - # ====== Parameter: RESPONSE =================================
+      id: 106048914038192880
+      identification: 
+        name: RESPONSE
+
+      parameter: 
+        type: Request or Response Body
+
+      value: 
+        direction: Out
+
+  - # ====== Operation: PUT - /:id ===============================
+    id: 106042728029127570
+    label: 
+      label: 'PUT - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: PUT
+      database-operation: Update Row
+
+  - # ====== Operation: DELETE - /:id ============================
+    id: 106043047744127570
+    label: 
+      label: 'DELETE - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: DELETE
+      database-operation: Delete Row
+
+- # ====== REST Data Source: OpenAI2 ===========================
+  id: 106055767757285027
+  identification: 
+    name: OpenAI2
+
+  subscription: 
+    version-number: 41807807648911
+
+  source: 
+    type: HTTP
+    remote-server: api-openai-com # 62426771183626119
+    url-path-prefix: v1/completions
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  authentication: 
+    credentials: Credentials for OpenAI # 62426431733626116
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: openai2
+    pass-ecid: Application Default
+
+  parameters: 
+  - # ====== Parameter: Content-Type =============================
+    id: 106056391579285032
+    identification: 
+      name: Content-Type
+
+    parameter: 
+      type: HTTP Header
+      data-type: String
+
+    value: 
+      direction: In
+      static: true
+      value: application/json
+
+    advanced: 
+      use-for-row-search: false
+      omit-when-value-is-empty: false
+
+  data-profiles: 
+    id: 106054334627285021
+    identification: 
+      name: OpenAI2
+
+    data-profile: 
+      format: JSON
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: CODE ========================================
+      id: 106054608142285024
+      identification: 
+        column-name: CODE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: error.code
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: TYPE ========================================
+      id: 106054887141285024
+      identification: 
+        column-name: TYPE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: error.type
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: PARAM =======================================
+      id: 106055167446285024
+      identification: 
+        column-name: PARAM
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: error.param
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: MESSAGE =====================================
+      id: 106055513836285025
+      identification: 
+        column-name: MESSAGE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: error.message
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+  operations: 
+  - # ====== Operation: POST =====================================
+    id: 106056005754285029
+    label: 
+      label: POST
+
+    operation: 
+      url-pattern: .
+      http-method: POST
+      database-operation: Fetch Rows
+      request-body-template: |
+        {
+        "prompt":"#PROMPT#", "model":"text-davinci-003", "temperature":0.7,"max_tokens":2000
+        }
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+- # ====== REST Data Source: Cohere ============================
+  id: 49858857681687160801
+  identification: 
+    name: Cohere
+
+  subscription: 
+    version-number: 41807807648974
+
+  source: 
+    type: HTTP
+    remote-server: api-cohere-ai # 49815239263382569479
+    url-path-prefix: /v1/generate
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  authentication: 
+    credentials: Cohere API Key # 50802721736378295793
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: cohere
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 49858856571003160796
+    identification: 
+      name: Cohere
+
+    data-profile: 
+      format: JSON
+      row-selector: items
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COLUMN_1_ID =================================
+      id: 49858856796783160798
+      identification: 
+        column-name: COLUMN_1_ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        path-expression: id
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: COLUMN_2_NAME ===============================
+      id: 49858857044851160799
+      identification: 
+        column-name: COLUMN_2_NAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 2000
+        primary-key: false
+
+      parsing: 
+        path-expression: name
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: COLUMN_3_HIREDATE ===========================
+      id: 49858857370107160799
+      identification: 
+        column-name: COLUMN_3_HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: hire-date
+        format-mask: 'YYYY-MM-DD"T"HH24:MI:SS'
+        has-time-zone: false
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 49858857874945160801
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+  - # ====== Operation: POST =====================================
+    id: 49858858251464160803
+    label: 
+      label: POST
+
+    operation: 
+      url-pattern: .
+      http-method: POST
+      database-operation: Not Mapped
+      request-body-template: |
+        {
+              "model": "command",
+              "prompt": "#PROMPT#",
+              "max_tokens": 300,
+              "temperature": 0.9,
+              "k": 0,
+              "stop_sequences": [],
+              "return_likelihoods": "NONE"
+            }
+
+    parameters: 
+    - # ====== Parameter: PROMPT ===================================
+      id: 49860618291020166370
+      identification: 
+        name: PROMPT
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: Content-Type =============================
+      id: 49862157618818171163
+      identification: 
+        name: Content-Type
+
+      parameter: 
+        type: HTTP Header
+        data-type: String
+
+      value: 
+        direction: In
+        static: true
+        value: application/json
+
+      advanced: 
+        omit-when-value-is-empty: false
+
+    - # ====== Parameter: RESPONSE =================================
+      id: 49862167594302172244
+      identification: 
+        name: RESPONSE
+
+      parameter: 
+        type: Request or Response Body
+
+      value: 
+        direction: Out
+
+  - # ====== Operation: PUT - /:id ===============================
+    id: 49858858705275160804
+    label: 
+      label: 'PUT - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: PUT
+      database-operation: Update Row
+
+  - # ====== Operation: DELETE - /:id ============================
+    id: 49858859063479160804
+    label: 
+      label: 'DELETE - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: DELETE
+      database-operation: Delete Row
+

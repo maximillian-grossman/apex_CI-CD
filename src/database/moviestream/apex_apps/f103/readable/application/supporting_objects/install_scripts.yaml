@@ -1,0 +1,25 @@
+---
+- # ====== Install Script: EMP_DEPT ============================
+  id: 1869349802807107696
+  identification: 
+    name: EMP_DEPT
+
+  execution: 
+    sequence: 10
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: select null from all_tab_columns where table_name = 'EBA_DEMO_DG_DEPT';
+
+- # ====== Install Script: ORDER_ITEMS =========================
+  id: 1869351751320447079
+  identification: 
+    name: ORDER_ITEMS
+
+  execution: 
+    sequence: 20
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: select null from all_tab_columns where table_name = 'EBA_DEMO_DG_CUSTOMERS';
+

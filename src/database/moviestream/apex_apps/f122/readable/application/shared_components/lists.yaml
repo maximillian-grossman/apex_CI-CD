@@ -1,0 +1,917 @@
+---
+- # ====== List: Manual Data Loading ===========================
+  id: 3345768028255080901
+  identification: 
+    name: Manual Data Loading
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: PL/SQL Parser ================================
+    id: 3345768204414080902
+    label: 
+      label: PL/SQL Parser
+
+    icon: 
+      image/icon-css-classes: fa-file-sql
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # PL/SQL Parser
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Parse uploaded file and discover the columns manually using APEX_DATA_PARSER package.
+
+  - # ====== Entry: PL/SQL Load ==================================
+    id: 3345768551479080904
+    label: 
+      label: PL/SQL Load
+
+    icon: 
+      image/icon-css-classes: fa-upload
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # Load Data using PL/SQL API
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Use a SQL INSERT statement in combination with the APEX_DATA_PARSER.PARSE table function to upload a file directly into a table.
+
+- # ====== List: Data Loading ==================================
+  id: 3345776733424291124
+  identification: 
+    name: Data Loading
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: CSV Load =====================================
+    id: 3345776871130291125
+    label: 
+      label: CSV Load
+
+    icon: 
+      image/icon-css-classes: fa-file-csv
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:11:::'
+        page: 11 # CSV Load
+        clear-cache: 11
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Upload or copy and paste CSV data.
+
+  - # ====== Entry: Transformation and Lookup ====================
+    id: 3345778546930291126
+    label: 
+      label: Transformation and Lookup
+
+    icon: 
+      image/icon-css-classes: fa-dynamic-content
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:15:::'
+        page: 15 # Transform and Lookup
+        clear-cache: 15
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Define <strong>Transformation Rules</strong> and <strong>Lookups</strong> to convert the data when loading.
+
+  - # ====== Entry: Multiple File Types Load =====================
+    id: 3346977962917078637
+    label: 
+      label: Multiple File Types Load
+
+    icon: 
+      image/icon-css-classes: fa-files-o
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:16:&SESSION.::&DEBUG.:16:::'
+        page: 16 # Multiple File Types Load
+        clear-cache: 16
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Use <strong>APEX_DATA_LOADING</strong> package to support loading multiple file types.
+
+  - # ====== Entry: Background Loading ===========================
+    id: 3354297443608175155
+    label: 
+      label: Background Loading
+
+    icon: 
+      image/icon-css-classes: fa-clock-o
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:17:::'
+        page: 17 # Background Load
+        clear-cache: 17
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: For a large data load, use the <strong>Execution Chain</strong> process type to perform loading in the background.
+
+  - # ====== Entry: Legacy Data Loading ==========================
+    id: 3356344087732007352
+    label: 
+      label: Legacy Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-archive
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Data Load Source
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Allow end users to specify column mappings using the <strong>Legacy Data Loading Wizard</strong>.
+
+- # ====== List: Home ==========================================
+  id: 3552026023091211814
+  identification: 
+    name: Home
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Data Loading =================================
+    id: 3345738840960856202
+    label: 
+      label: Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-database-arrow-up
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Data Loading
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Load data using declarative data loading process type.
+
+  - # ====== Entry: Manual Data Loading ==========================
+    id: 3552027018259211817
+    label: 
+      label: Manual Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-wrench
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 32
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.:32:::'
+        page: 30 # Manual Data Loading
+        clear-cache: 32
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Parse upload data manually using APEX_DATA_PARSER package and upload the data maually with DML.
+
+- # ====== List: Data Load Wizard Progress - Load Employees ====
+  id: 4358004199035259081
+  identification: 
+    name: Data Load Wizard Progress - Load Employees
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Data Load Source =============================
+    id: 4358004450569259083
+    label: 
+      label: Data Load Source
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.'
+        page: 21 # Data Load Source
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Data / Table Mapping =========================
+    id: 4358004880393259083
+    label: 
+      label: Data / Table Mapping
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.'
+        page: 22
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Data Validation ==============================
+    id: 4358005284180259084
+    label: 
+      label: Data Validation
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.'
+        page: 23 # Data Validation
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Data Load Results ============================
+    id: 4358005687780259084
+    label: 
+      label: Data Load Results
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.'
+        page: 24 # Data Load Results
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Menu ===============================
+  id: 5104277956751515469
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 45013246144525
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: test_load ====================================
+    id: 17568433639742815
+    label: 
+      label: test_load
+
+    icon: 
+      image/icon-css-classes: fa-file-o
+
+    layout: 
+      sequence: 160
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 2
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+        page: 2 # test_load
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Data Loading =================================
+    id: 3345749618565024987
+    label: 
+      label: Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-database-arrow-up
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Data Loading
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: PL/SQL Parser ================================
+    id: 3345770114989101378
+    label: 
+      label: PL/SQL Parser
+
+    layout: 
+      sequence: 80
+      parent-entry: Manual Data Loading # 3551985019093879174
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # PL/SQL Parser
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: PL/SQL Data Load =============================
+    id: 3345770413532103713
+    label: 
+      label: PL/SQL Data Load
+
+    layout: 
+      sequence: 90
+      parent-entry: Manual Data Loading # 3551985019093879174
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # Load Data using PL/SQL API
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: CSV Load =====================================
+    id: 3345773868858237701
+    label: 
+      label: CSV Load
+
+    icon: 
+      image/icon-css-classes: fa-file-csv
+
+    layout: 
+      sequence: 100
+      parent-entry: Data Loading # 3345749618565024987
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:11:::'
+        page: 11 # CSV Load
+        clear-cache: 11
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Transformation and Lookup ====================
+    id: 3345774199113241578
+    label: 
+      label: Transformation and Lookup
+
+    icon: 
+      image/icon-css-classes: fa-dynamic-content
+
+    layout: 
+      sequence: 110
+      parent-entry: Data Loading # 3345749618565024987
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:15:::'
+        page: 15 # Transform and Lookup
+        clear-cache: 15
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Multiple File Type Load ======================
+    id: 3346876796494627450
+    label: 
+      label: Multiple File Type Load
+
+    icon: 
+      image/icon-css-classes: fa-files-o
+
+    layout: 
+      sequence: 120
+      parent-entry: Data Loading # 3345749618565024987
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 16
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:16:&SESSION.::&DEBUG.:16:::'
+        page: 16 # Multiple File Types Load
+        clear-cache: 16
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Background Load ==============================
+    id: 3349098944591829621
+    label: 
+      label: Background Load
+
+    icon: 
+      image/icon-css-classes: fa-clock-o
+
+    layout: 
+      sequence: 130
+      parent-entry: Data Loading # 3345749618565024987
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 17
+      - 18
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:17:::'
+        page: 17 # Background Load
+        clear-cache: 17
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Manual Data Loading ==========================
+    id: 3551985019093879174
+    label: 
+      label: Manual Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-wrench
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.:32:::'
+        page: 30 # Manual Data Loading
+        clear-cache: 32
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Legacy Data Loading ==========================
+    id: 4358006413433259085
+    label: 
+      label: Legacy Data Loading
+
+    icon: 
+      image/icon-css-classes: fa-archive
+
+    layout: 
+      sequence: 150
+      parent-entry: Data Loading # 3345749618565024987
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 21
+      - 22
+      - 23
+      - 24
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Data Load Source
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 5104278112015515470
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 1
+      - 6
+      - 8
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Sample Data Loading
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Reset Data ===================================
+    id: 5120270851723500537
+    label: 
+      label: Reset Data
+
+    layout: 
+      sequence: 60
+      parent-entry: Administration # 5489197615269362736
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
+        page: 8 # Reset Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Theme Style ==================================
+    id: 5472731816478798616
+    label: 
+      label: Theme Style
+
+    layout: 
+      sequence: 70
+      parent-entry: Administration # 5489197615269362736
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 7
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::::'
+        page: 7 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Administration ===============================
+    id: 5489197615269362736
+    label: 
+      label: Administration
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar (Top) ==========================
+  id: 5104365061216521857
+  identification: 
+    name: Navigation Bar (Top)
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 5104365341142521863
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+        page: 6 # Help
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 5104365667848521871
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 25
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: Sign Out =====================================
+    id: 5104366055904521871
+    label: 
+      label: Sign Out
+
+    layout: 
+      sequence: 30
+      parent-entry: '&APP_USER.' # 5104365667848521871
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Administration Options ========================
+  id: 5516843624493908297
+  identification: 
+    name: Administration Options
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Reset Data ===================================
+    id: 5516843776748908298
+    label: 
+      label: Reset Data
+
+    icon: 
+      image/icon-css-classes: fa-database
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
+        page: 8 # Reset Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Reset the sample data provided in this application to the default.
+
+  - # ====== Entry: Theme Style ==================================
+    id: 5516844177405908302
+    label: 
+      label: Theme Style
+
+    icon: 
+      image/icon-css-classes: fa-laptop
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::::'
+        page: 7 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Change user interface theme style for all users.
+
+- # ====== List: Data Load Process Train - Load Employees ======
+  id: 5524284896021963681
+  identification: 
+    name: Data Load Process Train - Load Employees
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    type: Static Values
+

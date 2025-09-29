@@ -1,0 +1,168 @@
+---
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.DUE ===========
+  id: 17705229371587284
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.DUE
+
+  subscription: 
+    version-number: 45040927642411
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Overdue ======================================
+    id: 17705566948587285
+    entry: 
+      sequence: 1
+      display: Overdue
+      return: '|0'
+
+  - # ====== Entry: Next hour ====================================
+    id: 17705993469587288
+    entry: 
+      sequence: 2
+      display: Next hour
+      return: 0|1
+
+  - # ====== Entry: Next 24 hours ================================
+    id: 17706331384587289
+    entry: 
+      sequence: 3
+      display: Next 24 hours
+      return: 1|24
+
+  - # ====== Entry: Next 7 days ==================================
+    id: 17706777790587289
+    entry: 
+      sequence: 4
+      display: Next 7 days
+      return: 24|168
+
+  - # ====== Entry: Next 30 days =================================
+    id: 17707124256587290
+    entry: 
+      sequence: 5
+      display: Next 30 days
+      return: 168|720
+
+  - # ====== Entry: More than 30 days ============================
+    id: 17707533348587291
+    entry: 
+      sequence: 6
+      display: More than 30 days
+      return: 720|
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.TYPE ==========
+  id: 17708331988587292
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.TYPE
+
+  subscription: 
+    version-number: 45040927642687
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select disp,
+             val
+        from table ( apex_human_task.get_lov_type )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.PRIORITY ======
+  id: 17709451529587295
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.PRIORITY
+
+  subscription: 
+    version-number: 45040927643031
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select disp,
+             val
+        from table ( apex_human_task.get_lov_priority )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.STATE =========
+  id: 17710196289587296
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.STATE
+
+  subscription: 
+    version-number: 45040927643186
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select disp,
+             val
+        from table ( apex_human_task.get_lov_state )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.INITIATED =====
+  id: 17712075651587299
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.INITIATED
+
+  subscription: 
+    version-number: 45040927644382
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Last hour ====================================
+    id: 17712357830587300
+    entry: 
+      sequence: 1
+      display: Last hour
+      return: '|1'
+
+  - # ====== Entry: Last 24 hours ================================
+    id: 17712724316587300
+    entry: 
+      sequence: 2
+      display: Last 24 hours
+      return: 1|24
+
+  - # ====== Entry: Last 7 days ==================================
+    id: 17713104946587302
+    entry: 
+      sequence: 3
+      display: Last 7 days
+      return: 24|168
+
+  - # ====== Entry: Last 30 days =================================
+    id: 17713547720587303
+    entry: 
+      sequence: 4
+      display: Last 30 days
+      return: 168|720
+
+  - # ====== Entry: Older than 30 days ===========================
+    id: 17713919458587304
+    entry: 
+      sequence: 5
+      display: Older than 30 days
+      return: 720|
+

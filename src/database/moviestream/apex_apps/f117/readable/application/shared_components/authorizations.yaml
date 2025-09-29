@@ -1,0 +1,25 @@
+---
+- # ====== Authorization: Operations Team ======================
+  id: 1275551282813086744
+  identification: 
+    name: Operations Team
+
+  subscription: 
+    version-number: 738866192
+
+  authorization-scheme: 
+    type: Exists SQL Query
+
+  settings: 
+    sql-query: |
+      select null
+      from eba_demo_appr_emp
+      where ename = :APP_USER
+      and deptno  = 40 /* OPERATIONS */
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: Insufficient privileges, user is not on the Operations team
+

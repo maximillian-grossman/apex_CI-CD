@@ -1,0 +1,37 @@
+---
+- # ====== REST Data Source Server: catfact-ninja ==============
+  id: 16773964706617306
+  identification: 
+    name: catfact-ninja
+
+  endpoint-url: 
+    url: 'https://catfact.ninja/'
+
+  advanced: 
+    static-id: catfact_ninja
+    prompt-on-install: false
+
+- # ====== REST Data Source Server: document-aiservice-us-ashbur
+  id: 20671374649449050
+  identification: 
+    name: document-aiservice-us-ashburn-1-oci-oraclecloud-com-20221109-actions
+
+  endpoint-url: 
+    url: 'https://document.aiservice.us-ashburn-1.oci.oraclecloud.com/20221109/actions/'
+
+  advanced: 
+    static-id: document_aiservice_us_ashburn_1_oci_oraclecloud_com_20221109_actions
+    prompt-on-install: false
+
+- # ====== REST Data Source Server: document-aiservice-us-ashbur
+  id: 20953340450045351
+  identification: 
+    name: document-aiservice-us-ashburn-1-oci-oraclecloud-com
+
+  endpoint-url: 
+    url: 'https://document.aiservice.us-ashburn-1.oci.oraclecloud.com/'
+
+  advanced: 
+    static-id: document_aiservice_us_ashburn_1_oci_oraclecloud_com
+    prompt-on-install: false
+

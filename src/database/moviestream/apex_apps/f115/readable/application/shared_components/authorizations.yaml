@@ -1,0 +1,24 @@
+---
+- # ====== Authorization: Team Members =========================
+  id: 27408255071200423222
+  identification: 
+    name: Team Members
+
+  subscription: 
+    version-number: 1089079371
+
+  authorization-scheme: 
+    type: Exists SQL Query
+
+  settings: 
+    sql-query: |
+      select 1
+      from eba_demo_md_team_members
+      where upper(username) = upper(:APP_USER)
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: You must be a team member to use this application.
+

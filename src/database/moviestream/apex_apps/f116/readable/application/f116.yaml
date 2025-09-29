@@ -1,0 +1,278 @@
+---
+# ====== Application: DOC_UNDERSTANDING_RAFFLE ===============
+id: 116
+identification: 
+  name: DOC_UNDERSTANDING_RAFFLE
+  alias: DOC-UNDERSTANDING-RAFFLE
+  version: Release 1.0
+
+row-search: 
+  tokenize: true
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Use Instance Settings
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: true
+  logging: true
+  debugging: true
+  compatibility-mode: 21.2 to 24.1
+  accessible-read-only-items: true
+  pass-ecid: Y
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Oracle APEX Accounts # 20318516856332071
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Disabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+
+database-session: 
+  parsing-schema: MOVIESTREAM
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Left-To-Right
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Text
+  text: DOC_UNDERSTANDING_RAFFLE
+
+progressive-web-app: 
+  enable: true
+  installable: true
+  display: Standalone
+  screen-orientation: Any
+  ios-status-bar-style: Default
+  enable-push-notifications: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+    page: 1 # Home
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - t-TreeNav--styleA
+  - js-navCollapsed--hidden
+  list-position: Side
+  list: Navigation Menu # 20319301710332076
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 20608588523332622
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  include-jquery-migrate: false
+
+attributes: 
+  theme: Universal Theme # 42
+  global-page: 0
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: false
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 44992776958564
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: DOC_UNDERSTANDING_RAFFLE
+
+component-settings: 
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 1459463432103564
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 44702215372736
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 20314318057332062
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 44652547743980
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 20314617425332064
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 44652547744065
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 20314947117332064
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 44652547744080
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 20315255218332065
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 44652547744093
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 20315504011332065
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 44652547744109
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 20315816255332066
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 44652547744121
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 20316125060332066
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 44652547744133
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 20316416648332067
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 44652547744143
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 20316786912332067
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 44652547744156
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 20317031152332068
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 44652547744162
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 20317372160332068
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 44652547744178
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 20317608819332069
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 44652547744190
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 20317976706332069
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 44652547744204
+
+application-settings: 
+- # ====== Application Setting: FEEDBACK_ATTACHMENTS_YN ========
+  id: 20612720859332651
+  identification: 
+    name: FEEDBACK_ATTACHMENTS_YN
+
+  value: 
+    value: Y
+    required: false
+
+  advanced: 
+    valid-values: Y, N
+    on-upgrade-keep-value: true
+
+  subscription: 
+    version-number: 44652547772827
+
+  configuration: 
+    build-option: 'Feature: Feedback' # 20611259239332646
+

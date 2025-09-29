@@ -1,0 +1,46 @@
+---
+- # ====== Build Option: Commented Out =========================
+  id: 14851582802202914
+  identification: 
+    name: Commented Out
+
+  status: 
+    status: Exclude
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  subscription: 
+    version-number: 44586090308787
+
+- # ====== Build Option: Feature: Access Control ===============
+  id: 15144352700203482
+  identification: 
+    name: 'Feature: Access Control'
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  comments: 
+    comments: Incorporate role based user authentication within your application and manage username mappings to application roles.
+
+  subscription: 
+    version-number: 44586090317432
+
+- # ====== Build Option: Feature: Activity Reporting ===========
+  id: 15144426773203482
+  identification: 
+    name: 'Feature: Activity Reporting'
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  comments: 
+    comments: Include numerous reports and charts on end user activity.
+
+  subscription: 
+    version-number: 44586090317459
+

@@ -1,0 +1,309 @@
+---
+# ====== Page: Texas House Bills =============================
+id: 5
+identification: 
+  name: Texas House Bills
+  alias: TEXAS-HOUSE-BILLS
+  title: Texas House Bills
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 29272516938460798
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 40060727131315943
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Texas House Bills ===========================
+  id: 29273219289460800
+  identification: 
+    name: Texas House Bills
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select a.*, b.first_page_image
+      from (
+      select 
+          l.id
+          , l.file_name
+          , 'File Size: '||l.file_size file_size
+          , 'Num Text Items: '||count(v.chunk_id) num_chunks
+      from legislation l, legislation_vector v
+      where l.id = v.id
+      group by     l.id
+          , l.file_name
+          , 'File Size: '||l.file_size) a,
+      legislation b
+      where a.id = b.id
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--styleB
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 29273703001460801
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - u-color-16
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: FILE_NAME
+      css-classes: 
+      - u-normal-text
+
+    subtitle: 
+      advanced-formatting: false
+      column: FILE_SIZE
+      css-classes: 
+      - u-normal-text
+
+    body: 
+      advanced-formatting: false
+      column: NUM_CHUNKS
+      css-classes: 
+      - u-normal-text
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Image BLOB Column
+      image-column: FIRST_PAGE_IMAGE
+      icon-position: Start
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    actions: 
+    - # ====== Action: Update ======================================
+      id: 27189606824512310
+      identification: 
+        type: Button
+        label: Update
+
+      layout: 
+        position: Primary
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.:::'
+          page: 13 # Update Legislation
+
+        link-attributes: '&ID.'
+
+      appearance: 
+        display-type: Text
+        hot: false
+
+page-items: 
+- # ====== Page Item: P5_ORDER_BY ==============================
+  id: 29274248474460805
+  identification: 
+    name: P5_ORDER_BY
+    type: Select List
+
+  label: 
+    label: Order By
+    alignment: Right
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Texas House Bills # 29273219289460800
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC2:File Name;FILE_NAME,File Size;FILE_SIZE'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: FILE_NAME
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: search_house_bills ==========================
+  id: 27189311000512307
+  identification: 
+    button-name: search_house_bills
+    label: Search House Bills
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 29272516938460798
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-color-1
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:::'
+      page: 12 # House Bill Detail
+
+    warn-on-unsaved-changes: Do Not Check
+

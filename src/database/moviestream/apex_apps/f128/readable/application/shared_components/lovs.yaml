@@ -1,0 +1,41 @@
+---
+- # ====== List of Values: ACCESS_ROLES ========================
+  id: 22823038669812667
+  identification: 
+    name: ACCESS_ROLES
+
+  subscription: 
+    version-number: 45591960732565
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select role_name d, role_id r
+      from APEX_APPL_ACL_ROLES where application_id = :APP_ID 
+      order by 1
+
+  column-mapping: 
+    return: R
+    display: D
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: EMAIL_USERNAME_FORMAT ===============
+  id: 22830540094812690
+  identification: 
+    name: EMAIL_USERNAME_FORMAT
+
+  subscription: 
+    version-number: 45591960734969
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Email Addresses ==============================
+    id: 22830855833812691
+    entry: 
+      sequence: 1
+      display: Email Addresses
+      return: EMAIL
+

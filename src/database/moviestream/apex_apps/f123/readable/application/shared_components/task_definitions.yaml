@@ -1,0 +1,56 @@
+---
+- # ====== Task Definition: Aprrove_Change =====================
+  id: 17698561292559354
+  identification: 
+    name: Aprrove_Change
+
+  settings: 
+    subject: test_subject
+    task-type: Approval Task
+    initiator-can-complete: Y
+    priority: 3-Medium
+    details-page: 
+      url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP,3:P3_TASK_ID:&TASK_ID.'
+      page: 3 # Task Details
+      clear-cache: RP,3
+      values: 
+        p3_task_id: '&TASK_ID.'
+
+  deadline: 
+    due-on-type: None
+
+  source: 
+    table-owner: Parsing Schema
+
+  advanced: 
+    static-id: APRROVE_CHANGE
+
+  parameters: 
+  - # ====== Parameter: Session Id ===============================
+    id: 17829612322672132
+    identification: 
+      static-id: session_id
+
+    label: 
+      label: Session Id
+
+    value: 
+      data-type: String
+      required: true
+
+    advanced: 
+      show-on-task-details: true
+      updatable: true
+
+  participants: 
+  - # ====== Participant: Potential Owner ========================
+    id: 17698967006572677
+    identification: 
+      type: Potential Owner
+
+    value: 
+      type: SQL Query
+      sql-query: |
+        select user_name from APEX_WORKSPACE_SESSION_GROUPS
+        where apex_session_id = :app_session
+

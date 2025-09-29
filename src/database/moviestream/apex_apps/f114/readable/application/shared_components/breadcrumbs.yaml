@@ -1,0 +1,105 @@
+---
+- # ====== Breadcrumb: Breadcrumb ==============================
+  id: 29454639415932840
+  identification: 
+    name: Breadcrumb
+
+  entries: 
+  - # ====== Entry: Home =========================================
+    id: 29454885841932842
+    identification: 
+      name: Home
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+
+  - # ====== Entry: RCO_DIRECTORY_DETAILS ========================
+    id: 29835988436782082
+    identification: 
+      name: RCO_DIRECTORY_DETAILS
+      page-number: 5
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&APP_SESSION.::&DEBUG.:::'
+        page: 5 # RCO_DIRECTORY_DETAILS
+
+  - # ====== Entry: PATIENT_MAPPING_SEARCH =======================
+    id: 29911416866007005
+    identification: 
+      name: PATIENT_MAPPING_SEARCH
+      page-number: 6
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&APP_SESSION.::&DEBUG.:::'
+        page: 6 # PATIENT_MAPPING_SEARCH
+
+  - # ====== Entry: Directory Report =============================
+    id: 29951331095618318
+    identification: 
+      name: Directory Report
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&APP_SESSION.::&DEBUG.:::'
+        page: 2 # Directory Report
+
+  - # ====== Entry: Administration ===============================
+    id: 30105495338261228
+    identification: 
+      name: Administration
+      page-number: 10100
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10100:&APP_SESSION.::&DEBUG.:::'
+        page: 10100 # Administration
+
+  - # ====== Entry: Directory Report Admin =======================
+    id: 30146995974061918
+    identification: 
+      name: Directory Report Admin
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+        page: 3 # Directory Report Admin
+
+  - # ====== Entry: Admin Data Load ==============================
+    id: 30214974670268041
+    identification: 
+      name: Admin Data Load
+      page-number: 11
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&APP_SESSION.::&DEBUG.:::'
+        page: 11 # Admin Data Load
+

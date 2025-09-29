@@ -1,0 +1,55 @@
+create or replace force editionable view service_mapping (
+    directory,
+    facility_disp,
+    facility_desc,
+    encounter_org,
+    aff_fac_pool_alias,
+    cluster_,
+    bldg_disp,
+    bldg_desc,
+    nurse_unit_disp,
+    nurse_unit_desc,
+    nu_outbound_alias,
+    patient_type,
+    patient_type_alias,
+    medical_service,
+    op_prefix,
+    aff_srvc_pool_alias,
+    med_svc_alias,
+    patient_service_code,
+    patient_service_description,
+    status,
+    added_dt,
+    inactive_dt
+) as
+    select
+        directory,
+        facility_disp,
+        facility_desc,
+        encounter_org,
+        aff_fac_pool_alias,
+        cluster_,
+        bldg_disp,
+        bldg_desc,
+        nurse_unit_disp,
+        nurse_unit_desc,
+        nu_outbound_alias,
+        patient_type,
+        patient_type_alias,
+        medical_service,
+        op_prefix,
+        aff_srvc_pool_alias,
+        med_svc_alias,
+        patient_service_code,
+        patient_service_description,
+        status,
+        added_dt,
+        inactive_dt
+    from
+        rco_directory   rd,
+        facility_disp   fd,
+        bldg_disp       bd,
+        nurse_unit_disp nd;
+
+
+-- sqlcl_snapshot {"hash":"0acc77a6db88e4b1b74a6aba2db357a6fd362c4f","type":"VIEW","name":"SERVICE_MAPPING","schemaName":"MOVIESTREAM","sxml":""}

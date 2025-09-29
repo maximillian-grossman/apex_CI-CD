@@ -1,0 +1,532 @@
+---
+# ====== Page: REST Endpoint Status ==========================
+id: 301
+identification: 
+  name: REST Endpoint Status
+  alias: REST-ENDPOINTS-STATUS
+  title: REST Endpoint Status
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: REST Endpoint Test Results ==================
+  id: 100453335114784163
+  identification: 
+    name: REST Endpoint Test Results
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select NAME as card_title,
+             URL,
+             LAST_STATUS,
+             case 
+                 when last_status is null then 'fa-question'
+                 when last_status = 'OK' then 'fa-check'
+                 else 'fa-exception'
+             end as card_icon,
+             case  
+                 when last_status is null then 'u-color-29'
+                 when last_status = 'OK' then 'u-color-35'
+                 else 'u-color-39' 
+             end as card_color,
+             case  
+                 when last_status='OK' then 'OK'
+                 when last_status='ERROR_ACL' then 'Network Access Control List (ACL)'
+                 when last_status='ERROR_CERT' then 'SSL Certificate error (Wallet)'
+                 when last_status='ERROR_NETWORK' then 'Networking issue (e.g. Proxy Server)'
+                 when last_status like 'ERROR_HTTP%' then 'HTTP Error ' || substr( last_status, 12 )
+                 when last_status like 'ERROR_OTHER%' then 'Other Error: ' || substr( last_status, 13 )
+                 else 'Other Error'
+             end as card_text,
+             url as card_subtext
+        from EBA_RESTDEMO_SAMPLE_URLS
+       where name != 'ORDS EMP'
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Cards
+      template-options: 
+      - '#DEFAULT#'
+      - t-Cards--featured force-fa-lg
+      - t-Cards--displayIcons
+      - t-Cards--3cols
+      - t-Cards--animColorFill
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: URL =========================================
+    id: 101195474024178642
+    identification: 
+      column-name: URL
+      type: Plain Text
+
+    heading: 
+      heading: Url
+      alignment: center
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: LAST_STATUS =================================
+    id: 101195477893178643
+    identification: 
+      column-name: LAST_STATUS
+      type: Plain Text
+
+    heading: 
+      heading: Last status
+      alignment: center
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TITLE ==================================
+    id: 101196022091178648
+    identification: 
+      column-name: CARD_TITLE
+      type: Plain Text
+
+    heading: 
+      heading: Card title
+      alignment: center
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_ICON ===================================
+    id: 101196143237178649
+    identification: 
+      column-name: CARD_ICON
+      type: Plain Text
+
+    heading: 
+      heading: Card icon
+      alignment: center
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_COLOR ==================================
+    id: 101196272799178650
+    identification: 
+      column-name: CARD_COLOR
+      type: Plain Text
+
+    heading: 
+      heading: Card color
+      alignment: center
+
+    layout: 
+      sequence: 5
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_SUBTEXT ================================
+    id: 101196425135178652
+    identification: 
+      column-name: CARD_SUBTEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card subtext
+      alignment: center
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CARD_TEXT ===================================
+    id: 101196480239178653
+    identification: 
+      column-name: CARD_TEXT
+      type: Plain Text
+
+    heading: 
+      heading: Card text
+      alignment: center
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Information =================================
+  id: 101196606718178654
+  identification: 
+    name: Information
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This page contains test results for the REST endpoint URLs used in this application. Test results are being stored in a local table. Click the <strong>Test Endpoints</strong> button to execute the test. Failure in accessing the endpoint URLs can have the following reasons.
+      </p>
+      <ul>
+      <li><strong>Missing Network Connectivity</strong><br>
+          The database server has either no connection to the internet or is behind a firewall. Set a proxy server either at the
+          application level (in Shared Components) or at the Application Express instance level.</li>
+      <li><strong>Certificate Validation Errors</strong></br>
+          When the database cannot verify the server certificate of an HTTPS endpoint, the service cannot be accessed. In that case,
+          the CA certificate must be added to the database wallet and the wallet must be configured in Application Express. See
+          <a href="https://blogs.oracle.com/apex/apex-https-certificates-and-the-oracle-wallet" target="_blank">"APEX, HTTPS, certificates and the Oracle Wallet"</a> for more information.</li>
+      <li><strong>Network Access Control List</strong><br>
+          The APEX Engine User (e.g. APEX_190100) is not allowed to perform outbound HTTP requests. A <em>PL/SQL Network ACL</em> must be
+          configured in the database in order to allow requests the service endpoints.</li>
+      </ul>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 101218071321224102
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 1
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: TEST ========================================
+  id: 101195663856178644
+  identification: 
+    button-name: TEST
+    label: Test Endpoints
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 101218071321224102
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Test Endpoints =============================
+  id: 101195817246178646
+  identification: 
+    name: Test Endpoints
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: eba_restdemo_sample_pkg.test_all;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: 'URL Endpoints tested. '
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: TEST # 101195663856178644
+

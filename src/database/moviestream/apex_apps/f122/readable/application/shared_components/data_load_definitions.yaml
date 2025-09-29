@@ -1,0 +1,1426 @@
+---
+- # ====== Data Load Definition: test ==========================
+  id: 17567804793731314
+  identification: 
+    name: test
+
+  subscription: 
+    version-number: 45013236124929
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: CLIENT_REQUESTS
+    loading-method: Append
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: test
+
+  data-profiles: 
+    id: 17565537959731295
+    identification: 
+      name: test
+
+    data-profile: 
+      format: XLSX
+
+    advanced: 
+      encoding: Unicode UTF-8
+      default-xlsx-sheet-name: sheet8.xml
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: REQUESTOR ===================================
+      id: 17565877554731309
+      identification: 
+        column-name: REQUESTOR
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 400
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL001
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: APPROVER ====================================
+      id: 17566127943731310
+      identification: 
+        column-name: APPROVER
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 400
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL002
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: ID ==========================================
+      id: 17566478655731311
+      identification: 
+        column-name: ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL003
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: STATUS ======================================
+      id: 17566763722731311
+      identification: 
+        column-name: STATUS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL004
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: DBA =========================================
+      id: 17567002918731312
+      identification: 
+        column-name: DBA
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 100
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL006
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: SUBMISSION_DATE =============================
+      id: 17567319238731312
+      identification: 
+        column-name: SUBMISSION_DATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL007
+        has-time-zone: true
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: ACCOUNT_MANAGER =============================
+      id: 17567660775731313
+      identification: 
+        column-name: ACCOUNT_MANAGER
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 100
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COL008
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+- # ====== Data Load Definition: XLSX Load =====================
+  id: 3345811677317643308
+  identification: 
+    name: XLSX Load
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    loading-method: Merge
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: XLSX_Load
+
+  data-profiles: 
+    id: 3345809051981643305
+    identification: 
+      name: XLSX Load
+
+    data-profile: 
+      format: XLSX
+
+    advanced: 
+      encoding: Unicode UTF-8
+      default-xlsx-sheet-name: sheet1.xml
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: EMPNO =======================================
+      id: 3345809354482643305
+      identification: 
+        column-name: EMPNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: true
+
+      parsing: 
+        selector-type: Name
+        selector: EMPNO
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: ENAME =======================================
+      id: 3345809670405643306
+      identification: 
+        column-name: ENAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ENAME
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: JOB =========================================
+      id: 3345810025557643306
+      identification: 
+        column-name: JOB
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 9
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: JOB
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: MGR =========================================
+      id: 3345810348083643306
+      identification: 
+        column-name: MGR
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: MGR
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: HIREDATE ====================================
+      id: 3345810647439643306
+      identification: 
+        column-name: HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: HIREDATE
+        format-mask: YYYY"-"MM"-"DD
+        has-time-zone: true
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: SAL =========================================
+      id: 3345810920165643307
+      identification: 
+        column-name: SAL
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: SAL
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: COMM ========================================
+      id: 3345811199077643308
+      identification: 
+        column-name: COMM
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COMM
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: DEPTNO ======================================
+      id: 3345811486651643308
+      identification: 
+        column-name: DEPTNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: DEPTNO
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+- # ====== Data Load Definition: XML Load ======================
+  id: 3345831163216655132
+  identification: 
+    name: XML Load
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    loading-method: Replace
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: XML_Load
+
+  data-profiles: 
+    id: 3345828598624655122
+    identification: 
+      name: XML Load
+
+    data-profile: 
+      format: XML
+      row-selector: /*/ROW
+
+    advanced: 
+      encoding: Unicode UTF-8
+
+    columns: 
+    - # ====== Column: EMPNO =======================================
+      id: 3345828853660655122
+      identification: 
+        column-name: EMPNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: true
+
+      parsing: 
+        path-expression: EMPNO[1]
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: ENAME =======================================
+      id: 3345829176673655123
+      identification: 
+        column-name: ENAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        path-expression: ENAME[1]
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: JOB =========================================
+      id: 3345829467484655130
+      identification: 
+        column-name: JOB
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 9
+        primary-key: false
+
+      parsing: 
+        path-expression: JOB[1]
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: MGR =========================================
+      id: 3345829829635655131
+      identification: 
+        column-name: MGR
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: MGR[1]
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: HIREDATE ====================================
+      id: 3345830137579655131
+      identification: 
+        column-name: HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: HIREDATE[1]
+        format-mask: MM"/"DD"/"RR
+        has-time-zone: true
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: SAL =========================================
+      id: 3345830376682655131
+      identification: 
+        column-name: SAL
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: SAL[1]
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: DEPTNO ======================================
+      id: 3345830723033655131
+      identification: 
+        column-name: DEPTNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: DEPTNO[1]
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: COMM ========================================
+      id: 3345830952775655132
+      identification: 
+        column-name: COMM
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: COMM[1]
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+- # ====== Data Load Definition: Transform and Lookup ==========
+  id: 3346290134203441329
+  identification: 
+    name: Transform and Lookup
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    loading-method: Replace
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: Transform_and_Lookup
+
+  data-profiles: 
+    id: 3346287515230441327
+    identification: 
+      name: Transform and Lookup
+
+    data-profile: 
+      format: CSV
+
+    advanced: 
+      encoding: Western European ISO-8859-1
+      csv-enclosed-by: '"'
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: EMPNO =======================================
+      id: 3346287785450441327
+      identification: 
+        column-name: EMPNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: true
+
+      parsing: 
+        selector-type: Name
+        selector: EMPNO
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: ENAME =======================================
+      id: 3346288131861441327
+      identification: 
+        column-name: ENAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        selector-type: Regular Expression
+        selector: .*Name$
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: JOB =========================================
+      id: 3346288353569441327
+      identification: 
+        column-name: JOB
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 9
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: JOB
+
+      transformation: 
+        type: To Upper Case
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: MGR_LOADED ==================================
+      id: 3346288723300441328
+      identification: 
+        column-name: MGR_LOADED
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 4000
+        primary-key: false
+
+      parsing: 
+        selector-type: Regular Expression
+        selector: MGR|Manager
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: HIREDATE ====================================
+      id: 3346288983345441328
+      identification: 
+        column-name: HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: HIREDATE
+        format-mask: MM/DD/YYYY
+        has-time-zone: false
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: SAL =========================================
+      id: 3346289316375441328
+      identification: 
+        column-name: SAL
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Regular Expression
+        selector: SAL|Salary
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: COMM ========================================
+      id: 3346289641888441328
+      identification: 
+        column-name: COMM
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Regular Expression
+        selector: COMM|Commission
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: DEPTNO_LOADED ===============================
+      id: 3346289894352441329
+      identification: 
+        column-name: DEPTNO_LOADED
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 4000
+        primary-key: false
+
+      parsing: 
+        selector-type: Regular Expression
+        selector: DEPTNO|Department
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+    - # ====== Column: DEPTNO ======================================
+      id: 3346333466952024188
+      identification: 
+        column-name: DEPTNO
+
+      source: 
+        type: Lookup
+        data-type: NUMBER
+        primary-key: false
+
+      lookup: 
+        table-owner: Parsing Schema
+        table-name: EBA_DEMO_LOAD_DEPT
+        return-column: DEPTNO
+        table-column-1: DNAME
+        data-column-1: DEPTNO_LOADED
+
+      advanced: 
+        sequence: 18
+        hidden: false
+
+    - # ====== Column: MGR =========================================
+      id: 3346334010694033310
+      identification: 
+        column-name: MGR
+
+      source: 
+        type: Lookup
+        data-type: NUMBER
+        primary-key: false
+
+      lookup: 
+        table-owner: Parsing Schema
+        table-name: EBA_DEMO_LOAD_EMP
+        return-column: EMPNO
+        table-column-1: ENAME
+        data-column-1: MGR_LOADED
+
+      advanced: 
+        sequence: 28
+        hidden: false
+
+- # ====== Data Load Definition: JSON Load =====================
+  id: 3346943251301982203
+  identification: 
+    name: JSON Load
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    loading-method: Replace
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: JSON_Load
+
+  data-profiles: 
+    id: 3346940692306982201
+    identification: 
+      name: JSON Load
+
+    data-profile: 
+      format: JSON
+      row-selector: items
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Unicode UTF-8
+
+    columns: 
+    - # ====== Column: JOB =========================================
+      id: 3346940964494982201
+      identification: 
+        column-name: JOB
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 9
+        primary-key: false
+
+      parsing: 
+        path-expression: job
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: MGR =========================================
+      id: 3346941333021982201
+      identification: 
+        column-name: MGR
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: mgr
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: SAL =========================================
+      id: 3346941606346982202
+      identification: 
+        column-name: SAL
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: sal
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: COMM ========================================
+      id: 3346941851278982202
+      identification: 
+        column-name: COMM
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: comm
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: EMPNO =======================================
+      id: 3346942183880982202
+      identification: 
+        column-name: EMPNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: true
+
+      parsing: 
+        path-expression: empno
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: ENAME =======================================
+      id: 3346942506203982202
+      identification: 
+        column-name: ENAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        path-expression: ename
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: DEPTNO ======================================
+      id: 3346942849914982202
+      identification: 
+        column-name: DEPTNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        path-expression: deptno
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: HIREDATE ====================================
+      id: 3346943116514982203
+      identification: 
+        column-name: HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: hiredate
+        format-mask: 'YYYY"-"MM"-"DD"T"HH24":"MI":"SS'
+        has-time-zone: true
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+- # ====== Data Load Definition: CSV Load ======================
+  id: 3353798051347232228
+  identification: 
+    name: CSV Load
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    loading-method: Merge
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: CSV_Load
+
+  data-profiles: 
+    id: 3353795483027232308
+    identification: 
+      name: CSV Load
+
+    data-profile: 
+      format: CSV
+
+    advanced: 
+      encoding: Western European ISO-8859-1
+      csv-enclosed-by: '"'
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: EMPNO =======================================
+      id: 3353795823055232250
+      identification: 
+        column-name: EMPNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: true
+
+      parsing: 
+        selector-type: Name
+        selector: EMPNO
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: ENAME =======================================
+      id: 3353796150793232243
+      identification: 
+        column-name: ENAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ENAME
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: JOB =========================================
+      id: 3353796406925232240
+      identification: 
+        column-name: JOB
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 10
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: JOB
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: MGR =========================================
+      id: 3353796661462232236
+      identification: 
+        column-name: MGR
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: MGR
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: HIREDATE ====================================
+      id: 3353796951275232229
+      identification: 
+        column-name: HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: HIREDATE
+        format-mask: MM/DD/YYYY
+        has-time-zone: false
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: SAL =========================================
+      id: 3353797304980232228
+      identification: 
+        column-name: SAL
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: SAL
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: COMM ========================================
+      id: 3353797589132232228
+      identification: 
+        column-name: COMM
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COMM
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: DEPTNO ======================================
+      id: 3353797866292232228
+      identification: 
+        column-name: DEPTNO
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: DEPTNO
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+- # ====== Data Load Definition: Sales Data Load ===============
+  id: 3354384084115221396
+  identification: 
+    name: Sales Data Load
+
+  subscription: 
+    version-number: 1089079239
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_SALES
+    loading-method: Replace
+
+  error-handling: 
+    when-on-error: Log Error into Collection
+    name: sales_data_load_err
+
+  advanced: 
+    commit-interval: 200
+    static-id: Sales_Data_Load
+
+  data-profiles: 
+    id: 3354379669229221606
+    identification: 
+      name: Sales Data Load
+
+    data-profile: 
+      format: CSV
+
+    advanced: 
+      encoding: Western European ISO-8859-1
+      csv-enclosed-by: '"'
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: REGION ======================================
+      id: 3354380046684221410
+      identification: 
+        column-name: REGION
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 255
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: REGION
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: COUNTRY =====================================
+      id: 3354380328141221404
+      identification: 
+        column-name: COUNTRY
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 255
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: COUNTRY
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: ITEM_TYPE ===================================
+      id: 3354380595096221399
+      identification: 
+        column-name: ITEM_TYPE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ITEM_TYPE
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: SALES_CHANNEL ===============================
+      id: 3354380854179221398
+      identification: 
+        column-name: SALES_CHANNEL
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: SALES_CHANNEL
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: ORDER_PRIORITY ==============================
+      id: 3354381174260221398
+      identification: 
+        column-name: ORDER_PRIORITY
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 1
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ORDER_PRIORITY
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: ORDER_DATE ==================================
+      id: 3354381545105221398
+      identification: 
+        column-name: ORDER_DATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ORDER_DATE
+        format-mask: MM"/"DD"/"RR
+        has-time-zone: true
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: ORDER_ID ====================================
+      id: 3354381817305221398
+      identification: 
+        column-name: ORDER_ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ORDER_ID
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: SHIP_DATE ===================================
+      id: 3354382119527221397
+      identification: 
+        column-name: SHIP_DATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: SHIP_DATE
+        format-mask: MM"/"DD"/"RR
+        has-time-zone: true
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+    - # ====== Column: UNITS_SOLD ==================================
+      id: 3354382363313221397
+      identification: 
+        column-name: UNITS_SOLD
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: UNITS_SOLD
+
+      advanced: 
+        sequence: 9
+        hidden: false
+
+    - # ====== Column: UNIT_PRICE ==================================
+      id: 3354382708347221397
+      identification: 
+        column-name: UNIT_PRICE
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: UNIT_PRICE
+
+      advanced: 
+        sequence: 10
+        hidden: false
+
+    - # ====== Column: UNIT_COST ===================================
+      id: 3354382989420221397
+      identification: 
+        column-name: UNIT_COST
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: UNIT_COST
+
+      advanced: 
+        sequence: 11
+        hidden: false
+
+    - # ====== Column: TOTAL_REVENUE ===============================
+      id: 3354383342189221397
+      identification: 
+        column-name: TOTAL_REVENUE
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: TOTAL_REVENUE
+
+      advanced: 
+        sequence: 12
+        hidden: false
+
+    - # ====== Column: TOTAL_COST ==================================
+      id: 3354383644733221397
+      identification: 
+        column-name: TOTAL_COST
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: TOTAL_COST
+
+      advanced: 
+        sequence: 13
+        hidden: false
+
+    - # ====== Column: TOTAL_PROFIT ================================
+      id: 3354383944972221396
+      identification: 
+        column-name: TOTAL_PROFIT
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        decimal-character: .
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: TOTAL_PROFIT
+
+      advanced: 
+        sequence: 14
+        hidden: false
+

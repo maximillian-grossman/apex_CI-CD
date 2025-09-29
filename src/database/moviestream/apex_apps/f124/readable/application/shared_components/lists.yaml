@@ -1,0 +1,950 @@
+---
+- # ====== List: All Maps ======================================
+  id: 805941914005687255
+  identification: 
+    name: All Maps
+
+  subscription: 
+    version-number: 1089080427
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Heat Map =====================================
+    id: 805942091423687256
+    label: 
+      label: Heat Map
+
+    icon: 
+      image/icon-css-classes: fa-heat-map
+
+    layout: 
+      sequence: 1080
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 110
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:::'
+        page: 110 # Airports Heat Map
+        clear-cache: 110
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize airport data as a <em>heat map</em>.
+      2.: map-screenshots/heat-map.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Clickable Map ================================
+    id: 805942510675687263
+    label: 
+      label: Clickable Map
+
+    icon: 
+      image/icon-css-classes: fa-map-marker
+
+    layout: 
+      sequence: 1020
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 111
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:111:&SESSION.::&DEBUG.:111:::'
+        page: 111 # Airports Map
+        clear-cache: 111
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize airport data using <em>map markers</em>.
+      2.: map-screenshots/clickable-map.jpg
+
+  - # ====== Entry: Search and Show ==============================
+    id: 805942901914687263
+    label: 
+      label: Search and Show
+
+    icon: 
+      image/icon-css-classes: fa-search
+
+    layout: 
+      sequence: 1030
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 121
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:121:&SESSION.::&DEBUG.:121:::'
+        page: 121 # Airports Search
+        clear-cache: 121
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Search for an airport within an Interactive Report, and visualize it on a map.
+      2.: map-screenshots/search-and-show.jpg
+
+  - # ====== Entry: Faceted Search ===============================
+    id: 805943219759687264
+    label: 
+      label: Faceted Search
+
+    icon: 
+      image/icon-css-classes: fa-filter
+
+    layout: 
+      sequence: 1040
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 120
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:120:::'
+        page: 120 # Airports Faceted Search
+        clear-cache: 120
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Provide powerful analysis on airport data using <em>Faceted Search</em>.
+      2.: map-screenshots/faceted-search.jpg
+
+  - # ====== Entry: Circle Search ================================
+    id: 805943702496687264
+    label: 
+      label: Circle Search
+
+    icon: 
+      image/icon-css-classes: fa-circle-o
+
+    layout: 
+      sequence: 1050
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 122
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:122:&SESSION.::&DEBUG.:122:::'
+        page: 122 # Map Circle Search 
+        clear-cache: 122
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Draw a circle onto a map and find all airports within that circle.
+      2.: map-screenshots/circle-search.jpg
+
+  - # ====== Entry: Map and Report ===============================
+    id: 805944114181687276
+    label: 
+      label: Map and Report
+
+    icon: 
+      image/icon-css-classes: fa-arrows-h
+
+    layout: 
+      sequence: 1060
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 123
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:123:&SESSION.::&DEBUG.:123:::'
+        page: 123 # Map and Report
+        clear-cache: 123
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Connect a map to a report (or other) component.
+      2.: map-screenshots/map-and-report.jpg
+
+  - # ====== Entry: Nearest Neighbor Search ======================
+    id: 805944423037687276
+    label: 
+      label: Nearest Neighbor Search
+
+    icon: 
+      image/icon-css-classes: fa-line-map
+
+    layout: 
+      sequence: 1070
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 124
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:124:&SESSION.::&DEBUG.:124,RR:::'
+        page: 124 # Nearest Neighbor Search
+        clear-cache: 124,RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Show nearest neighbors to a clicked position on the map.
+      2.: map-screenshots/nearest-neighbor.jpg
+
+  - # ====== Entry: Legacy Oracle Maps Plug-In ===================
+    id: 2345317177513271297
+    label: 
+      label: Legacy Oracle Maps Plug-In
+
+    icon: 
+      image/icon-css-classes: fa-plug
+
+    layout: 
+      sequence: 4100
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 201
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:201:&SESSION.::&DEBUG.:201:::'
+        page: 201 # Legacy Oracle Maps Plug-In
+        clear-cache: 201
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize Spatial data using the Plug-In from the (legacy) Sample Geolocation Showcase.
+      2.: map-screenshots/legacy.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: US States and Large Airports =================
+    id: 2350083369209384650
+    label: 
+      label: US States and Large Airports
+
+    icon: 
+      image/icon-css-classes: fa-map-markers-o
+
+    layout: 
+      sequence: 4090
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 115
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:115:&SESSION.::&DEBUG.:115:::'
+        page: 115 # US States and Large Airports
+        clear-cache: 115
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize US state boundaries and large airports on one map.
+      2.: map-screenshots/us-states-and-large-airports.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: US States (flat) =============================
+    id: 2350942969616220442
+    label: 
+      label: US States (flat)
+
+    icon: 
+      image/icon-css-classes: fa-2d-mode
+
+    layout: 
+      sequence: 4060
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 112
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:112:&SESSION.::&DEBUG.::::'
+        page: 112 # US States (flat)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize US states as flat polygons.
+      2.: map-screenshots/us-states-flat.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: US States (extruded) =========================
+    id: 2350943455315220442
+    label: 
+      label: US States (extruded)
+
+    icon: 
+      image/icon-css-classes: fa-3d-mode
+
+    layout: 
+      sequence: 4070
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 113
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:113:&SESSION.::&DEBUG.::::'
+        page: 113 # US States (extruded)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize US states as extruded 3D polygons, based on a value.
+      2.: map-screenshots/us-states-extruded.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: US States with Links =========================
+    id: 2350943779682220442
+    label: 
+      label: US States with Links
+
+    icon: 
+      image/icon-css-classes: fa-link
+
+    layout: 
+      sequence: 4080
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 114
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:114:&SESSION.::&DEBUG.::::'
+        page: 114 # US States with Links
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Visualize US states as a clickable map.
+      2.: map-screenshots/us-states-with-links.jpg
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+- # ====== List: Main Menu =====================================
+  id: 1572199268787420226
+  identification: 
+    name: Main Menu
+
+  subscription: 
+    version-number: 1089080427
+
+  source: 
+    type: Static Values
+
+- # ====== List: Desktop Navigation Menu =======================
+  id: 1575512491748929807
+  identification: 
+    name: Desktop Navigation Menu
+
+  subscription: 
+    version-number: 45167209990453
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: test =========================================
+    id: 19551909208248356
+    label: 
+      label: test
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 2080
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 5
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&APP_SESSION.::&DEBUG.:::'
+        page: 5 # test
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Load Full Dataset ============================
+    id: 811438042984344093
+    label: 
+      label: Load Full Dataset
+
+    icon: 
+      image/icon-css-classes: fa-download
+
+    layout: 
+      sequence: 2070
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 501
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:501:&SESSION.::&DEBUG.::::'
+        page: 501 # Load Full Dataset
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: US States and Large Airports =================
+    id: 1571321812892496781
+    label: 
+      label: US States and Large Airports
+
+    icon: 
+      image/icon-css-classes: fa-map-markers-o
+
+    layout: 
+      sequence: 2040
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 115
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:115:&SESSION.::&DEBUG.::::'
+        page: 115 # US States and Large Airports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Legacy Oracle Maps Plug-In ===================
+    id: 1571491428223742222
+    label: 
+      label: Legacy Oracle Maps Plug-In
+
+    icon: 
+      image/icon-css-classes: fa-plug
+
+    layout: 
+      sequence: 2060
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 201
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:201:&SESSION.::&DEBUG.::::'
+        page: 201 # Legacy Oracle Maps Plug-In
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: US States with Links =========================
+    id: 1572138255670155738
+    label: 
+      label: US States with Links
+
+    icon: 
+      image/icon-css-classes: fa-link
+
+    layout: 
+      sequence: 2030
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 114
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:114:&SESSION.::&DEBUG.::::'
+        page: 114 # US States with Links
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Map and Report ===============================
+    id: 1572208177250492365
+    label: 
+      label: Map and Report
+
+    icon: 
+      image/icon-css-classes: fa-table-search
+
+    layout: 
+      sequence: 1060
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 123
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:123:&SESSION.::&DEBUG.::::'
+        page: 123 # Map and Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: US States (extruded) =========================
+    id: 1573815848512065270
+    label: 
+      label: US States (extruded)
+
+    icon: 
+      image/icon-css-classes: fa-3d-mode
+
+    layout: 
+      sequence: 2020
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 113
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:113:&SESSION.::&DEBUG.::::'
+        page: 113 # US States (extruded)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Nearest Neighbor Search ======================
+    id: 1575146162458242992
+    label: 
+      label: Nearest Neighbor Search
+
+    icon: 
+      image/icon-css-classes: fa-line-map
+
+    layout: 
+      sequence: 1070
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 124
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:124:&SESSION.::&DEBUG.::::'
+        page: 124 # Nearest Neighbor Search
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 1575665765937930326
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Search and Show ==============================
+    id: 1575809653182058543
+    label: 
+      label: Search and Show
+
+    icon: 
+      image/icon-css-classes: fa-search
+
+    layout: 
+      sequence: 1030
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 121
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:121:&SESSION.::&DEBUG.::::'
+        page: 121 # Airports Search
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: US States (flat) =============================
+    id: 1575909597373909020
+    label: 
+      label: US States (flat)
+
+    icon: 
+      image/icon-css-classes: fa-2d-mode
+
+    layout: 
+      sequence: 2010
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 112
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:112:&SESSION.::&DEBUG.::::'
+        page: 112 # US States (flat)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Heat Map =====================================
+    id: 1576309169882241942
+    label: 
+      label: Heat Map
+
+    icon: 
+      image/icon-css-classes: fa-heat-map
+
+    layout: 
+      sequence: 1080
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.::::'
+        page: 110 # Airports Heat Map
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_sample_map_states
+
+  - # ====== Entry: Clickable Map ================================
+    id: 1576318343113312925
+    label: 
+      label: Clickable Map
+
+    icon: 
+      image/icon-css-classes: fa-map-marker
+
+    layout: 
+      sequence: 1020
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 111
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:111:&SESSION.::&DEBUG.::::'
+        page: 111 # Airports Map
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Circle Search ================================
+    id: 1576371615364628090
+    label: 
+      label: Circle Search
+
+    icon: 
+      image/icon-css-classes: fa-search
+
+    layout: 
+      sequence: 1050
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 122
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:122:&SESSION.::&DEBUG.::::'
+        page: 122 # Map Circle Search 
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Faceted Search ===============================
+    id: 1577508170999626211
+    label: 
+      label: Faceted Search
+
+    icon: 
+      image/icon-css-classes: fa-filter
+
+    layout: 
+      sequence: 1040
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 120
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.::P120_AIRPORT_TYPE:AIRPORT:'
+        page: 120 # Airports Faceted Search
+        values: 
+          p120_airport_type: AIRPORT
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Desktop Navigation Bar ========================
+  id: 1575655651589930120
+  identification: 
+    name: Desktop Navigation Bar
+
+  subscription: 
+    version-number: 1089080427
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 821588996112163153
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 5
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+        page: 2 # Help
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 1575667200148930353
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: --- ==========================================
+    id: 1575667681418930354
+    label: 
+      label: '---'
+
+    layout: 
+      sequence: 20
+      parent-entry: '&APP_USER.' # 1575667200148930353
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: separator
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Sign Out =====================================
+    id: 1575668053564930355
+    label: 
+      label: Sign Out
+
+    icon: 
+      image/icon-css-classes: fa-sign-out
+
+    layout: 
+      sequence: 30
+      parent-entry: '&APP_USER.' # 1575667200148930353
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+

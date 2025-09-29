@@ -1,0 +1,27 @@
+---
+- # ====== Application Item: SAMPLE_ENDPOINT_URL ===============
+  id: 1859055476355503796
+  identification: 
+    name: SAMPLE_ENDPOINT_URL
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166093930424
+
+- # ====== Application Item: SAMPLE_SERVICE_AVAILABLE ==========
+  id: 1868188300167609501
+  identification: 
+    name: SAMPLE_SERVICE_AVAILABLE
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166093930427
+

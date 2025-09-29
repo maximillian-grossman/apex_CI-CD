@@ -1,0 +1,1291 @@
+---
+# ====== Page: Admin Data Load ===============================
+id: 11
+identification: 
+  name: Admin Data Load
+  alias: ADMIN-DATA-LOAD
+  title: Admin Data Load
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: Administration Rights # 29701042856449715
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 30167671657783579
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 29407835550448382
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Button Bar ==================================
+  id: 30168310591783585
+  identification: 
+    name: Button Bar
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--noUI
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P11_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Data Source =================================
+  id: 30170363480783594
+  identification: 
+    name: Data Source
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Upload a File ===============================
+  id: 30170738801783596
+  identification: 
+    name: Upload a File
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: Data Source # 30170363480783594
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P11_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Loaded File =================================
+  id: 30172891784783610
+  identification: 
+    name: Loaded File
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: Data Source # 30170363480783594
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P11_FILE
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+- # ====== Region: Preview =====================================
+  id: 30175639899783628
+  identification: 
+    name: Preview
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select p.line_number,
+             p.col001, p.col002, p.col003, p.col004, p.col005, p.col006, p.col007, p.col008, p.col009, p.col010
+             -- add more columns (col011 to col300) here.
+        from apex_application_temp_files f, 
+             table( apex_data_parser.parse(
+                        p_content           => f.blob_content,
+                        p_file_name         => f.filename,
+                        p_xlsx_sheet_name   => case when :P11_XLSX_WORKSHEET is not null then :P11_XLSX_WORKSHEET end,
+                        p_file_profile      => apex_data_loading.get_file_profile( p_static_id => 'master_data_upload' ),
+                        p_max_rows          => 100 ) ) p
+       where f.name = :P11_FILE
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P11_FILE
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 50
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlight
+      - t-Report--horizontalBorders
+      - t-Report--hideNoPagination
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 500
+
+    messages: 
+      when-no-data-found: no data found
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: None
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: LINE_NUMBER =================================
+    id: 30176051802783638
+    identification: 
+      column-name: LINE_NUMBER
+      type: Plain Text
+
+    heading: 
+      heading: Line Number
+      alignment: end
+
+    layout: 
+      sequence: 1
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL001 ======================================
+    id: 30176441633783641
+    identification: 
+      column-name: COL001
+      type: Plain Text
+
+    heading: 
+      heading: Col001
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL002 ======================================
+    id: 30176865012783642
+    identification: 
+      column-name: COL002
+      type: Plain Text
+
+    heading: 
+      heading: Col002
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL003 ======================================
+    id: 30177221546783644
+    identification: 
+      column-name: COL003
+      type: Plain Text
+
+    heading: 
+      heading: Col003
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL004 ======================================
+    id: 30177689451783645
+    identification: 
+      column-name: COL004
+      type: Plain Text
+
+    heading: 
+      heading: Col004
+      alignment: start
+
+    layout: 
+      sequence: 5
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL005 ======================================
+    id: 30178017564783646
+    identification: 
+      column-name: COL005
+      type: Plain Text
+
+    heading: 
+      heading: Col005
+      alignment: start
+
+    layout: 
+      sequence: 6
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL006 ======================================
+    id: 30178433637783648
+    identification: 
+      column-name: COL006
+      type: Plain Text
+
+    heading: 
+      heading: Col006
+      alignment: start
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL007 ======================================
+    id: 30178877397783649
+    identification: 
+      column-name: COL007
+      type: Plain Text
+
+    heading: 
+      heading: Col007
+      alignment: start
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL008 ======================================
+    id: 30179274431783651
+    identification: 
+      column-name: COL008
+      type: Plain Text
+
+    heading: 
+      heading: Col008
+      alignment: start
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL009 ======================================
+    id: 30179602336783652
+    identification: 
+      column-name: COL009
+      type: Plain Text
+
+    heading: 
+      heading: Col009
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COL010 ======================================
+    id: 30180045371783653
+    identification: 
+      column-name: COL010
+      type: Plain Text
+
+    heading: 
+      heading: Col010
+      alignment: start
+
+    layout: 
+      sequence: 11
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+page-items: 
+- # ====== Page Item: P11_FILE =================================
+  id: 30171114295783598
+  identification: 
+    name: P11_FILE
+    type: File Upload
+
+  label: 
+    label: Upload a File
+    alignment: Left
+
+  display: 
+    display-as: Block Dropzone
+    dropzone-description: Supported formats XLSX
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+    maximum-file-size: 5000
+
+  layout: 
+    sequence: 10
+    region: Upload a File # 30170738801783596
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P11_ERROR_ROW_COUNT ======================
+  id: 30171567180783605
+  identification: 
+    name: P11_ERROR_ROW_COUNT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Upload a File # 30170738801783596
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P11_FILE_NAME ============================
+  id: 30173209435783611
+  identification: 
+    name: P11_FILE_NAME
+    type: Display Only
+
+  label: 
+    label: Loaded File
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 20
+    region: Loaded File # 30172891784783610
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: Pasted Data
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P11_XLSX_WORKSHEET =======================
+  id: 30174360030783622
+  identification: 
+    name: P11_XLSX_WORKSHEET
+    type: Select List
+
+  label: 
+    label: XLSX Worksheet
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 30
+    region: Loaded File # 30172891784783610
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      select p.sheet_display_name,
+             p.sheet_file_name
+        from apex_application_temp_files f,
+             table( apex_data_parser.get_xlsx_worksheets( p_content => f.blob_content ) ) p
+       where f.name = :P11_FILE
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  server-side-condition: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      declare
+          l_sheet_count number;
+      begin
+          select count(*)
+            into l_sheet_count
+            from apex_application_temp_files f,
+                 table( apex_data_parser.get_xlsx_worksheets( p_content => f.blob_content ) ) p
+           where f.name = :P11_FILE;
+          
+           -- display if the XSLX file contains multiple worksheets
+          return ( l_sheet_count > 1 );
+      exception
+          when others then 
+              return false;
+      end;
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CLEAR =======================================
+  id: 30168809329783588
+  identification: 
+    button-name: CLEAR
+    label: Clear
+
+  layout: 
+    sequence: 10
+    region: Button Bar # 30168310591783585
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: LOAD ========================================
+  id: 30169162146783589
+  identification: 
+    button-name: LOAD
+    label: Load Data
+
+  layout: 
+    sequence: 20
+    region: Button Bar # 30168310591783585
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Upload a File =======================
+  id: 30171919998783606
+  identification: 
+    name: Upload a File
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P11_FILE
+
+  client-side-condition: 
+    type: Item is not null
+    item: P11_FILE
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 30172435653783608
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: Upload a File # 30171919998783606
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Submit worksheet on change ==========
+  id: 30174771497783625
+  identification: 
+    name: Submit worksheet on change
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P11_XLSX_WORKSHEET
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 30175301026783627
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: Submit worksheet on change # 30174771497783625
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: Is valid file type ======================
+  id: 30174065140783621
+  identification: 
+    name: Is valid file type
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Function Body (returning Boolean)
+    language: PL/SQL
+    pl/sql-function-body: |
+      if apex_data_parser.assert_file_type(
+             p_file_name => :P11_FILE_NAME,
+             p_file_type => apex_data_parser.c_file_type_xlsx )
+      then
+          return true;
+      else
+          :P11_FILE := null;
+          return false;
+      end if;
+    always-execute: false
+
+  error: 
+    error-message: Invalid file type. Supported file types XLSX.
+    display-location: Inline with Field and in Notification
+    associated-item: P11_FILE # 30171114295783598
+
+computations: 
+- # ====== Computation: P11_FILE_NAME ==========================
+  id: 30173720571783614
+  identification: 
+    item-name: P11_FILE_NAME
+
+  execution: 
+    sequence: 10
+    point: After Submit
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select filename
+        from apex_application_temp_files 
+       where name = :P11_FILE
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P11_FILE
+
+processes: 
+- # ====== Process: Data_Sort ==================================
+  id: 29951228895866892
+  identification: 
+    name: Data_Sort
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DECLARE
+          v_rco_directory_id   number;
+          v_facility_disp_id   number;
+          v_bldg_disp_id       number;
+          v_nurse_unit_disp_id number;
+      BEGIN
+         
+          execute immediate  'truncate table NURSE_UNIT_DISP';
+          execute immediate  'truncate table BLDG_DISP';
+          execute immediate  'truncate table FACILITY_DISP';
+          execute immediate 'truncate table RCO_DIRECTORY';
+          FOR rec IN (SELECT * FROM TEMP_TABLE) LOOP -- loop over each record
+              -- try find existing record RCO_DIRECTORY_ID
+              BEGIN
+                  SELECT ID INTO v_rco_directory_id
+                  FROM RCO_DIRECTORY
+                  WHERE DIRECTORY = rec.RCO_DIRECTORY
+                    AND FACILITY_DISP = rec.FACILITY_DISP
+                    AND FACILITY_DESC = rec.FACILITY_DESC
+                  FETCH FIRST 1 ROW ONLY;
+              EXCEPTION
+                  WHEN NO_DATA_FOUND THEN
+                      INSERT INTO RCO_DIRECTORY (DIRECTORY, FACILITY_DISP, FACILITY_DESC)
+                      VALUES (rec.RCO_DIRECTORY, rec.FACILITY_DISP, rec.FACILITY_DESC)
+                      RETURNING ID INTO v_rco_directory_id;
+              END;
+      
+              -- try find existing record FACILITY_DISP_ID
+              BEGIN
+                  SELECT ID INTO v_facility_disp_id
+                  FROM FACILITY_DISP
+                  WHERE RCO_DIRECTORY_ID = v_rco_directory_id
+                    AND ENCOUNTER_ORG = rec.ENCOUNTER_ORG
+                    AND AFF_FAC_POOL_ALIAS = rec.AFF_FAC_POOL_ALIAS
+                    AND CLUSTER_ = rec.CLUSTER_
+                    AND BLDG_DISP = rec.BLDG_DISP
+                    AND BLDG_DESC = rec.BLDG_DESC
+                  FETCH FIRST 1 ROW ONLY;
+              EXCEPTION
+                  WHEN NO_DATA_FOUND THEN
+                      INSERT INTO FACILITY_DISP (RCO_DIRECTORY_ID, ENCOUNTER_ORG, AFF_FAC_POOL_ALIAS, CLUSTER_, BLDG_DISP, BLDG_DESC)
+                      VALUES (v_rco_directory_id, rec.ENCOUNTER_ORG, rec.AFF_FAC_POOL_ALIAS, rec.CLUSTER_, rec.BLDG_DISP, rec.BLDG_DESC)
+                      RETURNING ID INTO v_facility_disp_id;
+              END;
+      
+              -- try find existing record BLDG_DISP_ID
+              BEGIN
+                  SELECT ID INTO v_bldg_disp_id
+                  FROM BLDG_DISP
+                  WHERE FACILITY_DISP_ID = v_facility_disp_id
+                    AND NURSE_UNIT_DISP = rec.NURSE_UNIT_DISP
+                    AND NURSE_UNIT_DESC = rec.NURSE_UNIT_DESC
+                    AND NU_OUTBOUND_ALIAS = rec.NU_OUTBOUND_ALIAS
+                  FETCH FIRST 1 ROW ONLY;
+              EXCEPTION
+                  WHEN NO_DATA_FOUND THEN
+                      INSERT INTO BLDG_DISP (FACILITY_DISP_ID, NURSE_UNIT_DISP, NURSE_UNIT_DESC, NU_OUTBOUND_ALIAS)
+                      VALUES (v_facility_disp_id, rec.NURSE_UNIT_DISP, rec.NURSE_UNIT_DESC, rec.NU_OUTBOUND_ALIAS)
+                      RETURNING ID INTO v_bldg_disp_id;
+              END;
+      
+              -- try existing record NURSE_UNIT_DISP_ID ( not required 3589 unique records for this table)
+              
+              BEGIN
+                  SELECT ID INTO v_nurse_unit_disp_id
+                  FROM NURSE_UNIT_DISP
+                  WHERE BLDG_DISP_ID = v_bldg_disp_id
+                    AND PATIENT_TYPE = rec.PATIENT_TYPE
+                    AND PATIENT_TYPE_ALIAS = rec.PATIENT_TYPE_ALIAS
+                    AND MEDICAL_SERVICE = rec.MEDICAL_SERVICE
+                    AND OP_PREFIX = rec.OP_PREFIX
+                    AND AFF_SRVC_POOL_ALIAS = rec.AFF_SRVC_POOL_ALIAS
+                    AND MED_SVC_ALIAS = rec.MED_SVC_ALIAS
+                    AND PATIENT_SERVICE_CODE = rec.PATIENT_SERVICE_CODE
+                    AND PATIENT_SERVICE_DESCRIPTION = rec.PATIENT_SERVICE_DESCRIPTION
+                    AND STATUS = rec.STATUS
+                    AND ADDED_DT = rec.ADDED_DT
+                    AND INACTIVE_DT = rec.INACTIVE_DT
+                  FETCH FIRST 1 ROW ONLY;
+              EXCEPTION
+                  WHEN NO_DATA_FOUND THEN
+                      INSERT INTO NURSE_UNIT_DISP (BLDG_DISP_ID, PATIENT_TYPE, PATIENT_TYPE_ALIAS, MEDICAL_SERVICE, OP_PREFIX, 
+                                                   AFF_SRVC_POOL_ALIAS, MED_SVC_ALIAS, PATIENT_SERVICE_CODE, PATIENT_SERVICE_DESCRIPTION, 
+                                                   STATUS, ADDED_DT, INACTIVE_DT)
+                      VALUES (v_bldg_disp_id, rec.PATIENT_TYPE, rec.PATIENT_TYPE_ALIAS, rec.MEDICAL_SERVICE, rec.OP_PREFIX, 
+                              rec.AFF_SRVC_POOL_ALIAS, rec.MED_SVC_ALIAS, rec.PATIENT_SERVICE_CODE, rec.PATIENT_SERVICE_DESCRIPTION, 
+                              rec.STATUS, rec.ADDED_DT, rec.INACTIVE_DT)
+                      RETURNING ID INTO v_nurse_unit_disp_id;
+              END;
+          END LOOP;
+      END;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 30169162146783589
+
+- # ====== Process: Load Data ==================================
+  id: 30169651384783591
+  identification: 
+    name: Load Data
+    type: Data Loading
+    execution-chain: None
+
+  settings: 
+    data-load-definition: Master Data Upload # 30166566604767611
+    source-data-type: File Browse Item
+    file-browse-item: P11_FILE
+    page-item-containing-xlsx-sheet-name: P11_XLSX_WORKSHEET
+    error-row-count-item: P11_ERROR_ROW_COUNT
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 30169162146783589
+
+- # ====== Process: Clear Cache ================================
+  id: 30170016563783593
+  identification: 
+    name: Clear Cache
+    type: Clear Session State
+    execution-chain: None
+
+  settings: 
+    type: Clear all Items on the Current Page
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ":REQUEST = 'CLEAR' or :P11_ERROR_ROW_COUNT = 0"
+

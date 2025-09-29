@@ -1,0 +1,100 @@
+---
+- # ====== Static Application File: templates/emp_per_dept.docx 
+  id: 1852580132367460904
+  identification: 
+    file-name: templates/emp_per_dept.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: document-screenshots/emp_per
+  id: 1852594457953975449
+  identification: 
+    file-name: document-screenshots/emp_per_dept.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: document-screenshots/custome
+  id: 1868987155550911707
+  identification: 
+    file-name: document-screenshots/customer-order.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: document-screenshots/employe
+  id: 1868987304162911726
+  identification: 
+    file-name: document-screenshots/employees.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/employees.docx ===
+  id: 1868996632366965038
+  identification: 
+    file-name: templates/employees.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/customer-order.doc
+  id: 1868996806721965039
+  identification: 
+    file-name: templates/customer-order.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 2623411709706129681
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-144-rounded.p
+  id: 2623412086536129682
+  identification: 
+    file-name: icons/app-icon-144-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 2623412296443129683
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-256-rounded.p
+  id: 2623412677720129683
+  identification: 
+    file-name: icons/app-icon-256-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 2623412913093129684
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+

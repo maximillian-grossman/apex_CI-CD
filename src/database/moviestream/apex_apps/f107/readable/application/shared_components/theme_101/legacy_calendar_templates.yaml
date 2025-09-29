@@ -1,0 +1,16 @@
+---
+- # ====== Legacy Calendar Template: Calendar ==================
+  id: 17401514431291792
+  identification: 
+    name: Calendar
+    identifier: CALENDAR
+    class: Calendar
+
+  subscription: 
+    master: 
+      app: 107 # test_object_Storage
+      referenced-id: 17085972682121183 # Calendar
+
+  advanced: 
+    translatable: false
+

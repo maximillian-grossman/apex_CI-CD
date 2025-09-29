@@ -1,0 +1,88 @@
+---
+- # ====== Authentication: Oracle APEX Accounts ================
+  id: 17661702182239813
+  identification: 
+    name: Oracle APEX Accounts
+
+  subscription: 
+    version-number: 45040751556344
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+
+- # ====== Authentication: OKTA_SSO ============================
+  id: 17678489401311414
+  identification: 
+    name: OKTA_SSO
+
+  subscription: 
+    version-number: 45040856961809
+
+  settings: 
+    type: Social Sign-In
+    credential-store: 17678099510298925
+    authentication-provider: OpenID Connect Provider
+    discovery-url: 'https://trial-3870463-admin.okta.com/.well-known/openid-configuration'
+    scope: profile
+    username: name
+    convert-username-to-upper-case: false
+    additional-user-attributes: sub, profile
+    map-additional-user-attributes-to: G_SUB
+    verify-attributes: true
+
+  source: 
+    pl/sql-code: |
+      PROCEDURE p_post_processing 
+      IS
+          l_clob          CLOB;
+          j            APEX_JSON.t_values;
+          l_group_names apex_t_varchar2;
+          l_api_key_c  CONSTANT VARCHAR2(256) DEFAULT '00vx1MgsJ4g2ybqFqkdIkjXG0cD1h-EbyEpeWea2pd';
+          l_org_url_c  CONSTANT VARCHAR2(256) DEFAULT 'https://trial-3870463-admin.okta.com';
+      BEGIN
+          apex_web_service.set_request_headers(
+              p_name_01        => 'Content-Type',
+              p_value_01       => 'application/json',
+              p_name_02        => 'Accept',
+              p_value_02       => 'application/json',
+              p_name_03        => 'Authorization',
+              p_value_03       => 'SSWS ' || l_api_key_c
+               );
+          l_clob := apex_web_service.make_rest_request(
+              p_url => l_org_url_c || '/api/v1/users/maximillian.grossman@oracle.com/groups',
+              p_http_method => 'GET');
+           APEX_JSON.PARSE(p_values => j, p_source => l_clob);
+         FOR i IN 1 .. APEX_JSON.GET_COUNT(p_path=> '.', p_values=> j) 
+         LOOP
+              -- add all group names to l_group_names
+               apex_string.push (
+                        p_table => l_group_names,
+                        p_value => apex_json.get_varchar2(p_path=>'[%d].profile.name',p0=> i,p_values=>j));     
+         END LOOP;
+          -- save group names in session
+          apex_authorization.enable_dynamic_groups (
+              p_group_names => l_group_names );
+      END p_post_processing;
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    post-authentication-procedure-name: 'p_post_processing '
+    switch-in-session: false
+
+  post-logout-url: 
+    post-logout-url: 'https://ijegqeyui1cwvrq-cidemos.adb.us-ashburn-1.oraclecloudapps.com/ords/r/cidemos/okta-sso/home'
+
+  real-application-security: 
+    ras-mode: Disabled
+

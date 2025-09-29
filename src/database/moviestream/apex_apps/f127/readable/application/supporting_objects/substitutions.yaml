@@ -1,0 +1,17 @@
+---
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  installation: 
+    prompt-substitution: false
+
+- # ====== Substitution: GETTING_STARTED_URL ===================
+  id: 2
+  identification: 
+    name: GETTING_STARTED_URL
+
+  installation: 
+    prompt-substitution: false
+

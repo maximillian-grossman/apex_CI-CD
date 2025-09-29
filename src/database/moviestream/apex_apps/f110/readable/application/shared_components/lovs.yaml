@@ -1,0 +1,121 @@
+---
+- # ====== List of Values: EMP_JOBS ============================
+  id: 719631537128665266
+  identification: 
+    name: EMP_JOBS
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Clerk ========================================
+    id: 719631898043665268
+    entry: 
+      sequence: 1
+      display: Clerk
+      return: CLERK
+
+  - # ====== Entry: Salesman =====================================
+    id: 719632218404665273
+    entry: 
+      sequence: 2
+      display: Salesman
+      return: SALESMAN
+
+  - # ====== Entry: President ====================================
+    id: 719632629114665273
+    entry: 
+      sequence: 3
+      display: President
+      return: PRESIDENT
+
+  - # ====== Entry: Manager ======================================
+    id: 719633097311665273
+    entry: 
+      sequence: 4
+      display: Manager
+      return: MANAGER
+
+  - # ====== Entry: Analyst ======================================
+    id: 719633427240665274
+    entry: 
+      sequence: 5
+      display: Analyst
+      return: ANALYST
+
+- # ====== List of Values: PEOPLE_CATEGORIES ===================
+  id: 737882866737555995
+  identification: 
+    name: PEOPLE_CATEGORIES
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Science & Technology =========================
+    id: 737883193382555996
+    entry: 
+      sequence: 1
+      display: Science & Technology
+      return: S_T
+
+  - # ====== Entry: Arts =========================================
+    id: 737883562321555997
+    entry: 
+      sequence: 2
+      display: Arts
+      return: A
+
+  - # ====== Entry: Business & Law ===============================
+    id: 737883959839555997
+    entry: 
+      sequence: 3
+      display: Business & Law
+      return: B_L
+
+  - # ====== Entry: Politics =====================================
+    id: 737884340901555998
+    entry: 
+      sequence: 4
+      display: Politics
+      return: P
+
+  - # ====== Entry: Sports =======================================
+    id: 737884726244555998
+    entry: 
+      sequence: 5
+      display: Sports
+      return: S
+
+- # ====== List of Values: PEOPLE_GENDER =======================
+  id: 737885612450560140
+  identification: 
+    name: PEOPLE_GENDER
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Male =========================================
+    id: 737885832777560140
+    entry: 
+      sequence: 1
+      display: Male
+      return: M
+
+  - # ====== Entry: Female =======================================
+    id: 737886272701560140
+    entry: 
+      sequence: 2
+      display: Female
+      return: F
+

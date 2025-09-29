@@ -1,0 +1,192 @@
+---
+- # ====== List of Values: LOV_AIRPORTS ========================
+  id: 1575212608416262378
+  identification: 
+    name: LOV_AIRPORTS
+
+  subscription: 
+    version-number: 1089080483
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select id,
+             airport_name,
+             iata_code,
+             initcap( airport_type ) airport_type,
+             city,
+             state_name,
+             activation_date,
+             apex_json.stringify( geometry ) as geojson
+        from eba_sample_map_airports
+
+  column-mapping: 
+    return: ID
+    display: AIRPORT_NAME
+    default-sort: Use Order By from Query
+
+  columns: 
+  - # ====== Column: ID ==========================================
+    id: 1575222616765303870
+    identification: 
+      column-name: ID
+      show: false
+
+    layout: 
+      sequence: 10
+
+    source: 
+      data-type: NUMBER
+
+    advanced: 
+      searchable: false
+
+  - # ====== Column: AIRPORT_NAME ================================
+    id: 1575222946181303870
+    identification: 
+      column-name: AIRPORT_NAME
+      show: true
+
+    heading: 
+      heading: Airport Name
+
+    layout: 
+      sequence: 20
+
+    source: 
+      data-type: VARCHAR2
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: IATA_CODE ===================================
+    id: 1575223417105303870
+    identification: 
+      column-name: IATA_CODE
+      show: true
+
+    heading: 
+      heading: Code
+
+    layout: 
+      sequence: 30
+
+    source: 
+      data-type: VARCHAR2
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: AIRPORT_TYPE ================================
+    id: 1575223801745303871
+    identification: 
+      column-name: AIRPORT_TYPE
+      show: true
+
+    heading: 
+      heading: Airport Type
+
+    layout: 
+      sequence: 40
+
+    source: 
+      data-type: VARCHAR2
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: CITY ========================================
+    id: 1575224202622303871
+    identification: 
+      column-name: CITY
+      show: true
+
+    heading: 
+      heading: City
+
+    layout: 
+      sequence: 50
+
+    source: 
+      data-type: VARCHAR2
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: STATE_NAME ==================================
+    id: 1575224607576303871
+    identification: 
+      column-name: STATE_NAME
+      show: true
+
+    heading: 
+      heading: State
+
+    layout: 
+      sequence: 60
+
+    source: 
+      data-type: VARCHAR2
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: ACTIVATION_DATE =============================
+    id: 1575225018735303871
+    identification: 
+      column-name: ACTIVATION_DATE
+      show: true
+
+    heading: 
+      heading: Activation Date
+
+    layout: 
+      sequence: 70
+
+    source: 
+      data-type: VARCHAR2
+
+    appearance: 
+      format-mask: mon-yyyy
+
+    advanced: 
+      searchable: true
+
+  - # ====== Column: GEOJSON =====================================
+    id: 1575225366536303871
+    identification: 
+      column-name: GEOJSON
+      show: false
+
+    heading: 
+      heading: Geojson
+
+    layout: 
+      sequence: 80
+
+    source: 
+      data-type: CLOB
+
+    advanced: 
+      searchable: true
+
+- # ====== List of Values: LOGIN_REMEMBER_USERNAME =============
+  id: 1575660935136930283
+  identification: 
+    name: LOGIN_REMEMBER_USERNAME
+
+  subscription: 
+    version-number: 1089080483
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Remember username ============================
+    id: 1575661335657930288
+    entry: 
+      sequence: 10
+      display: Remember username
+      return: Y
+

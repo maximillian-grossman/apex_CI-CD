@@ -1,0 +1,910 @@
+---
+# ====== Page: Home ==========================================
+id: 1
+identification: 
+  name: Home
+  alias: HOME
+  title: Sample DocGen
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Privs =======================================
+  id: 1852542119754376581
+  identification: 
+    name: Privs
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: Installed on Oracle Cloud # 1852944032824506182
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P1_PRIVS_MISSING_YN
+    value: Y
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: DWROLE grant is missing =====================
+  id: 1852542311670376583
+  identification: 
+    name: DWROLE grant is missing
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: "return '<pre>grant DWROLE to ' || :WORKSPACE_SCHEMA || ';</pre>';"
+
+  layout: 
+    sequence: 10
+    parent-region: Privs # 1852542119754376581
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--danger
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  header-and-footer: 
+    header-text: 'Please execute the following as ADMIN user:'
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select 1
+        from user_role_privs
+       where granted_role  = 'DWROLE'
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
+
+- # ====== Region: OCI$RESOURCE_PRINCIPAL is missing ===========
+  id: 1852542493316376584
+  identification: 
+    name: OCI$RESOURCE_PRINCIPAL is missing
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: |
+      return 'Please execute the following as ADMIN user:<pre>begin
+          dbms_cloud_admin.enable_resource_principal();
+          dbms_cloud_admin.enable_resource_principal(username => ''' || :WORKSPACE_SCHEMA || ''');
+      end</pre>';
+
+  layout: 
+    sequence: 20
+    parent-region: Privs # 1852542119754376581
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--danger
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select 1
+        from all_credentials
+       where credential_name  = 'OCI$RESOURCE_PRINCIPAL'
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
+
+- # ====== Region: Prerequisites ===============================
+  id: 1852542567008376585
+  identification: 
+    name: Prerequisites
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This application can only be used on an Autonomous Database on OCI.</p>
+      <strong>Configuration steps:</strong>
+      <ol>
+          <li><a target="_blank" rel="noopener noreferrer" href="https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functions_pbf_catalog_document_generator.htm#functions_pbf_catalog_document_generator">Configure the Document Generator Function</a></li>
+          <li>Create an Object Storage Bucket</li>
+          <li>Create a Dynamic Group for the Autonomous Database
+              <code><pre>resource.id = '&lt;db_ocid>'</pre></code></li>
+          </li>
+           <li>Create a Policy for the Dynamic Group to manage objects and invoke the function
+              <code><pre>
+      Allow dynamic-group &lt;group_name> to manage objects in compartment &lt;compartment_name>
+      Allow dynamic-group &lt;group_name> to manage buckets in compartment &lt;compartment_name>
+      Allow dynamic-group &lt;group_name> to use functions-family in compartment &lt;compartment_name>
+              </pre></code>
+          </li>
+           <li>Enable the Resource Principal in the database as <code>ADMIN</code> user
+              <code><pre>
+      EXEC DBMS_CLOUD_ADMIN.ENABLE_RESOURCE_PRINCIPAL();
+      EXEC DBMS_CLOUD_ADMIN.ENABLE_RESOURCE_PRINCIPAL(username => '&WORKSPACE_SCHEMA.');
+              </pre></code>
+          </li>
+           <li>Grant the role <code>DWROLE</code> to the workspace schema as <code>ADMIN</code> user
+              <code><pre>grant DWROLE to &WORKSPACE_SCHEMA.;</pre></code>
+          </li> 
+           <li>Configure the "OCI Document Generator - Print Document" Plug-In Component Settings
+          </li>  
+      </ol>
+
+  layout: 
+    sequence: 10
+    parent-region: Installed on Oracle Cloud # 1852944032824506182
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Not installed on Oracle Cloud ===============
+  id: 1852943998580506181
+  identification: 
+    name: Not installed on Oracle Cloud
+    type: Static Content
+
+  source: 
+    html-code: In order to work properly, this application must be installed in an APEX Service or Autonomous Database in the Oracle Cloud.
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--danger
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: not apex_application_global.g_cloud
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Installed on Oracle Cloud ===================
+  id: 1852944032824506182
+  identification: 
+    name: Installed on Oracle Cloud
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: None
+    render-components: Above Content
+
+  advanced: 
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_application_global.g_cloud
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About =======================================
+  id: 1876089770936022670
+  identification: 
+    name: About
+    type: Static Content
+
+  source: 
+    html-code: Welcome to the <strong>Sample Document Generator</strong> Application. This application contains a few examples to generate PDF documents using JSON data and DOCX templates.
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Examples ====================================
+  id: 1876090549814022678
+  identification: 
+    name: Examples
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select list_entry_id as id,
+             display_sequence,
+             entry_text as title,
+             entry_attribute_01 as description,
+             entry_attribute_02 as screenshot_img_path,
+             entry_attribute_03 as template_path,
+             entry_attribute_04 as static_id,
+             'Screenshot of '||entry_text||' PDF document' as alt
+        from apex_application_list_entries
+       where application_id = :APP_ID
+         and list_name = 'Examples'
+       order by display_sequence asc
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1876090653105022679
+    appearance: 
+      layout: Grid
+      grid-columns: 2 Columns
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: TITLE
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <h4 class="a-CardView-subTitle">&DESCRIPTION!RAW.</h4>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_IMAGES#&SCREENSHOT_IMG_PATH.'
+      position: First
+      appearance: Widescreen
+      sizing: Fit
+      image-description: '&ALT.'
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    actions: 
+    - # ====== Action: JSON ========================================
+      id: 1868988775665924532
+      identification: 
+        type: Button
+        label: JSON
+
+      layout: 
+        position: Secondary
+        sequence: 20
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:1:&SESSION.:JSON:&DEBUG.::P1_STATIC_ID:&STATIC_ID.'
+          page: 1 # Home
+          request: JSON
+          values: 
+            p1_static_id: '&STATIC_ID.'
+
+        link-attributes: title="Download JSON Document"
+
+      appearance: 
+        display-type: Icon
+        icon: fa-file-json-o
+        hot: false
+
+    - # ====== Action: Template ====================================
+      id: 1868988872655924533
+      identification: 
+        type: Button
+        label: Template
+
+      layout: 
+        position: Secondary
+        sequence: 30
+
+      link: 
+        type: Redirect to URL
+        target: '#APP_IMAGES#&TEMPLATE_PATH.'
+        link-attributes: download title="Download MS Word Document"
+
+      appearance: 
+        display-type: Icon
+        icon: fa-file-word-o
+        hot: false
+
+    - # ====== Action: Generate PDF ================================
+      id: 1876090774382022680
+      identification: 
+        type: Button
+        label: Generate PDF
+
+      layout: 
+        position: Primary
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:1:&SESSION.:&STATIC_ID.:&DEBUG.:::'
+          page: 1 # Home
+          request: '&STATIC_ID.'
+
+        link-attributes: title="Generate PDF Document"
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-print
+        hot: true
+
+      server-side-condition: 
+        type: Item = Value
+        item: P1_PRIVS_MISSING_YN
+        value: N
+        execute-condition: For Each Row
+
+- # ====== Region: Sample Document Generator ===================
+  id: 2623422381551129699
+  identification: 
+    name: Sample Document Generator
+    type: Static Content
+
+  source: 
+    html-code: Demonstration of invoking the Oracle Document Generator Pre-Built Function in APEX.
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Below Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-512.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P1_PRIVS_MISSING_YN ======================
+  id: 1852943801414506179
+  identification: 
+    name: P1_PRIVS_MISSING_YN
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_STATIC_ID =============================
+  id: 1887220659952812275
+  identification: 
+    name: P1_STATIC_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Examples # 1876090549814022678
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+computations: 
+- # ====== Computation: P1_PRIVS_MISSING_YN ====================
+  id: 1852943885686506180
+  identification: 
+    item-name: P1_PRIVS_MISSING_YN
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      declare
+          l_priv_count pls_integer;
+      begin
+          select sum(priv)
+            into l_priv_count
+            from (select 1 as priv
+                    from all_credentials
+                   where credential_name  = 'OCI$RESOURCE_PRINCIPAL'
+                   union all
+                  select 1
+                    from user_role_privs
+                   where granted_role  = 'DWROLE');
+          
+          return 
+              case 
+                  when nvl( l_priv_count, 0 ) < 2 
+                  then 'Y'
+                  else 'N'
+              end;
+      end;
+
+processes: 
+- # ====== Process: Print Employees per Department =============
+  id: 1852542674342376586
+  identification: 
+    name: Print Employees per Department
+    type: OCI Document Generator - Print Document
+    execution-chain: None
+
+  settings: 
+    template: templates/emp_per_dept.docx
+    report-source-query: |
+      select json_serialize(
+                      json_object(
+                          'departments' value 
+                              json_arrayagg(
+                                  json_object(
+                                      'id' value d.deptno,
+                                      'dname' value d.dname,
+                                      'loc' value d.loc,
+                                      'page' value 'true',
+                                      'employees' value
+                                          (
+                                              select json_arrayagg(
+                                                  json_object(
+                                                      'ename' value e.ename,
+                                                      'job' value e.job,
+                                                      'mgr' value nvl( m.ename, '-' ),
+                                                      'hiredate' value to_char( e.hiredate, 'DD MON YYYY'),
+                                                      'sal' value e.sal,
+                                                      'comm' value nvl( e.comm, 0 )
+                                                  )
+                                              returning clob)
+                                              from eba_demo_dg_emp e
+                                              left join eba_demo_dg_emp m
+                                                on e.mgr = m.empno
+                                              where e.deptno = d.deptno
+                                          )
+                                  returning clob)
+                              returning clob)
+                      returning clob)
+                  returning clob pretty) as data
+      from eba_demo_dg_dept d
+      where exists (select 1 
+                      from eba_demo_dg_emp 
+                     where deptno = d.deptno)
+    filename: emp-per-dept
+
+  execution: 
+    sequence: 70
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Request = Value
+    value: EMP_PER_DEPT
+
+- # ====== Process: Print Employees ============================
+  id: 1887219866352812267
+  identification: 
+    name: Print Employees
+    type: OCI Document Generator - Print Document
+    execution-chain: None
+
+  settings: 
+    template: templates/employees.docx
+    report-source-query: |
+      select json_object( 
+              'currentDate'   value to_char( sysdate, 'DD MON YYYY' ),
+              'employees'     value
+                  json_arrayagg( 
+                      json_object('name'      value e.ename,
+                                 'job'        value e.job,
+                                 'hiredate'   value to_char( e.hiredate, 'DD MON YYYY'),
+                                 'salary'     value e.sal,
+                                 'commission' value nvl(e.comm,0),
+                                 'department' value d.dname,
+                                 'location'   value d.loc,
+                                 'manager'    value nvl(m.ename,'-') ) pretty ) ) as report_data
+        from eba_demo_dg_emp e
+        join eba_demo_dg_dept d
+          on e.deptno = d.deptno
+        left join eba_demo_dg_emp m
+          on e.mgr = m.empno
+    filename: employees
+
+  execution: 
+    sequence: 40
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Request = Value
+    value: EMPLOYEES
+
+- # ====== Process: Download JSON ==============================
+  id: 1887220567754812274
+  identification: 
+    name: Download JSON
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_sql       varchar2( 32767 );
+          l_context   pls_integer;
+          l_data      sys.json_object_t;
+          l_clob      clob;
+          l_export    apex_data_export.t_export;
+          l_static_id varchar2(100) := v('P1_STATIC_ID');
+      begin
+      
+          select attribute_01 as sql_query,
+                 attribute_03 as filename
+            into l_sql,
+                 l_export.file_name
+            from apex_application_page_proc
+           where page_id = 1
+             and condition_expression1 = l_static_id;
+      
+          l_context := apex_exec.open_query_context(
+              p_location  => apex_exec.c_location_local_db,
+              p_sql_query => l_sql );
+      
+          if apex_exec.next_row( p_context => l_context ) then
+      
+              l_data := sys.json_object_t( apex_exec.get_clob( l_context, 1 ) );
+      
+              l_export.content_blob   := l_data.to_blob();
+              l_export.format         := apex_data_export.c_format_json;
+              l_export.mime_type      := 'application/json';
+      
+              apex_data_export.download(
+                  p_export    => l_export );
+      
+          end if;
+      
+      end;
+
+  execution: 
+    sequence: 80
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Request = Value
+    value: JSON
+
+- # ====== Process: Print Orders ===============================
+  id: 1887220887827812277
+  identification: 
+    name: Print Orders
+    type: OCI Document Generator - Print Document
+    execution-chain: None
+
+  settings: 
+    template: templates/customer-order.docx
+    report-source-query: |
+      select json_object( 
+          'order' value
+          json_object(
+              'id'        value o.order_id,
+              'date'      value to_char(o.order_datetime, 'DD MON YYYY'),
+              'customer'  value c.full_name,
+              'email'     value c.email_address,
+              'count'     value count(i.line_item_id),
+              'items'     value json_arrayagg(
+                  json_object (
+                      'id'            value i.line_item_id,
+                      'unitPrice'     value i.unit_price,
+                      'quantity'      value i.quantity,
+                      'total'         value (i.unit_price * i.quantity),
+                      'productName'   value p.product_name
+                  )
+              order by i.line_item_id  ) )
+          ) as data
+        from eba_demo_dg_orders sample(1) o 
+        join eba_demo_dg_customers c
+          on c.customer_id = o.customer_id
+        join eba_demo_dg_order_items i
+          on i.order_id = o.order_id
+        join eba_demo_dg_products p
+          on i.product_id = p.product_id
+       group by o.order_id,
+             o.order_datetime,
+             c.full_name,
+             c.email_address
+    filename: customer-order
+
+  execution: 
+    sequence: 60
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Request = Value
+    value: ORDER
+

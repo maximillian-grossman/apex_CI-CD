@@ -1,0 +1,25 @@
+---
+- # ====== Install Script: Oracle TEXT helper package (compiles 
+  id: 1176166296502976669
+  identification: 
+    name: Oracle TEXT helper package (compiles without Oracle Text)
+
+  execution: 
+    sequence: 30
+
+- # ====== Install Script: install =============================
+  id: 1342167212310798322
+  identification: 
+    name: install
+
+  execution: 
+    sequence: 10
+
+- # ====== Install Script: data ================================
+  id: 1342175075748419701
+  identification: 
+    name: data
+
+  execution: 
+    sequence: 20
+

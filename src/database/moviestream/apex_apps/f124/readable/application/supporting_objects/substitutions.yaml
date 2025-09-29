@@ -1,0 +1,25 @@
+---
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  installation: 
+    prompt-substitution: false
+
+- # ====== Substitution: AIRPORT_DATA ==========================
+  id: 2
+  identification: 
+    name: AIRPORT_DATA
+
+  installation: 
+    prompt-substitution: false
+
+- # ====== Substitution: US_STATES_DATA ========================
+  id: 3
+  identification: 
+    name: US_STATES_DATA
+
+  installation: 
+    prompt-substitution: false
+

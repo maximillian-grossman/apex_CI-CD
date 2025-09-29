@@ -1,0 +1,924 @@
+---
+# ====== Page: PL/SQL Access =================================
+id: 223
+identification: 
+  name: PL/SQL Access
+  alias: PL-SQL-ACCESS
+  title: PL/SQL Access
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: EBA_RESTDEMO_SAMPLE_GITHUB table ============
+  id: 91433528068511927
+  identification: 
+    name: EBA_RESTDEMO_SAMPLE_GITHUB table
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: select * from eba_restdemo_sample_github
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 100452080751784151
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: true
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 100737139482951332
+      identification: 
+        name: Primary Report
+        alias: 14581
+
+  columns: 
+  - # ====== Column: NAME ========================================
+    id: 100452186372784152
+    identification: 
+      column-name: NAME
+      type: Text Field
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: LANGUAGE ====================================
+    id: 100452365437784153
+    identification: 
+      column-name: LANGUAGE
+      type: Text Field
+
+    heading: 
+      heading: Language
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: LANGUAGE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DESCRIPTION =================================
+    id: 100452450292784154
+    identification: 
+      column-name: DESCRIPTION
+      type: Text Field
+
+    heading: 
+      heading: Description
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: DESCRIPTION
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: UPDATED_ON ==================================
+    id: 100452565152784155
+    identification: 
+      column-name: UPDATED_ON
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: Updated on
+      alignment: center
+
+    settings: 
+      show: On icon click
+      show-other-months: false
+      navigation-list-for: None
+
+    layout: 
+      sequence: 70
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'mm/dd/yyyy hh24:mi:ss'
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: UPDATED_ON
+      data-type: TIMESTAMP
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: CREATED_ON ==================================
+    id: 100452634173784156
+    identification: 
+      column-name: CREATED_ON
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: Created on
+      alignment: center
+
+    settings: 
+      show: On icon click
+      show-other-months: false
+      navigation-list-for: None
+
+    layout: 
+      sequence: 80
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'mm/dd/yyyy hh24:mi:ss'
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: CREATED_ON
+      data-type: TIMESTAMP
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ISSUES_CNT ==================================
+    id: 100452709424784157
+    identification: 
+      column-name: ISSUES_CNT
+      type: Number Field
+
+    heading: 
+      heading: Issues cnt
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ISSUES_CNT
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ROWID =======================================
+    id: 100452842674784158
+    identification: 
+      column-name: ROWID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ROWID
+      data-type: ROWID
+      primary-key: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 100452891649784159
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 100453064964784160
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
+- # ====== Region: PL/SQL Code =================================
+  id: 91435703349511949
+  identification: 
+    name: PL/SQL Code
+    type: Static Content
+
+  source: 
+    html-code: |
+      
+      <pre>
+      declare
+          l_context     apex_exec.t_context;
+          l_filters     apex_exec.t_filters;
+          l_columns     apex_exec.t_columns;
+           
+          l_name_idx    pls_integer;
+          l_lang_idx    pls_integer;
+          l_desc_idx    pls_integer;
+          l_upd_idx     pls_integer;
+          l_cr_idx      pls_integer;
+          l_issues_idx  pls_integer;
+      begin
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'NAME' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'LANGUAGE' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'DESCRIPTION' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'UPDATED_AT' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'CREATED_AT' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'OPEN_ISSUES_COUNT' );
+      
+          l_context := apex_exec.open_web_source_query(
+              p_module_static_id  => 'Sample_Application_Github_Repositories',
+              p_columns           => l_columns,
+              p_max_rows          => 1000 );
+      
+          l_name_idx   := apex_exec.get_column_position( l_context, 'NAME' );
+          l_lang_idx   := apex_exec.get_column_position( l_context, 'LANGUAGE' );
+          l_desc_idx   := apex_exec.get_column_position( l_context, 'DESCRIPTION' );
+          l_upd_idx    := apex_exec.get_column_position( l_context, 'UPDATED_AT' );
+          l_cr_idx     := apex_exec.get_column_position( l_context, 'CREATED_AT' );
+          l_issues_idx := apex_exec.get_column_position( l_context, 'OPEN_ISSUES_COUNT' );
+      
+          while apex_exec.next_row( l_context ) loop
+      
+              insert into eba_restdemo_sample_github values (
+                  apex_exec.get_varchar2    ( l_context, l_name_idx ), 
+                  apex_exec.get_varchar2    ( l_context, l_lang_idx ), 
+                  apex_exec.get_varchar2    ( l_context, l_desc_idx ), 
+                  apex_exec.get_timestamp_tz( l_context, l_upd_idx ), 
+                  apex_exec.get_timestamp_tz( l_context, l_cr_idx ), 
+                  apex_exec.get_number      ( l_context, l_issues_idx ));
+      
+          end loop;
+          
+          apex_exec.close( l_context );
+      exception
+          when others then
+          apex_exec.close( l_context );
+          raise;    
+      end;
+      </pre>
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: PL/SQL and Web Source Modules ===============
+  id: 91435794548511950
+  identification: 
+    name: PL/SQL and Web Source Modules
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      Github repository count for <strong>Oracle</strong>: &P223_REPO_CNT.
+      </p></p>
+      This page illustrates how to use an existing Web Source Module with PL/SQL and the <strong>APEX_EXEC</strong> package. When the <strong>Download</strong> button is clicked, the <strong>EBA_RESTDEMO_SAMPLE_GITHUB</strong> table is being populated with data from the Web Source Module. The Interactive Grid below works on that local table, data can thus be edited.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 92473273447120130
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 1
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+page-items: 
+- # ====== Page Item: P223_REPO_CNT ============================
+  id: 91433366246511925
+  identification: 
+    name: P223_REPO_CNT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: PL/SQL Code # 91435703349511949
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Download ====================================
+  id: 91435059834511942
+  identification: 
+    button-name: Download
+    label: Download
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 92473273447120130
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: Clear =======================================
+  id: 91436033672511952
+  identification: 
+    button-name: Clear
+    label: Clear
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 92473273447120130
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Get Repo Count =============================
+  id: 91433386614511926
+  identification: 
+    name: Get Repo Count
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      select count(*) into :P223_REPO_CNT
+        from table( eba_restdemo_sample_pkg.get_github_repos );
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Download REST Data =========================
+  id: 91435114634511943
+  identification: 
+    name: Download REST Data
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_context     apex_exec.t_context;
+          l_filters     apex_exec.t_filters;
+          l_columns     apex_exec.t_columns;
+           
+          l_name_idx    pls_integer;
+          l_lang_idx    pls_integer;
+          l_desc_idx    pls_integer;
+          l_upd_idx     pls_integer;
+          l_cr_idx      pls_integer;
+          l_issues_idx  pls_integer;
+      begin
+          delete from eba_restdemo_sample_github;
+      
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'NAME' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'LANGUAGE' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'DESCRIPTION' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'UPDATED_AT' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'CREATED_AT' );
+          apex_exec.add_column( p_columns => l_columns, p_column_name => 'OPEN_ISSUES_COUNT' );
+      
+          l_context := apex_exec.open_web_source_query(
+              p_module_static_id  => 'Sample_Application_Github_Repositories',
+              p_columns           => l_columns,
+              p_max_rows          => 1000 );
+      
+          l_name_idx   := apex_exec.get_column_position( l_context, 'NAME' );
+          l_lang_idx   := apex_exec.get_column_position( l_context, 'LANGUAGE' );
+          l_desc_idx   := apex_exec.get_column_position( l_context, 'DESCRIPTION' );
+          l_upd_idx    := apex_exec.get_column_position( l_context, 'UPDATED_AT' );
+          l_cr_idx     := apex_exec.get_column_position( l_context, 'CREATED_AT' );
+          l_issues_idx := apex_exec.get_column_position( l_context, 'OPEN_ISSUES_COUNT' );
+      
+          while apex_exec.next_row( l_context ) loop
+      
+              insert into eba_restdemo_sample_github values (
+                  apex_exec.get_varchar2    ( l_context, l_name_idx ), 
+                  apex_exec.get_varchar2    ( l_context, l_lang_idx ), 
+                  apex_exec.get_varchar2    ( l_context, l_desc_idx ), 
+                  apex_exec.get_timestamp_tz( l_context, l_upd_idx ), 
+                  apex_exec.get_timestamp_tz( l_context, l_cr_idx ), 
+                  apex_exec.get_number      ( l_context, l_issues_idx ));
+      
+          end loop;
+          
+          apex_exec.close( l_context );
+      exception
+          when others then
+          apex_exec.close( l_context );
+          raise;    
+      end;
+      
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Github Repository Information downloaded from REST Service.
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: Download # 91435059834511942
+
+- # ====== Process: Clear local table ==========================
+  id: 91436172529511953
+  identification: 
+    name: Clear local table
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: delete from eba_restdemo_sample_github;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Local data deleted.
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: Clear # 91436033672511952
+
+- # ====== Process: EBA_RESTDEMO_SAMPLE_GITHUB table - Save Inte
+  id: 100453092782784161
+  identification: 
+    name: EBA_RESTDEMO_SAMPLE_GITHUB table - Save Interactive Grid Data
+    type: Interactive Grid - Automatic Row Processing (DML)
+    execution-chain: None
+    editable-region: EBA_RESTDEMO_SAMPLE_GITHUB table # 91433528068511927
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+

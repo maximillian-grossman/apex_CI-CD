@@ -1,0 +1,637 @@
+---
+# ====== Page: Request Laptop ================================
+id: 22
+identification: 
+  name: Request Laptop
+  alias: REQUEST-LAPTOP
+  title: Request Laptop
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  width: 340
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: true
+
+javascript: 
+  execute-when-page-loads: |
+    apex.items.P22_NEED_BY.dayFormatter = function (pDateISOString) {
+      const day = apex.date.parse(pDateISOString, "YYYY-MM-DD").getDay();
+      return {
+          // disable when day is Saturday or Sunday
+          disabled: [0, 6].includes(day),
+          // set a styling css class like u-danger-text
+          class: null,
+          // set a tooltip that is shown on hover
+          tooltip: null
+      };
+    };
+    apex.items.P22_NEED_BY.refresh();
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Request Laptop ==============================
+  id: 1893504297700597639
+  identification: 
+    name: Request Laptop
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_APPR_LAPTOP_REQUESTS
+    include-rowid-column: false
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+- # ====== Region: Buttons =====================================
+  id: 1893510848469597667
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+page-items: 
+- # ====== Page Item: P22_ID ===================================
+  id: 1266239035361100281
+  identification: 
+    name: P22_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Request Laptop # 1893504297700597639
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Request Laptop # 1893504297700597639
+    column: ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P22_LAPTOP_TYPE ==========================
+  id: 1280372346516506437
+  identification: 
+    name: P22_LAPTOP_TYPE
+    type: Select List
+
+  label: 
+    label: Laptop Type
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 90
+    region: Request Laptop # 1893504297700597639
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: AVAILABLE_LAPTOP_TYPES # 1282373792368606595
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Request Laptop # 1893504297700597639
+    column: LAPTOP_TYPE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P22_NEED_BY ==============================
+  id: 1280372445230506438
+  identification: 
+    name: P22_NEED_BY
+    type: Date Picker
+
+  label: 
+    label: Need By
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Inline
+    minimum-date: Item
+    minimum-item: P22_MINIMUM_DATE
+    maximum-date: None
+    multiple-months: No
+    use-defaults: false
+    appearance-&-behavior: Month Picker
+    days-outside-month: Visible
+    show-on: Item Focus
+
+  layout: 
+    sequence: 100
+    region: Request Laptop # 1893504297700597639
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: YYYYMMDDHH24MI
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Request Laptop # 1893504297700597639
+    column: NEED_BY
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P22_MINIMUM_DATE =========================
+  id: 1280372842215506442
+  identification: 
+    name: P22_MINIMUM_DATE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 110
+    region: Request Laptop # 1893504297700597639
+    slot: BODY
+
+  appearance: 
+    format-mask: YYYYMMDDHH24MI
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P22_EMPNO ================================
+  id: 1893505242845597655
+  identification: 
+    name: P22_EMPNO
+    type: Display Only
+
+  label: 
+    label: Employee
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Display Value of List of Values
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 40
+    region: Request Laptop # 1893504297700597639
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: EBA_DEMO_CONF_EMP_LOV # 1314983740356632196
+    display-extra-values: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Request Laptop # 1893504297700597639
+    column: EMPNO
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 1279977240794474912
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Buttons # 1893510848469597667
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: SUBMIT_FOR_APPROVAL =========================
+  id: 1279977672941474913
+  identification: 
+    button-name: SUBMIT_FOR_APPROVAL
+    label: Submit
+
+  layout: 
+    sequence: 30
+    region: Buttons # 1893510848469597667
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P22_EMPNO
+
+dynamic-actions: 
+- # ====== Dynamic Action: Cancel Dialog =======================
+  id: 1279980280326474925
+  identification: 
+    name: Cancel Dialog
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 1279977240794474912
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 1279980855739474926
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: Cancel Dialog # 1279980280326474925
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P22_NEED_BY ============================
+  id: 1280372741573506441
+  identification: 
+    item-name: P22_NEED_BY
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Expression
+    language: SQL
+    sql-expression: to_char((sysdate + 14) + case to_char(sysdate + 14, 'fmDay','NLS_DATE_LANGUAGE = AMERICAN') when 'Saturday' then 2 when 'Sunday' then 1 else 0 end,'YYYYMMDDHH24MI') min_date
+
+- # ====== Computation: P22_MINIMUM_DATE =======================
+  id: 1280372918681506443
+  identification: 
+    item-name: P22_MINIMUM_DATE
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Expression
+    language: SQL
+    sql-expression: to_char((sysdate + 7) + case to_char(sysdate + 7, 'fmDay','NLS_DATE_LANGUAGE = AMERICAN') when 'Saturday' then 2 when 'Sunday' then 1 else 0 end,'YYYYMMDDHH24MI') min_date
+
+processes: 
+- # ====== Process: Initialize form Request Salary Change ======
+  id: 1279976092137474911
+  identification: 
+    name: Initialize form Request Salary Change
+    type: Form - Initialization
+    execution-chain: None
+    form-region: Request Laptop # 1893504297700597639
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Process form Request Laptop ================
+  id: 1279976551264474911
+  identification: 
+    name: Process form Request Laptop
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: Request Laptop # 1893504297700597639
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Start Laptop Request Workflow ==============
+  id: 1279979058231474923
+  identification: 
+    name: Start Laptop Request Workflow
+    type: Workflow
+    execution-chain: None
+
+  settings: 
+    type: Start
+    definition: Laptop Request # 1266235530298100246
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SUBMIT_FOR_APPROVAL # 1279977672941474913
+
+  parameters: 
+  - # ====== Parameter: Employee ID ==============================
+    id: 1280373028892506444
+    identification: 
+      name: Employee ID # 1266236257360100253
+
+    parameter: 
+      direction: In
+      data-type: NUMBER
+
+    value: 
+      type: Item
+      item: P22_EMPNO
+
+  - # ====== Parameter: Laptop Request ID ========================
+    id: 1280373112188506445
+    identification: 
+      name: Laptop Request ID # 1266236338937100254
+
+    parameter: 
+      direction: In
+      data-type: NUMBER
+
+    value: 
+      type: Item
+      item: P22_ID
+
+  - # ====== Parameter: Laptop Type ==============================
+    id: 1280373183249506446
+    identification: 
+      name: Laptop Type # 1266236381115100255
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+
+    value: 
+      type: Item
+      item: P22_LAPTOP_TYPE
+
+- # ====== Process: Close Dialog ===============================
+  id: 1279979957242474924
+  identification: 
+    name: Close Dialog
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    show-success-messages: false
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Request is contained in Value
+    value: CREATE,SUBMIT_FOR_APPROVAL,DELETE
+

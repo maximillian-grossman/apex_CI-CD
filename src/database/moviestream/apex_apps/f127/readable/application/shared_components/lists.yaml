@@ -1,0 +1,2497 @@
+---
+- # ====== List: IG Report Linking Examples ====================
+  id: 1066453040584203413
+  identification: 
+    name: IG Report Linking Examples
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Clearing report settings =====================
+    id: 1066453163575203414
+    label: 
+      label: Clearing report settings
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.:CR:::'
+        page: 37 # Linking to Interactive Grids
+        clear-cache: CR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Resetting to Developer Defaults ==============
+    id: 1066453640862203415
+    label: 
+      label: Resetting to Developer Defaults
+
+    icon: 
+      image/icon-css-classes: fa-refresh
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.:RR:::'
+        page: 37 # Linking to Interactive Grids
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Invoking a Saved Report ======================
+    id: 1066453978992203415
+    label: 
+      label: Invoking a Saved Report
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.:IG_Status:&DEBUG.:RR:::'
+        page: 37 # Linking to Interactive Grids
+        request: IG_Status
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Filtering Report for budgets greater than 5000
+    id: 1066454768522203415
+    label: 
+      label: Filtering Report for budgets greater than 5000
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.:18,RR:IGGT_BUDGET:5000:'
+        page: 37 # Linking to Interactive Grids
+        clear-cache: 18,RR
+        values: 
+          iggt_budget: 5000
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Linking to a Saved Report ====================
+    id: 1066526674531917459
+    label: 
+      label: Linking to a Saved Report
+
+    icon: 
+      image/icon-css-classes: fa-link
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR:IGGT_BUDGET:6000:'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          iggt_budget: 6000
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+- # ====== List: Report Use Cases ==============================
+  id: 1334532326885220160
+  identification: 
+    name: Report Use Cases
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1066477176478266227
+    label: 
+      label: Linking to Interactive Grids
+
+    icon: 
+      image/icon-css-classes: fa-chain
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.::::'
+        page: 37 # Linking to Interactive Grids
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Shows how to link to an interactive grid, including syntax to clear settings, reset settings, call named reports, pass filters, etc.
+
+  - # ====== Entry: Drill Down to Interactive Grid ===============
+    id: 1067114114820068578
+    label: 
+      label: Drill Down to Interactive Grid
+
+    icon: 
+      image/icon-css-classes: fa-level-down
+
+    layout: 
+      sequence: 15
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.:RP:::'
+        page: 40 # Drill Down IG
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Includes drill down links from one interactive grid to another.
+
+  - # ====== Entry: Filtering ====================================
+    id: 1334533121391220163
+    label: 
+      label: Filtering
+
+    icon: 
+      image/icon-css-classes: fa-filter
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # Filtering
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Filter classic report results using a left hand side-bar control region.  Uses bind variable references to properly constrain the report.
+
+  - # ====== Entry: Non-Tabular Templates ========================
+    id: 1334553199270640140
+    label: 
+      label: Non-Tabular Templates
+
+    icon: 
+      image/icon-css-classes: fa-comment-o
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.::::'
+        page: 13 # Non-Tabular Templates
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Classic reports are template based, Interactive Reports are not.  This example demonstrates the use of a classic report template.
+
+  - # ====== Entry: Interactive Report Query API =================
+    id: 2916928449896231628
+    label: 
+      label: Interactive Report Query API
+
+    icon: 
+      image/icon-css-classes: fa-terminal
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Interactive Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This example shows how to call an Oracle APEX runtime API to get the SQL statement that corresponds to the current user's interactive report filters and use this to drive a chart on another page.
+
+  - # ====== Entry: Drill Down to Interactive Report =============
+    id: 2917059454431972999
+    label: 
+      label: Drill Down to Interactive Report
+
+    icon: 
+      image/icon-css-classes: fa-level-down
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:RP:::'
+        page: 6 # Drill Down IR
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Includes drill down links from one interactive report to another.
+
+  - # ====== Entry: Report Highlighting ==========================
+    id: 2917064244930992609
+    label: 
+      label: Report Highlighting
+
+    icon: 
+      image/icon-css-classes: fa-lightbulb-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:RP:::'
+        page: 7 # Highlighting
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Shows how to use the built in row and column highlighting capabilities of Interactive Reports.
+
+  - # ====== Entry: Linking to Interactive Reports ===============
+    id: 2917292441517276944
+    label: 
+      label: Linking to Interactive Reports
+
+    icon: 
+      image/icon-css-classes: fa-chain
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.::::'
+        page: 18 # Linking to Interactive Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Shows how to link to an interactive report, including syntax to clear settings, reset settings, call named reports, pass filters, etc.
+
+  - # ====== Entry: Column Format Masks ==========================
+    id: 2917370083856615037
+    label: 
+      label: Column Format Masks
+
+    icon: 
+      image/icon-css-classes: fa-columns
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:RP:::'
+        page: 8 # Format Masks
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: See various formatting options for dates, numbers, and percent bar charts which are available from within classic and interactive reports.  This example uses an interactive report but the format masks are common between interactive reports and classic reports.
+
+  - # ====== Entry: Custom Buttons ===============================
+    id: 2917370683105615037
+    label: 
+      label: Custom Buttons
+
+    icon: 
+      image/icon-css-classes: fa-external-link
+
+    layout: 
+      sequence: 90
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Custom Buttons
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: An example of how to turn report cells into buttons via CSS.  This example uses an interactive report.
+
+  - # ====== Entry: Reporting from Oracle APEX Collections =======
+    id: 2917408869856793517
+    label: 
+      label: Reporting from Oracle APEX Collections
+
+    icon: 
+      image/icon-css-classes: fa-paste
+
+    layout: 
+      sequence: 100
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.:RP,38:::'
+        page: 38 # Report from Collection
+        clear-cache: RP,38
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates the technique of building reports based upon Oracle APEX collections.  This allows for result sets to be manipulated and cached before being reporting on.
+
+  - # ====== Entry: Bind Variables ===============================
+    id: 2937658560857963680
+    label: 
+      label: Bind Variables
+
+    icon: 
+      image/icon-css-classes: fa-wrench
+
+    layout: 
+      sequence: 55
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:RP,15:::'
+        page: 15 # Bind Variables
+        clear-cache: RP,15
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Shows how to filter an interactive report using a bind variable which derives its value from an Oracle APEX page item.
+
+- # ====== List: Report Linking Examples =======================
+  id: 1334757715830511791
+  identification: 
+    name: Report Linking Examples
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Clearing report settings =====================
+    id: 1334757901164511795
+    label: 
+      label: Clearing report settings
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:CR:::'
+        page: 18 # Linking to Interactive Reports
+        clear-cache: CR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Resetting to Developer Defaults ==============
+    id: 1334758227317511795
+    label: 
+      label: Resetting to Developer Defaults
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:RR:::'
+        page: 18 # Linking to Interactive Reports
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Invoking a Saved Report ======================
+    id: 1334758502014511795
+    label: 
+      label: Invoking a Saved Report
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.:IR_status:&DEBUG.:RR:::'
+        page: 18 # Linking to Interactive Reports
+        request: IR_status
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Resetting Pagination =========================
+    id: 1334758828651511795
+    label: 
+      label: Resetting Pagination
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&APP_SESSION.:::RP'
+        page: 18 # Linking to Interactive Reports
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Filtering Report for budgets greater than 5000
+    id: 1334759424430516121
+    label: 
+      label: Filtering Report for budgets greater than 5000
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:18,RR:IRGT_BUDGET:5000:'
+        page: 18 # Linking to Interactive Reports
+        clear-cache: 18,RR
+        values: 
+          irgt_budget: 5000
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+- # ====== List: SQL Examples ==================================
+  id: 1334762015971597029
+  identification: 
+    name: SQL Examples
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Pivot ========================================
+    id: 1334762206384597029
+    label: 
+      label: Pivot
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.::::'
+        page: 25 # Pivot Syntax
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: 'Highlights the use of the PIVOT operator. This operator takes data in separate rows, aggregates it, and converts it into columns. '
+
+  - # ====== Entry: CASE Statements ==============================
+    id: 1334762798247597034
+    label: 
+      label: CASE Statements
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:RP:::'
+        page: 19 # CASE Statement
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Highlights the Oracle CASE statement which can be used to perform IF-THEN-ELSE logic in queries.
+
+  - # ====== Entry: Group By =====================================
+    id: 1334763109530597034
+    label: 
+      label: Group By
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.:RP:::'
+        page: 23 # Group By Clause
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: The GROUP BY clause allows a developer to use SQL aggregate functions (AVG, COUNT, MAX, MIN, STDDEV, SUM and VARIANCE).
+
+  - # ====== Entry: Inline Views =================================
+    id: 1334763429847597034
+    label: 
+      label: Inline Views
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.::::'
+        page: 22 # Inline Views
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Inline views are commonly used to simplify complex queries by removing join operations.
+
+  - # ====== Entry: Connect By ===================================
+    id: 1334843999818089681
+    label: 
+      label: Connect By
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.::::'
+        page: 26 # Connect By
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a hierarchy query using connect by and the sys connect by path.
+
+  - # ====== Entry: String Functions =============================
+    id: 1334851118113126808
+    label: 
+      label: String Functions
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.:27:P27_FUNCTION:SUBSTR:'
+        page: 27 # String Functions
+        clear-cache: 27
+        values: 
+          p27_function: SUBSTR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Examples of substr, instr, nvl, nvl2, coalesce, replace, and trim SQL functions.
+
+  - # ====== Entry: Regular Expressions ==========================
+    id: 1334854704729148212
+    label: 
+      label: Regular Expressions
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.::::'
+        page: 28 # Regular Expressions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Regular expressions enable you to search for patterns in string data by using standardized syntax conventions.
+
+  - # ====== Entry: Pipelined Functions ==========================
+    id: 1334856700162174376
+    label: 
+      label: Pipelined Functions
+
+    layout: 
+      sequence: 90
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.::::'
+        page: 35 # Pipelined Functions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Pipelined functions provide the ability to reference the data returned by a PL/SQL process as a table in a SQL statement.
+
+  - # ====== Entry: Soundex ======================================
+    id: 1334889005578694825
+    label: 
+      label: Soundex
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.::::'
+        page: 29 # Soundex
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This function lets you compare words that are spelled differently, but sound alike in English.
+
+- # ====== List: Oracle APEX Advanced Techniques ===============
+  id: 1334829829044969866
+  identification: 
+    name: Oracle APEX Advanced Techniques
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: 10. Reporting from Oracle APEX Collections ===
+    id: 1334830026455969866
+    label: 
+      label: 10. Reporting from Oracle APEX Collections
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.:RP,38:::'
+        page: 38 # Report from Collection
+        clear-cache: RP,38
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates the technique of building reports based upon Oracle APEX collections.  This allows for result sets to be manipulated and cached before being reporting on.
+      2.: reportIcon
+
+- # ====== List: String Functions ==============================
+  id: 1334894398888784366
+  identification: 
+    name: String Functions
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: substr() =====================================
+    id: 1334894606899784366
+    label: 
+      label: substr()
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'SUBSTR'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:SUBSTR:'
+        page: 27 # String Functions
+        values: 
+          p27_function: SUBSTR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: instr() ======================================
+    id: 1334894905144784366
+    label: 
+      label: instr()
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'INSTR'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:INSTR:'
+        page: 27 # String Functions
+        values: 
+          p27_function: INSTR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: nvl() ========================================
+    id: 1334895219202784367
+    label: 
+      label: nvl()
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'NVL'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:NVL:'
+        page: 27 # String Functions
+        values: 
+          p27_function: NVL
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: nvl2() =======================================
+    id: 1334895526183784367
+    label: 
+      label: nvl2()
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'NVL2'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:NVL2:'
+        page: 27 # String Functions
+        values: 
+          p27_function: NVL2
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: coalesce() ===================================
+    id: 1334895806890784367
+    label: 
+      label: coalesce()
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'COALESCE'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:COALESCE:'
+        page: 27 # String Functions
+        values: 
+          p27_function: COALESCE
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: replace() ====================================
+    id: 1334899922745793207
+    label: 
+      label: replace()
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'REPLACE'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:REPLACE:'
+        page: 27 # String Functions
+        values: 
+          p27_function: REPLACE
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: trim() =======================================
+    id: 1334900123155793207
+    label: 
+      label: trim()
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":P27_FUNCTION = 'TRIM'"
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.::P27_FUNCTION:TRIM:'
+        page: 27 # String Functions
+        values: 
+          p27_function: TRIM
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: SQL Analytic Examples =========================
+  id: 1334984511925204434
+  identification: 
+    name: SQL Analytic Examples
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Top N Queries ================================
+    id: 1334984715331204438
+    label: 
+      label: Top N Queries
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+        page: 20 # Top N Queries
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Top-N queries provide a method for limiting the number of rows returned from ordered sets of data.
+
+  - # ====== Entry: LEAD and LAG =================================
+    id: 1334985307932204438
+    label: 
+      label: LEAD and LAG
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # LEAD and LAG
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates use of LEAD and LAG functions to get next and previous data.
+
+  - # ====== Entry: LISTAGG ======================================
+    id: 1334986508386204448
+    label: 
+      label: LISTAGG
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # LISTAGG
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates ordering data within each group and concatenate the values in a comma delimited list.
+
+  - # ====== Entry: ROW_NUMBER ===================================
+    id: 1334986818328204448
+    label: 
+      label: ROW_NUMBER
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # ROW_NUMBER
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to assign a serial number to a partition of records. This is very useful in reporting, especially in places where different partitions have their own serial numbers.
+
+  - # ====== Entry: RATIO_TO_REPORT ==============================
+    id: 1334987117586204448
+    label: 
+      label: RATIO_TO_REPORT
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+        page: 33 # RATIO_TO_REPORT
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to compare the current value against the sum of another set of values.
+
+  - # ====== Entry: RANK and DENSE_RANK ==========================
+    id: 1334987402292204448
+    label: 
+      label: RANK and DENSE_RANK
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # RANK and DENSE_RANK
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to rank the records based on a column value or expression.
+
+- # ====== List: Navigation Menu ===============================
+  id: 1607232903838493498
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Cards ========================================
+    id: 637926783161488113
+    label: 
+      label: Cards
+
+    layout: 
+      sequence: 65
+      parent-entry: Sample Reports # 1607232952008493499
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 41
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:41:&SESSION.::&DEBUG.::::'
+        page: 41 # Cards
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Faceted Search ===============================
+    id: 637932264224552992
+    label: 
+      label: Faceted Search
+
+    layout: 
+      sequence: 63
+      parent-entry: Sample Reports # 1607232952008493499
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 42
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:42:&SESSION.::&DEBUG.::::'
+        page: 42 # Faceted Search
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1066455641514212594
+    label: 
+      label: Linking to Interactive Grids
+
+    layout: 
+      sequence: 135
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 37
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.::::'
+        page: 37 # Linking to Interactive Grids
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Drill Down Interactive Grid ==================
+    id: 1066484759026754173
+    label: 
+      label: Drill Down Interactive Grid
+
+    layout: 
+      sequence: 105
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 40
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.::::'
+        page: 40 # Drill Down IG
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Sample Reports ===============================
+    id: 1607232952008493499
+    label: 
+      label: Sample Reports
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 10
+      - 14
+      - 41
+      - 42
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Interactive Report ===========================
+    id: 1607233084697493500
+    label: 
+      label: Interactive Report
+
+    layout: 
+      sequence: 55
+      parent-entry: Sample Reports # 1607232952008493499
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 1
+      - 2
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Interactive Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Classic Report ===============================
+    id: 1607233146337493500
+    label: 
+      label: Classic Report
+
+    layout: 
+      sequence: 70
+      parent-entry: Sample Reports # 1607232952008493499
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 3
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+        page: 3 # Classic Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Use Cases ====================================
+    id: 1607233480153493500
+    label: 
+      label: Use Cases
+
+    icon: 
+      image/icon-css-classes: fa-briefcase
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Use Cases
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: SQL Examples =================================
+    id: 1607233527099493500
+    label: 
+      label: SQL Examples
+
+    icon: 
+      image/icon-css-classes: fa-search-plus
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.::::'
+        page: 39 # SQL Examples
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Analytic Functions ===========================
+    id: 1620165813119015358
+    label: 
+      label: Analytic Functions
+
+    icon: 
+      image/icon-css-classes: fa-flash
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Analytic Function Examples
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Administration ===============================
+    id: 1670146154894697717
+    label: 
+      label: Administration
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 36
+      - 4
+      - 34
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:36:&SESSION.::&DEBUG.::::'
+        page: 36 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Interactive Grid =============================
+    id: 1977422312040585221
+    label: 
+      label: Interactive Grid
+
+    layout: 
+      sequence: 60
+      parent-entry: Sample Reports # 1607232952008493499
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Interactive Grid
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Filtering ====================================
+    id: 3475710131700344446
+    label: 
+      label: Filtering
+
+    layout: 
+      sequence: 150
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # Filtering
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Non-Tabular Templates ========================
+    id: 3475730209579764423
+    label: 
+      label: Non-Tabular Templates
+
+    layout: 
+      sequence: 160
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.::::'
+        page: 13 # Non-Tabular Templates
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Pivot ========================================
+    id: 3475952107923743820
+    label: 
+      label: Pivot
+
+    layout: 
+      sequence: 220
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.::::'
+        page: 25 # Pivot Syntax
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: 'Highlights the use of the PIVOT operator. This operator takes data in separate rows, aggregates it, and converts it into columns. '
+
+  - # ====== Entry: CASE Statements ==============================
+    id: 3475952699786743825
+    label: 
+      label: CASE Statements
+
+    layout: 
+      sequence: 200
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:RP:::'
+        page: 19 # CASE Statement
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Highlights the Oracle CASE statement which can be used to perform IF-THEN-ELSE logic in queries.
+
+  - # ====== Entry: Group By =====================================
+    id: 3475953011069743825
+    label: 
+      label: Group By
+
+    layout: 
+      sequence: 260
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.:RP:::'
+        page: 23 # Group By Clause
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: The GROUP BY clause allows a developer to use SQL aggregate functions (AVG, COUNT, MAX, MIN, STDDEV, SUM and VARIANCE).
+
+  - # ====== Entry: Inline Views =================================
+    id: 3475953331386743825
+    label: 
+      label: Inline Views
+
+    layout: 
+      sequence: 270
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.::::'
+        page: 22 # Inline Views
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Inline views are commonly used to simplify complex queries by removing join operations.
+
+  - # ====== Entry: Connect By ===================================
+    id: 3476033901357236472
+    label: 
+      label: Connect By
+
+    layout: 
+      sequence: 210
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.::::'
+        page: 26 # Connect By
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a hierarchy query using connect by and the sys connect by path.
+
+  - # ====== Entry: String Functions =============================
+    id: 3476041019652273599
+    label: 
+      label: String Functions
+
+    layout: 
+      sequence: 250
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.:27:P27_FUNCTION:SUBSTR:'
+        page: 27 # String Functions
+        clear-cache: 27
+        values: 
+          p27_function: SUBSTR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Examples of substr, instr, nvl, nvl2, coalesce, replace, and trim SQL functions.
+
+  - # ====== Entry: Regular Expressions ==========================
+    id: 3476044606268295003
+    label: 
+      label: Regular Expressions
+
+    layout: 
+      sequence: 230
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.::::'
+        page: 28 # Regular Expressions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Regular expressions enable you to search for patterns in string data by using standardized syntax conventions.
+
+  - # ====== Entry: Pipelined Functions ==========================
+    id: 3476046601701321167
+    label: 
+      label: Pipelined Functions
+
+    layout: 
+      sequence: 280
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.::::'
+        page: 35 # Pipelined Functions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Pipelined functions provide the ability to reference the data returned by a PL/SQL process as a table in a SQL statement.
+
+  - # ====== Entry: Soundex ======================================
+    id: 3476078907117841616
+    label: 
+      label: Soundex
+
+    layout: 
+      sequence: 240
+      parent-entry: SQL Examples # 1607233527099493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.::::'
+        page: 29 # Soundex
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This function lets you compare words that are spelled differently, but sound alike in English.
+
+  - # ====== Entry: Top N Queries ================================
+    id: 3476180857216360075
+    label: 
+      label: Top N Queries
+
+    layout: 
+      sequence: 340
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+        page: 20 # Top N Queries
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Top-N queries provide a method for limiting the number of rows returned from ordered sets of data.
+
+  - # ====== Entry: LEAD and LAG =================================
+    id: 3476181449817360075
+    label: 
+      label: LEAD and LAG
+
+    layout: 
+      sequence: 290
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # LEAD and LAG
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates use of LEAD and LAG functions to get next and previous data.
+
+  - # ====== Entry: LISTAGG ======================================
+    id: 3476182650271360085
+    label: 
+      label: LISTAGG
+
+    layout: 
+      sequence: 300
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # LISTAGG
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates ordering data within each group and concatenate the values in a comma delimited list.
+
+  - # ====== Entry: ROW_NUMBER ===================================
+    id: 3476182960213360085
+    label: 
+      label: ROW_NUMBER
+
+    layout: 
+      sequence: 330
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # ROW_NUMBER
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to assign a serial number to a partition of records. This is very useful in reporting, especially in places where different partitions have their own serial numbers.
+
+  - # ====== Entry: RATIO_TO_REPORT ==============================
+    id: 3476183259471360085
+    label: 
+      label: RATIO_TO_REPORT
+
+    layout: 
+      sequence: 320
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+        page: 33 # RATIO_TO_REPORT
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to compare the current value against the sum of another set of values.
+
+  - # ====== Entry: RANK and DENSE_RANK ==========================
+    id: 3476183544177360085
+    label: 
+      label: RANK and DENSE_RANK
+
+    layout: 
+      sequence: 310
+      parent-entry: Analytic Functions # 1620165813119015358
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # RANK and DENSE_RANK
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to rank the records based on a column value or expression.
+
+  - # ====== Entry: Interactive Report Query API =================
+    id: 5058105460205355911
+    label: 
+      label: Interactive Report Query API
+
+    layout: 
+      sequence: 120
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Interactive Report
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Drill Down Interactive Report ================
+    id: 5058236464741097282
+    label: 
+      label: Drill Down Interactive Report
+
+    layout: 
+      sequence: 100
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:RP:::'
+        page: 6 # Drill Down IR
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Report Highlighting ==========================
+    id: 5058241255240116892
+    label: 
+      label: Report Highlighting
+
+    layout: 
+      sequence: 110
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:RP:::'
+        page: 7 # Highlighting
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Linking to Interactive Reports ===============
+    id: 5058469451826401227
+    label: 
+      label: Linking to Interactive Reports
+
+    layout: 
+      sequence: 130
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.::::'
+        page: 18 # Linking to Interactive Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Column Format Masks ==========================
+    id: 5058547094165739320
+    label: 
+      label: Column Format Masks
+
+    layout: 
+      sequence: 170
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:RP:::'
+        page: 8 # Format Masks
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Custom Buttons ===============================
+    id: 5058547693414739320
+    label: 
+      label: Custom Buttons
+
+    layout: 
+      sequence: 180
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Custom Buttons
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Reporting from Collections ===================
+    id: 5058585880165917800
+    label: 
+      label: Reporting from Collections
+
+    layout: 
+      sequence: 190
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.:RP,38:::'
+        page: 38 # Report from Collection
+        clear-cache: RP,38
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Bind Variables ===============================
+    id: 5078835571167087963
+    label: 
+      label: Bind Variables
+
+    layout: 
+      sequence: 140
+      parent-entry: Use Cases # 1607233480153493500
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:RP,15:::'
+        page: 15 # Bind Variables
+        clear-cache: RP,15
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar ================================
+  id: 1607441255996592135
+  identification: 
+    name: Navigation Bar
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 1607441732568592150
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:HELP:&SESSION.::&DEBUG.::::'
+        page: HELP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 1607442045990592150
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: Sign Out =====================================
+    id: 1607442627807592151
+    label: 
+      label: Sign Out
+
+    layout: 
+      sequence: 50
+      parent-entry: '&APP_USER.' # 1607442045990592150
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Administration ================================
+  id: 1897029187176362090
+  identification: 
+    name: Administration
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 1897029407685362095
+    label: 
+      label: Manage Sample Data
+
+    icon: 
+      image/icon-css-classes: fa-edit
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Manage Sample Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This application ships with sample data.  You can remove or recreate sample data using this administrative page.
+
+  - # ====== Entry: Theme Style ==================================
+    id: 1897029798510362096
+    label: 
+      label: Theme Style
+
+    icon: 
+      image/icon-css-classes: fa-desktop
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:34:&SESSION.::&DEBUG.::::'
+        page: 34 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Set application user interface theme style for all users.
+
+- # ====== List: Home Page List ================================
+  id: 3187604928553464846
+  identification: 
+    name: Home Page List
+
+  subscription: 
+    version-number: 1089078416
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Cards ========================================
+    id: 637950023240667549
+    label: 
+      label: Cards
+
+    layout: 
+      sequence: 45
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:41:&SESSION.::&DEBUG.:RP,41:::'
+        page: 41 # Cards
+        clear-cache: RP,41
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Report displayed in cards
+
+  - # ====== Entry: SQL Examples =================================
+    id: 1355064398717935116
+    label: 
+      label: SQL Examples
+
+    icon: 
+      image/icon-css-classes: '#APP_IMAGES#reports_usecases.jpg'
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.:RP:::'
+        page: 39 # SQL Examples
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: true
+      1.: Demonstrations of advanced SQL techniques
+
+  - # ====== Entry: Faceted Search ===============================
+    id: 1670034820633079727
+    label: 
+      label: Faceted Search
+
+    icon: 
+      image/icon-css-classes: '#APP_IMAGES#reports_filter.png'
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:42:&SESSION.::&DEBUG.:RP,42:::'
+        page: 42 # Faceted Search
+        clear-cache: RP,42
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Report with facets to filter the result
+
+  - # ====== Entry: Interactive Grid =============================
+    id: 1977423662888598479
+    label: 
+      label: Interactive Grid
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Interactive Grid
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Reports which allow for in-line editing and other customization by the end user
+
+  - # ====== Entry: Analytic Functions ===========================
+    id: 2226168406330832536
+    label: 
+      label: Analytic Functions
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Analytic Function Examples
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrations of various analytic functions available in Oracle SQL.
+
+  - # ====== Entry: Interactive Report ===========================
+    id: 3187605723446464848
+    label: 
+      label: Interactive Report
+
+    icon: 
+      image/icon-css-classes: '#APP_IMAGES#reports_ir.png'
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:RP:::'
+        page: 1 # Interactive Report
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: true
+      1.: Reports which enable customization by the end user
+
+  - # ====== Entry: Classic Report ===============================
+    id: 3187606023202464849
+    label: 
+      label: Classic Report
+
+    icon: 
+      image/icon-css-classes: '#APP_IMAGES#reports_classic.png'
+
+    layout: 
+      sequence: 47
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:::'
+        page: 3 # Classic Report
+        clear-cache: RP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: true
+      1.: Tabular data which can be filtered by page item values
+
+  - # ====== Entry: Use Cases ====================================
+    id: 3187606306809464849
+    label: 
+      label: Use Cases
+
+    icon: 
+      image/icon-css-classes: '#APP_IMAGES#reports_usecases.jpg'
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Use Cases
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: true
+      1.: 'Demonstrations of advanced APEX report techniques '
+

@@ -1,0 +1,77 @@
+---
+- # ====== Upgrade Script: Drop old objects ====================
+  id: 192079975846461576
+  identification: 
+    name: Drop old objects
+
+  execution: 
+    sequence: 59
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select object_name
+      from user_objects
+      where object_type = 'PACKAGE'
+          and object_name in ( 'EBA_DEMO_IR_FILTER_FW', 'EBA_DEMO_IR_FILTER2_FW' )
+      union all
+      select object_name
+      from user_objects
+      where object_type = 'TYPE'
+          and object_name in ( 'EBA_DEMO_IR_ACTIVE_FILTERS_TBL', 'EBA_DEMO_IR_FILTER_COL_TBL',
+                              'EBA_DEMO_IR_FILTER_COLUMN_T', 'EBA_DEMO_IR_ACTIVE_FILTERS_T' )
+
+- # ====== Upgrade Script: Create Emp Table ====================
+  id: 1334866810082295484
+  identification: 
+    name: Create Emp Table
+
+  execution: 
+    sequence: 20
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select table_name
+      from user_tables
+      where table_name = 'EBA_DEMO_IR_EMP'
+
+- # ====== Upgrade Script: Create Dept Table ===================
+  id: 1334868029476301086
+  identification: 
+    name: Create Dept Table
+
+  execution: 
+    sequence: 10
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select table_name
+      from user_tables
+      where table_name = 'EBA_DEMO_IR_DEPT'
+
+- # ====== Upgrade Script: Update Data Script ==================
+  id: 1334912814387807759
+  identification: 
+    name: Update Data Script
+
+  execution: 
+    sequence: 30
+
+- # ====== Upgrade Script: Pipelined Function Package ==========
+  id: 1335112207019149196
+  identification: 
+    name: Pipelined Function Package
+
+  execution: 
+    sequence: 50
+
+- # ====== Upgrade Script: Refresh Data ========================
+  id: 2604020801678724239
+  identification: 
+    name: Refresh Data
+
+  execution: 
+    sequence: 40
+

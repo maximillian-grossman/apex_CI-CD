@@ -1,0 +1,920 @@
+---
+# ====== Page: Oracle Text ===================================
+id: 70
+identification: 
+  name: Oracle Text
+  alias: ORACLE-TEXT
+  title: Oracle Text
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Overview: Oracle Text =======================
+  id: 1123226108112276895
+  identification: 
+    name: 'Overview: Oracle Text'
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This page shows how Oracle Text can be used within an Interactive Grid to perform full-text search using linguistic features. An Oracle Text index has been created on your table. Consult the <i>Oracle Text Application Developers Guide</i> for details. For performance reasons, only one Oracle Text index may be used within an Interactive Grid. In Page Designer, navigate to the Attribute Section, then to <strong>Oracle Text Index Column</strong> and select the table column, for which the Oracle Text index has been created.</p>
+      <p>In this example, Oracle Text features are available to search the <b>Name</b> and <b>Country</b> columns with the Interactive Grid <i>Row Filter</i>. Type your query (or one of the below examples) into the <b>Search: Full text</b> field. Your query is automatically translated to Oracle Text query syntax by the <b>EBA_DEMO_IG_TEXT_PKG.CONVERT_TEXT_QUERY</b> function. It will find exact as well as fuzzy matches.</p>
+      </p>
+      <p>Query Examples (fuzzy logic will find results)</p>
+      <ul>
+      <li>Julius Caesar</li>
+      <li>gustav eifel</li>
+      <li>armstong states</li>
+      </ul>
+      <p>You can also type in Oracle Text query syntax directly; simply prefix your query with <b>ORATEXT:</b>. For details about the query syntax, consult the <i>Oracle Text Application Developers' Guide</i>.</p>
+      <ul>
+      <li>ORATEXT: Julius and ?Itali</li>
+      <li>ORATEXT: Einstein and Germany</li>
+      </ul>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - i-h240
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select 1 from user_indexes
+      where index_name='EBA_DEMO_IG_TEXT_FTX'
+
+  security: 
+    authorization-scheme: Oracle Text is available # 1176167065401001527
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Oracle Text =================================
+  id: 1176169423553038832
+  identification: 
+    name: Oracle Text
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 1342165149965603159
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: People ======================================
+  id: 1176212190931069746
+  identification: 
+    name: People
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID,
+             RATING,
+             NAME,
+             COUNTRY,
+             TO_CHAR(FROM_YR) as FROM_YR,
+             case when TO_YR = 0 then '' else TO_CHAR(TO_YR) end as TO_YR, 
+             gender
+        from EBA_DEMO_IG_PEOPLE
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select 1 from user_indexes
+      where index_name='EBA_DEMO_IG_TEXT_FTX'
+
+  security: 
+    authorization-scheme: Oracle Text is available # 1176167065401001527
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1176212230126069747
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    advanced: 
+      oracle-text-index-column: NAME
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 1176217865022070932
+      identification: 
+        name: Primary Report
+        alias: 14512
+
+  columns: 
+  - # ====== Column: ID ==========================================
+    id: 1176212385836069748
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 10
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: RATING ======================================
+    id: 1176212482587069749
+    identification: 
+      column-name: RATING
+      type: Number Field
+
+    heading: 
+      heading: Rating
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 20
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: RATING
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: NAME ========================================
+    id: 1176212608602069750
+    identification: 
+      column-name: NAME
+      type: Textarea
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 255
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: COUNTRY =====================================
+    id: 1176212703832069751
+    identification: 
+      column-name: COUNTRY
+      type: Text Field
+
+    heading: 
+      heading: Country
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 50
+
+    source: 
+      type: Database Column
+      database-column: COUNTRY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: FROM_YR =====================================
+    id: 1176212790804069752
+    identification: 
+      column-name: FROM_YR
+      type: Number Field
+
+    heading: 
+      heading: Born
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 50
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 40
+
+    source: 
+      type: Database Column
+      database-column: FROM_YR
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TO_YR =======================================
+    id: 1176212823218069753
+    identification: 
+      column-name: TO_YR
+      type: Number Field
+
+    heading: 
+      heading: Died
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 60
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 40
+
+    source: 
+      type: Database Column
+      database-column: TO_YR
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: GENDER ======================================
+    id: 1176213118666069756
+    identification: 
+      column-name: GENDER
+      type: Select List
+
+    heading: 
+      heading: Gender
+      alignment: start
+
+    layout: 
+      sequence: 100
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: PEOPLE_GENDER # 737885612450560140
+      display-extra-values: false
+      display-null-value: false
+
+    source: 
+      type: Database Column
+      database-column: GENDER
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ROWID =======================================
+    id: 1853872011245847187
+    identification: 
+      column-name: ROWID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 110
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ROWID
+      data-type: ROWID
+      primary-key: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#9bafde'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#efefef'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: Oracle Text is not available ================
+  id: 1176213794360069762
+  identification: 
+    name: Oracle Text is not available
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>Oracle Text is not available in your workspace. Contact your database administrator to get the <strong>CTXAPP</strong> role granted using the following SQL statement.</p>
+      <pre>grant CTXAPP to #OWNER#;</pre>
+      <p>Then log out and back into the application and revisit this page. </p>
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--warning
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: MODEL.LOV.NOT_W_ARGUMENT # 1176167065401001527
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Oracle Text Index does not exist ============
+  id: 1176214092119069765
+  identification: 
+    name: Oracle Text Index does not exist
+    type: Static Content
+
+  source: 
+    html-code: <p>Oracle Text is available in your workspace, but the Full Text index does not exist yet.</p>
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--info
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select 1 from user_indexes
+      where index_name='EBA_DEMO_IG_TEXT_FTX'
+
+  security: 
+    authorization-scheme: Oracle Text is available # 1176167065401001527
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: NEXT ========================================
+  id: 1176213878791069763
+  identification: 
+    button-name: NEXT
+    label: Next
+
+  layout: 
+    sequence: 20
+    region: Oracle Text # 1176169423553038832
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillEnd
+    icon: fa-angle-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.:RP::'
+      page: 38 # Pagination
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+- # ====== Button: PREV ========================================
+  id: 1176213948447069764
+  identification: 
+    button-name: PREV
+    label: Previous
+
+  layout: 
+    sequence: 10
+    region: Oracle Text # 1176169423553038832
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillStart
+    icon: fa-angle-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.:RP::'
+      page: 14 # Chart View
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+- # ====== Button: CREATE_TEXT_INDEX ===========================
+  id: 1176214157612069766
+  identification: 
+    button-name: CREATE_TEXT_INDEX
+    label: Create Oracle Text index
+
+  layout: 
+    sequence: 10
+    region: Oracle Text Index does not exist # 1176214092119069765
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+  security: 
+    authorization-scheme: Oracle Text is available # 1176167065401001527
+
+processes: 
+- # ====== Process: Create Oracle Text Index ===================
+  id: 1176214360443069768
+  identification: 
+    name: Create Oracle Text Index
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          eba_demo_ig_text_pkg.drop_text_preferences;
+          eba_demo_ig_text_pkg.create_text_preferences;
+          eba_demo_ig_text_pkg.create_text_index;
+      end;
+      
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  security: 
+    authorization-scheme: Oracle Text is available # 1176167065401001527
+

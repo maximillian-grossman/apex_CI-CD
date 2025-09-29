@@ -1,0 +1,2141 @@
+---
+- # ====== Workflow: Laptop Procurement ========================
+  id: 37603491295975312
+  identification: 
+    name: Laptop Procurement
+    title: Laptop Procurement
+
+  advanced: 
+    static-id: LAPTOP_PROCUREMENT
+
+  parameters: 
+  - # ====== Parameter: Delivered from Stock =====================
+    id: 37606674519975344
+    identification: 
+      static-id: P_DELIVERED_FROM_STOCK
+
+    label: 
+      label: Delivered from Stock
+
+    parameter: 
+      data-type: VARCHAR2
+      direction: Out
+
+  versions: 
+  - # ====== Version: 1.0 ========================================
+    id: 37603619064975313
+    identification: 
+      workflow-version: 1.0
+
+    settings: 
+      state: In Development
+
+    additional-data: 
+      type: Table / View
+      table-owner: Parsing Schema
+      table-name: EBA_DEMO_APPR_LAPTOP_REQUESTS
+
+    column-mapping: 
+      primary-key-column: ID
+
+    activities: 
+    - # ====== Activity: Start =====================================
+      id: 37603660763975314
+      identification: 
+        name: Start
+        type: Workflow Start
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 10
+
+      advanced: 
+        static-id: New
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 37604018133975317
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Start # 37603660763975314
+          to: In Stock? # 37603776733975315
+
+    - # ====== Activity: In Stock? =================================
+      id: 37603776733975315
+      identification: 
+        name: In Stock?
+        type: Switch
+
+      switch: 
+        type: True False Check
+
+      condition: 
+        condition-type: Function Body
+        language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+        function-body: |
+          :P_DELIVERED_FROM_STOCK := case 
+                                     when eba_demo_appr.laptop_in_stock(:LAPTOP_TYPE) then 'Y'
+                                     else 'N'
+                                     end;
+          return :P_DELIVERED_FROM_STOCK = 'Y';
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 20
+
+      advanced: 
+        static-id: New_1
+
+      connections: 
+      - # ====== Connection: Yes =====================================
+        id: 37604151644975319
+        identification: 
+          name: Yes
+
+        condition: 
+          when: True
+
+        activity: 
+          to: Deliver from Stock # 37604389348975321
+
+      - # ====== Connection: No ======================================
+        id: 37604490335975322
+        identification: 
+          name: No
+
+        condition: 
+          when: False
+
+        activity: 
+          to: Order Laptop # 37604996838975327
+
+    - # ====== Activity: End =======================================
+      id: 37603857403975316
+      identification: 
+        name: End
+        type: Workflow End
+
+      settings: 
+        end-state: Completed
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 30
+
+      advanced: 
+        static-id: New_2
+
+    - # ====== Activity: Update for Delivery =======================
+      id: 37604294741975320
+      identification: 
+        name: Update for Delivery
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_LAPTOP_REQUEST
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 40
+
+      advanced: 
+        static-id: New_3
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 37604903655975326
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Update for Delivery # 37604294741975320
+          to: End # 37603857403975316
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 37605991198975337
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 37606117406975338
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: Static Value
+          static-value: DELIVERED
+
+        advanced: 
+          display-sequence: 20
+
+      - # ====== Parameter: p_workflow_id ============================
+        id: 37606189982975339
+        identification: 
+          name: p_workflow_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 30
+
+      - # ====== Parameter: p_approval_task_id =======================
+        id: 37606294454975340
+        identification: 
+          name: p_approval_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 40
+
+      - # ====== Parameter: p_delivery_action_task_id ================
+        id: 37606354247975341
+        identification: 
+          name: p_delivery_action_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: Item
+          item: V_DELIVERY_ACTION_TASK_ID
+
+        advanced: 
+          display-sequence: 50
+
+      - # ====== Parameter: p_approver ===============================
+        id: 37606473675975342
+        identification: 
+          name: p_approver
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 60
+
+      - # ====== Parameter: p_decision_date ==========================
+        id: 37606572516975343
+        identification: 
+          name: p_decision_date
+
+        parameter: 
+          direction: In
+          data-type: DATE
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 70
+
+    - # ====== Activity: Deliver from Stock ========================
+      id: 37604389348975321
+      identification: 
+        name: Deliver from Stock
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: DELIVER_LAPTOP_FROM_STOCK
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 50
+
+      advanced: 
+        static-id: New_4
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 37604815771975325
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Deliver from Stock # 37604389348975321
+          to: End # 37603857403975316
+
+      parameters: 
+      - # ====== Parameter: p_laptop_type ============================
+        id: 41550428989777398
+        identification: 
+          name: p_laptop_type
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Item
+          item: LAPTOP_TYPE
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_laptop_request_id ======================
+        id: 41550586928777399
+        identification: 
+          name: p_laptop_request_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: Order Laptop ==============================
+      id: 37604996838975327
+      identification: 
+        name: Order Laptop
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: ORDER_LAPTOP_FROM_SUPPLIER
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 70
+
+      advanced: 
+        static-id: New_6
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 37605412091975331
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Order Laptop # 37604996838975327
+          to: Confirm Delivery # 37605066193975328
+
+      parameters: 
+      - # ====== Parameter: p_laptop_type ============================
+        id: 41550720774777400
+        identification: 
+          name: p_laptop_type
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Item
+          item: LAPTOP_TYPE
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_laptop_request_id ======================
+        id: 41550731325777401
+        identification: 
+          name: p_laptop_request_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: Confirm Delivery ==========================
+      id: 37605066193975328
+      identification: 
+        name: Confirm Delivery
+        type: Human Task - Create
+
+      settings: 
+        definition: Laptop Delivered # 1545410620927921527
+        task-id-item: V_DELIVERY_ACTION_TASK_ID
+        details-primary-key--item: APEX$WORKFLOW_DETAIL_PK
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 80
+
+      advanced: 
+        static-id: ConfirmDelivery
+
+      comments: 
+        comments: This action task is completed by a conditional database trigger call to eba_demo_appr.laptop_delivered() procedure, which uses apex_approval.complete_task() in an autonomous transaction to do so.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 37605502652975332
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Confirm Delivery # 37605066193975328
+          to: Update for Delivery # 37604294741975320
+
+    variables: 
+    - # ====== Variable: Approver ==================================
+      id: 37605205865975329
+      identification: 
+        static-id: APPROVER
+
+      label: 
+        label: Approver
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: TaskOutcome ===============================
+      id: 37605243954975330
+      identification: 
+        static-id: TASK_OUTCOME
+
+      label: 
+        label: TaskOutcome
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: Delivery Action Task Id ===================
+      id: 37605619481975333
+      identification: 
+        static-id: V_DELIVERY_ACTION_TASK_ID
+
+      label: 
+        label: Delivery Action Task Id
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+- # ====== Workflow: Laptop Request ============================
+  id: 1266235530298100246
+  identification: 
+    name: Laptop Request
+    title: Request for &P_LAPTOP_TYPE. by emp ID &P_EMPNO.
+
+  advanced: 
+    static-id: LAPTOP_REQUEST
+
+  comments: 
+    comments: Laptop Request Workflow
+
+  parameters: 
+  - # ====== Parameter: Employee ID ==============================
+    id: 1266236257360100253
+    identification: 
+      static-id: P_EMPNO
+
+    label: 
+      label: Employee ID
+
+    parameter: 
+      data-type: NUMBER
+      direction: In
+
+    value: 
+      required: true
+
+    default: 
+      value: Y
+
+  - # ====== Parameter: Laptop Request ID ========================
+    id: 1266236338937100254
+    identification: 
+      static-id: P_LAPTOP_REQUEST_ID
+
+    label: 
+      label: Laptop Request ID
+
+    parameter: 
+      data-type: NUMBER
+      direction: In
+
+    value: 
+      required: true
+
+    default: 
+      value: Y
+
+  - # ====== Parameter: Laptop Type ==============================
+    id: 1266236381115100255
+    identification: 
+      static-id: P_LAPTOP_TYPE
+
+    label: 
+      label: Laptop Type
+
+    parameter: 
+      data-type: VARCHAR2
+      direction: In
+
+    value: 
+      required: true
+
+    default: 
+      value: Y
+
+  versions: 
+  - # ====== Version: 1.0 ========================================
+    id: 1266235601982100247
+    identification: 
+      workflow-version: 1.0
+
+    settings: 
+      state: In Development
+
+    activities: 
+    - # ====== Activity: Procure Laptop ============================
+      id: 37605689013975334
+      identification: 
+        name: Procure Laptop
+        type: Invoke Workflow
+
+      settings: 
+        definition: Laptop Procurement # 37603491295975312
+        details-primary-key-item: P_LAPTOP_REQUEST_ID
+        wait-for-completion: true
+        retry-point: Resume
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 190
+
+      advanced: 
+        static-id: New_3
+
+      connections: 
+      - # ====== Connection: New_1 ===================================
+        id: 37605878798975336
+        identification: 
+          name: New_1
+          type: Normal
+
+        activity: 
+          from: Procure Laptop # 37605689013975334
+          to: Notify Delivered? # 1535263920157633084
+
+      parameters: 
+      - # ====== Parameter: Delivered from Stock =====================
+        id: 37606776637975345
+        identification: 
+          name: Delivered from Stock # 37606674519975344
+
+        parameter: 
+          direction: Out
+          ignore-output: false
+          data-type: VARCHAR2
+
+        value: 
+          item: V_DELIVERED_FROM_STOCK
+
+    - # ====== Activity: Start =====================================
+      id: 1266235724017100248
+      identification: 
+        name: Start
+        type: Workflow Start
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 10
+
+      advanced: 
+        static-id: New
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1266236016506100251
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Start # 1266235724017100248
+          to: Request Pending # 1266235861917100249
+
+    - # ====== Activity: Request Pending ===========================
+      id: 1266235861917100249
+      identification: 
+        name: Request Pending
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_LAPTOP_REQUEST
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 20
+
+      advanced: 
+        static-id: RequestPending
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1266237386492100265
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Request Pending # 1266235861917100249
+          to: Approve Request # 1266237163577100262
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1266236564221100256
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: P_LAPTOP_REQUEST_ID
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1266236606866100257
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: Static Value
+          static-value: PENDING
+
+        advanced: 
+          display-sequence: 20
+
+      - # ====== Parameter: p_workflow_id ============================
+        id: 1266236753855100258
+        identification: 
+          name: p_workflow_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: Static Value
+          static-value: '&APEX$WORKFLOW_ID.'
+
+        advanced: 
+          display-sequence: 30
+
+      - # ====== Parameter: p_approver ===============================
+        id: 1266236889862100260
+        identification: 
+          name: p_approver
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: Null
+
+        advanced: 
+          display-sequence: 50
+
+      - # ====== Parameter: p_decision_date ==========================
+        id: 1266237033865100261
+        identification: 
+          name: p_decision_date
+
+        parameter: 
+          direction: In
+          data-type: DATE
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 60
+
+      - # ====== Parameter: p_approval_task_id =======================
+        id: 1535262419113633069
+        identification: 
+          name: p_approval_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 70
+
+      - # ====== Parameter: p_delivery_action_task_id ================
+        id: 1535262576753633070
+        identification: 
+          name: p_delivery_action_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 80
+
+    - # ====== Activity: Approve Request ===========================
+      id: 1266237163577100262
+      identification: 
+        name: Approve Request
+        type: Human Task - Create
+
+      settings: 
+        definition: Laptop Approval # 1279143294693132783
+        initiator-can-complete: No
+        task-id-item: V_APPROVAL_TASK_ID
+        details-primary-key--item: P_LAPTOP_REQUEST_ID
+        outcome: V_TASK_OUTCOME
+        owner: V_APPROVER
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 40
+
+      advanced: 
+        static-id: ApproveRequest
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1266236165077100252
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Approve Request # 1266237163577100262
+          to: Update Request # 1266237574646100266
+
+    - # ====== Activity: Update Request ============================
+      id: 1266237574646100266
+      identification: 
+        name: Update Request
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_LAPTOP_REQUEST
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 50
+
+      advanced: 
+        static-id: UpdateRequest
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1266238370877100274
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Update Request # 1266237574646100266
+          to: Approved? # 1266238240664100273
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1266237612786100267
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: P_LAPTOP_REQUEST_ID
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1266237699986100268
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: Item
+          item: V_TASK_OUTCOME
+
+        advanced: 
+          display-sequence: 20
+
+      - # ====== Parameter: p_workflow_id ============================
+        id: 1266237814351100269
+        identification: 
+          name: p_workflow_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 30
+
+      - # ====== Parameter: p_approver ===============================
+        id: 1266238066209100271
+        identification: 
+          name: p_approver
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: true
+
+        value: 
+          type: Item
+          item: V_APPROVER
+
+        advanced: 
+          display-sequence: 50
+
+      - # ====== Parameter: p_decision_date ==========================
+        id: 1266238090692100272
+        identification: 
+          name: p_decision_date
+
+        parameter: 
+          direction: In
+          data-type: DATE
+          has-default: true
+
+        value: 
+          type: Expression
+          language: PL/SQL
+          pl/sql-expression: sysdate
+
+        advanced: 
+          display-sequence: 60
+
+      - # ====== Parameter: p_approval_task_id =======================
+        id: 1535260626233633051
+        identification: 
+          name: p_approval_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: Item
+          item: V_APPROVAL_TASK_ID
+
+        advanced: 
+          display-sequence: 70
+
+      - # ====== Parameter: p_delivery_action_task_id ================
+        id: 1535260775223633052
+        identification: 
+          name: p_delivery_action_task_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: true
+
+        value: 
+          type: API Default
+
+        advanced: 
+          display-sequence: 80
+
+    - # ====== Activity: Approved? =================================
+      id: 1266238240664100273
+      identification: 
+        name: Approved?
+        type: Switch
+
+      switch: 
+        type: Check Workflow Variable
+
+      compare: 
+        compare-variable: V_TASK_OUTCOME
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 60
+
+      advanced: 
+        static-id: Approved
+
+      connections: 
+      - # ====== Connection: Rejected ================================
+        id: 1266238400095100275
+        identification: 
+          name: Rejected
+
+        condition: 
+          operator: Is Equal To
+          value: REJECTED
+
+        activity: 
+          to: New # 1535262642528633071
+
+      - # ====== Connection: Approved ================================
+        id: 1266238643069100277
+        identification: 
+          name: Approved
+
+        condition: 
+          operator: Is Equal To
+          value: APPROVED
+
+        activity: 
+          to: Notify Approved? # 1535263372916633078
+
+    - # ====== Activity: End =======================================
+      id: 1266238516930100276
+      identification: 
+        name: End
+        type: Workflow End
+
+      settings: 
+        end-state: Completed
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 140
+
+      advanced: 
+        static-id: New_6
+
+    - # ====== Activity: Email Approved ============================
+      id: 1266238771976100278
+      identification: 
+        name: Email Approved
+        type: Send E-Mail
+
+      settings: 
+        from: '&APP_EMAIL.'
+        to: '&V_EMAIL_TO_NOTIFY.'
+        subject: '&LAPTOP_TYPE. Laptop for &ENAME. Approved'
+        body-plain-text: |
+          Dear &ENAME.,
+          
+          Congratulations, your laptop request for &LAPTOP_TYPE. has been approved.
+          
+          Best Regards,
+            The backoffice team
+        send-immediately: true
+
+      additional-data: 
+        sql-query: |
+          select ename,
+                 case :P_LAPTOP_TYPE when 'MAC' then 'MacBook Pro'
+                                     when 'WIN' then 'Lenovo T490'
+                 end as laptop_type
+          from eba_demo_appr_emp
+          where empno = :P_EMPNO
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 90
+
+      advanced: 
+        static-id: EmailApproved
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1266238868587100279
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Email Approved # 1266238771976100278
+          to: Procure Laptop # 37605689013975334
+
+    - # ====== Activity: Email Delivered ===========================
+      id: 1535261111283633056
+      identification: 
+        name: Email Delivered
+        type: Send E-Mail
+
+      settings: 
+        from: '&APP_EMAIL.'
+        to: '&V_EMAIL_TO_NOTIFY.'
+        email-template: Laptop Delivered Notification # 41536661482570782
+        placeholder-values: '{"P_LAPTOP_TYPE":"&LAPTOP_TYPE.","P_ENAME":"&ENAME.","P_DELIVERED_FROM_STOCK":"&V_DELIVERED_FROM_STOCK."}'
+        send-immediately: true
+
+      additional-data: 
+        sql-query: |
+          select ename,
+                 case :P_LAPTOP_TYPE when 'MAC' then 'MacBook Pro'
+                                     when 'WIN' then 'Lenovo T490'
+                 end as laptop_type
+          from eba_demo_appr_emp
+          where empno = :P_EMPNO
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 130
+
+      advanced: 
+        static-id: EmailDelivered
+
+      connections: 
+      - # ====== Connection: Done ====================================
+        id: 1535261382939633059
+        identification: 
+          name: Done
+          type: Normal
+
+        activity: 
+          from: Email Delivered # 1535261111283633056
+          to: End # 1266238516930100276
+
+    - # ====== Activity: New =======================================
+      id: 1535262642528633071
+      identification: 
+        name: New
+        type: Wait
+
+      settings: 
+        timeout-type: Expression
+        expression: eba_demo_appr.rejection_delay_until_time
+        language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+
+      layout: 
+        sequence: 150
+
+      advanced: 
+        static-id: New_2
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1535262682844633072
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: New # 1535262642528633071
+          to: Notify Rejected? # 1545478702981617142
+
+    - # ====== Activity: Email Rejected ============================
+      id: 1535263050481633075
+      identification: 
+        name: Email Rejected
+        type: Send E-Mail
+
+      settings: 
+        from: '&APP_EMAIL.'
+        to: '&DEMO_NOTIFICATION_EMAIL.'
+        subject: '&LAPTOP_TYPE. Laptop for &ENAME. Rejected'
+        body-plain-text: |
+          Dear &ENAME.,
+          
+          Sorry, your laptop request for &LAPTOP_TYPE. was not approved.
+          
+          Best Regards,
+            The backoffice team
+        send-immediately: true
+
+      additional-data: 
+        sql-query: |
+          select ename,
+                 case :P_LAPTOP_TYPE when 'MAC' then 'MacBook Pro'
+                                     when 'WIN' then 'Lenovo T490'
+                 end as laptop_type
+          from eba_demo_appr_emp
+          where empno = :P_EMPNO
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 100
+
+      advanced: 
+        static-id: EmailRejected
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1535263206164633077
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Email Rejected # 1535263050481633075
+          to: End # 1266238516930100276
+
+    - # ====== Activity: Notify Approved? ==========================
+      id: 1535263372916633078
+      identification: 
+        name: Notify Approved?
+        type: Switch
+
+      switch: 
+        type: True False Check
+
+      condition: 
+        condition-type: Workflow Variable is NOT NULL
+        workflow-variable: V_EMAIL_TO_NOTIFY
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 160
+
+      advanced: 
+        static-id: NotifyApproved
+
+      connections: 
+      - # ====== Connection: Yes =====================================
+        id: 1535263695271633082
+        identification: 
+          name: Yes
+
+        condition: 
+          when: True
+
+        activity: 
+          to: Email Approved # 1266238771976100278
+
+      - # ====== Connection: No ======================================
+        id: 1535263856600633083
+        identification: 
+          name: No
+
+        condition: 
+          when: False
+
+        activity: 
+          to: Procure Laptop # 37605689013975334
+
+    - # ====== Activity: Notify Delivered? =========================
+      id: 1535263920157633084
+      identification: 
+        name: Notify Delivered?
+        type: Switch
+
+      switch: 
+        type: True False Check
+
+      condition: 
+        condition-type: Workflow Variable is NOT NULL
+        workflow-variable: V_EMAIL_TO_NOTIFY
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 170
+
+      advanced: 
+        static-id: NotifyDelivered
+
+      connections: 
+      - # ====== Connection: Yes =====================================
+        id: 1545478506217617140
+        identification: 
+          name: Yes
+
+        condition: 
+          when: True
+
+        activity: 
+          to: Email Delivered # 1535261111283633056
+
+      - # ====== Connection: No ======================================
+        id: 1545478647114617141
+        identification: 
+          name: No
+
+        condition: 
+          when: False
+
+        activity: 
+          to: End # 1266238516930100276
+
+    - # ====== Activity: Notify Rejected? ==========================
+      id: 1545478702981617142
+      identification: 
+        name: Notify Rejected?
+        type: Switch
+
+      switch: 
+        type: True False Check
+
+      condition: 
+        condition-type: Workflow Variable is NOT NULL
+        workflow-variable: V_EMAIL_TO_NOTIFY
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 180
+
+      advanced: 
+        static-id: New_1
+
+      connections: 
+      - # ====== Connection: Yes =====================================
+        id: 1545478786878617143
+        identification: 
+          name: Yes
+
+        condition: 
+          when: True
+
+        activity: 
+          to: Email Rejected # 1535263050481633075
+
+      - # ====== Connection: No ======================================
+        id: 1545478937502617144
+        identification: 
+          name: No
+
+        condition: 
+          when: False
+
+        activity: 
+          to: End # 1266238516930100276
+
+    variables: 
+    - # ====== Variable: Delivered from Stock ======================
+      id: 37606834372975346
+      identification: 
+        static-id: V_DELIVERED_FROM_STOCK
+
+      label: 
+        label: Delivered from Stock
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: Laptop Approver ===========================
+      id: 1266237189225100263
+      identification: 
+        static-id: V_APPROVER
+
+      label: 
+        label: Laptop Approver
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: Laptop Approval Outcome ===================
+      id: 1266237281538100264
+      identification: 
+        static-id: V_TASK_OUTCOME
+
+      label: 
+        label: Laptop Approval Outcome
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: Approval Task ID ==========================
+      id: 1535260394414633049
+      identification: 
+        static-id: V_APPROVAL_TASK_ID
+
+      label: 
+        label: Approval Task ID
+
+      parameter: 
+        data-type: NUMBER
+
+      value: 
+        type: Null
+
+    - # ====== Variable: Email to Notify ===========================
+      id: 1535263596014633081
+      identification: 
+        static-id: V_EMAIL_TO_NOTIFY
+
+      label: 
+        label: Email to Notify
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Expression
+        language: PL/SQL
+        pl/sql-expression: apex_app_setting.get_value('DEMO_NOTIFICATION_EMAIL')
+
+    participants: 
+    - # ====== Participant: Workflow Administrator =================
+      id: 1531652127313030737
+      identification: 
+        name: Administrator
+        type: Workflow Administrator
+
+      value: 
+        type: Static Value
+        static-value: PAT
+
+    - # ====== Participant: Workflow Owner =========================
+      id: 1531652203597030738
+      identification: 
+        name: Owner
+        type: Workflow Owner
+
+      value: 
+        type: Expression
+        language: PL/SQL
+        pl/sql-expression: eba_demo_appr.userlist_for_department('OPERATIONS')
+
+- # ====== Workflow: Employee Appraisal ========================
+  id: 1515035545873611578
+  identification: 
+    name: Employee Appraisal
+    title: Appraisal for &SUBJECT.
+
+  advanced: 
+    static-id: EMPLOYEE_APPRAISAL
+
+  parameters: 
+  - # ====== Parameter: Subject ==================================
+    id: 1535260195849633047
+    identification: 
+      static-id: SUBJECT
+
+    label: 
+      label: Subject
+
+    parameter: 
+      data-type: VARCHAR2
+      direction: In
+
+    value: 
+      required: true
+
+  versions: 
+  - # ====== Version: 1.0 ========================================
+    id: 1515035670599611579
+    identification: 
+      workflow-version: 1.0
+
+    settings: 
+      state: In Development
+
+    additional-data: 
+      type: SQL Query
+      sql-query: |
+        select a.id, a.appraisal_date
+        from eba_demo_appr_appraisals a
+        left join eba_demo_appr_emp e
+               on e.empno = a.empno
+        where a.id = :APEX$WORKFLOW_DETAIL_PK
+
+    comments: 
+      comments: This workflow orchestrates the employee evaluation process beginning with an employee self evaluation. It's detail primary key is the ID column in the EBA_DEMO_APPR_APPRAISALS system of record table. This is configured in the "Additional Data" section above.
+
+    activities: 
+    - # ====== Activity: Start =====================================
+      id: 1515035765569611580
+      identification: 
+        name: Start
+        type: Workflow Start
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 10
+
+      advanced: 
+        static-id: New
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1515036055258611583
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Start # 1515035765569611580
+          to: Appraisal Originated # 1528609397408769857
+
+    - # ====== Activity: Self-Evaluation ===========================
+      id: 1515035789713611581
+      identification: 
+        name: Self-Evaluation
+        type: Human Task - Create
+
+      settings: 
+        definition: Appraisal - Employee Input # 1245818160760937795
+        initiator-can-complete: No
+        details-primary-key--item: APEX$WORKFLOW_DETAIL_PK
+
+      deadline: 
+        due-on-type: Expression
+        language: PL/SQL
+        pl/sql-expression: ':APPRAISAL_DATE'
+
+      layout: 
+        sequence: 30
+
+      advanced: 
+        static-id: SelfEvaluation
+
+      comments: 
+        comments: Start with the employee's completing a self-evaluation.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1528607630518769839
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Self-Evaluation # 1515035789713611581
+          to: Appraisal Submitted # 1528608176501769844
+
+    - # ====== Activity: End =======================================
+      id: 1515035939343611582
+      identification: 
+        name: End
+        type: Workflow End
+
+      settings: 
+        end-state: Completed
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 100
+
+      advanced: 
+        static-id: New_2
+
+    - # ====== Activity: Manager Appraisal =========================
+      id: 1528607466190769837
+      identification: 
+        name: Manager Appraisal
+        type: Human Task - Create
+
+      settings: 
+        definition: Appraisal - Manager Input # 1528632773841837456
+        initiator-can-complete: No
+        details-primary-key--item: APEX$WORKFLOW_DETAIL_PK
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 50
+
+      advanced: 
+        static-id: ManagerAppraisal
+
+      comments: 
+        comments: Next, have the employee's manager add their evaluation.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1528607702606769840
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Manager Appraisal # 1528607466190769837
+          to: Manager Submitted # 1528608488805769848
+
+    - # ====== Activity: VP Review =================================
+      id: 1528607495883769838
+      identification: 
+        name: VP Review
+        type: Human Task - Create
+
+      settings: 
+        definition: Appraisal - VP Review # 1528631282566833435
+        initiator-can-complete: No
+        details-primary-key--item: APEX$WORKFLOW_DETAIL_PK
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 70
+
+      advanced: 
+        static-id: VPReview
+
+      comments: 
+        comments: Finally, have the VP review the evaluation.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1515036155958611584
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: VP Review # 1528607495883769838
+          to: VP Reviewed # 1528608933576769852
+
+      parameters: 
+      - # ====== Parameter: P Vp Username ============================
+        id: 1532785157252008474
+        identification: 
+          name: P Vp Username # 1532784736678008471
+
+        value: 
+          type: Item
+          item: VP_USERNAME
+
+    - # ====== Activity: Appraisal Submitted =======================
+      id: 1528608176501769844
+      identification: 
+        name: Appraisal Submitted
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_APPRAISAL_STATUS
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 40
+
+      advanced: 
+        static-id: AppraisalSubmitted
+
+      comments: 
+        comments: Mark the appraisal as SUBMITTED by the employee.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1528608266304769845
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Appraisal Submitted # 1528608176501769844
+          to: Manager Appraisal # 1528607466190769837
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1528608374098769846
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1528608478854769847
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Static Value
+          static-value: SUBMITTED
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: Manager Submitted =========================
+      id: 1528608488805769848
+      identification: 
+        name: Manager Submitted
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_APPRAISAL_STATUS
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 60
+
+      advanced: 
+        static-id: ManagerSubmitted
+
+      comments: 
+        comments: Mark the appraisal as MGR_SUBMITTED by the manager.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1531653069750030746
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Manager Submitted # 1528608488805769848
+          to: Determine VP # 1531652660906030742
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1528608746219769850
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1528608817121769851
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Static Value
+          static-value: MGR_SUBMITTED
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: VP Reviewed ===============================
+      id: 1528608933576769852
+      identification: 
+        name: VP Reviewed
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_APPRAISAL_STATUS
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 80
+
+      advanced: 
+        static-id: VPReviewed
+
+      comments: 
+        comments: Mark the appraisal as VP_REVIEWED by the VP.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1531653696108030753
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: VP Reviewed # 1528608933576769852
+          to: Appraisal Completed # 1531653353360030749
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1528608997139769853
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1528609178615769854
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Static Value
+          static-value: VP_REVIEWED
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: Appraisal Originated ======================
+      id: 1528609397408769857
+      identification: 
+        name: Appraisal Originated
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_APPRAISAL_STATUS
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 20
+
+      advanced: 
+        static-id: AppraisalOriginated
+
+      comments: 
+        comments: Mark the appraisal as ORIGINATED.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1528609849465769861
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Appraisal Originated # 1528609397408769857
+          to: Self-Evaluation # 1515035789713611581
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1528609650712769859
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1528609685967769860
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Static Value
+          static-value: ORIGINATED
+
+        advanced: 
+          display-sequence: 20
+
+    - # ====== Activity: Determine VP ==============================
+      id: 1531652660906030742
+      identification: 
+        name: Determine VP
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: DETERMINE_APPRAISAL_VP
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 110
+
+      advanced: 
+        static-id: DetermineVP
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1528609271207769855
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Determine VP # 1531652660906030742
+          to: VP Required? # 1531653091277030747
+
+      parameters: 
+      - # ====== Parameter: p_appraisal_id ===========================
+        id: 1531652916857030745
+        identification: 
+          name: p_appraisal_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 20
+
+      - # ====== Parameter: p_vp_username ============================
+        id: 1565185257520342680
+        identification: 
+          name: p_vp_username
+
+        parameter: 
+          direction: In/Out
+          data-type: VARCHAR2
+          ignore-output: false
+
+        value: 
+          item: VP_USERNAME
+
+        advanced: 
+          display-sequence: 30
+
+    - # ====== Activity: VP Required? ==============================
+      id: 1531653091277030747
+      identification: 
+        name: VP Required?
+        type: Switch
+
+      switch: 
+        type: True False Check
+
+      condition: 
+        condition-type: Workflow Variable != Value
+        workflow-variable: VP_USERNAME
+        value: NONE
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 120
+
+      advanced: 
+        static-id: New_3
+
+      connections: 
+      - # ====== Connection: No VP Available =========================
+        id: 1531653838690030754
+        identification: 
+          name: No VP Available
+
+        condition: 
+          when: False
+
+        activity: 
+          to: Appraisal Completed # 1531653353360030749
+
+      - # ====== Connection: Yes =====================================
+        id: 1531653975185030755
+        identification: 
+          name: Yes
+
+        condition: 
+          when: True
+
+        activity: 
+          to: VP Review # 1528607495883769838
+
+    - # ====== Activity: Appraisal Completed =======================
+      id: 1531653353360030749
+      identification: 
+        name: Appraisal Completed
+        type: Invoke API
+
+      settings: 
+        type: PL/SQL Package
+        owner: PARSING SCHEMA
+        package: EBA_DEMO_APPR
+        procedure-or-function: UPDATE_APPRAISAL_STATUS
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 90
+
+      advanced: 
+        static-id: VPReviewed_1
+
+      comments: 
+        comments: Mark the appraisal as VP_REVIEWED by the VP.
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 1531653413268030750
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Appraisal Completed # 1531653353360030749
+          to: End # 1515035939343611582
+
+      parameters: 
+      - # ====== Parameter: p_id =====================================
+        id: 1531653530680030751
+        identification: 
+          name: p_id
+
+        parameter: 
+          direction: In
+          data-type: NUMBER
+          has-default: false
+
+        value: 
+          type: Item
+          item: APEX$WORKFLOW_DETAIL_PK
+
+        advanced: 
+          display-sequence: 10
+
+      - # ====== Parameter: p_status =================================
+        id: 1531653648838030752
+        identification: 
+          name: p_status
+
+        parameter: 
+          direction: In
+          data-type: VARCHAR2
+          has-default: false
+
+        value: 
+          type: Static Value
+          static-value: COMPLETED
+
+        advanced: 
+          display-sequence: 20
+
+    variables: 
+    - # ====== Variable: VP Username ===============================
+      id: 1531653208929030748
+      identification: 
+        static-id: VP_USERNAME
+
+      label: 
+        label: VP Username
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    participants: 
+    - # ====== Participant: Workflow Owner =========================
+      id: 1531652329213030739
+      identification: 
+        name: New
+        type: Workflow Owner
+
+      value: 
+        type: Expression
+        language: PL/SQL
+        pl/sql-expression: eba_demo_appr.userlist_for_department('OPERATIONS')
+
+    - # ====== Participant: Workflow Administrator =================
+      id: 1531652403636030740
+      identification: 
+        name: New_1
+        type: Workflow Administrator
+
+      value: 
+        type: Static Value
+        static-value: PAT
+

@@ -1,0 +1,13 @@
+---
+- # ====== REST Data Source Server: catfact-ninja ==============
+  id: 16773964706617306
+  identification: 
+    name: catfact-ninja
+
+  endpoint-url: 
+    url: 'https://catfact.ninja/'
+
+  advanced: 
+    static-id: catfact_ninja
+    prompt-on-install: false
+

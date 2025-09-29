@@ -1,0 +1,1559 @@
+---
+# ====== Page: test_search ===================================
+id: 7
+identification: 
+  name: test_search
+  alias: TEST-SEARCH
+  title: test_search
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 18451724890430045
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 18084022872281603
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Search Results ==============================
+  id: 18452485732430049
+  identification: 
+    name: Search Results
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: MASTER_VIEW
+    include-rowid-column: false
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--hideHeader
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 50
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlight
+      - t-Report--inline
+      - t-Report--hideNoPagination
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 100000
+
+    messages: 
+      when-no-data-found: no data found
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: DIRECTORY_ID ================================
+    id: 18456228454430236
+    identification: 
+      column-name: DIRECTORY_ID
+      type: Plain Text
+
+    heading: 
+      heading: Directory Id
+      alignment: end
+
+    layout: 
+      sequence: 1
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DIRECTORY ===================================
+    id: 18456667000430237
+    identification: 
+      column-name: DIRECTORY
+      type: Plain Text
+
+    heading: 
+      heading: Directory
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FACILITY_DISP ===============================
+    id: 18457011520430238
+    identification: 
+      column-name: FACILITY_DISP
+      type: Plain Text
+
+    heading: 
+      heading: Facility Disp
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FACILITY_DESC ===============================
+    id: 18457435689430238
+    identification: 
+      column-name: FACILITY_DESC
+      type: Plain Text
+
+    heading: 
+      heading: Facility Desc
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FACILITY_ID =================================
+    id: 18457881678430239
+    identification: 
+      column-name: FACILITY_ID
+      type: Plain Text
+
+    heading: 
+      heading: Facility Id
+      alignment: end
+
+    layout: 
+      sequence: 5
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: RCO_DIRECTORY_ID ============================
+    id: 18458279365430239
+    identification: 
+      column-name: RCO_DIRECTORY_ID
+      type: Plain Text
+
+    heading: 
+      heading: Rco Directory Id
+      alignment: end
+
+    layout: 
+      sequence: 6
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ENCOUNTER_ORG ===============================
+    id: 18458664186430240
+    identification: 
+      column-name: ENCOUNTER_ORG
+      type: Plain Text
+
+    heading: 
+      heading: Encounter Org
+      alignment: start
+
+    layout: 
+      sequence: 7
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: AFF_FAC_POOL_ALIAS ==========================
+    id: 18459027614430240
+    identification: 
+      column-name: AFF_FAC_POOL_ALIAS
+      type: Plain Text
+
+    heading: 
+      heading: Aff Fac Pool Alias
+      alignment: start
+
+    layout: 
+      sequence: 8
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CLUSTER_ ====================================
+    id: 18459435343430241
+    identification: 
+      column-name: CLUSTER_
+      type: Plain Text
+
+    heading: 
+      heading: 'Cluster '
+      alignment: start
+
+    layout: 
+      sequence: 9
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: BLDG_DISP ===================================
+    id: 18459896569430241
+    identification: 
+      column-name: BLDG_DISP
+      type: Plain Text
+
+    heading: 
+      heading: Bldg Disp
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: BLDG_DESC ===================================
+    id: 18460278242430242
+    identification: 
+      column-name: BLDG_DESC
+      type: Hidden
+
+    layout: 
+      sequence: 11
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: BUILDING_ID =================================
+    id: 18460673950430242
+    identification: 
+      column-name: BUILDING_ID
+      type: Hidden
+
+    layout: 
+      sequence: 12
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FACILITY_DISP_ID ============================
+    id: 18461077910430243
+    identification: 
+      column-name: FACILITY_DISP_ID
+      type: Hidden
+
+    layout: 
+      sequence: 13
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NURSE_UNIT_DISP =============================
+    id: 18461427330430243
+    identification: 
+      column-name: NURSE_UNIT_DISP
+      type: Hidden
+
+    layout: 
+      sequence: 14
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NURSE_UNIT_DESC =============================
+    id: 18461871262430244
+    identification: 
+      column-name: NURSE_UNIT_DESC
+      type: Hidden
+
+    layout: 
+      sequence: 15
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NU_OUTBOUND_ALIAS ===========================
+    id: 18462291269430244
+    identification: 
+      column-name: NU_OUTBOUND_ALIAS
+      type: Hidden
+
+    layout: 
+      sequence: 16
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: NURSE_ID ====================================
+    id: 18462690761430245
+    identification: 
+      column-name: NURSE_ID
+      type: Hidden
+
+    layout: 
+      sequence: 17
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: BLDG_DISP_ID ================================
+    id: 18463072839430245
+    identification: 
+      column-name: BLDG_DISP_ID
+      type: Hidden
+
+    layout: 
+      sequence: 18
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PATIENT_TYPE ================================
+    id: 18463448594430246
+    identification: 
+      column-name: PATIENT_TYPE
+      type: Hidden
+
+    layout: 
+      sequence: 19
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PATIENT_TYPE_ALIAS ==========================
+    id: 18463880838430246
+    identification: 
+      column-name: PATIENT_TYPE_ALIAS
+      type: Hidden
+
+    layout: 
+      sequence: 20
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MEDICAL_SERVICE =============================
+    id: 18464227738430247
+    identification: 
+      column-name: MEDICAL_SERVICE
+      type: Hidden
+
+    layout: 
+      sequence: 21
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: OP_PREFIX ===================================
+    id: 18464679254430247
+    identification: 
+      column-name: OP_PREFIX
+      type: Hidden
+
+    layout: 
+      sequence: 22
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: AFF_SRVC_POOL_ALIAS =========================
+    id: 18465012605430248
+    identification: 
+      column-name: AFF_SRVC_POOL_ALIAS
+      type: Hidden
+
+    layout: 
+      sequence: 23
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MED_SVC_ALIAS ===============================
+    id: 18465498093430249
+    identification: 
+      column-name: MED_SVC_ALIAS
+      type: Hidden
+
+    layout: 
+      sequence: 24
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PATIENT_SERVICE_CODE ========================
+    id: 18465826815430249
+    identification: 
+      column-name: PATIENT_SERVICE_CODE
+      type: Hidden
+
+    layout: 
+      sequence: 25
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PATIENT_SERVICE_DESCRIPTION =================
+    id: 18466268247430250
+    identification: 
+      column-name: PATIENT_SERVICE_DESCRIPTION
+      type: Hidden
+
+    layout: 
+      sequence: 26
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: STATUS ======================================
+    id: 18466629853430250
+    identification: 
+      column-name: STATUS
+      type: Hidden
+
+    layout: 
+      sequence: 27
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ADDED_DT ====================================
+    id: 18467026405430251
+    identification: 
+      column-name: ADDED_DT
+      type: Hidden
+
+    layout: 
+      sequence: 28
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: INACTIVE_DT =================================
+    id: 18467404533430251
+    identification: 
+      column-name: INACTIVE_DT
+      type: Hidden
+
+    layout: 
+      sequence: 29
+
+    sorting: 
+      default-sequence: 1
+      direction: Ascending
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Search ======================================
+  id: 18452551318430049
+  identification: 
+    name: Search
+    type: Smart Filters
+
+  source: 
+    filtered-region: Search Results # 18452485732430049
+
+  layout: 
+    sequence: 10
+    parent-region: Breadcrumb # 18451724890430045
+    slot: SMART_FILTERS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      more-filters-suggestion-chip: false
+      compact-numbers-threshold: 10000
+      show-total-row-count: No
+
+  facets: 
+  - # ====== Facet: P7_SEARCH ====================================
+    id: 18453074693430052
+    identification: 
+      name: P7_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      input-field: Top of Faceted Search Region
+
+    layout: 
+      sequence: 10
+
+    source: 
+      database-column(s): DIRECTORY,FACILITY_DISP,FACILITY_DESC,ENCOUNTER_ORG,AFF_FAC_POOL_ALIAS,CLUSTER_,BLDG_DISP,BLDG_DESC,NURSE_UNIT_DISP,NURSE_UNIT_DESC,NU_OUTBOUND_ALIAS,PATIENT_TYPE,PATIENT_TYPE_ALIAS,MEDICAL_SERVICE,OP_PREFIX,AFF_SRVC_POOL_ALIAS,MED_SVC_ALIAS,PATIENT_SERVICE_CODE,PATIENT_SERVICE_DESCRIPTION,STATUS,ADDED_DT,INACTIVE_DT
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Facet: P7_DIRECTORY =================================
+    id: 18453454381430053
+    identification: 
+      name: P7_DIRECTORY
+      type: Checkbox Group
+
+    label: 
+      label: Directory
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 20
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: DIRECTORY
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_FACILITY_DISP =============================
+    id: 18453852182430054
+    identification: 
+      name: P7_FACILITY_DISP
+      type: Checkbox Group
+
+    label: 
+      label: Facility Disp
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 30
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: FACILITY_DISP
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_FACILITY_DESC =============================
+    id: 18454256941430054
+    identification: 
+      name: P7_FACILITY_DESC
+      type: Checkbox Group
+
+    label: 
+      label: Facility Desc
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 40
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: FACILITY_DESC
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_ENCOUNTER_ORG =============================
+    id: 18454616053430055
+    identification: 
+      name: P7_ENCOUNTER_ORG
+      type: Checkbox Group
+
+    label: 
+      label: Encounter Org
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 50
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: ENCOUNTER_ORG
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_AFF_FAC_POOL_ALIAS ========================
+    id: 18455052489430056
+    identification: 
+      name: P7_AFF_FAC_POOL_ALIAS
+      type: Checkbox Group
+
+    label: 
+      label: Aff Fac Pool Alias
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 60
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: AFF_FAC_POOL_ALIAS
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_ADDED_DT ==================================
+    id: 18455428111430056
+    identification: 
+      name: P7_ADDED_DT
+      type: Checkbox Group
+
+    label: 
+      label: Added Dt
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 70
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: ADDED_DT
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P7_INACTIVE_DT ===============================
+    id: 18455811246430057
+    identification: 
+      name: P7_INACTIVE_DT
+      type: Checkbox Group
+
+    label: 
+      label: Inactive Dt
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 80
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: INACTIVE_DT
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  filters: 
+  - # ====== Filter: P7_SEARCH ===================================
+    id: 18453074693430052
+    identification: 
+      name: P7_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      collapsed-search-field: false
+
+    layout: 
+      sequence: 10
+
+    source: 
+      database-column(s): DIRECTORY,FACILITY_DISP,FACILITY_DESC,ENCOUNTER_ORG,AFF_FAC_POOL_ALIAS,CLUSTER_,BLDG_DISP,BLDG_DESC,NURSE_UNIT_DISP,NURSE_UNIT_DESC,NU_OUTBOUND_ALIAS,PATIENT_TYPE,PATIENT_TYPE_ALIAS,MEDICAL_SERVICE,OP_PREFIX,AFF_SRVC_POOL_ALIAS,MED_SVC_ALIAS,PATIENT_SERVICE_CODE,PATIENT_SERVICE_DESCRIPTION,STATUS,ADDED_DT,INACTIVE_DT
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Filter: P7_DIRECTORY ================================
+    id: 18453454381430053
+    identification: 
+      name: P7_DIRECTORY
+      type: Checkbox Group
+
+    label: 
+      label: Directory
+
+    layout: 
+      sequence: 20
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: DIRECTORY
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_FACILITY_DISP ============================
+    id: 18453852182430054
+    identification: 
+      name: P7_FACILITY_DISP
+      type: Checkbox Group
+
+    label: 
+      label: Facility Disp
+
+    layout: 
+      sequence: 30
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: FACILITY_DISP
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_FACILITY_DESC ============================
+    id: 18454256941430054
+    identification: 
+      name: P7_FACILITY_DESC
+      type: Checkbox Group
+
+    label: 
+      label: Facility Desc
+
+    layout: 
+      sequence: 40
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: FACILITY_DESC
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_ENCOUNTER_ORG ============================
+    id: 18454616053430055
+    identification: 
+      name: P7_ENCOUNTER_ORG
+      type: Checkbox Group
+
+    label: 
+      label: Encounter Org
+
+    layout: 
+      sequence: 50
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: ENCOUNTER_ORG
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_AFF_FAC_POOL_ALIAS =======================
+    id: 18455052489430056
+    identification: 
+      name: P7_AFF_FAC_POOL_ALIAS
+      type: Checkbox Group
+
+    label: 
+      label: Aff Fac Pool Alias
+
+    layout: 
+      sequence: 60
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: AFF_FAC_POOL_ALIAS
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_ADDED_DT =================================
+    id: 18455428111430056
+    identification: 
+      name: P7_ADDED_DT
+      type: Checkbox Group
+
+    label: 
+      label: Added Dt
+
+    layout: 
+      sequence: 70
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: ADDED_DT
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P7_INACTIVE_DT ==============================
+    id: 18455811246430057
+    identification: 
+      name: P7_INACTIVE_DT
+      type: Checkbox Group
+
+    label: 
+      label: Inactive Dt
+
+    layout: 
+      sequence: 80
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: INACTIVE_DT
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+

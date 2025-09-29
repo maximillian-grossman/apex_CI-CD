@@ -1,0 +1,353 @@
+---
+- # ====== List: LLM Conversations =============================
+  id: 106036317202053552
+  identification: 
+    name: LLM Conversations
+
+  subscription: 
+    version-number: 41807807649124
+
+  source: 
+    type: SQL Query
+    sql-query: |
+      SELECT 1, 
+          summary,
+          APEX_PAGE.GET_URL(p_page => 1, p_items => 'P1_CONV_ID', P_values => id), 
+          case when :P1_CONV_ID = id then 'Y'else 'N' end , 
+          'fa fa-comment-o' as image from OCW23_conversations 
+      where 
+          username = :app_user 
+              and summary is not null order by STARTED_ON desc;
+
+- # ====== List: User Settings =================================
+  id: 106838771847280607
+  identification: 
+    name: User Settings
+
+  subscription: 
+    version-number: 41807807649159
+
+  source: 
+    type: Static Values
+
+  configuration: 
+    build-option: 'Feature: User Settings' # 106835225054280587
+
+  entries: 
+  - # ====== Entry: Push Notifications ===========================
+    id: 106839224415280609
+    label: 
+      label: Push Notifications
+
+    icon: 
+      image/icon-css-classes: fa-bell-o
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20010:&SESSION.::&DEBUG.::::'
+        page: 20010 # Push Notifications
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Configure whether you want to receive push notifications on this device.
+      2.: <span class="a-pwaPush--state"></span>
+
+    configuration: 
+      build-option: 'Feature: Push Notifications' # 106834925540280582
+
+  - # ====== Entry: AI Settings ==================================
+    id: 106842429672293463
+    label: 
+      label: AI Settings
+
+    icon: 
+      image/icon-css-classes: fa-bell-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20020:&SESSION.::&DEBUG.::::'
+        page: 20020 # AI Settings
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Configure whether you want to receive push notifications on this device.
+
+- # ====== List: Navigation Menu ===============================
+  id: 49856872011664140029
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 41807807649362
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: SQL ==========================================
+    id: 103502166468607585
+    label: 
+      label: SQL
+
+    icon: 
+      image/icon-css-classes: fa-file-o
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 3
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&APP_SESSION.::&DEBUG.:::'
+        page: 3 # Explain
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 49857568296262140166
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar ================================
+  id: 49857557119592140156
+  identification: 
+    name: Navigation Bar
+
+  subscription: 
+    version-number: 41807807649430
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: New ==========================================
+    id: 101494182394745583
+    label: 
+      label: New
+
+    icon: 
+      image/icon-css-classes: fa-plus-square-o
+
+    layout: 
+      sequence: 5
+
+    is-current: 
+      type: Never
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::P1_CONV_ID::'
+        page: 1 # Home
+        values: 
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Clear ========================================
+    id: 104121910858135914
+    label: 
+      label: Clear
+
+    icon: 
+      image/icon-css-classes: fa-ban
+
+    layout: 
+      sequence: 1
+
+    is-current: 
+      type: Never
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:&APP_PAGE_ID.:&SESSION.:DELETE_CONVERSATION:&DEBUG.::::'
+        page: '&APP_PAGE_ID.'
+        request: DELETE_CONVERSATION
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: 'return :P1_CONV_ID IS NOT NULL;'
+
+  - # ====== Entry: Install App ==================================
+    id: 106067876834567624
+    label: 
+      label: Install App
+
+    icon: 
+      image/icon-css-classes: fa-cloud-download
+
+    layout: 
+      sequence: 8
+
+    is-current: 
+      type: Never
+
+    link: 
+      target: '#action$a-pwa-install'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: a-pwaInstall icon-only margin-left-sm
+
+  - # ====== Entry: Settings =====================================
+    id: 106841549514280623
+    label: 
+      label: Settings
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 1
+      parent-entry: '&APP_USER.' # 49857569803287140168
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20000:&APP_SESSION.::&DEBUG.:::'
+        page: 20000 # Settings
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    configuration: 
+      build-option: 'Feature: User Settings' # 106835225054280587
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 49857569803287140168
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username icon-only margin-left-sm
+
+  - # ====== Entry: --- ==========================================
+    id: 49857570114655140168
+    label: 
+      label: '---'
+
+    layout: 
+      sequence: 20
+      parent-entry: '&APP_USER.' # 49857569803287140168
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: separator
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Sign Out =====================================
+    id: 49857570592456140169
+    label: 
+      label: Sign Out
+
+    icon: 
+      image/icon-css-classes: fa-sign-out
+
+    layout: 
+      sequence: 30
+      parent-entry: '&APP_USER.' # 49857569803287140168
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+

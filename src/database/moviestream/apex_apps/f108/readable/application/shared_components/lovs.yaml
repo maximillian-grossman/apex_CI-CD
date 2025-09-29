@@ -1,0 +1,104 @@
+---
+- # ====== List of Values: EMP.ENAME ===========================
+  id: 8031723102138918
+  identification: 
+    name: EMP.ENAME
+
+  subscription: 
+    version-number: 44455247238636
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EMP
+
+  column-mapping: 
+    return: EMPNO
+    display: ENAME
+    default-sort: ENAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: DEPT.DNAME ==========================
+  id: 8033670258138923
+  identification: 
+    name: DEPT.DNAME
+
+  subscription: 
+    version-number: 44455247238691
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: DEPT
+
+  column-mapping: 
+    return: DEPTNO
+    display: DNAME
+    default-sort: DNAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: ACCESS_ROLES ========================
+  id: 8086521121139056
+  identification: 
+    name: ACCESS_ROLES
+
+  subscription: 
+    version-number: 44455247240663
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select role_name d, role_id r
+      from APEX_APPL_ACL_ROLES where application_id = :APP_ID 
+      order by 1
+
+  column-mapping: 
+    return: R
+    display: D
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: EMAIL_USERNAME_FORMAT ===============
+  id: 8094015557139069
+  identification: 
+    name: EMAIL_USERNAME_FORMAT
+
+  subscription: 
+    version-number: 44455247240870
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Email Addresses ==============================
+    id: 8094316028139070
+    entry: 
+      sequence: 1
+      display: Email Addresses
+      return: EMAIL
+
+- # ====== List of Values: TEST ================================
+  id: 9246501130483171
+  identification: 
+    name: TEST
+
+  subscription: 
+    version-number: 44489003572696
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select return, case display 
+      when 'fa-thumbs-up' then 'fa-thumbs-up'
+      end user_icon
+      from ICONS
+
+  column-mapping: 
+    return: RETURN
+    display: RETURN
+    default-sort: Use Order By from Query
+    icon: USER_ICON
+

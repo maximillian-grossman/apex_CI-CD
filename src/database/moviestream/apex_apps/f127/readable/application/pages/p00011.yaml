@@ -1,0 +1,1094 @@
+---
+# ====== Page: Interactive Report ============================
+id: 11
+identification: 
+  name: Interactive Report
+  alias: INTERACTIVE-REPORT2
+  title: Interactive Report
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+html-header: 
+  html-header: |
+    <style>
+    .apexir_WORKSHEET_ICONS {border: none !important; -moz-box-shadow: none !important; -box-shadow: none !important; -webkit-box-shadow: none !important;}
+    .apexir_WORKSHEET_ICONS td {border-bottom: none !important}
+    .apexir_WORKSHEET_ICONS td img {border: 4px solid #CCC; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
+    .apexir_WORKSHEET_CUSTOM td {
+    border-right: none !important;}
+    .reportDetail td.separator { border-top: 1px solid #DDD !important;}
+    </style>
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Drill Down Donut Chart Based on user's Intera
+  id: 628947232626145559
+  identification: 
+    name: Drill Down Donut Chart Based on user's Interactive Report Filters
+    type: Chart
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: dynamic_pie_chart
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 628947403579145560
+    chart: 
+      type: Donut
+
+    layout: 
+      height: 400
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: false
+
+    settings: 
+      pie-selection-effect: Highlight
+
+    value: 
+      pie-chart-other-threshold: 0
+      format: Decimal
+      decimal-places: 0
+      format-scaling: None
+
+    animation: 
+      on-display: None
+      on-data-change: None
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-value: true
+
+    legend: 
+      show: true
+      position: Automatic
+      hide-and-show-behavior: None
+
+    series: 
+    - # ====== Series: Tasks =======================================
+      id: 628947457113145561
+      identification: 
+        name: Tasks
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select c001 project, to_number(c002) cost
+          from apex_collections
+          where collection_name = 'IR_RESULT_FROM_PAGE_11'
+          order by 2 desc, 1
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: PROJECT
+        value: COST
+
+      label: 
+        show: false
+
+- # ====== Region: SQL Source ==================================
+  id: 628947784120145564
+  identification: 
+    name: SQL Source
+    type: Static Content
+
+  source: 
+    html-code: |
+      select c001 project, to_number(c002) cost
+      from apex_collections
+      where collection_name = 'IR_RESULT_FROM_PAGE_11'
+      order by 2 desc, 1
+
+  layout: 
+    sequence: 10
+    parent-region: Drill Down Donut Chart Based on user's Interactive Report Filters # 628947232626145559
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Interactive Report Query Based on Current Use
+  id: 1334392408374434741
+  identification: 
+    name: Interactive Report Query Based on Current User's Session
+    type: PL/SQL Dynamic Content [Legacy]
+
+  source: 
+    pl/sql-code: |
+      declare
+        l_report apex_ir.t_report;
+        l_region_id   number;
+      begin
+        select max(region_id) into l_region_id 
+        from APEX_APPLICATION_PAGE_REGIONS 
+        where application_id = :APP_ID and 
+              page_id = :APP_PAGE_ID and 
+              static_id = 'IR_EXAMPLE';
+      
+        l_report := apex_ir.get_report (
+          p_page_id        => :app_page_id,
+          p_region_id      => l_region_id);
+        
+        sys.htp.p('<p /><p />');
+        sys.htp.p('<pre>');  
+        sys.htp.p(apex_escape.html(l_report.sql_query));
+        sys.htp.p('</pre>');
+        sys.htp.p('<p /><p />');
+        for i in 1..l_report.binds.count
+        loop
+            if i = 1 then
+              sys.htp.p('<b>Binds Interactive Report Uses To Run</b><p />');
+            end if;
+            sys.htp.p(i||'. ');
+            sys.htp.p(l_report.binds(i).name||' = '||apex_escape.html(l_report.binds(i).value));
+            sys.htp.p('<br />');
+        end loop;
+        
+      
+      end;
+
+  layout: 
+    sequence: 30
+    parent-region: Interactive Report Source # 2181575680905164481
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: Breadcrumb ==================================
+  id: 1334392823227434742
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 6307140148628747096
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Interactive Report ==========================
+  id: 1334395603374465837
+  identification: 
+    name: Interactive Report
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select	
+             ID,
+             PROJECT,
+             TASK_NAME,
+             START_DATE,
+             END_DATE,
+             STATUS,
+             ASSIGNED_TO,
+             COST,
+             BUDGET,
+             budget - cost available_budget
+      from EBA_DEMO_IR_PROJECTS
+
+  layout: 
+    sequence: 10
+    parent-region: Interactive Report Source # 2181575680905164481
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--noBorders
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: IR_EXAMPLE
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1334395708633465837
+    link: 
+      link-column: Exclude Link Column
+
+    appearance: 
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 1000000
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: true
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 1334397004067466067
+      identification: 
+        name: Primary Report
+        alias: 6569088
+
+    columns: 
+    - # ====== Column: ID ==========================================
+      id: 1334396028232465840
+      identification: 
+        column-name: ID
+        type: Hidden
+
+      heading: 
+        heading: Selected Project
+
+      layout: 
+        sequence: 2
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: PROJECT =====================================
+      id: 1334396129116465841
+      identification: 
+        column-name: PROJECT
+        type: Plain Text
+
+      heading: 
+        heading: Project
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 3
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TASK_NAME ===================================
+      id: 1334396200576465841
+      identification: 
+        column-name: TASK_NAME
+        type: Plain Text
+
+      heading: 
+        heading: Task Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 4
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: START_DATE ==================================
+      id: 1334396324161465841
+      identification: 
+        column-name: START_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Start Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 5
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: END_DATE ====================================
+      id: 1334396424825465841
+      identification: 
+        column-name: END_DATE
+        type: Plain Text
+
+      heading: 
+        heading: End Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: STATUS ======================================
+      id: 1334396529337465841
+      identification: 
+        column-name: STATUS
+        type: Plain Text
+
+      heading: 
+        heading: Status
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 7
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ASSIGNED_TO =================================
+      id: 1334396608525465841
+      identification: 
+        column-name: ASSIGNED_TO
+        type: Plain Text
+
+      heading: 
+        heading: Assigned To
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 8
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COST ========================================
+      id: 1334396715032465841
+      identification: 
+        column-name: COST
+        type: Plain Text
+
+      heading: 
+        heading: Cost
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 9
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: BUDGET ======================================
+      id: 1334396814244465841
+      identification: 
+        column-name: BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Budget
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 10
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: AVAILABLE_BUDGET ============================
+      id: 1334396903527465841
+      identification: 
+        column-name: AVAILABLE_BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Available Budget
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 11
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+- # ====== Region: About this page =============================
+  id: 1334564312011067478
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This example shows how to call the <strong>APEX_IR</strong> runtime API to get the SQL statement that corresponds to the current user's interactive report filters and use this to dynamically update a chart.  Filter your report by status or any criteria, and the pie chart will update to match.  The SQL for the base interactive report and the user's current report filters and bind variables is exposed at the bottom of the page.  The "get chart data from IR result" dynamic action on this page provides an example of how to call the interactive report API's.</p>
+      
+      <p>As the interactive report is filtered or refreshed, a dynamic action is fired that creates a collection based on the current state of the interactive report.  It then refreshes the pie chart with the updated collection.  The result is having a pie chart that refreshes to match the filters of the report in real time.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Developer Supplied Query ====================
+  id: 1354471623913437174
+  identification: 
+    name: Developer Supplied Query
+    type: Source Display
+
+  layout: 
+    sequence: 20
+    parent-region: Interactive Report Source # 2181575680905164481
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      region-static-id: IR_EXAMPLE
+
+- # ====== Region: Interactive Report Source ===================
+  id: 2181575680905164481
+  identification: 
+    name: Interactive Report Source
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: RESET_REPORT ================================
+  id: 1334563709110057098
+  identification: 
+    button-name: RESET_REPORT
+    label: Reset
+
+  layout: 
+    sequence: 10
+    region: Interactive Report # 1334395603374465837
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-undo-alt
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:11,RIR::'
+      page: 11 # Interactive Report
+      clear-cache: 11,RIR
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: get chart data from IR result =======
+  id: 1334830904588972247
+  identification: 
+    name: get chart data from IR result
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: After Refresh
+    selection-type: Region
+    region: Interactive Report # 1334395603374465837
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 1334831202608972252
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        declare
+          l_report     apex_ir.t_report;
+          q            varchar2(32767);
+          l_name_list  apex_application_global.vc_arr2;
+          l_value_list apex_application_global.vc_arr2;
+          c_collection_name constant varchar2(100) := 'IR_RESULT_FROM_PAGE_11';
+          l_region_id  number;
+        begin
+          -- obtain region ID from interactive report page
+          select max(region_id) into l_region_id 
+          from APEX_APPLICATION_PAGE_REGIONS 
+          where application_id = :APP_ID and page_id = 11 and static_id = 'IR_EXAMPLE';
+        
+          -- get SQL query from APEX_IR API
+          l_report := apex_ir.get_report (
+            p_page_id        => 11,
+            p_region_id      => l_region_id);
+         
+          q := 'select s.project, sum(s.cost) from ('||l_report.sql_query||') s group by project';
+          
+          for i in 1..l_report.binds.count
+          loop
+              l_name_list(l_name_list.count+1) := l_report.binds(i).name;
+              l_value_list(l_value_list.count+1) := l_report.binds(i).value;
+          end loop;
+          
+          if apex_collection.collection_exists( p_collection_name => c_collection_name ) then
+              apex_collection.delete_collection( p_collection_name => c_collection_name );
+          end if;
+          
+          apex_collection.create_collection_from_query_b(
+                p_collection_name => c_collection_name,
+                p_query           => q,
+                p_names           => l_name_list,
+                p_values          => l_value_list,
+                p_max_row_count   => null);
+        end;
+
+    execution: 
+      sequence: 10
+      event: get chart data from IR result # 1334830904588972247
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Refresh =====================================
+    id: 1334831916941975469
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Drill Down Donut Chart Based on user's Interactive Report Filters # 628947232626145559
+
+    execution: 
+      sequence: 20
+      event: get chart data from IR result # 1334830904588972247
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+

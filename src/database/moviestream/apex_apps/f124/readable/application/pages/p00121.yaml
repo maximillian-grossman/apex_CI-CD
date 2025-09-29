@@ -1,0 +1,909 @@
+---
+# ====== Page: Airports Search ===============================
+id: 121
+identification: 
+  name: Airports Search
+  alias: AIRPORTS-SEARCH
+  title: '&APP_NAME. - Airports Search'
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+javascript: 
+  function-and-global-variable-declaration: |
+    function showFeature( pId ) {
+        apex.item( "P121_ID").setValue( pId );
+        apex.event.trigger( $("#airport-map-region"), "refresh_and_center" );
+    }
+
+css: 
+  inline: 'td[headers="LINK"] {text-align: center;}'
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: About This Page =============================
+  id: 1575187169299459874
+  identification: 
+    name: About This Page
+    type: Static Content
+
+  source: 
+    html-code: <p>This page shows how to combine an Interactive Report with a Map Region. First look up an airport in the interactive report. Clicking the <strong><span class="fa fa-map-marker"></span></strong> button shows this airport within the map region on the right.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Popup
+    template-options: 
+    - '#DEFAULT#'
+    - js-dialog-autoheight
+    - js-popup-noOverlay
+    - js-popup-callout
+    - js-dialog-size480x320
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: about_this_page
+    custom-attributes: 
+    - data-parent-element="#help_button"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Airports ====================================
+  id: 1575314742600558797
+  identification: 
+    name: Airports
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID,
+             IATA_CODE,
+             initcap(AIRPORT_NAME) airport_name,
+             initcap(CITY) as city,
+             STATE_NAME,
+             ELEVATION,
+             DIST_CITY_TO_AIRPORT,
+             LAND_AREA_COVERED,
+             ACTIVATION_DATE_dt as ACTIVATION_DATE,
+             nvl(COMMERCIAL_OPS,0) COMMERCIAL_OPS,
+             AIR_TAXI_OPS,
+             GEOMETRY
+        from EBA_SAMPLE_MAP_AIRPORTS
+       where airport_type = 'AIRPORT'
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1575314929606558799
+    link: 
+      link-column: Link to Custom Target
+      target: "javascript:showFeature('#ID#')"
+      link-icon: <span class="t-Icon fa fa-lg fa-map-marker-s u-danger-text" aria-hidden="true"></span>
+      link-attributes: 'style="text-align: center;"'
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: false
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 1575820846559095943
+      identification: 
+        name: Primary Report
+        alias: 21131
+
+    - # ====== Saved Report: Commercial Airports ===================
+      id: 1576355585161496783
+      identification: 
+        name: Commercial Airports
+        alias: 26478
+
+    - # ====== Saved Report: Large Airports ========================
+      id: 1576356585236499280
+      identification: 
+        name: Large Airports
+        alias: 26488
+
+    - # ====== Saved Report: All Airports ==========================
+      id: 1576357560904501815
+      identification: 
+        name: All Airports
+        alias: 26498
+
+    columns: 
+    - # ====== Column: AIRPORT_NAME ================================
+      id: 1568719467045744788
+      identification: 
+        column-name: AIRPORT_NAME
+        type: Plain Text
+
+      heading: 
+        heading: Airport Name
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 140
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ID ==========================================
+      id: 1575315089160558800
+      identification: 
+        column-name: ID
+        type: Hidden
+
+      heading: 
+        heading: Id
+
+      layout: 
+        sequence: 10
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: IATA_CODE ===================================
+      id: 1575315175624558801
+      identification: 
+        column-name: IATA_CODE
+        type: Plain Text
+
+      heading: 
+        heading: Code
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 20
+        column-alignment: center
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: CITY ========================================
+      id: 1575315234995558802
+      identification: 
+        column-name: CITY
+        type: Plain Text
+
+      heading: 
+        heading: City
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 30
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: STATE_NAME ==================================
+      id: 1575315309594558803
+      identification: 
+        column-name: STATE_NAME
+        type: Plain Text
+
+      heading: 
+        heading: State
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 40
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ELEVATION ===================================
+      id: 1575315665355558806
+      identification: 
+        column-name: ELEVATION
+        type: Hidden
+
+      heading: 
+        heading: Elevation
+
+      layout: 
+        sequence: 90
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: DIST_CITY_TO_AIRPORT ========================
+      id: 1575315730354558807
+      identification: 
+        column-name: DIST_CITY_TO_AIRPORT
+        type: Hidden
+
+      heading: 
+        heading: Dist City To Airport
+
+      layout: 
+        sequence: 100
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: LAND_AREA_COVERED ===========================
+      id: 1575315827073558808
+      identification: 
+        column-name: LAND_AREA_COVERED
+        type: Hidden
+
+      heading: 
+        heading: Land Area Covered
+
+      layout: 
+        sequence: 110
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: ACTIVATION_DATE =============================
+      id: 1575315931290558809
+      identification: 
+        column-name: ACTIVATION_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Opened
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 50
+        column-alignment: center
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: YYYY
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COMMERCIAL_OPS ==============================
+      id: 1575316009572558810
+      identification: 
+        column-name: COMMERCIAL_OPS
+        type: Plain Text
+
+      heading: 
+        heading: Operations
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 60
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: AIR_TAXI_OPS ================================
+      id: 1575316157775558811
+      identification: 
+        column-name: AIR_TAXI_OPS
+        type: Hidden
+
+      heading: 
+        heading: Air Taxi Ops
+
+      layout: 
+        sequence: 120
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: GEOMETRY ====================================
+      id: 1575316283190558812
+      identification: 
+        column-name: GEOMETRY
+        type: Hidden
+
+      heading: 
+        heading: Geometry
+
+      layout: 
+        sequence: 130
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    printing: 
+      output: 
+        layout: Default Report Layout
+        view-file-as: Attachment
+
+      page: 
+        size: Letter
+        orientation: Landscape
+        units: Inches
+        width: 11
+        height: 8.5
+        border-width: 0.5
+        border-color: '#666666'
+
+      page-header: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+        page-header-text: New
+
+      column-headings: 
+        font: Helvetica
+        font-weight: Bold
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#EEEEEE'
+
+      columns: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#FFFFFF'
+
+      page-footer: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+
+- # ====== Region: Map =========================================
+  id: 1575316331077558813
+  identification: 
+    name: Map
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: airport-map-region
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1575316420125558814
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Scale Bar
+      - Infinite Map
+      - Rectangle Zoom
+
+    initial-position-and-zoom: 
+      type: Based on Spatial Results
+
+    legend: 
+      show: true
+      position: End
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: Airport ======================================
+      id: 1575316530522558815
+      identification: 
+        name: Airport
+        layer-type: Points
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select
+              ID,
+              IATA_CODE,
+              AIRPORT_TYPE,
+              AIRPORT_NAME,
+              CITY,
+              STATE_NAME,
+              to_char(ACTIVATION_DATE_DT,'fmDDfm-MON-YYYY') as ACTIVATION_DATE,
+              ELEVATION,
+              DIST_CITY_TO_AIRPORT,
+              LAND_AREA_COVERED,
+              COMMERCIAL_OPS,
+              to_char(COMMERCIAL_OPS,'999G999G999G999') as com_ops_fmtd,
+              AIR_TAXI_OPS,
+              to_char(AIR_TAXI_OPS,'999G999G999G999') as air_ops_fmtd,
+              GEOMETRY
+          from 
+              eba_sample_map_airports
+          where
+              ID = :P121_ID
+        page-items-to-submit: 
+        - P121_ID
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: SDO_GEOMETRY
+        geometry-column: GEOMETRY
+        primary-key-column: ID
+
+      point-objects: 
+        style: SVG
+        shape: Default
+        shape-scale: 2
+
+      appearance: 
+        fill-color: '#ff0000'
+        fill-opacity: 0.8
+        stroke-color: '#ffffff'
+
+      point-clustering: 
+        enable: false
+
+      tooltip: 
+        advanced-formatting: false
+
+      info-window: 
+        advanced-formatting: true
+        html-expression: |
+          <h3>&AIRPORT_NAME. (&IATA_CODE.)</h3>
+          <p><strong>&CITY., &STATE_NAME.</strong><br>
+          {if ACTIVATION_DATE/}
+          Activation Date: &ACTIVATION_DATE.<br>
+          {endif/}
+          {if COMMERCIAL_OPS/}
+          Commercial Operations: &COM_OPS_FMTD.<br>
+          {endif/}
+          {if AIR_TAXI_OPS/}
+          Taxi Operations: &AIR_OPS_FMTD.<br>
+          {endif/}
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+page-items: 
+- # ====== Page Item: P121_ID ==================================
+  id: 1575316633468558816
+  identification: 
+    name: P121_ID
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 10
+    region: Map # 1575316331077558813
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Map Refresh =========================
+  id: 1575316727451558817
+  identification: 
+    name: Map Refresh
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Custom
+    custom-event: refresh_and_center
+    selection-type: jQuery Selector
+    jquery-selector: '#airport-map-region'
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 1575316801119558818
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Map # 1575316331077558813
+
+    execution: 
+      sequence: 20
+      event: Map Refresh # 1575316727451558817
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Show Feature ========================
+  id: 1575316931613558819
+  identification: 
+    name: Show Feature
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: After Refresh
+    selection-type: Region
+    region: Map # 1575316331077558813
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 1575316996609558820
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        var lMapRegion   = apex.region("airport-map-region"),
+            // important: Use the layer name exactly as specified in the "name" attribute in Page Designer
+            lLayerId     = lMapRegion.call("getLayerIdByName", "Airport"),
+            lCurrentZoom = lMapRegion.call("getMapCenterAndZoomLevel").zoom,
+            lAirportId   = apex.item("P121_ID").getValue(),
+            lFeature     = lMapRegion.call("getFeature", lLayerId, lAirportId ),
+            lPosition;
+        
+        if ( lFeature.geometry ) {
+            lPosition    = lFeature.geometry.coordinates;
+                
+            // close all Info Windows, which might currently be open
+            lMapRegion.call( "closeAllInfoWindows" );
+        
+            // focus the map to the chosen feature
+            lMapRegion.call( "setCenter", lPosition );
+        
+            // if the current zoom level is below 8, zoom in. Otherwise do nothing.
+            if ( lCurrentZoom < 12 ) {
+                lMapRegion.call( "setZoomLevel", 12 );
+            }
+            setTimeout( function() {lMapRegion.call( "displayPopup", "infoWindow", lLayerId, lAirportId.toString(), false )}, 500 );
+        }
+
+    execution: 
+      sequence: 10
+      event: Show Feature # 1575316931613558819
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+    client-side-condition: 
+      type: Item is not null
+      item: P121_ID
+

@@ -1,0 +1,883 @@
+---
+# ====== Page: Load Full Dataset =============================
+id: 501
+identification: 
+  name: Load Full Dataset
+  alias: LOAD-FULL-DATASET
+  title: '&APP_NAME. - Load Full Dataset'
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: File Items ==================================
+  id: 800036958503676064
+  identification: 
+    name: File Items
+    type: Static Content
+
+  source: 
+    html-code: '<p>Download the <strong>states-full.json</strong> and <strong>airports-full.json</strong> files from <strong><a href="https://github.com/oracle/apex/tree/22.1/sample-apps/sample-maps/" target="_blank">https://github.com/oracle/apex/tree/22.1/sample-apps/sample-maps/</a></strong> and upload here.</p>'
+
+  layout: 
+    sequence: 10
+    parent-region: Load Full Dataset # 1578357999098866643
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--hiddenOverflow
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: From GitHub =================================
+  id: 800037022904676065
+  identification: 
+    name: From GitHub
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: Load Full Dataset # 1578357999098866643
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--hiddenOverflow
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Load Full Dataset ===========================
+  id: 1578357999098866643
+  identification: 
+    name: Load Full Dataset
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    - t-Form--stretchInputs
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: States Data =================================
+  id: 1578358413521866647
+  identification: 
+    name: States Data
+    type: Static Content
+
+  source: 
+    html-code: US States Data is fully loaded.
+
+  layout: 
+    sequence: 10
+    parent-region: Status States # 1578359609472866659
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--success
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: select 1 from eba_sample_map_states
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: States Data =================================
+  id: 1578359168431866655
+  identification: 
+    name: States Data
+    type: Static Content
+
+  source: 
+    html-code: Use this page to load US States boundaries to the Sample Application.
+
+  layout: 
+    sequence: 30
+    parent-region: Status States # 1578359609472866659
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--warning
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: select 1 from eba_sample_map_states
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Airports Data ===============================
+  id: 1578359271663866656
+  identification: 
+    name: Airports Data
+    type: Static Content
+
+  source: 
+    html-code: Airports Data is fully loaded.
+
+  layout: 
+    sequence: 30
+    parent-region: Status Airports # 1578359658720866660
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--success
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select 1 from eba_sample_map_airports
+      having count(*)>1000
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Airports Data ===============================
+  id: 1578359351842866657
+  identification: 
+    name: Airports Data
+    type: Static Content
+
+  source: 
+    html-code: Use this page to load the full US Airports dataset to the Sample Application.
+
+  layout: 
+    sequence: 40
+    parent-region: Status Airports # 1578359658720866660
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--warning
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select 1 from eba_sample_map_airports
+      having count(*)<1000
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Status States ===============================
+  id: 1578359609472866659
+  identification: 
+    name: Status States
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Status Airports =============================
+  id: 1578359658720866660
+  identification: 
+    name: Status Airports
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About This Page =============================
+  id: 2359549594723687898
+  identification: 
+    name: About This Page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      Use this page to load full airport and US state boundary data into this sample application. If your database can connect to the internet, the application can download directly from GitHub. Otherwise, download the JSON files from GitHub using your browser, and upload them here afterwards.
+      </p>
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Popup
+    template-options: 
+    - '#DEFAULT#'
+    - js-dialog-autoheight
+    - js-popup-noOverlay
+    - js-popup-callout
+    - js-dialog-size480x320
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: about_this_page
+    custom-attributes: 
+    - data-parent-element="#help_button"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P501_PROXY_OVERRIDE ======================
+  id: 800037186176676066
+  identification: 
+    name: P501_PROXY_OVERRIDE
+    type: Text Field
+
+  label: 
+    label: Use Proxy Server
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: From GitHub # 800037022904676065
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P501_STATES_FILE =========================
+  id: 1578358108607866644
+  identification: 
+    name: P501_STATES_FILE
+    type: File Upload
+
+  label: 
+    label: US States Data
+    alignment: Left
+
+  display: 
+    display-as: Inline File Browse
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+
+  layout: 
+    sequence: 10
+    region: File Items # 800036958503676064
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P501_AIRPORTS_FILE =======================
+  id: 1578358184725866645
+  identification: 
+    name: P501_AIRPORTS_FILE
+    type: File Upload
+
+  label: 
+    label: Airports Data
+    alignment: Left
+
+  display: 
+    display-as: Inline File Browse
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+
+  layout: 
+    sequence: 20
+    region: File Items # 800036958503676064
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P501_SOURCE ==============================
+  id: 1578358500319866648
+  identification: 
+    name: P501_SOURCE
+    type: Radio Group
+
+  label: 
+    label: Load Data From
+    alignment: Left
+
+  settings: 
+    number-of-columns: 2
+    page-action-on-selection: None
+
+  layout: 
+    sequence: 10
+    region: Load Full Dataset # 1578357999098866643
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Above
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--radioButtonGroup
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:Upload Files;FILE,Directly from GitHub;GITHUB'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: FILE
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: LOAD ========================================
+  id: 1578358823714866652
+  identification: 
+    button-name: LOAD
+    label: Load Dataset
+
+  layout: 
+    sequence: 30
+    region: Breadcrumb # 2355183043372782721
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconLeft
+    icon: fa-download
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Load From ===========================
+  id: 1578358537862866649
+  identification: 
+    name: Load From
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P501_SOURCE
+
+  client-side-condition: 
+    type: Item = Value
+    item: P501_SOURCE
+    value: FILE
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 800037218976676067
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: From GitHub # 800037022904676065
+
+    execution: 
+      sequence: 20
+      event: Load From # 1578358537862866649
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Show ========================================
+    id: 800037379680676068
+    identification: 
+      action: Show
+
+    affected-elements: 
+      selection-type: Region
+      region: From GitHub # 800037022904676065
+
+    execution: 
+      sequence: 10
+      event: Load From # 1578358537862866649
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+  - # ====== Action: Show ========================================
+    id: 1578358696847866650
+    identification: 
+      action: Show
+
+    affected-elements: 
+      selection-type: Region
+      region: File Items # 800036958503676064
+
+    execution: 
+      sequence: 10
+      event: Load From # 1578358537862866649
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Hide ========================================
+    id: 1578358759530866651
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: File Items # 800036958503676064
+
+    execution: 
+      sequence: 20
+      event: Load From # 1578358537862866649
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+processes: 
+- # ====== Process: Load Full Dataset ==========================
+  id: 1578358920692866653
+  identification: 
+    name: Load Full Dataset
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          eba_sample_map_load_data(
+              p_load_from          => :P501_SOURCE,
+              p_states_file_name   => :P501_STATES_FILE,
+              p_airports_file_name => :P501_AIRPORTS_FILE,
+              p_proxy_override     => :P501_PROXY_OVERRIDE );
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Data loaded.
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 1578358823714866652
+
+branches: 
+- # ====== Branch: Go To Page 1 ================================
+  id: 812006497939506125
+  identification: 
+    name: Go To Page 1
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:501::&success_msg=#SUCCESS_MSG#'
+      page: 1 # Home
+      clear-cache: 501
+
+  server-side-condition: 
+    when-button-pressed: LOAD # 1578358823714866652
+

@@ -1,0 +1,5725 @@
+---
+- # ====== Plugin: Avatar ======================================
+  id: 372003459514573094
+  identification: 
+    name: Avatar
+    internal-name: THEME_42$AVATAR
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 1564363394689414260
+
+    subscribe-component-settings: true
+    version-number: 133929266
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <span class="t-Avatar is-placeholder{if ?SHAPE/} #SHAPE#{endif/}{if ?SIZE/} #SIZE#{endif/}{if ?CSS_CLASSES/} #CSS_CLASSES#{endif/}"></span>
+      {else/}
+        {if ?LINK/}<a href="#LINK#" #LINK_ATTR#{else/}<span{endif/} class="t-Avatar{if ?TYPE/} t-Avatar--{if ?IMAGE/}image{else/}{if ?INITIALS/}initials{else/}icon{endif/}{endif/}{endif/}{if ?SHAPE/} #SHAPE#{endif/}{if ?SIZE/} #SIZE#{endif/}{if ?ICON/} #ICON#{else/} fa fa-user{endif/}{if ?CSS_CLASSES/} #CSS_CLASSES#{endif/} u-color" {if !IMAGE/}{if DESCRIPTION/} role="img" aria-label="#DESCRIPTION#" title="#DESCRIPTION#"{else/} role="presentation"{endif/}{endif/}>{if IMAGE/}<img src="#IMAGE#" alt="#DESCRIPTION#"{if ?DESCRIPTION/} title="#DESCRIPTION#"{endif/} loading="lazy" />{else/}{if ?INITIALS/}#INITIALS#{endif/}{endif/}{if ?LINK/}</a>{else/}</span>{endif/}
+      {endif/}
+    translate-templates: false
+    default-escape-mode: HTML
+
+  callbacks: 
+    api-interface: Procedure with Legacy Attributes [deprecated]
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 1.0
+    help-text: Display an image, icon, or initials. Available as a partial template to display a single row.
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Type ==============================
+    id: 43406526023509625
+    identification: 
+      static-id: TYPE
+      attribute: 1
+      name: Type
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: IMAGE
+
+    help: 
+      help-text: Select the type of content that will be displayed in the avatar.
+
+    examples: 
+      demo-value: IMAGE
+
+    entries: 
+    - # ====== Entry: Image ========================================
+      id: 43407043386509625
+      entry: 
+        sequence: 10
+        display: Image
+        return: IMAGE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Initials =====================================
+      id: 43407618387509626
+      entry: 
+        sequence: 20
+        display: Initials
+        return: INITIALS
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Icon =========================================
+      id: 43408206699509627
+      entry: 
+        sequence: 30
+        display: Icon
+        return: ICON
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Image =============================
+    id: 43408837927509627
+    identification: 
+      static-id: IMAGE
+      attribute: 2
+      name: Image
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Media
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43406526023509625
+      depending-on-condition-type: equal to
+      expression: IMAGE
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Use the Media popup dialog to select a source for the avatar image.</p>
+        
+        <p>Available options include:
+        <ul>
+        <li>URL</li>
+        <li>BLOB Column</li>
+        <li>URL Column</li>
+        </ul>
+        </p>
+
+    examples: 
+      demo-value: '#APEX_FILES#apex_ui/img/favicons/app-artwork-catalog.png'
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43409261144509628
+    identification: 
+      static-id: DESCRIPTION
+      attribute: 3
+      name: Description
+      scope: Component
+
+    layout: 
+      sequence: 55
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter a short description of the image/icon or select a source column from the quick pick options. This will be used as title & alt text for the avatar image/icon.
+
+  - # ====== Custom Attribute: Initials ==========================
+    id: 43409842904509628
+    identification: 
+      static-id: INITIALS
+      attribute: 4
+      name: Initials
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    condition: 
+      depending-on-custom-attribute: Type # 43406526023509625
+      depending-on-condition-type: equal to
+      expression: INITIALS
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column to be displayed within each avatar. Only varchar2 data types are supported.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43410307867509628
+    identification: 
+      static-id: ICON
+      attribute: 5
+      name: Icon
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43406526023509625
+      depending-on-condition-type: equal to
+      expression: ICON
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43410822384509629
+    identification: 
+      static-id: SHAPE
+      attribute: 6
+      name: Shape
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Select the shape of the avatar. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43411305335509629
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Avatar--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43411893717509630
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Avatar--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a circular shape.
+
+    - # ====== Entry: Square =======================================
+      id: 43412530533509630
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Avatar--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square shape.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43413100019509631
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Size ==============================
+    id: 43413694722509632
+    identification: 
+      static-id: SIZE
+      attribute: 7
+      name: Size
+      scope: Component
+
+    layout: 
+      sequence: 70
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Set the size of the avatar. The default inherits the sizing set by the containing template.
+
+    entries: 
+    - # ====== Entry: Extra Extra Small ============================
+      id: 43414216932509632
+      entry: 
+        sequence: 10
+        display: Extra Extra Small
+        return: t-Avatar--xxs
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Small ==================================
+      id: 43414803335509633
+      entry: 
+        sequence: 20
+        display: Extra Small
+        return: t-Avatar--xs
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Small ========================================
+      id: 43415426929509633
+      entry: 
+        sequence: 30
+        display: Small
+        return: t-Avatar--sm
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Medium =======================================
+      id: 43416041316509634
+      entry: 
+        sequence: 40
+        display: Medium
+        return: t-Avatar--md
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Large ========================================
+      id: 43416618035509634
+      entry: 
+        sequence: 50
+        display: Large
+        return: t-Avatar--lg
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Large ==================================
+      id: 43417187331509635
+      entry: 
+        sequence: 60
+        display: Extra Large
+        return: t-Avatar--xl
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Extra Large ============================
+      id: 43417806596509635
+      entry: 
+        sequence: 70
+        display: Extra Extra Large
+        return: t-Avatar--xxl
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: CSS Classes =======================
+    id: 43418387357509636
+    identification: 
+      static-id: CSS_CLASSES
+      attribute: 8
+      name: CSS Classes
+      scope: Component
+
+    layout: 
+      sequence: 80
+
+    settings: 
+      type: Text
+      common: false
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter classes to add to this component. You may add multiple classes by separating them with a space.
+
+  action-positions: 
+  - # ====== Action Position: Link ===============================
+    id: 2173841000143690134
+    identification: 
+      name: Link
+      static-id: LINK
+      sequence: 10
+
+    advanced: 
+      quick-pick: true
+
+    settings: 
+      type: Link
+
+- # ====== Plugin: Badge =======================================
+  id: 372017829681573104
+  identification: 
+    name: Badge
+    internal-name: THEME_42$BADGE
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 1564377533892414278
+
+    subscribe-component-settings: true
+    version-number: 133929097
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    - Multiple (Report)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <span class="t-Badge is-placeholder{if ?SIZE/} #SIZE#{endif/}{if ?SHAPE/} #SHAPE#{endif/}"></span>
+      {else/}
+        {if ?LINK/}<a href="#LINK#" #LINK_ATTR#{else/}<span{endif/} class="t-Badge{if ?STATE/} t-Badge--#STATE#{endif/}{if ?STYLE/} #STYLE#{endif/}{if ?SIZE/} #SIZE#{endif/}{if ?SHAPE/} #SHAPE#{endif/}" role="status" aria-label="#LABEL!STRIPHTML# #VALUE#" title="#LABEL!STRIPHTML# #VALUE#">
+          {if ?ICON/}<span class="t-Badge-icon #ICON#" aria-hidden="true"></span>{endif/}
+          {if LABEL_DISPLAY/}<span class="t-Badge-label">#LABEL#</span>{endif/}
+          <span class="t-Badge-value">#VALUE#</span>
+        {if ?LINK/}</a>{else/}</span>{endif/}
+      {endif/}
+      
+    report-body: |
+      {if !APEX$HAS_MESSAGE/}
+        <ul class="t-Badges #APEX$COMPONENT_CSS_CLASSES#">#APEX$ROWS#</ul>
+      {endif/}
+    report-row: |
+      <li class="t-Badges-item" #APEX$ROW_IDENTIFICATION#>#APEX$PARTIAL#</li>
+      
+    translate-templates: true
+    default-escape-mode: HTML
+    number-of-lazy-loading-skeletons: 1
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 1.0
+    help-text: Display content within a badge. Available for multiple report rows or a single row.
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Label =============================
+    id: 43420925055509641
+    identification: 
+      static-id: LABEL
+      attribute: 1
+      name: Label
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter a value for the badge label or select a source column from the quick pick options.
+
+  - # ====== Custom Attribute: Value =============================
+    id: 43421401069509642
+    identification: 
+      static-id: VALUE
+      attribute: 2
+      name: Value
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Number
+      - Date
+      - Interval Year to Month
+      - Interval Day to Second
+      escape-mode: Strip HTML
+
+    help: 
+      help-text: Select a source column for the badge value.
+
+  - # ====== Custom Attribute: State =============================
+    id: 43421892988509642
+    identification: 
+      static-id: STATE
+      attribute: 3
+      name: State
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Select the source column for the state of the badge. Substitute column value with "danger", "warning", "success" or "info" for default styling.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43422366082509643
+    identification: 
+      static-id: ICON
+      attribute: 4
+      name: Icon
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the badge.
+
+  - # ====== Custom Attribute: Display Label =====================
+    id: 43422893236509643
+    identification: 
+      static-id: LABEL_DISPLAY
+      attribute: 5
+      name: Display Label
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the badge label. When set to Yes, the badge label will be displayed in addition to the badge value. When set to No, only the badge value will be displayed.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43423409700509643
+    identification: 
+      static-id: STYLE
+      attribute: 6
+      name: Style
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Select the badge style. Default inherits the style set by the containing template.
+
+    entries: 
+    - # ====== Entry: Subtle =======================================
+      id: 43423852090509644
+      entry: 
+        sequence: 10
+        display: Subtle
+        return: t-Badge--subtle
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Outline ======================================
+      id: 43424459026509644
+      entry: 
+        sequence: 20
+        display: Outline
+        return: t-Badge--outline
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43425144223509645
+    identification: 
+      static-id: SHAPE
+      attribute: 7
+      name: Shape
+      scope: Component
+
+    layout: 
+      sequence: 70
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Select the shape of the badge. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43425585291509645
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Badge--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43426158958509646
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Badge--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with circular edges.
+
+    - # ====== Entry: Square =======================================
+      id: 43426800120509646
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Badge--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with squared edges.
+
+  - # ====== Custom Attribute: Size ==============================
+    id: 43427362929509647
+    identification: 
+      static-id: SIZE
+      attribute: 8
+      name: Size
+      scope: Component
+
+    layout: 
+      sequence: 80
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Set the size of the badge. The default inherits the sizing set by the containing template.
+
+    entries: 
+    - # ====== Entry: Small ========================================
+      id: 43427889636509647
+      entry: 
+        sequence: 10
+        display: Small
+        return: t-Badge--sm
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Medium =======================================
+      id: 43428452580509648
+      entry: 
+        sequence: 20
+        display: Medium
+        return: t-Badge--md
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Large ========================================
+      id: 43429070975509649
+      entry: 
+        sequence: 30
+        display: Large
+        return: t-Badge--lg
+
+      advanced: 
+        quick-pick: false
+
+  action-positions: 
+  - # ====== Action Position: Link ===============================
+    id: 2242562243203480262
+    identification: 
+      name: Link
+      static-id: LINK
+      sequence: 10
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+- # ====== Plugin: Comments ====================================
+  id: 372027057250573111
+  identification: 
+    name: Comments
+    internal-name: THEME_42$COMMENTS
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: true
+
+  subscription: 
+    master: 
+      referenced-id: 1564386865908414285
+
+    subscribe-component-settings: true
+    version-number: 75159091
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    - Multiple (Report)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <div class="t-Comments-item{if ?COMMENT_CLASS/} #COMMENT_CLASS#{endif/}">
+          {if DISPLAY_AVATAR%assigned/}
+            <div class="t-Comments-icon">
+              {if ?APEX$SELECTOR%assigned/}<div class="t-Comments-selection is-placeholder"></div>{endif/}
+              {with/}
+                SIZE:=t-Avatar--xs
+                SHAPE:=#AVATAR_SHAPE#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-Comments-body">
+            <div class="t-Comments-info">
+              <span class="t-Comments-user is-placeholder"></span>
+            </div>
+            <div class="t-Comments-comment is-placeholder"></div>
+          </div>
+        </div>
+      {else/}
+        <div class="t-Comments-item{if ?COMMENT_CLASS/} #COMMENT_CLASS#{endif/}">
+          {if DISPLAY_AVATAR/}
+            <div class="t-Comments-icon">
+              {if ?APEX$SELECTOR%assigned/}<div class="t-Comments-selection">#APEX$SELECTOR#</div>{endif/}
+              {with/}
+                TYPE:=#AVATAR_TYPE#
+                IMAGE:=#AVATAR_IMAGE#
+                DESCRIPTION:=#AVATAR_DESCRIPTION#
+                ICON:=#AVATAR_ICON#
+                INITIALS:=#AVATAR_INITIALS#
+                SIZE:=t-Avatar--xs
+                SHAPE:=#AVATAR_SHAPE#
+                CSS_CLASSES:=u-color
+                LINK:=#AVATAR_LINK#
+                LINK_ATTR:=#AVATAR_LINK_ATTR#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-Comments-body">
+            <div class="t-Comments-info">
+              <span class="t-Comments-user">{if USER_NAME_LINK/}<a href="#USER_NAME_LINK#" #USER_NAME_LINK_ATTR#>{endif/}#USER_NAME#{if USER_NAME_LINK/}</a>{endif/}</span>
+              {if COMMENT_DATE/}<span class="t-Comments-date">#COMMENT_DATE#</span>{endif/}
+              {if ACTIONS/}<span class="t-Comments-actions">#ACTIONS#</span>{endif/}
+            </div>
+            <div class="t-Comments-comment">
+              #COMMENT_TEXT#
+              {if ATTRIBUTES/}<div class="t-Comments-attributes">#ATTRIBUTES#</div>{endif/}
+            </div>
+          </div>
+        </div>
+      {endif/}
+    report-body: |
+      <ul class="t-Comments{if ?STYLE/} #STYLE#{endif/} {if APPLY_THEME_COLORS/} u-colors{endif/} #APEX$COMPONENT_CSS_CLASSES#">#APEX$ROWS#</ul>
+      
+    report-row: |
+      <li class="t-Comments-item" #APEX$ROW_IDENTIFICATION#>#APEX$PARTIAL#</li>
+      
+    translate-templates: false
+    default-escape-mode: HTML
+    number-of-lazy-loading-skeletons: 3
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    help-text: Display user comments and status updates. Supports avatars. Available for a single row or as a report with multiple rows.
+
+  attribute-groups: 
+  - # ====== Attribute Group: Avatar =============================
+    id: 1843315607566541368
+    identification: 
+      name: Avatar
+      sequence: 20
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Comment Text ======================
+    id: 43430819612509653
+    identification: 
+      static-id: COMMENT_TEXT
+      attribute: 1
+      name: Comment Text
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column containing text for user comments.
+
+    examples: 
+      demo-value: Praesent vel felis rutrum erat elementum viverra sit amet non odio. Cras vel auctor eros, in malesuada dolor. Nulla tellus magna, ornare consectetur purus id, volutpat egestas felis. Proin lobortis risus massa, nec faucibus arcu malesuada a. Nunc sed gravida urna. Fusce at ligula sed erat consequat pharetra.
+
+  - # ====== Custom Attribute: User Name =========================
+    id: 43431252612509654
+    identification: 
+      static-id: USER_NAME
+      attribute: 2
+      name: User Name
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be displayed as the user name associated with a comment.
+
+    examples: 
+      demo-value: Joel
+
+  - # ====== Custom Attribute: Date ==============================
+    id: 43431759878509654
+    identification: 
+      static-id: COMMENT_DATE
+      attribute: 3
+      name: Date
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Date
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column containing a date, date range, or time.
+
+    examples: 
+      demo-value: 5 minutes ago
+
+  - # ====== Custom Attribute: Attributes ========================
+    id: 43432261457509655
+    identification: 
+      static-id: ATTRIBUTES
+      attribute: 4
+      name: Attributes
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: HTML
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter some text and/or column substitution strings to be used as the comment attributes.
+
+  - # ====== Custom Attribute: Type ==============================
+    id: 43432808532509655
+    identification: 
+      static-id: AVATAR_TYPE
+      attribute: 5
+      name: Type
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 50
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: icon
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43439952791509662
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the type of content that will be displayed in the avatar.
+
+    examples: 
+      demo-value: initials
+
+    entries: 
+    - # ====== Entry: Image ========================================
+      id: 43433297691509656
+      entry: 
+        sequence: 10
+        display: Image
+        return: image
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Initials =====================================
+      id: 43433882260509656
+      entry: 
+        sequence: 20
+        display: Initials
+        return: initials
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Icon =========================================
+      id: 43434447500509657
+      entry: 
+        sequence: 30
+        display: Icon
+        return: icon
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Image =============================
+    id: 43435090855509657
+    identification: 
+      static-id: AVATAR_IMAGE
+      attribute: 6
+      name: Image
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 60
+
+    settings: 
+      type: Media
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43432808532509655
+      depending-on-condition-type: equal to
+      expression: image
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Use the Media popup dialog to select a source for the avatar image.</p>
+        
+        <p>Available options include:
+        <ul>
+        <li>URL</li>
+        <li>BLOB Column</li>
+        <li>URL Column</li>
+        </ul>
+        </p>
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43435606574509658
+    identification: 
+      static-id: AVATAR_DESCRIPTION
+      attribute: 7
+      name: Description
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 95
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter a short description of the image/icon or select a source column from the quick pick options. This will be used as title & alt text for the avatar image/icon.
+
+  - # ====== Custom Attribute: Initials ==========================
+    id: 43436088826509658
+    identification: 
+      static-id: AVATAR_INITIALS
+      attribute: 8
+      name: Initials
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 80
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Type # 43432808532509655
+      depending-on-condition-type: equal to
+      expression: initials
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column to be displayed within each avatar. Only varchar2 data types are supported.
+
+    examples: 
+      demo-value: JK
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43436560265509659
+    identification: 
+      static-id: AVATAR_ICON
+      attribute: 9
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 90
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: fa-user
+
+    condition: 
+      depending-on-custom-attribute: Type # 43432808532509655
+      depending-on-condition-type: equal to
+      expression: icon
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43437064532509659
+    identification: 
+      static-id: AVATAR_SHAPE
+      attribute: 10
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843315607566541368
+      sequence: 100
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-Avatar--rounded
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43439952791509662
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the avatar. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43437592006509660
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Avatar--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43438215817509660
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Avatar--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a circular shape.
+
+    - # ====== Entry: Square =======================================
+      id: 43438756188509661
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Avatar--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square shape.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43439371533509662
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Display Avatar ====================
+    id: 43439952791509662
+    identification: 
+      static-id: DISPLAY_AVATAR
+      attribute: 11
+      name: Display Avatar
+      scope: Component
+
+    layout: 
+      sequence: 110
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Specify whether to display or hide the avatar for each row. When set to Yes, an avatar will be displayed with the assigned image, icon, or initials. When set to No, no avatar will be displayed.
+
+    examples: 
+      demo-value: Y
+
+  - # ====== Custom Attribute: Comment Class =====================
+    id: 43440477943509663
+    identification: 
+      static-id: COMMENT_CLASS
+      attribute: 14
+      name: Comment Class
+      scope: Component
+
+    layout: 
+      sequence: 45
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Allows you to pass a class onto individual comments. Example using is-active will highlight the specific comment with a different shade.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43440992873509663
+    identification: 
+      static-id: STYLE
+      attribute: 12
+      name: Style
+      scope: Report
+
+    layout: 
+      sequence: 120
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-Comments--basic
+
+    help: 
+      help-text: Set the style of the comments.
+
+    examples: 
+      demo-value: t-Comments--chat
+
+    entries: 
+    - # ====== Entry: Basic ========================================
+      id: 43441477746509664
+      entry: 
+        sequence: 10
+        display: Basic
+        return: t-Comments--basic
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Chat (Speech Bubbles) ========================
+      id: 43442069573509664
+      entry: 
+        sequence: 20
+        display: Chat (Speech Bubbles)
+        return: t-Comments--chat
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Apply Theme Colors ================
+    id: 43442665963509665
+    identification: 
+      static-id: APPLY_THEME_COLORS
+      attribute: 13
+      name: Apply Theme Colors
+      scope: Report
+
+    layout: 
+      sequence: 130
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Specify whether to use the Universal Theme colors for avatar and badge row items. When set to Yes, the u-colors class will be applied to each row. When set to No, a default color will be used instead.
+
+  action-positions: 
+  - # ====== Action Position: Actions ============================
+    id: 2173835422263702166
+    identification: 
+      name: Actions
+      static-id: ACTIONS
+      sequence: 10
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Template
+
+  - # ====== Action Position: Avatar Link ========================
+    id: 2173891045933684045
+    identification: 
+      name: Avatar Link
+      static-id: AVATAR_LINK
+      sequence: 20
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: User Name Link =====================
+    id: 2174043263646554816
+    identification: 
+      name: User Name Link
+      static-id: USER_NAME_LINK
+      sequence: 30
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  action-templates: 
+  - # ====== Action Template: Link ===============================
+    id: 2173836013768709623
+    identification: 
+      name: Link
+      type: Button
+
+    template: 
+      action-template: '{if !IS_DISABLED/}<a {if CSS_CLASSES/}class="#CSS_CLASSES#"{endif/} href="#LINK_URL#" #LINK_ATTR#>#LABEL#</a>{endif/}'
+
+    advanced: 
+      translatable: false
+
+- # ====== Plugin: Button ======================================
+  id: 372043896492573123
+  identification: 
+    name: Button
+    internal-name: THEME_42$BUTTON
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 1568467215199837453
+
+    subscribe-component-settings: true
+    version-number: 76331028
+
+  templates: 
+    partial: |
+      {if MENU_ID/}<button type="button" data-menu="#MENU_ID#"{else/}<a href="#LINK_URL#" #LINK_ATTR#{endif/} class="t-Button{if IS_HOT/} t-Button--hot{endif/}{if IS_ICON_ONLY/} t-Button--noLabel t-Button--icon{else/}{if ICON_CLASSES/} t-Button--iconLeft{endif/}{endif/} #CSS_CLASSES#" title="#LABEL!STRIPHTML#" {if IS_DISABLED/} disabled{endif/}>
+        {if ?ICON_CLASSES/}<span class="t-Icon t-Icon--left #ICON_CLASSES#" aria-hidden="true"></span>{endif/}<span class="t-Button-label">#LABEL#</span>
+      {if MENU_ID/}</button>{else/}</a>{endif/}
+      
+    translate-templates: false
+    default-escape-mode: HTML
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Label =============================
+    id: 43474722507509706
+    identification: 
+      static-id: LABEL
+      attribute: 1
+      name: Label
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+  - # ====== Custom Attribute: Link URL ==========================
+    id: 43475213806509706
+    identification: 
+      static-id: LINK_URL
+      attribute: 2
+      name: Link URL
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Link to Target Page/URL
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+  - # ====== Custom Attribute: Link Attribute ====================
+    id: 43475700836509707
+    identification: 
+      static-id: LINK_ATTR
+      attribute: 3
+      name: Link Attribute
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: Raw
+
+  - # ====== Custom Attribute: Icon Classes ======================
+    id: 43476177533509707
+    identification: 
+      static-id: ICON_CLASSES
+      attribute: 4
+      name: Icon Classes
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+  - # ====== Custom Attribute: CSS Classes =======================
+    id: 43476697566509708
+    identification: 
+      static-id: CSS_CLASSES
+      attribute: 5
+      name: CSS Classes
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+  - # ====== Custom Attribute: Is Disabled =======================
+    id: 43477227134509708
+    identification: 
+      static-id: IS_DISABLED
+      attribute: 6
+      name: Is Disabled
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: N
+
+  - # ====== Custom Attribute: Is Hot ============================
+    id: 43477732866509709
+    identification: 
+      static-id: IS_HOT
+      attribute: 7
+      name: Is Hot
+      scope: Component
+
+    layout: 
+      sequence: 70
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: N
+
+  - # ====== Custom Attribute: Is Icon Only ======================
+    id: 43478192034509710
+    identification: 
+      static-id: IS_ICON_ONLY
+      attribute: 8
+      name: Is Icon Only
+      scope: Component
+
+    layout: 
+      sequence: 80
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: N
+
+- # ====== Plugin: Timeline ====================================
+  id: 372048383235573127
+  identification: 
+    name: Timeline
+    internal-name: THEME_42$TIMELINE
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: true
+
+  subscription: 
+    master: 
+      referenced-id: 1601817836543095628
+
+    subscribe-component-settings: true
+    version-number: 76584807
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    - Multiple (Report)
+    partial: |
+      <div{if ?CSS_CLASSES/} class="#CSS_CLASSES#"{endif/}>
+        <div class="t-Timeline-wrap">
+          {if ?APEX$SELECTOR%assigned/}<div class="t-Timeline-selection">#APEX$SELECTOR#</div>{endif/}
+          <div class="t-Timeline-user">
+            {if DISPLAY_AVATAR/}
+              {with/}
+                TYPE:=#AVATAR_TYPE#
+                IMAGE:=#AVATAR_IMAGE#
+                DESCRIPTION:=#AVATAR_DESCRIPTION#
+                INITIALS:=#AVATAR_INITIALS#
+                ICON:=#AVATAR_ICON#
+                SHAPE:=#AVATAR_SHAPE#
+                SIZE:=
+                LINK:=#AVATAR_LINK#
+                LINK_ATTR:=#AVATAR_LINK_ATTR#
+              {apply THEME$AVATAR/}
+            {endif/}
+            <div class="t-Timeline-userinfo">
+              <span class="t-Timeline-username">{if ?USER_NAME_LINK/}<a href="#USER_NAME_LINK#" #USER_NAME_LINK_ATTR#>{endif/}#USER_NAME#{if ?USER_NAME_LINK/}</a>{endif/}</span>
+              <span class="t-Timeline-date">#DATE#</span>
+            </div>
+          </div>
+          <div class="t-Timeline-content">
+            {if DISPLAY_BADGE/}
+              <div class="t-Timeline-typeWrap">
+                {with/}
+                  LABEL_DISPLAY:=#BADGE_LABEL_DISPLAY#
+                  LABEL:=#BADGE_LABEL#
+                  VALUE:=#BADGE_VALUE#
+                  ICON:=#BADGE_ICON#
+                  STATE:=#BADGE_STATE#
+                {apply THEME$BADGE/}
+              </div>
+            {endif/}
+            <div class="t-Timeline-body">
+              <h3 class="t-Timeline-title">{if ?TITLE_LINK/}<a href="#TITLE_LINK#" #TITLE_LINK_ATTR#>{endif/}#TITLE#{if ?TITLE_LINK/}</a>{endif/}</h3>
+              {if ?DESCRIPTION/}<p class="t-Timeline-desc">#DESCRIPTION#</p>{endif/}
+            </div>
+          </div>
+        </div>
+      </div>
+    report-body: |
+      <ul class="t-Timeline{if ?STYLE/} #STYLE#{endif/}{if APPLY_THEME_COLORS/} u-colors{endif/} #APEX$COMPONENT_CSS_CLASSES#">#APEX$ROWS#</ul>
+      
+    report-row: '<li class="t-Timeline-item" #APEX$ROW_IDENTIFICATION#>#APEX$PARTIAL#</li>'
+    translate-templates: false
+    default-escape-mode: HTML
+    number-of-lazy-loading-skeletons: 3
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    help-text: Display a series of events. Supports avatars and badges. Available for a single row or as a report with multiple rows.
+
+  attribute-groups: 
+  - # ====== Attribute Group: Badge ==============================
+    id: 2190607127642616719
+    identification: 
+      name: Badge
+      sequence: 20
+
+  - # ====== Attribute Group: Avatar =============================
+    id: 2190607682654616720
+    identification: 
+      name: Avatar
+      sequence: 10
+
+  custom-attributes: 
+  - # ====== Custom Attribute: User Name =========================
+    id: 43525328006509770
+    identification: 
+      static-id: USER_NAME
+      attribute: 1
+      name: User Name
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be displayed as the user name associated with a timeline event.
+
+    examples: 
+      demo-value: User
+
+  - # ====== Custom Attribute: Date ==============================
+    id: 43525758796509771
+    identification: 
+      static-id: DATE
+      attribute: 2
+      name: Date
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Number
+      - Date
+      - Interval Year to Month
+      - Interval Day to Second
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column containing a date, date range, or time.
+
+    examples: 
+      demo-value: 1 hour ago
+
+  - # ====== Custom Attribute: Title =============================
+    id: 43526337419509771
+    identification: 
+      static-id: TITLE
+      attribute: 3
+      name: Title
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be used as the title.
+
+    examples: 
+      demo-value: Lorem ipsum dolor sit amet
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43526769099509772
+    identification: 
+      static-id: DESCRIPTION
+      attribute: 4
+      name: Description
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be used for the row description.
+
+    examples: 
+      demo-value: Nunc sit amet nunc quis magna ornare suscipit. Etiam aliquet maximus sapien, at sagittis sem gravida nec.
+
+  - # ====== Custom Attribute: Display Avatar ====================
+    id: 43527293345509773
+    identification: 
+      static-id: DISPLAY_AVATAR
+      attribute: 5
+      name: Display Avatar
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the avatar for each row. When set to Yes, an avatar will be displayed with the assigned image, icon, or initials. When set to No, no avatar will be displayed.
+
+    examples: 
+      demo-value: Y
+
+  - # ====== Custom Attribute: Display Badge =====================
+    id: 43527820262509773
+    identification: 
+      static-id: DISPLAY_BADGE
+      attribute: 6
+      name: Display Badge
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the badge for each row. When set to Yes, a badge will be displayed in each row. When set to No, no badge will be displayed.
+
+    examples: 
+      demo-value: Y
+
+  - # ====== Custom Attribute: Type ==============================
+    id: 43528281387509774
+    identification: 
+      static-id: AVATAR_TYPE
+      attribute: 7
+      name: Type
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 70
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: icon
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43527293345509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the type of content that will be displayed in the avatar.
+
+    examples: 
+      demo-value: icon
+
+    entries: 
+    - # ====== Entry: Image ========================================
+      id: 43528841611509774
+      entry: 
+        sequence: 10
+        display: Image
+        return: image
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Initials =====================================
+      id: 43529424435509775
+      entry: 
+        sequence: 20
+        display: Initials
+        return: initials
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Icon =========================================
+      id: 43529967799509776
+      entry: 
+        sequence: 30
+        display: Icon
+        return: icon
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Image =============================
+    id: 43530576763509776
+    identification: 
+      static-id: AVATAR_IMAGE
+      attribute: 8
+      name: Image
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 80
+
+    settings: 
+      type: Media
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43528281387509774
+      depending-on-condition-type: equal to
+      expression: image
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Use the Media popup dialog to select a source for the avatar image.</p>
+        
+        <p>Available options include:
+        <ul>
+        <li>URL</li>
+        <li>BLOB Column</li>
+        <li>URL Column</li>
+        </ul>
+        </p>
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43531104672509777
+    identification: 
+      static-id: AVATAR_DESCRIPTION
+      attribute: 9
+      name: Description
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 115
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter a short description of the image/icon or select a source column from the quick pick options. This will be used as title & alt text for the avatar image/icon.
+
+  - # ====== Custom Attribute: Initials ==========================
+    id: 43531557697509778
+    identification: 
+      static-id: AVATAR_INITIALS
+      attribute: 10
+      name: Initials
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 100
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Type # 43528281387509774
+      depending-on-condition-type: equal to
+      expression: initials
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column to be displayed within each avatar. Only varchar2 data types are supported.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43532063900509778
+    identification: 
+      static-id: AVATAR_ICON
+      attribute: 11
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 110
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: fa-user
+
+    condition: 
+      depending-on-custom-attribute: Type # 43528281387509774
+      depending-on-condition-type: equal to
+      expression: icon
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43532549718509779
+    identification: 
+      static-id: AVATAR_SHAPE
+      attribute: 12
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 2190607682654616720
+      sequence: 120
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-Avatar--circle
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43527293345509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the avatar. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43533092509509779
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Avatar--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43533730649509780
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Avatar--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a circular shape.
+
+    - # ====== Entry: Square =======================================
+      id: 43534249795509780
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Avatar--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square shape.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43534891226509781
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Label =============================
+    id: 43535499840509782
+    identification: 
+      static-id: BADGE_LABEL
+      attribute: 13
+      name: Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 130
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: true
+      escape-mode: Raw
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter a value for the badge label or select a source column from the quick pick options.
+
+  - # ====== Custom Attribute: Value =============================
+    id: 43535999854509782
+    identification: 
+      static-id: BADGE_VALUE
+      attribute: 14
+      name: Value
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 140
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Number
+      - Date
+      - Interval Year to Month
+      - Interval Day to Second
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select a source column for the badge value.
+
+    examples: 
+      demo-value: Closed
+
+  - # ====== Custom Attribute: State =============================
+    id: 43536457412509783
+    identification: 
+      static-id: BADGE_STATE
+      attribute: 15
+      name: State
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 150
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column for the state of the badge. Substitute column value with "danger", "warning", "success" or "info" for default styling.
+
+    examples: 
+      demo-value: is-removed
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43536947904509784
+    identification: 
+      static-id: BADGE_ICON
+      attribute: 16
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 160
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the badge.
+
+    examples: 
+      demo-value: fa-check-circle-o
+
+  - # ====== Custom Attribute: Display Label =====================
+    id: 43537477569509784
+    identification: 
+      static-id: BADGE_LABEL_DISPLAY
+      attribute: 17
+      name: Display Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 170
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Specify whether to display or hide the badge label. When set to Yes, the badge label will be displayed in addition to the badge value. When set to No, only the badge value will be displayed.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43537959473509785
+    identification: 
+      static-id: BADGE_STYLE
+      attribute: 18
+      name: Style
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 180
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the badge style. Default inherits the style set by the containing template.
+
+    entries: 
+    - # ====== Entry: Subtle =======================================
+      id: 43538469613509785
+      entry: 
+        sequence: 10
+        display: Subtle
+        return: t-Badge--subtle
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Outline ======================================
+      id: 43539058662509786
+      entry: 
+        sequence: 20
+        display: Outline
+        return: t-Badge--outline
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43539725285509787
+    identification: 
+      static-id: BADGE_SHAPE
+      attribute: 19
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 2190607127642616719
+      sequence: 190
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43527820262509773
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the badge. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43540204869509787
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Badge--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43540791529509788
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Badge--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with circular edges.
+
+    - # ====== Entry: Square =======================================
+      id: 43541431919509788
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Badge--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with squared edges.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43541980183509789
+    identification: 
+      static-id: STYLE
+      attribute: 20
+      name: Style
+      scope: Report
+
+    layout: 
+      sequence: 200
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Set the style of timeline items.
+
+    entries: 
+    - # ====== Entry: Compact ======================================
+      id: 43542463361509789
+      entry: 
+        sequence: 10
+        display: Compact
+        return: t-Timeline--compact
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Apply Theme Colors ================
+    id: 43543082240509790
+    identification: 
+      static-id: APPLY_THEME_COLORS
+      attribute: 21
+      name: Apply Theme Colors
+      scope: Report
+
+    layout: 
+      sequence: 210
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Specify whether to use the Universal Theme colors for avatar and badge row items. When set to Yes, the u-colors class will be applied to each row. When set to No, a default color will be used instead.
+
+    examples: 
+      demo-value: Y
+
+  action-positions: 
+  - # ====== Action Position: Title Link =========================
+    id: 2168752086371892007
+    identification: 
+      name: Title Link
+      static-id: TITLE_LINK
+      sequence: 25
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: User Name Link =====================
+    id: 2283163449360155608
+    identification: 
+      name: User Name Link
+      static-id: USER_NAME_LINK
+      sequence: 15
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: Avatar Link ========================
+    id: 2402194696334460049
+    identification: 
+      name: Avatar Link
+      static-id: AVATAR_LINK
+      sequence: 10
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+- # ====== Plugin: Content Row =================================
+  id: 372074385968573145
+  identification: 
+    name: Content Row
+    internal-name: THEME_42$CONTENT_ROW
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: true
+
+  subscription: 
+    master: 
+      referenced-id: 1568468153344837456
+
+    subscribe-component-settings: true
+    version-number: 76107179
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    - Multiple (Report)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <div class="t-ContentRow-wrap" aria-hidden="true">
+          {if ?APEX$SELECTOR%assigned/}<div class="t-ContentRow-selection is-placeholder"></div>{endif/}
+          {if DISPLAY_BADGE/}
+            <div class="t-ContentRow-badge #BADGE_COL_WIDTH# #BADGE_POS# #BADGE_ALIGNMENT#">
+              {with/}
+                LABEL:=
+                VALUE:=
+                SIZE:=#BADGE_SIZE#
+                SHAPE:=#BADGE_SHAPE#
+              {apply THEME$BADGE/}
+            </div>
+          {endif/}
+          {if DISPLAY_AVATAR/}
+            <div class="t-ContentRow-avatar">
+              {with/}
+                SHAPE:=#AVATAR_SHAPE#
+                SIZE:=#AVATAR_SIZE#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-ContentRow-body">
+            <div class="t-ContentRow-content">
+              {if ?OVERLINE%assigned/}<div class="t-ContentRow-overline is-placeholder"></div>{endif/}
+              {if ?TITLE%assigned/}<div class="t-ContentRow-title is-placeholder"></div>{endif/}
+              {if ?DESCRIPTION%assigned/}<div class="t-ContentRow-description is-placeholder"></div>{endif/}
+            </div>
+            {if ?MISC%assigned/}<div class="t-ContentRow-misc is-placeholder"></div>{endif/}
+            {if ?PRIMARY_ACTIONS%assigned/}<div class="t-ContentRow-actions is-placeholder"></div>{endif/}
+          </div>
+        </div>
+      {else/}
+        {if ?FULL_ROW_LINK/}<a class="t-ContentRow-fullLink" href="#FULL_ROW_LINK#" #FULL_ROW_LINK_ATTR#></a>{endif/}
+        <div class="t-ContentRow-wrap #ITEM_CSS_CLASSES#">
+          {if ?APEX$SELECTOR%assigned/}<div class="t-ContentRow-selection">#APEX$SELECTOR#</div>{endif/}
+          {if DISPLAY_BADGE/}
+            <div class="t-ContentRow-badge #BADGE_COL_WIDTH# #BADGE_POS# #BADGE_ALIGNMENT#">
+              {with/}
+                LABEL_DISPLAY:=#BADGE_LABEL_DISPLAY#
+                LABEL:=#BADGE_LABEL#
+                VALUE:=#BADGE_VALUE#
+                ICON:=#BADGE_ICON#
+                STATE:=#BADGE_STATE#
+                SIZE:=#BADGE_SIZE#
+                STYLE:=#BADGE_STYLE#
+                SHAPE:=#BADGE_SHAPE#
+                LINK:=#BADGE_LINK#
+                LINK_ATTR:=#BADGE_LINK_ATTR#
+              {apply THEME$BADGE/}
+            </div>
+          {endif/}
+          {if DISPLAY_AVATAR/}
+            <div class="t-ContentRow-avatar" aria-hidden="true">
+              {with/}
+                TYPE:=#AVATAR_TYPE#
+                IMAGE:=#AVATAR_IMAGE#
+                DESCRIPTION:=#AVATAR_DESCRIPTION#
+                INITIALS:=#AVATAR_INITIALS#
+                ICON:=#AVATAR_ICON#
+                SHAPE:=#AVATAR_SHAPE#
+                SIZE:=#AVATAR_SIZE#
+                CSS_CLASSES:=#AVATAR_CSS_CLASSES#
+                LINK:=#AVATAR_LINK#
+                LINK_ATTR:=#AVATAR_LINK_ATTR#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-ContentRow-body">
+            <div class="t-ContentRow-content">
+              {if ?OVERLINE/}<div class="t-ContentRow-overline">#OVERLINE#</div>{endif/}
+              {if ?TITLE/}<h3 class="t-ContentRow-title">{if ?TITLE_LINK/}<a href="#TITLE_LINK#" #TITLE_LINK_ATTR#>{endif/}#TITLE#{if ?TITLE_LINK/}</a>{endif/}</h3>{endif/}
+              {if ?DESCRIPTION/}<div class="t-ContentRow-description">#DESCRIPTION#</div>{endif/}
+            </div>
+            {if ?MISC%assigned/}<div class="t-ContentRow-misc">#MISC#</div>{endif/}
+            {if ?PRIMARY_ACTIONS/}<div class="t-ContentRow-actions">#PRIMARY_ACTIONS#</div>{endif/}
+          </div>
+        </div>
+      {endif/}
+    report-body: '<ul class="t-ContentRow{if ?STYLE/} #STYLE#{endif/}{if REMOVE_PADDING/} t-ContentRow--removePadding{endif/}{if HIDE_BORDERS/} t-ContentRow--hideBorders{endif/}{if APPLY_THEME_COLORS/} u-colors{endif/} #APEX$COMPONENT_CSS_CLASSES#">#APEX$ROWS#</ul>'
+    report-row: '<li class="t-ContentRow-item{if ?ITEM_CLASSES/} #ITEM_CLASSES#{endif/}" #APEX$ROW_IDENTIFICATION#>#APEX$PARTIAL#</li>'
+    translate-templates: false
+    default-escape-mode: HTML
+    number-of-lazy-loading-skeletons: 3
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    help-text: Display content in a formatted row with a title, description, and more. Supports avatars and badges. Available for a single row or as a report with multiple rows.
+
+  attribute-groups: 
+  - # ====== Attribute Group: Appearance =========================
+    id: 1713823990929307894
+    identification: 
+      name: Appearance
+      sequence: 30
+
+  - # ====== Attribute Group: Badge ==============================
+    id: 1970716054659581407
+    identification: 
+      name: Badge
+      sequence: 20
+
+  - # ====== Attribute Group: Avatar =============================
+    id: 1970716609671581408
+    identification: 
+      name: Avatar
+      sequence: 10
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Overline ==========================
+    id: 43480278545509716
+    identification: 
+      static-id: OVERLINE
+      attribute: 1
+      name: Overline
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: HTML
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter some text and/or column substitution strings to display at the top of each row above the title and description.
+
+    examples: 
+      demo-value: Category
+
+  - # ====== Custom Attribute: Title =============================
+    id: 43480808758509717
+    identification: 
+      static-id: TITLE
+      attribute: 2
+      name: Title
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: HTML
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter some text and/or column substitution strings to be used as the title in each row.
+
+    examples: 
+      demo-value: Lorem ipsum dolor sit amet
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43481272519509717
+    identification: 
+      static-id: DESCRIPTION
+      attribute: 3
+      name: Description
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: HTML
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter some text and/or column substitution strings to be used as the description in each row.
+
+    examples: 
+      demo-value: Nunc sit amet nunc quis magna ornare suscipit. Etiam aliquet maximus sapien, at sagittis sem gravida nec.
+
+  - # ====== Custom Attribute: Miscellaneous =====================
+    id: 43481764553509718
+    identification: 
+      static-id: MISC
+      attribute: 4
+      name: Miscellaneous
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: HTML
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: Raw
+
+    help: 
+      help-text: Enter miscellaneous content such as additional text and/or column substitution strings to display in each row.
+
+  - # ====== Custom Attribute: Display Avatar ====================
+    id: 43482257481509718
+    identification: 
+      static-id: DISPLAY_AVATAR
+      attribute: 5
+      name: Display Avatar
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the avatar for each row. When set to Yes, an avatar will be displayed with the assigned image, icon, or initials. When set to No, no avatar will be displayed.
+
+  - # ====== Custom Attribute: Display Badge =====================
+    id: 43482785406509719
+    identification: 
+      static-id: DISPLAY_BADGE
+      attribute: 6
+      name: Display Badge
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the badge for each row. When set to Yes, a badge will be displayed in each row. When set to No, no badge will be displayed.
+
+  - # ====== Custom Attribute: Type ==============================
+    id: 43483247743509719
+    identification: 
+      static-id: AVATAR_TYPE
+      attribute: 7
+      name: Type
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 70
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: icon
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43482257481509718
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the type of content that will be displayed in the avatar.
+
+    examples: 
+      demo-value: icon
+
+    entries: 
+    - # ====== Entry: Image ========================================
+      id: 43483825044509720
+      entry: 
+        sequence: 10
+        display: Image
+        return: image
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Initials =====================================
+      id: 43484356938509720
+      entry: 
+        sequence: 20
+        display: Initials
+        return: initials
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Icon =========================================
+      id: 43484970246509721
+      entry: 
+        sequence: 30
+        display: Icon
+        return: icon
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Image =============================
+    id: 43485603020509721
+    identification: 
+      static-id: AVATAR_IMAGE
+      attribute: 8
+      name: Image
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 80
+
+    settings: 
+      type: Media
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43483247743509719
+      depending-on-condition-type: equal to
+      expression: image
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Use the Media popup dialog to select a source for the avatar image.</p>
+        
+        <p>Available options include:
+        <ul>
+        <li>URL</li>
+        <li>BLOB Column</li>
+        <li>URL Column</li>
+        </ul>
+        </p>
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43486092292509722
+    identification: 
+      static-id: AVATAR_DESCRIPTION
+      attribute: 9
+      name: Description
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 115
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter a short description of the image or select a source column from the quick pick options. This will be used as alt text for the avatar image.
+
+  - # ====== Custom Attribute: Initials ==========================
+    id: 43486561966509723
+    identification: 
+      static-id: AVATAR_INITIALS
+      attribute: 10
+      name: Initials
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 100
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Type # 43483247743509719
+      depending-on-condition-type: equal to
+      expression: initials
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column to be displayed within each avatar. Only varchar2 data types are supported.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43487106096509723
+    identification: 
+      static-id: AVATAR_ICON
+      attribute: 11
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 110
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: fa-user
+
+    condition: 
+      depending-on-custom-attribute: Type # 43483247743509719
+      depending-on-condition-type: equal to
+      expression: icon
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43487572987509724
+    identification: 
+      static-id: AVATAR_SHAPE
+      attribute: 12
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 120
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-Avatar--rounded
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43482257481509718
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the avatar. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43488055602509724
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Avatar--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43488709285509725
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Avatar--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a circular shape.
+
+    - # ====== Entry: Square =======================================
+      id: 43489318687509725
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Avatar--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square shape.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43489852022509726
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Label =============================
+    id: 43490483039509726
+    identification: 
+      static-id: BADGE_LABEL
+      attribute: 13
+      name: Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 130
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: true
+      escape-mode: Raw
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter a value for the badge label or select a source column from the quick pick options.
+
+  - # ====== Custom Attribute: Value =============================
+    id: 43490957411509727
+    identification: 
+      static-id: BADGE_VALUE
+      attribute: 14
+      name: Value
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 140
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Number
+      - Date
+      - Interval Year to Month
+      - Interval Day to Second
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select a source column for the badge value.
+
+  - # ====== Custom Attribute: State =============================
+    id: 43491512052509727
+    identification: 
+      static-id: BADGE_STATE
+      attribute: 15
+      name: State
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 150
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column for the state of the badge. Substitute column value with "danger", "warning", "success" or "info" for default styling.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43491971129509728
+    identification: 
+      static-id: BADGE_ICON
+      attribute: 16
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 160
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the badge.
+
+  - # ====== Custom Attribute: Display Label =====================
+    id: 43492491160509728
+    identification: 
+      static-id: BADGE_LABEL_DISPLAY
+      attribute: 17
+      name: Display Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 170
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Specify whether to display or hide the badge label. When set to Yes, the badge label will be displayed in addition to the badge value. When set to No, only the badge value will be displayed.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43492994862509729
+    identification: 
+      static-id: BADGE_STYLE
+      attribute: 18
+      name: Style
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 180
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the badge style. Default inherits the style set by the containing template.
+
+    entries: 
+    - # ====== Entry: Subtle =======================================
+      id: 43493500383509730
+      entry: 
+        sequence: 10
+        display: Subtle
+        return: t-Badge--subtle
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Outline ======================================
+      id: 43494067321509730
+      entry: 
+        sequence: 20
+        display: Outline
+        return: t-Badge--outline
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43494690182509731
+    identification: 
+      static-id: BADGE_SHAPE
+      attribute: 19
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 190
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the badge. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43495156623509731
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Badge--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43495747635509732
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Badge--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with circular edges.
+
+    - # ====== Entry: Square =======================================
+      id: 43496429981509732
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Badge--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with squared edges.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43497017141509733
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Size ==============================
+    id: 43497643250509733
+    identification: 
+      static-id: AVATAR_SIZE
+      attribute: 20
+      name: Size
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 200
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43482257481509718
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Set the size of the avatar. The default inherits the sizing set by the containing template.
+
+    entries: 
+    - # ====== Entry: Extra Extra Small ============================
+      id: 43498108694509734
+      entry: 
+        sequence: 10
+        display: Extra Extra Small
+        return: t-Avatar--xxs
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Small ==================================
+      id: 43498741531509734
+      entry: 
+        sequence: 20
+        display: Extra Small
+        return: t-Avatar--xs
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Small ========================================
+      id: 43499280880509735
+      entry: 
+        sequence: 30
+        display: Small
+        return: t-Avatar--sm
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Medium =======================================
+      id: 43499856594509735
+      entry: 
+        sequence: 40
+        display: Medium
+        return: t-Avatar--md
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Large ========================================
+      id: 43500462888509736
+      entry: 
+        sequence: 50
+        display: Large
+        return: t-Avatar--lg
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Large ==================================
+      id: 43501140587509736
+      entry: 
+        sequence: 60
+        display: Extra Large
+        return: t-Avatar--xl
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Extra Extra Large ============================
+      id: 43501663023509737
+      entry: 
+        sequence: 70
+        display: Extra Extra Large
+        return: t-Avatar--xxl
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Size ==============================
+    id: 43502315416509737
+    identification: 
+      static-id: BADGE_SIZE
+      attribute: 21
+      name: Size
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 210
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Set the size of the badge. The default inherits the sizing set by the containing template.
+
+    entries: 
+    - # ====== Entry: Small ========================================
+      id: 43502842405509738
+      entry: 
+        sequence: 10
+        display: Small
+        return: t-Badge--sm
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Medium =======================================
+      id: 43503366697509738
+      entry: 
+        sequence: 20
+        display: Medium
+        return: t-Badge--md
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Large ========================================
+      id: 43504027576509739
+      entry: 
+        sequence: 30
+        display: Large
+        return: t-Badge--lg
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Column Width ======================
+    id: 43504561253509739
+    identification: 
+      static-id: BADGE_COL_WIDTH
+      attribute: 22
+      name: Column Width
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 220
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-ContentRow-badge--md
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Set the width of the content row columns. Default width is medium.
+
+    entries: 
+    - # ====== Entry: Small ========================================
+      id: 43505433992509740
+      entry: 
+        sequence: 10
+        display: Small
+        return: t-ContentRow-badge--sm
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Medium =======================================
+      id: 43505971373509741
+      entry: 
+        sequence: 20
+        display: Medium
+        return: t-ContentRow-badge--md
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Large ========================================
+      id: 43506581444509742
+      entry: 
+        sequence: 30
+        display: Large
+        return: t-ContentRow-badge--lg
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Auto =========================================
+      id: 43507178650509742
+      entry: 
+        sequence: 40
+        display: Auto
+        return: t-ContentRow-badge--auto
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Position ==========================
+    id: 43507805885509743
+    identification: 
+      static-id: BADGE_POS
+      attribute: 24
+      name: Position
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 240
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Start
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Positions the Badge column to either the "Start" or "End" of the row.
+
+    entries: 
+    - # ====== Entry: End ==========================================
+      id: 43508299849509744
+      entry: 
+        sequence: 10
+        display: End
+        return: t-ContentRow-badge--posEnd
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Positions the Badge column to the "end" of the row.
+
+  - # ====== Custom Attribute: Alignment =========================
+    id: 43508857779509744
+    identification: 
+      static-id: BADGE_ALIGNMENT
+      attribute: 25
+      name: Alignment
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1970716054659581407
+      sequence: 250
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Start
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43482785406509719
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Changes the alignment of the badge within its column.
+
+    entries: 
+    - # ====== Entry: Center =======================================
+      id: 43509429616509745
+      entry: 
+        sequence: 10
+        display: Center
+        return: t-ContentRow-badge--alignCenter
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Aligns the badge to the "center" of its column.
+
+    - # ====== Entry: End ==========================================
+      id: 43509949977509746
+      entry: 
+        sequence: 20
+        display: End
+        return: t-ContentRow-badge--alignEnd
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Aligns the badge to the "end" of its column.
+
+  - # ====== Custom Attribute: Item CSS Classes ==================
+    id: 43510602172509746
+    identification: 
+      static-id: ITEM_CSS_CLASSES
+      attribute: 31
+      name: Item CSS Classes
+      scope: Component
+
+    layout: 
+      sequence: 310
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML Attribute
+
+  - # ====== Custom Attribute: CSS Classes =======================
+    id: 43511144387509747
+    identification: 
+      static-id: AVATAR_CSS_CLASSES
+      attribute: 32
+      name: CSS Classes
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1970716609671581408
+      sequence: 320
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43482257481509718
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter CSS classes to add to the visual. You may add multiple classes by separating them with a space.
+
+  - # ====== Custom Attribute: Apply Theme Colors ================
+    id: 43511572788509747
+    identification: 
+      static-id: APPLY_THEME_COLORS
+      attribute: 23
+      name: Apply Theme Colors
+      scope: Report
+
+    layout: 
+      attribute-group: Appearance # 1713823990929307894
+      sequence: 230
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Specify whether to use the Universal Theme colors for avatar and badge row items. When set to Yes, the u-colors class will be applied to each row. When set to No, a default color will be used instead.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43512139087509748
+    identification: 
+      static-id: STYLE
+      attribute: 27
+      name: Style
+      scope: Report
+
+    layout: 
+      attribute-group: Appearance # 1713823990929307894
+      sequence: 270
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML
+
+    entries: 
+    - # ====== Entry: Compact ======================================
+      id: 43512607223509749
+      entry: 
+        sequence: 10
+        display: Compact
+        return: t-ContentRow--styleCompact
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Hide Borders ======================
+    id: 43513177468509749
+    identification: 
+      static-id: HIDE_BORDERS
+      attribute: 28
+      name: Hide Borders
+      scope: Report
+
+    layout: 
+      attribute-group: Appearance # 1713823990929307894
+      sequence: 280
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+  - # ====== Custom Attribute: Remove Padding ====================
+    id: 43513596155509750
+    identification: 
+      static-id: REMOVE_PADDING
+      attribute: 30
+      name: Remove Padding
+      scope: Report
+
+    layout: 
+      attribute-group: Appearance # 1713823990929307894
+      sequence: 300
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+  action-positions: 
+  - # ====== Action Position: Title Link =========================
+    id: 2168692697670062994
+    identification: 
+      name: Title Link
+      static-id: TITLE_LINK
+      sequence: 30
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: Full Row Link ======================
+    id: 2169371998400146098
+    identification: 
+      name: Full Row Link
+      static-id: FULL_ROW_LINK
+      sequence: 40
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: Avatar Link ========================
+    id: 2182284391277424741
+    identification: 
+      name: Avatar Link
+      static-id: AVATAR_LINK
+      sequence: 10
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  - # ====== Action Position: Primary Actions ====================
+    id: 2182285724667438598
+    identification: 
+      name: Primary Actions
+      static-id: PRIMARY_ACTIONS
+      sequence: 20
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Template
+
+  - # ====== Action Position: Badge Link =========================
+    id: 2242611033207513007
+    identification: 
+      name: Badge Link
+      static-id: BADGE_LINK
+      sequence: 50
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+  action-templates: 
+  - # ====== Action Template: Button =============================
+    id: 2182286326344469727
+    identification: 
+      name: Button
+      type: Button
+
+    template: 
+      action-template: |
+        {with/}
+        LINK_URL:=#LINK_URL#
+        LINK_ATTR:=#LINK_ATTR#
+        LABEL:=#LABEL#
+        ICON_CLASSES:=#ICON_CLASSES#
+        CSS_CLASSES:=#CSS_CLASSES#
+        IS_HOT:=#IS_HOT#
+        IS_ICON_ONLY:=#IS_ICON_ONLY#
+        IS_DISABLED:=#IS_DISABLED#
+        {apply THEME$BUTTON/}
+
+    advanced: 
+      translatable: false
+
+  - # ====== Action Template: Menu ===============================
+    id: 2182287585864473875
+    identification: 
+      name: Menu
+      type: Menu
+
+    template: 
+      action-template: |
+        {with/}
+        MENU_ID:=#MENU_ID#
+        LABEL:=#LABEL#
+        ICON_CLASSES:=#ICON_CLASSES#
+        CSS_CLASSES:=#CSS_CLASSES#
+        IS_HOT:=#IS_HOT#
+        IS_DISABLED:=#IS_DISABLED#
+        IS_ICON_ONLY:=#IS_ICON_ONLY#
+        {apply THEME$BUTTON/}
+        #MENU#
+
+    advanced: 
+      translatable: false
+
+- # ====== Plugin: Media List ==================================
+  id: 372111493096573171
+  identification: 
+    name: Media List
+    internal-name: THEME_42$MEDIA_LIST
+    theme: Universal Theme # 42
+    type: Template Component
+
+  advanced: 
+    quick-pick: true
+
+  subscription: 
+    master: 
+      referenced-id: 1564403634518414297
+
+    subscribe-component-settings: true
+    version-number: 76083243
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    - Multiple (Report)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <div class="t-MediaList-itemWrap">
+          {if ?APEX$SELECTOR%assigned/}<div class="t-MediaList-selection is-placeholder"></div>{endif/}
+          {if DISPLAY_AVATAR/}
+            <div class="t-MediaList-iconWrap" aria-hidden="true">
+              {with/}
+                SIZE:=t-Avatar--xs
+                SHAPE:=#AVATAR_SHAPE#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-MediaList-body">
+            {if ?TITLE%assigned/}<div class="t-MediaList-title is-placeholder"></div>{endif/}
+            {if ?DESCRIPTION%assigned/}<div class="t-MediaList-desc is-placeholder"></div>{endif/}
+          </div>
+          {if DISPLAY_BADGE%assigned/}
+            {with/}
+              LABEL:=
+              VALUE:=
+              SHAPE:=#BADGE_SHAPE#
+              STYLE:=#BADGE_STYLE#
+            {apply THEME$BADGE/}
+          {endif/}
+        </div>
+      {else/}
+        {if LINK/}<a href="#LINK#" #LINK_ATTR#{else/}<div{endif/} class="t-MediaList-itemWrap{if ?DESCRIPTION/} t-MediaList-itemWrap--showDesc{endif/}">
+          {if ?APEX$SELECTOR%assigned/}<div class="t-MediaList-selection">#APEX$SELECTOR#</div>{endif/}
+          {if DISPLAY_AVATAR/}
+            <div class="t-MediaList-iconWrap" aria-hidden="true">
+              {with/}
+                TYPE:=#AVATAR_TYPE#
+                IMAGE:=#AVATAR_IMAGE#
+                DESCRIPTION:=#AVATAR_DESCRIPTION#
+                ICON:=#AVATAR_ICON#
+                INITIALS:=#AVATAR_INITIALS#
+                CSS_CLASSES:=u-color
+                SHAPE:=#AVATAR_SHAPE#
+              {apply THEME$AVATAR/}
+            </div>
+          {endif/}
+          <div class="t-MediaList-body">
+            {if ?TITLE/}<h3 class="t-MediaList-title">#TITLE#</h3>{endif/}
+            {if ?DESCRIPTION/}<p class="t-MediaList-desc">#DESCRIPTION#</p>{endif/}
+          </div>
+          {if DISPLAY_BADGE/}
+            {with/}
+              LABEL_DISPLAY:=#BADGE_LABEL_DISPLAY#
+              LABEL:=#BADGE_LABEL#
+              VALUE:=#BADGE_VALUE#
+              ICON:=#BADGE_ICON#
+              STATE:=#BADGE_STATE#
+              SIZE:=t-Badge--md
+              STYLE:=#BADGE_STYLE#
+              SHAPE:=#BADGE_SHAPE#
+            {apply THEME$BADGE/}
+          {endif/}
+        {if LINK/}</a>{else/}</div>{endif/}
+      {endif/}
+    report-body: '<ul class="t-MediaList t-MediaList--showIcons{if ?LAYOUT/} #LAYOUT!ATTR#{endif/}{if ?SIZE/} #SIZE!ATTR#{endif/}{if APPLY_THEME_COLORS/} u-colors{endif/} #APEX$COMPONENT_CSS_CLASSES#">#APEX$ROWS#</ul>'
+    report-row: '<li class="t-MediaList-item" #APEX$ROW_IDENTIFICATION#>#APEX$PARTIAL#</li>'
+    translate-templates: false
+    default-escape-mode: HTML
+    number-of-lazy-loading-skeletons: 3
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    help-text: Display report content in a formatted media list. Supports avatars and badges. Available for a single row or as a report with multiple rows.
+
+  attribute-groups: 
+  - # ====== Attribute Group: Badge ==============================
+    id: 1843465002754393321
+    identification: 
+      name: Badge
+      sequence: 20
+
+  - # ====== Attribute Group: Avatar =============================
+    id: 1843465557766393322
+    identification: 
+      name: Avatar
+      sequence: 10
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Title =============================
+    id: 43448251198509675
+    identification: 
+      static-id: TITLE
+      attribute: 1
+      name: Title
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be used as the title.
+
+    examples: 
+      demo-value: Lorem ipsum dolor sit amet
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43448840178509676
+    identification: 
+      static-id: DESCRIPTION
+      attribute: 2
+      name: Description
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+
+    help: 
+      help-text: Select a source column to be used for the row description.
+
+    examples: 
+      demo-value: Nunc sit amet nunc quis magna ornare suscipit. Etiam aliquet maximus sapien, at sagittis sem gravida nec.
+
+  - # ====== Custom Attribute: Display Avatar ====================
+    id: 43449287970509676
+    identification: 
+      static-id: DISPLAY_AVATAR
+      attribute: 3
+      name: Display Avatar
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the avatar for each row. When set to Yes, an avatar will be displayed with the assigned image, icon, or initials. When set to No, no avatar will be displayed.
+
+  - # ====== Custom Attribute: Display Badge =====================
+    id: 43449836058509677
+    identification: 
+      static-id: DISPLAY_BADGE
+      attribute: 4
+      name: Display Badge
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    help: 
+      help-text: Specify whether to display or hide the badge for each row. When set to Yes, a badge will be displayed in each row. When set to No, no badge will be displayed.
+
+  - # ====== Custom Attribute: Type ==============================
+    id: 43450325343509677
+    identification: 
+      static-id: AVATAR_TYPE
+      attribute: 5
+      name: Type
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 50
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML
+
+    default: 
+      value: icon
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43449287970509676
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the type of content that will be displayed in the avatar.
+
+    examples: 
+      demo-value: icon
+
+    entries: 
+    - # ====== Entry: Image ========================================
+      id: 43450782385509678
+      entry: 
+        sequence: 10
+        display: Image
+        return: image
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Initials =====================================
+      id: 43451433731509678
+      entry: 
+        sequence: 20
+        display: Initials
+        return: initials
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Icon =========================================
+      id: 43451950365509679
+      entry: 
+        sequence: 30
+        display: Icon
+        return: icon
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Image =============================
+    id: 43452592250509679
+    identification: 
+      static-id: AVATAR_IMAGE
+      attribute: 6
+      name: Image
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 60
+
+    settings: 
+      type: Media
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Type # 43450325343509677
+      depending-on-condition-type: equal to
+      expression: image
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Use the Media popup dialog to select a source for the avatar image.</p>
+        
+        <p>Available options include:
+        <ul>
+        <li>URL</li>
+        <li>BLOB Column</li>
+        <li>URL Column</li>
+        </ul>
+        </p>
+
+  - # ====== Custom Attribute: Description =======================
+    id: 43453051205509680
+    identification: 
+      static-id: AVATAR_DESCRIPTION
+      attribute: 7
+      name: Description
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 95
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: true
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Enter a short description of the image/icon or select a source column from the quick pick options. This will be used as title & alt text for the avatar image/icon.
+
+  - # ====== Custom Attribute: Initials ==========================
+    id: 43453640901509680
+    identification: 
+      static-id: AVATAR_INITIALS
+      attribute: 8
+      name: Initials
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 80
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Type # 43450325343509677
+      depending-on-condition-type: equal to
+      expression: initials
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column to be displayed within each avatar. Only varchar2 data types are supported.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43454143827509681
+    identification: 
+      static-id: AVATAR_ICON
+      attribute: 9
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 90
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: fa-user
+
+    condition: 
+      depending-on-custom-attribute: Type # 43450325343509677
+      depending-on-condition-type: equal to
+      expression: icon
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43454597902509681
+    identification: 
+      static-id: AVATAR_SHAPE
+      attribute: 10
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Avatar # 1843465557766393322
+      sequence: 100
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: t-Avatar--rounded
+
+    condition: 
+      depending-on-custom-attribute: Display Avatar # 43449287970509676
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the avatar. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43455105753509682
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Avatar--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43455745563509682
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Avatar--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a circular shape.
+
+    - # ====== Entry: Square =======================================
+      id: 43456334964509683
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Avatar--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed within a square shape.
+
+    - # ====== Entry: No Shape =====================================
+      id: 43456938978509683
+      entry: 
+        sequence: 40
+        display: No Shape
+        return: t-Avatar--noShape
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed inline without a containing shape.
+
+  - # ====== Custom Attribute: Label =============================
+    id: 43457544951509684
+    identification: 
+      static-id: BADGE_LABEL
+      attribute: 11
+      name: Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 110
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: true
+      escape-mode: Raw
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter a value for the badge label or select a source column from the quick pick options.
+
+  - # ====== Custom Attribute: Value =============================
+    id: 43457999223509684
+    identification: 
+      static-id: BADGE_VALUE
+      attribute: 12
+      name: Value
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 120
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      - Number
+      - Date
+      - Interval Year to Month
+      - Interval Day to Second
+      escape-mode: Strip HTML
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select a source column for the badge value.
+
+  - # ====== Custom Attribute: State =============================
+    id: 43458470185509685
+    identification: 
+      static-id: BADGE_STATE
+      attribute: 13
+      name: State
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 130
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the source column for the state of the badge. Substitute column value with "danger", "warning", "success" or "info" for default styling.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 43458997343509685
+    identification: 
+      static-id: BADGE_ICON
+      attribute: 14
+      name: Icon
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 140
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the badge.
+
+  - # ====== Custom Attribute: Display Label =====================
+    id: 43459539110509686
+    identification: 
+      static-id: BADGE_LABEL_DISPLAY
+      attribute: 15
+      name: Display Label
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 150
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: N
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Specify whether to display or hide the badge label. When set to Yes, the badge label will be displayed in addition to the badge value. When set to No, only the badge value will be displayed.
+
+  - # ====== Custom Attribute: Style =============================
+    id: 43460001484509686
+    identification: 
+      static-id: BADGE_STYLE
+      attribute: 16
+      name: Style
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 160
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the badge style. Default inherits the style set by the containing template.
+
+    entries: 
+    - # ====== Entry: Subtle =======================================
+      id: 43460537012509687
+      entry: 
+        sequence: 10
+        display: Subtle
+        return: t-Badge--subtle
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Outline ======================================
+      id: 43461047687509687
+      entry: 
+        sequence: 20
+        display: Outline
+        return: t-Badge--outline
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Shape =============================
+    id: 43461661130509688
+    identification: 
+      static-id: BADGE_SHAPE
+      attribute: 17
+      name: Shape
+      scope: Component
+
+    layout: 
+      attribute-group: Badge # 1843465002754393321
+      sequence: 170
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    condition: 
+      depending-on-custom-attribute: Display Badge # 43449836058509677
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Select the shape of the badge. Default inherits the shape set by the containing template.
+
+    entries: 
+    - # ====== Entry: Rounded ======================================
+      id: 43462189372509688
+      entry: 
+        sequence: 10
+        display: Rounded
+        return: t-Badge--rounded
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with rounded corners.
+
+    - # ====== Entry: Circular =====================================
+      id: 43462774164509689
+      entry: 
+        sequence: 20
+        display: Circular
+        return: t-Badge--circle
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with circular edges.
+
+    - # ====== Entry: Square =======================================
+      id: 43463415284509689
+      entry: 
+        sequence: 30
+        display: Square
+        return: t-Badge--square
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Displayed with squared edges.
+
+  - # ====== Custom Attribute: Layout ============================
+    id: 43463974750509690
+    identification: 
+      static-id: LAYOUT
+      attribute: 18
+      name: Layout
+      scope: Report
+
+    layout: 
+      sequence: 180
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Select the number of grid columns the media list content will display in. Horizontal Span will display all columns in a single horizontal row.
+
+    entries: 
+    - # ====== Entry: 2 Column Grid ================================
+      id: 43464538245509690
+      entry: 
+        sequence: 10
+        display: 2 Column Grid
+        return: t-MediaList--cols t-MediaList--2cols
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: 3 Column Grid ================================
+      id: 43465133579509691
+      entry: 
+        sequence: 20
+        display: 3 Column Grid
+        return: t-MediaList--cols t-MediaList--3cols
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: 4 Column Grid ================================
+      id: 43465673777509691
+      entry: 
+        sequence: 30
+        display: 4 Column Grid
+        return: t-MediaList--cols t-MediaList--4cols
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: 5 Column Grid ================================
+      id: 43466292462509692
+      entry: 
+        sequence: 40
+        display: 5 Column Grid
+        return: t-MediaList--cols t-MediaList--5cols
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Horizontal Span ==============================
+      id: 43466914709509692
+      entry: 
+        sequence: 50
+        display: Horizontal Span
+        return: t-MediaList--horizontal
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Size ==============================
+    id: 43467499357509693
+    identification: 
+      static-id: SIZE
+      attribute: 19
+      name: Size
+      scope: Report
+
+    layout: 
+      sequence: 190
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      lov-null-text: Default
+      escape-mode: HTML Attribute
+
+    help: 
+      help-text: Set the size of media list items.
+
+    entries: 
+    - # ====== Entry: Large ========================================
+      id: 43467981571509694
+      entry: 
+        sequence: 10
+        display: Large
+        return: t-MediaList--large force-fa-lg
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Apply Theme Colors ================
+    id: 43468567504509694
+    identification: 
+      static-id: APPLY_THEME_COLORS
+      attribute: 20
+      name: Apply Theme Colors
+      scope: Report
+
+    layout: 
+      sequence: 200
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      escape-mode: HTML Attribute
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Specify whether to use the Universal Theme colors for avatar and badge row items. When set to Yes, the u-colors class will be applied to each row. When set to No, a default color will be used instead.
+
+  action-positions: 
+  - # ====== Action Position: Link ===============================
+    id: 2174093103710606724
+    identification: 
+      name: Link
+      static-id: LINK
+      sequence: 10
+
+    advanced: 
+      quick-pick: false
+
+    settings: 
+      type: Link
+
+- # ====== Plugin: Sample Apps Footer ==========================
+  id: 733777940202374475
+  identification: 
+    name: Sample Apps Footer
+    internal-name: COM.ORACLE.APEX.SAMPLEAPPFOOTER
+    type: Region
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 1660759070362076804
+
+    subscribe-component-settings: true
+
+  source: 
+    pl/sql-code: |
+      function render (   p_region in apex_plugin.t_region,
+                          p_plugin in apex_plugin.t_plugin,
+                          p_is_printer_friendly in boolean )
+              return apex_plugin.t_region_render_result is
+      begin
+          sys.htp.p('<ul class="t-Cards t-Cards--sampleAppsFooter t-Cards--featured force-fa-lg t-Cards--displayIcons t-Cards--hideBody t-Cards--animColorFill">');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/twitter" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-twitter" style="color: #1da1f2"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Twitter</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/linkedin" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-linkedin" style="color: #0077b5"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">LinkedIn</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/facebook" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-facebook" style="color: #3b5998"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Facebook</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/youtube" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-youtube" style="color: red"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">YouTube</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-apex" style="color: #707070"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">apex.oracle.com</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/community" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-users" style="color: #707070"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Oracle APEX Community</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/forum" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-comments-o" style="color: #707070"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Discussion Forums</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('<li class="t-Cards-item">');
+          sys.htp.p('  <div class="t-Card">');
+          sys.htp.p('    <a href="https://apex.oracle.com/autonomous" target="_blank" class="t-Card-wrap">');
+          sys.htp.p('      <div class="t-Card-icon"><span class="t-Icon fa fa-cloud" style="color: #707070"></span></div>');
+          sys.htp.p('      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Autonomous Database + APEX</h3></div>');
+          sys.htp.p('    </a>');
+          sys.htp.p('  </div>');
+          sys.htp.p('</li>');
+          sys.htp.p('</ul>');
+          return null;
+      end render;
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 5.0.1
+    help-text: |
+      <p>This region plug-in is used to display a custom footer at the bottom of pages with large icons for navigating to other sites such as twitter and linkedin.</p>
+      <p>Note: This plug-in should be customized to meet your specific requirements, rather than used as is.</p>
+
+- # ====== Plugin: Source Display ==============================
+  id: 1050142869310454286
+  identification: 
+    name: Source Display
+    internal-name: COM.ORACLE.APEX.DISPLAY_SOURCE
+    type: Region
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 1319402356703093756
+
+    subscribe-component-settings: true
+
+  source: 
+    pl/sql-code: |
+      function render (
+              p_region              in apex_plugin.t_region,
+              p_plugin              in apex_plugin.t_plugin,
+              p_is_printer_friendly in boolean )
+          return apex_plugin.t_region_render_result
+      is
+          -- It's better to have named variables instead of using the generic ones,
+          -- makes the code more readable. We are using the same defaults for the
+          -- required attributes as in the plug-in attribute configuration, because
+          -- they can still be null. Keep them in sync!
+          c_region_static_id    constant varchar2(255) := p_region.attribute_01;
+          c_highlight_page_item constant varchar2(255) := p_region.attribute_02;
+      
+          l_highlight_term varchar2(4000) := '';
+      
+          cursor sql_csr( d_region_static_id in varchar2 ) is
+              select source_type, 10 seq, null series_name, region_source source
+              from apex_application_page_regions
+              where application_id = :APP_ID
+                  and page_id = :APP_PAGE_ID
+                  and static_id = d_region_static_id
+                  and ( source_type_code like 'PLUGIN%'
+                      or source_type_code like 'STATIC_TEXT%'
+                      or source_type in (
+                          'Calendar',
+                          'Easy Calendar',
+                          'Interactive Report',
+                          'Interactive Grid',
+                          'List View',
+                          'Report',
+                          'PL/SQL',
+                          'Tabular Form'
+                      )
+                  )
+              union all
+              select reg.source_type, fs.series_seq, fs.series_name, fs.series_query source
+              from apex_application_page_regions reg,
+                  apex_application_page_flash5_s fs
+              where reg.application_id = :APP_ID
+                  and reg.page_id = :APP_PAGE_ID
+                  and reg.static_id = d_region_static_id
+                  and fs.application_id = reg.application_id
+                  and fs.page_id = reg.page_id
+                  and fs.region_id = reg.region_id
+                  and reg.source_type in (
+                      'Flash Chart',
+                      'Map'
+                  )
+              union all
+              select reg.source_type, 10 seq, null series_name, to_clob(tr.tree_query) source
+              from apex_application_page_regions reg,
+                  apex_application_page_trees tr
+              where reg.application_id = :APP_ID
+                  and reg.page_id = :APP_PAGE_ID
+                  and reg.static_id = d_region_static_id
+                  and tr.application_id = reg.application_id
+                  and tr.page_id = reg.page_id
+                  and tr.region_id = reg.region_id
+                  and reg.source_type in ('JavaScript Tree')
+              union all
+              select reg.source_type, 10 seq, null series_name, to_clob(list_query) source
+              from apex_application_page_regions reg,
+                  apex_application_lists li
+              where reg.application_id = :APP_ID
+                  and reg.page_id = :APP_PAGE_ID
+                  and reg.static_id = d_region_static_id
+                  and li.application_id = reg.application_id
+                  and li.list_id = reg.list_id
+                  and reg.source_type in ( 'List' )
+              order by 1, 2;
+          sql_rec sql_csr%ROWTYPE;
+      begin
+          if c_highlight_page_item is not null then
+              l_highlight_term := apex_escape.html(trim(lower(v(c_highlight_page_item))));
+          end if;
+      
+          for sql_rec in sql_csr( c_region_static_id ) loop
+              if sql_rec.series_name is not null then
+                  sys.htp.p('<p><strong>'||apex_escape.html(sql_rec.series_name)||':</strong></p>');
+              end if;
+              sys.htp.p('<pre>');
+              if l_highlight_term is not null then
+                  sys.htp.p(replace(apex_escape.html(sql_rec.source),
+                      l_highlight_term,'<span class="highlight">'||l_highlight_term||'</span>'));
+              else
+                  sys.htp.p(apex_escape.html(sql_rec.source));
+              end if;
+              sys.htp.p('</pre>');
+          end loop;
+      
+          return null;
+      end render;
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 5.0.1
+    help-text: This region plug-in is used to display the SQL Source region of an accompanying region.
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Region Static ID ==================
+    id: 1050143070044454305
+    identification: 
+      static-id: attribute_01
+      attribute: 1
+      name: Region Static ID
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    help: 
+      help-text: Enter the static ID as defined in the target region's attributes section.
+
+  - # ====== Custom Attribute: Highlight Term Page Item ==========
+    id: 1050143508570454315
+    identification: 
+      static-id: attribute_02
+      attribute: 2
+      name: Highlight Term Page Item
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    help: 
+      help-text: If you wish to have a term in your region source highlighted, create a page item and select it here.
+
+- # ====== Plugin: Modern Star Rating ==========================
+  id: 1888814544713171370
+  identification: 
+    name: Modern Star Rating
+    internal-name: COM.ORACLE.APEX.STARRATING_MODERN
+    type: Item
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    master: 
+      referenced-id: 9828570016118433579
+
+    subscribe-component-settings: true
+
+  source: 
+    pl/sql-code: |
+      c_default_stars      constant number        := 5;
+      c_default_icon_class constant varchar2(128) := 'fa-star';
+      c_default_acolor     constant varchar2(30)  := 'red';
+      c_default_bcolor     constant varchar2(30)  := '#e0e0e0';
+      
+      --===============================================================================
+      -- Renders the star rating item type based on the configuration of the page item.
+      --===============================================================================
+      procedure render_star_rating (
+          p_item   in apex_plugin.t_page_item,
+          p_plugin in apex_plugin.t_plugin,
+          p_param  in apex_plugin.t_item_render_param,
+          p_result in out nocopy apex_plugin.t_item_render_result )
+      is
+          c_number_of_stars      constant number          := nvl(to_number(p_item.attribute_01), c_default_stars);
+          c_escaped_value        constant varchar2(32767) := apex_escape.html_attribute(p_param.value);
+          
+          c_default_icon         constant varchar2(128)   := nvl( p_plugin.attribute_04, c_default_icon_class );
+          c_icon_class           constant varchar2(128)   := p_item.attribute_02;
+          c_default_icon_acolor  constant varchar2(128)   := nvl( p_plugin.attribute_02, c_default_acolor );
+          c_icon_acolor          constant varchar2(128)   := p_item.attribute_04;
+          c_default_icon_bcolor  constant varchar2(128)   := nvl( p_plugin.attribute_03, c_default_bcolor );
+          c_icon_bcolor          constant varchar2(128)   := p_item.attribute_05;
+          
+          c_label_text           constant varchar2(128)   := nvl( p_item.attribute_06, '#VALUE#' );
+          
+          c_use_default          boolean                  := case when p_item.attribute_03 = 'Y' then true else false end;
+          
+          l_name                 varchar2(30);
+          l_clear_tooltip        varchar2(4000)           := sys.htf.escape_sc(nvl(p_plugin.attribute_01, 'Clear Rating'));
+      
+      begin
+          l_name := apex_plugin.get_input_name_for_item;
+          
+          if p_param.is_readonly or p_param.is_printer_friendly then 
+              apex_plugin_util.print_hidden_if_readonly (
+                  p_item_name           => l_name,
+                  p_value               => p_param.value,
+                  p_is_readonly         => p_param.is_readonly,
+                  p_is_printer_friendly => p_param.is_printer_friendly
+             );
+             sys.htp.prn (
+                 '<input type="text" ' ||
+                 'class="' || 'apex-item-starrating apex-item-plugin' || '" ' ||
+                 'id="'    || p_item.name|| '_DISPLAY" ' ||
+                 'value="' || case when p_param.value is null then '' else ltrim( rtrim ( c_escaped_value ) ) end || '" />' );
+      
+          else
+          
+              -- render the text field widget
+              sys.htp.prn (
+                  '<input type="text" ' ||
+                  wwv_flow_plugin_util.get_element_attributes(p_item, l_name, 'apex-item-starrating apex-item-plugin', false) ||
+                  'id="'    || p_item.name|| '" ' ||
+                  'value="' || case when p_param.value is null then '' else ltrim( rtrim ( c_escaped_value ) ) end || '" />' );
+                 
+          end if;
+      
+          apex_javascript.add_onload_code (
+              p_code => 'starRatingItemInit("'|| case when p_param.is_readonly or p_param.is_printer_friendly then p_item.name || '_DISPLAY' else p_item.name end ||'", {'||
+                      apex_javascript.add_attribute( 'readOnly',      p_param.is_readonly,                                                       false, true  ) ||
+                      apex_javascript.add_attribute( 'numStars',      c_number_of_stars,                                                         false, true  ) ||
+                      apex_javascript.add_attribute( 'clearToolip',   l_clear_tooltip,                                                           false, true  ) ||
+                      apex_javascript.add_attribute( 'iconClass',     case when c_use_default then c_default_icon else c_icon_class end,         false, true  ) ||
+                      apex_javascript.add_attribute( 'isRequired',    p_item.is_required,                                                        false, true  ) ||
+                      apex_javascript.add_attribute( 'labelText',     c_label_text,                                                              false, true  ) ||
+                      apex_javascript.add_attribute( 'activeColor',   case when c_use_default then c_default_icon_acolor else c_icon_acolor end, false, true  ) ||
+                      apex_javascript.add_attribute( 'inactiveColor', case when c_use_default then c_default_icon_bcolor else c_icon_bcolor end, false, false ) ||
+                      '});' );
+      
+          -- Tell APEX that this field is navigable
+          p_result.is_navigable := (not p_param.is_readonly = false and not p_param.is_printer_friendly);
+      
+      end render_star_rating;
+      
+      
+      procedure metadata_star_rating (
+          p_item   in            apex_plugin.t_item,
+          p_plugin in            apex_plugin.t_plugin,
+          p_param  in            apex_plugin.t_item_meta_data_param,
+          p_result in out nocopy apex_plugin.t_item_meta_data_result )
+      is
+      begin
+          p_result.escape_output := false;
+      end;
+      
+      --==============================================================================
+      -- Validates the submitted star rating value against the configuration to make
+      -- sure that no invalid values are submitted by a hacker.
+      --==============================================================================
+      procedure validate_star_rating (
+          p_item   in            apex_plugin.t_item,
+          p_plugin in            apex_plugin.t_plugin,
+          p_param  in            apex_plugin.t_item_validation_param,
+          p_result in out nocopy apex_plugin.t_item_validation_result )
+      is
+          c_number_of_stars constant number := nvl(to_number(p_item.attribute_01), c_default_stars);
+      
+          l_value number;
+      begin
+          if p_param.value is null then return; end if;
+          
+          -- The value has to be numeric, in the boundaries of 1 and "number of stars"
+          if wwv_flow_utilities.is_numeric(p_param.value) then
+              l_value := to_number(p_param.value);
+              if not (   l_value between 0 and c_number_of_stars    )
+              then
+                  p_result.message := l_value || ' is not in the valid rating range of 1 - '||c_number_of_stars;
+              end if;
+          else
+              p_result.message := apex_escape.html(p_param.value)||' is not numeric';
+          end if;
+      end validate_star_rating;
+
+  callbacks: 
+    api-interface: Procedure with Legacy Attributes [deprecated]
+    render-procedure/function-name: render_star_rating
+    meta-data-procedure-name: metadata_star_rating
+    validation-procedure-name: validate_star_rating
+
+  supported-for: 
+    component-type: 
+    - Page Items
+    - Interactive Grid Columns
+
+  standard-attributes: 
+    attributes: 
+    - Is Visible Widget
+    - Session State Changeable
+    - Has Read Only Attribute
+    - Has Source Attributes
+    - Has Icon Attribute
+    - Has Encrypt Session State Attribute
+    - Has Filter
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  files: 
+    file-prefix: '#IMAGE_PREFIX#plugins/com.oracle.apex.starrating_modern/'
+
+  css: 
+    file-urls: 
+    - '#PLUGIN_FILES#com_oracle_apex_starrating_modern.css'
+
+  javascript: 
+    file-urls: 
+    - '#PLUGIN_FILES#com_oracle_apex_starrating_modern.js'
+
+  information: 
+    version: 1.1
+    about-url: 'http://www.oracleapex.info/'
+    help-text: |
+      <p><strong>Modern Star Rating Item</strong></p>
+      <p>This item displays a numeric value as a number of stars or other icons. The end user can change the value by selecting the desired number of stars. The value can be adjusted by clicking the number of stars with the mouse or by using the keyboard.</p>
+      <p>The icon to be displayed, the background and foreground colors can be adjusted either in the component settings or in the individual item settings. To use individual items and colors, set the attribute <strong>Use Component Defaults</strong> to <strong>No</strong>.</p>
+      <p>As icons, you may use any icon from the Icon Font available in your application. For Universal Theme applications, use an icon from the <em>Font APEX</em> library.</p>
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Clear Tooltip =====================
+    id: 2062918595355391996
+    identification: 
+      static-id: attribute_01
+      attribute: 1
+      name: Clear Tooltip
+      scope: Application
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: false
+      show-in-wizard: false
+      required: false
+      translatable: true
+      display-width: 20
+
+    default: 
+      value: Clear Rating
+
+    help: 
+      help-text: Text which should be displayed for the tooltip of the "Clear" icon of the star rating widget. If not specified, the default text "Clear Rating" will be used.
+
+  - # ====== Custom Attribute: Active Star Color =================
+    id: 2062918917583392001
+    identification: 
+      static-id: attribute_02
+      attribute: 2
+      name: Active Star Color
+      scope: Application
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Color
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: red
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose the default color for active stars.
+
+  - # ====== Custom Attribute: Inactive Star Color ===============
+    id: 2062919368749392002
+    identification: 
+      static-id: attribute_03
+      attribute: 3
+      name: Inactive Star Color
+      scope: Application
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Color
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: lightgray
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose the default color for inactive stars.
+
+  - # ====== Custom Attribute: Default icon ======================
+    id: 2062919724069392002
+    identification: 
+      static-id: attribute_04
+      attribute: 4
+      name: Default icon
+      scope: Application
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: fa-star
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose the default icon to use.
+
+    examples: 
+      examples: |
+        <pre>
+        fa-star
+        fa-database
+        fa-apex
+        </pre>
+
+  - # ====== Custom Attribute: Number of Stars ===================
+    id: 2062920170901392002
+    identification: 
+      static-id: attribute_01
+      attribute: 1
+      name: Number of Stars
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 2
+      maximum-length: 2
+
+    default: 
+      value: 9
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Specify the maximum number of stars.
+
+  - # ====== Custom Attribute: Icon ==============================
+    id: 2062920578278392003
+    identification: 
+      static-id: attribute_02
+      attribute: 2
+      name: Icon
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Icon
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: fa-star
+
+    condition: 
+      depending-on-custom-attribute: Use Component Defaults # 2062920975126392004
+      depending-on-condition-type: equal to
+      expression: N
+      always-evaluate: true
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Specify the icon to use.
+
+    examples: 
+      examples: |
+        <pre>
+        fa-star
+        fa-database
+        fa-apex
+        </pre>
+
+  - # ====== Custom Attribute: Use Component Defaults ============
+    id: 2062920975126392004
+    identification: 
+      static-id: attribute_03
+      attribute: 3
+      name: Use Component Defaults
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: Y
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose whether to use component defaults or not.
+
+  - # ====== Custom Attribute: Active Star Color =================
+    id: 2062921331995392004
+    identification: 
+      static-id: attribute_04
+      attribute: 4
+      name: Active Star Color
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Color
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: red
+
+    condition: 
+      depending-on-custom-attribute: Use Component Defaults # 2062920975126392004
+      depending-on-condition-type: equal to
+      expression: N
+      always-evaluate: true
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose the color for active stars.
+
+  - # ====== Custom Attribute: Inactive Star Color ===============
+    id: 2062921803324392004
+    identification: 
+      static-id: attribute_05
+      attribute: 5
+      name: Inactive Star Color
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Color
+      common: true
+      show-in-wizard: false
+      required: false
+      translatable: false
+
+    default: 
+      value: lightgray
+
+    condition: 
+      depending-on-custom-attribute: Use Component Defaults # 2062920975126392004
+      depending-on-condition-type: equal to
+      expression: N
+      always-evaluate: true
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: Choose the color for inactive stars.
+
+  - # ====== Custom Attribute: Tooltip Template ==================
+    id: 2062922126876392004
+    identification: 
+      static-id: attribute_06
+      attribute: 6
+      name: Tooltip Template
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Text
+      common: false
+      show-in-wizard: false
+      required: false
+      translatable: true
+      display-width: 30
+      maximum-length: 50
+
+    default: 
+      value: 'Rating: #VALUE#'
+
+    supported-for: 
+      component-type: 
+      - Page Items
+      - Interactive Grid Columns
+
+    help: 
+      help-text: 'Specify the template for the tooltip. The #VALUE# substitution is being replaces by the current rating value.'
+
+    examples: 
+      examples: 'Rating: #VALUE# stars.'
+

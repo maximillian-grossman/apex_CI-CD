@@ -1,0 +1,184 @@
+---
+# ====== Page: Example REST Application ======================
+id: 1
+identification: 
+  name: Example REST Application
+  alias: EXAMPLE-REST-APPLICATION
+  title: Example REST Application
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Home Page Menu ==============================
+  id: 100453208882784162
+  identification: 
+    name: Home Page Menu
+    type: List
+
+  source: 
+    list: Home Page # 101146871209978601
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      list-template: Cards
+      template-options: 
+      - '#DEFAULT#'
+      - u-colors
+      - t-Cards--featured force-fa-lg
+      - t-Cards--displayIcons
+      - t-Cards--3cols
+      - t-Cards--animColorFill
+
+- # ====== Region: &APP_NAME. ==================================
+  id: 1800053131288651718
+  identification: 
+    name: '&APP_NAME.'
+    type: Static Content
+
+  source: 
+    html-code: Access and use external REST services in your Applications.
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-512.png'
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About this Page =============================
+  id: 3672955037081923175
+  identification: 
+    name: About this Page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      This application showcases how to access external REST services from Oracle Application Express pages. Particular focus is on the new REST service capabilities in Application Express 18.1 and higher. The <strong>Oracle on Github</strong> page illustrates how to declaratively create Application Express components like reports, charts or calendars based on REST services.</p>
+      <p>The <strong>Web Sources and PL/SQL</strong> page shows how declarative Web Sources can be used from within PL/SQL code. That provides great flexibility when working with the data, without having to care for the details of JSON response parsing - Application Express is still responsible for that.
+      </p>
+      <p>
+       It is recommended to first test the URL endpoint used by this application. Go to <strong>Administration</strong> &gt; <strong>Test Service Endpoint</strong> to do this. After a successful test, the REST service demonstration pages can be explored.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-bottom-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

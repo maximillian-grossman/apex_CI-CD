@@ -1,0 +1,173 @@
+---
+- # ====== REST Data Source: cat_facts =========================
+  id: 19550875569244487
+  identification: 
+    name: cat_facts
+
+  subscription: 
+    version-number: 45167202207603
+
+  source: 
+    type: HTTP
+    remote-server: catfact-ninja # 16773964706617306
+    url-path-prefix: breeds
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: cat_facts
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 19549143973244473
+    identification: 
+      name: cat_facts
+
+    data-profile: 
+      format: JSON
+      row-selector: data
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COAT ========================================
+      id: 19549313547244480
+      identification: 
+        column-name: COAT
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: coat
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: BREED =======================================
+      id: 19549616518244481
+      identification: 
+        column-name: BREED
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: breed
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: ORIGIN ======================================
+      id: 19549948719244482
+      identification: 
+        column-name: ORIGIN
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: origin
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: COUNTRY =====================================
+      id: 19550251401244482
+      identification: 
+        column-name: COUNTRY
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: country
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: PATTERN =====================================
+      id: 19550504215244483
+      identification: 
+        column-name: PATTERN
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: pattern
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 19551135406244490
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+

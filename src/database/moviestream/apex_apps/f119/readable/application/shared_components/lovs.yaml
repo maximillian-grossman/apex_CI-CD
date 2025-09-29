@@ -1,0 +1,41 @@
+---
+- # ====== List of Values: STATUS LOV ==========================
+  id: 3187243820960865399
+  identification: 
+    name: STATUS LOV
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Deleted ======================================
+    id: 3187244095846865399
+    entry: 
+      sequence: 1
+      display: Deleted
+      return: D
+
+  - # ====== Entry: New ==========================================
+    id: 3187244392572865402
+    entry: 
+      sequence: 2
+      display: New
+      return: N
+
+  - # ====== Entry: Original =====================================
+    id: 3187244694012865402
+    entry: 
+      sequence: 3
+      display: Original
+      return: O
+
+  - # ====== Entry: Updated ======================================
+    id: 3187245010487865402
+    entry: 
+      sequence: 4
+      display: Updated
+      return: U
+

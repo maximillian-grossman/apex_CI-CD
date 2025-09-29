@@ -1,0 +1,30 @@
+---
+- # ====== Build Option: Commented Out =========================
+  id: 18083416537281600
+  identification: 
+    name: Commented Out
+
+  status: 
+    status: Exclude
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  subscription: 
+    version-number: 44622803817790
+
+- # ====== Build Option: Feature: Access Control ===============
+  id: 18768809717961923
+  identification: 
+    name: 'Feature: Access Control'
+
+  status: 
+    status: Include
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: false
+
+  comments: 
+    comments: Incorporate role based user authentication within your application and manage username mappings to application roles.
+
+  subscription: 
+    version-number: 44627247074297
+

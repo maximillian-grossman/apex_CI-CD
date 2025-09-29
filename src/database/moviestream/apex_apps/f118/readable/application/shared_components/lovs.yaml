@@ -1,0 +1,41 @@
+---
+- # ====== List of Values: EMP.ENAME ===========================
+  id: 13798577423283540
+  identification: 
+    name: EMP.ENAME
+
+  subscription: 
+    version-number: 44864184783896
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EMP
+
+  column-mapping: 
+    return: EMPNO
+    display: ENAME
+    default-sort: ENAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: DEPT.DNAME ==========================
+  id: 13798731813283542
+  identification: 
+    name: DEPT.DNAME
+
+  subscription: 
+    version-number: 44864184783994
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: DEPT
+
+  column-mapping: 
+    return: DEPTNO
+    display: DNAME
+    default-sort: DNAME
+    sort-direction: Ascending (Nulls Last)
+

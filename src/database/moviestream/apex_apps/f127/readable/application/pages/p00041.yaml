@@ -1,0 +1,282 @@
+---
+# ====== Page: Cards =========================================
+id: 41
+identification: 
+  name: Cards
+  alias: CARDS
+  title: Cards
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 637927635200488127
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 6307140148628747096
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Cards =======================================
+  id: 637928203410488131
+  identification: 
+    name: Cards
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ROWID,
+             ID,
+             ROW_VERSION_NUMBER,
+             PROJECT,
+             TASK_NAME,
+             START_DATE,
+             END_DATE,
+             STATUS,
+             ASSIGNED_TO,
+             to_char( COST, 'FML999G999G999G999G990D00' ) COST,
+             to_char( BUDGET, 'FML999G999G999G999G990D00' ) BUDGET
+        from EBA_DEMO_IR_PROJECTS
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - u-colors
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: cards_report
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 637928690676488132
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    title: 
+      advanced-formatting: false
+      column: PROJECT
+
+    subtitle: 
+      advanced-formatting: false
+      column: TASK_NAME
+
+    body: 
+      advanced-formatting: true
+      html-expression: 'Assigned: &ASSIGNED_TO.'
+
+    secondary-body: 
+      advanced-formatting: true
+      html-expression: |
+        Started: &START_DATE. Ended: &END_DATE.<br />
+        Budget: &BUDGET. Cost:&COST.
+
+    icon-and-badge: 
+      icon-source: Icon Class
+      icon-css-classes: fa-calendar-user
+      icon-position: Start
+      badge-column: STATUS
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: true
+
+    actions: 
+    - # ====== Action: Maintain Project ============================
+      id: 636215322212415621
+      identification: 
+        type: Button
+        label: Maintain Project
+
+      layout: 
+        position: Secondary
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:2:P2_ROWID:&ROWID.'
+          page: 2 # Maintain Project
+          clear-cache: 2
+          values: 
+            p2_rowid: '&ROWID.'
+
+      appearance: 
+        display-type: Icon
+        icon: fa-edit
+        hot: false
+        css-classes: 
+        - fa-lg
+
+- # ====== Region: About this page =============================
+  id: 1978919374514246766
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: <p>This cards region is a standard report region created using the Create Page Wizard.  Cards are useful for presenting a variety of information in small blocks.  As Cards usually provide entry to more detailed information, you can include number of actions declaratively.  You can easily scan for relevant and actionable information using cards. </p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-bottom-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+dynamic-actions: 
+- # ====== Dynamic Action: Refresh on Edit =====================
+  id: 237119218250541525
+  identification: 
+    name: Refresh on Edit
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Cards # 637928203410488131
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 237119299026541526
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Cards # 637928203410488131
+
+    execution: 
+      sequence: 10
+      event: Refresh on Edit # 237119218250541525
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

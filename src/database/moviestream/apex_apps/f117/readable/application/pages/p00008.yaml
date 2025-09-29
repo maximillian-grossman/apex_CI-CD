@@ -1,0 +1,676 @@
+---
+# ====== Page: Employees =====================================
+id: 8
+identification: 
+  name: Employees
+  alias: EMPLOYEES
+  title: Employees
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    :root {
+       --a-cv-item-width: 24rem;
+    }
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Form Region =================================
+  id: 1201156258904642541
+  identification: 
+    name: Form Region
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Employees ===================================
+  id: 1592296280866407923
+  identification: 
+    name: Employees
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      with reports as (
+          select empno
+              from (
+                  select empno, ename
+                    from eba_demo_appr_emp
+                    start with empno = :CURRENT_USER_EMPNO
+                    connect by prior empno = mgr
+              )
+          where empno != :CURRENT_USER_EMPNO
+      )
+      select e.EMPNO,
+             e.ENAME,
+             e.JOB,
+             e.SAL,
+             CASE WHEN t1.task_id IS NOT NULL THEN 'Y' ELSE 'N' end as pending_sal_approval,
+             CASE WHEN t2.task_id IS NOT NULL THEN 'Y' ELSE 'N' end as pending_job_approval,
+             CASE WHEN t3.task_id IS NOT NULL THEN 'Y' ELSE 'N' end as pending_bank_approval,
+             CASE WHEN lr.status IN ('PENDING','APPROVED') THEN 'Y' ELSE 'N' end as pending_laptop_delivery,
+             CASE WHEN a.id IS NULL and e.empno in (select empno from reports) THEN 'Y' ELSE 'N' end as is_direct_or_indirect_rep
+        from EBA_DEMO_APPR_EMP e
+        left outer join APEX_TASKS T1 
+          on t1.detail_pk = e.empno 
+          and t1.application_id = :APP_ID 
+          and t1.task_def_static_id = 'SALARY_CHANGE'
+          and t1.state_code in ('UNASSIGNED','ASSIGNED')
+        left outer join APEX_TASKS T2 
+          on t2.detail_pk = e.empno 
+          and t2.application_id = :APP_ID 
+          and t2.task_def_static_id = 'JOB_CHANGE'
+          and t2.state_code in ('UNASSIGNED','ASSIGNED')
+        left outer join APEX_TASKS T3
+          on t3.detail_pk = e.empno 
+          and t3.application_id = :APP_ID 
+          and t3.task_def_static_id = 'BANK_ACCOUNT_CHANGE'
+          and t3.state_code in ('UNASSIGNED','ASSIGNED')
+        left outer join EBA_DEMO_APPR_LAPTOP_REQUESTS LR 
+          on lr.empno = e.empno 
+          and lr.status in ('PENDING','APPROVED')
+         left outer join eba_demo_appr_appraisals a
+          on a.empno = e.empno
+          and add_months( last_day(sysdate) , -13) + 1 between a.period_start and a.period_end
+      where :P8_SHOW_ONLY_SUBORDINATES = 'N' or e.empno in (select empno from reports)      
+    page-items-to-submit: 
+    - P8_SHOW_ONLY_SUBORDINATES
+
+  order-by: 
+    type: Item
+    item: 
+      item-name: P8_ORDER_BY
+      order-bys: 
+      - key: ENAME
+        clause: ENAME
+
+      - key: JOB
+        clause: JOB
+
+      - key: SAL
+        clause: SAL DESC
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--styleC
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 982110498707923263
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    title: 
+      advanced-formatting: false
+      column: ENAME
+
+    subtitle: 
+      advanced-formatting: false
+
+    body: 
+      advanced-formatting: true
+      html-expression: |
+        <strong>Job:</strong> &JOB.<br />
+        <strong>Salary:</strong> $&SAL.
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Initials
+      icon-column: ENAME
+      icon-position: End
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No employees to display
+      no-data-found-icon: fa-user
+
+    actions: 
+    - # ====== Action: Bank ========================================
+      id: 351136661475416068
+      identification: 
+        type: Button
+        label: Bank
+
+      layout: 
+        position: Primary
+        sequence: 30
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.::P28_EMPNO:&EMPNO.'
+          page: 28 # Request Bank Account Change
+          values: 
+            p28_empno: '&EMPNO.'
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-building
+        hot: false
+        css-classes: 
+        - t-Button--small
+
+      server-side-condition: 
+        type: Item = Value
+        item: PENDING_BANK_APPROVAL
+        value: N
+        execute-condition: For Each Row
+
+    - # ====== Action: Salary ======================================
+      id: 982111067843923266
+      identification: 
+        type: Button
+        label: Salary
+
+      layout: 
+        position: Primary
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::P4_EMPNO:&EMPNO.'
+          page: 4 # Request Salary Change
+          values: 
+            p4_empno: '&EMPNO.'
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-edit
+        hot: false
+        css-classes: 
+        - t-Button--small
+
+      server-side-condition: 
+        type: Item = Value
+        item: PENDING_SAL_APPROVAL
+        value: N
+        execute-condition: For Each Row
+
+    - # ====== Action: Job =========================================
+      id: 982111602018923288
+      identification: 
+        type: Button
+        label: Job
+
+      layout: 
+        position: Primary
+        sequence: 20
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::P7_EMPNO:&EMPNO.'
+          page: 7 # Request Job Change
+          values: 
+            p7_empno: '&EMPNO.'
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-edit
+        hot: false
+        css-classes: 
+        - t-Button--small
+
+      server-side-condition: 
+        type: Item = Value
+        item: PENDING_JOB_APPROVAL
+        value: N
+        execute-condition: For Each Row
+
+    - # ====== Action: Appraisal ===================================
+      id: 1242595907561420537
+      identification: 
+        type: Button
+        label: Appraisal
+
+      layout: 
+        position: Primary
+        sequence: 40
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:16:&SESSION.::&DEBUG.:16:P16_EMPNO:&EMPNO.'
+          page: 16 # Request Employee Appraisal 
+          clear-cache: 16
+          values: 
+            p16_empno: '&EMPNO.'
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-server-user
+        hot: false
+        css-classes: 
+        - t-Button--small
+
+      server-side-condition: 
+        type: Item = Value
+        item: IS_DIRECT_OR_INDIRECT_REP
+        value: Y
+        execute-condition: For Each Row
+
+    - # ====== Action: Laptop ======================================
+      id: 1280373328558506447
+      identification: 
+        type: Button
+        label: Laptop
+
+      layout: 
+        position: Primary
+        sequence: 50
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.:22:P22_EMPNO:&EMPNO.'
+          page: 22 # Request Laptop
+          clear-cache: 22
+          values: 
+            p22_empno: '&EMPNO.'
+
+      appearance: 
+        display-type: Text with Icon
+        icon: fa-laptop
+        hot: false
+        css-classes: 
+        - t-Button--small
+
+      server-side-condition: 
+        type: Item = Value
+        item: PENDING_LAPTOP_DELIVERY
+        value: N
+        execute-condition: For Each Row
+
+- # ====== Region: Breadcrumb ==================================
+  id: 1592297803502407928
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 1275353707076086477
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: About this page =============================
+  id: 2273509042150803132
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          This page shows all employees and allows a user to initiate a request 
+          for a job change, salary change, or laptop by clicking the appropriate
+          button on an employee's card. Managers can initiate a request for an
+          employee appraisal by clicking the (Appraisal) button on any of their
+          subordinates' cards.
+      </p>
+      <p>    
+          The respective buttons are hidden on a given employee's card if the
+          corresponding request is currently pending. In addition, the 
+          <strong>Appraisal</strong> button only shows for <em>subordinates</em>
+          of the currently logged-in user. 
+      </p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P8_ORDER_BY ==============================
+  id: 982112203364923288
+  identification: 
+    name: P8_ORDER_BY
+    type: Select List
+
+  label: 
+    label: Order By
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Employees # 1592296280866407923
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-sort-amount-desc
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC2:Name;ENAME,Job;JOB,Salary;SAL'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    css-classes: 
+    - mnw160
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: ENAME
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P8_SHOW_ONLY_SUBORDINATES ================
+  id: 1515034616036611569
+  identification: 
+    name: P8_SHOW_ONLY_SUBORDINATES
+    type: Switch
+
+  label: 
+    label: Show Only Subordinates?
+    alignment: Left
+
+  settings: 
+    use-defaults: true
+
+  layout: 
+    sequence: 20
+    region: Employees # 1592296280866407923
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-align-self-center
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: N
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: On Modal Dialog Closed ==============
+  id: 982112915567923305
+  identification: 
+    name: On Modal Dialog Closed
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: JavaScript Expression
+    javascript-expression: document
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 982113414310923320
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Employees # 1592296280866407923
+
+    execution: 
+      sequence: 10
+      event: On Modal Dialog Closed # 982112915567923305
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: When Subordinates Switched ==========
+  id: 1515034771484611570
+  identification: 
+    name: When Subordinates Switched
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P8_SHOW_ONLY_SUBORDINATES
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 1515034864796611571
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Employees # 1592296280866407923
+
+    execution: 
+      sequence: 10
+      event: When Subordinates Switched # 1515034771484611570
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

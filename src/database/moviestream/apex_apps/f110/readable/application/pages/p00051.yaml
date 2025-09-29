@@ -1,0 +1,1493 @@
+---
+# ====== Page: Client Validation =============================
+id: 51
+identification: 
+  name: Client Validation
+  alias: CLIENT-VALIDATION
+  title: Client Validation
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Client Validation ===========================
+  id: 2143918771242982965
+  identification: 
+    name: Client Validation
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select EMPNO,
+             nvl(FLEX2, 'fa-user') as ICON,
+             ENAME,
+             JOB,
+             MGR,
+             HIREDATE,
+             SAL,
+             COMM,
+             ONLEAVE,
+             NOTES,
+             DEPTNO,
+             FLEX1 as PIN,
+             FLEX2 as AVATAR,
+             FLEX3 as COLOR,
+             FLEX4 as TAGS
+        from EBA_DEMO_IG_EMP
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: emp
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 2143925237784982977
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: true
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 2143925697348982978
+      identification: 
+        name: Primary Report
+        alias: 14495
+
+  columns: 
+  - # ====== Column: PIN =========================================
+    id: 1438561426140640149
+    identification: 
+      column-name: PIN
+      type: Password
+
+    heading: 
+      heading: PIN
+      alignment: start
+
+    settings: 
+      submit-when-enter-pressed: true
+
+    layout: 
+      sequence: 140
+      column-alignment: start
+      stretch: Use Report Setting
+
+    validation: 
+      value-required: false
+      maximum-length: 1000
+
+    source: 
+      type: Database Column
+      database-column: PIN
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: AVATAR ======================================
+    id: 1438561531536640150
+    identification: 
+      column-name: AVATAR
+      type: Select List
+
+    heading: 
+      heading: Avatar
+      alignment: start
+
+    layout: 
+      sequence: 150
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Static Values
+      static-values: |
+        STATIC:Ambulance;fa-ambulance,Bicycle;fa-bicycle,Bus;fa-bus,Car;fa-car,Jet;fa-fighter-jet,Motorcycle;fa-motorcycle,Plane;fa-plane,Rocket;fa-rocket,Ship;fa-ship,Shuttle;fa-space-shuttle,Subway;fa-subway,Taxi;fa-taxi,Train;fa-train,Truck;fa-truck
+        
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: AVATAR
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Static
+      static-value: fa-plane
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COLOR =======================================
+    id: 1438561618851640151
+    identification: 
+      column-name: COLOR
+      type: Color Picker
+
+    heading: 
+      heading: Avatar Color
+      alignment: start
+
+    settings: 
+      use-defaults: true
+
+    layout: 
+      sequence: 160
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 1000
+
+    source: 
+      type: Database Column
+      database-column: COLOR
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Static
+      static-value: '#0000AA'
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TAGS ========================================
+    id: 1438561719405640152
+    identification: 
+      column-name: TAGS
+      type: Checkbox Group
+
+    heading: 
+      heading: Tags
+      alignment: start
+
+    settings: 
+      number-of-columns: 1
+
+    multiple-values: 
+      type: Delimited List
+      separator: ':'
+
+    layout: 
+      sequence: 170
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC:Punctual,Innovative,Motivated,Resourceful,Knowledgeable'
+      display-extra-values: true
+
+    source: 
+      type: Database Column
+      database-column: TAGS
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    advanced: 
+      static-id: C_TAGS
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ICON ========================================
+    id: 1438562323760640158
+    identification: 
+      column-name: ICON
+      type: HTML Expression
+
+    heading: 
+      alignment: start
+      alternative-label: Avatar
+
+    settings: 
+      html-expression: '<span class="fa &ICON." style="color: &COLOR.;"></span>'
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ICON
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 2143919252368982969
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 2143919753226982969
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: EMPNO =======================================
+    id: 2143920255212982971
+    identification: 
+      column-name: EMPNO
+      type: Display Only
+
+    heading: 
+      heading: ID
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: EMPNO
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ENAME =======================================
+    id: 2143920764556982971
+    identification: 
+      column-name: ENAME
+      type: Text Field
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 60
+
+    source: 
+      type: Database Column
+      database-column: ENAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: false
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    advanced: 
+      custom-attributes: 
+      - pattern="^[\-A-Z
+      - a-z']*$"
+      - data-valid-message="Name
+      - is
+      - required
+      - and
+      - must
+      - not
+      - contain
+      - special
+      - characters
+      - or
+      - numbers"
+
+  - # ====== Column: JOB =========================================
+    id: 2143921299745982972
+    identification: 
+      column-name: JOB
+      type: Select List
+
+    heading: 
+      heading: Job
+      alignment: start
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: EMP_JOBS # 719631537128665266
+      display-extra-values: true
+      display-null-value: false
+
+    source: 
+      type: Database Column
+      database-column: JOB
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: MGR =========================================
+    id: 2143921753707982972
+    identification: 
+      column-name: MGR
+      type: Select List
+
+    heading: 
+      heading: Manager
+      alignment: start
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: SQL Query
+      sql-query: select ENAME as d, EMPNO as r from EBA_DEMO_IG_EMP where JOB = 'MANAGER' or JOB = 'PRESIDENT' order by 1
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: MGR
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: HIREDATE ====================================
+    id: 2143922257631982973
+    identification: 
+      column-name: HIREDATE
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: Hire Date
+      alignment: start
+
+    settings: 
+      show: Inline
+      show-other-months: false
+      navigation-list-for: Year
+
+    layout: 
+      sequence: 80
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    source: 
+      type: Database Column
+      database-column: HIREDATE
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: false
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: SAL =========================================
+    id: 2143922739627982973
+    identification: 
+      column-name: SAL
+      type: Number Field
+
+    heading: 
+      heading: Salary
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: SAL
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    advanced: 
+      static-id: cSal
+      custom-attributes: 
+      - data-valid-message="Salary
+      - must
+      - be
+      - a
+      - valid
+      - number
+      - between
+      - 0
+      - and
+      - 10000."
+
+  - # ====== Column: COMM ========================================
+    id: 2143923263794982973
+    identification: 
+      column-name: COMM
+      type: Number Field
+
+    heading: 
+      heading: Commission
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: COMM
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    advanced: 
+      static-id: cComm
+      custom-attributes: 
+      - data-valid-message="Commission
+      - must
+      - be
+      - a
+      - valid
+      - number
+      - between
+      - 0
+      - and
+      - 10000."
+
+  - # ====== Column: ONLEAVE =====================================
+    id: 2143923741104982974
+    identification: 
+      column-name: ONLEAVE
+      type: Switch
+
+    heading: 
+      heading: On Leave
+      alignment: start
+
+    settings: 
+      use-defaults: true
+
+    layout: 
+      sequence: 110
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ONLEAVE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Static
+      static-value: N
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: NOTES =======================================
+    id: 2143924236081982974
+    identification: 
+      column-name: NOTES
+      type: Textarea
+
+    heading: 
+      heading: Notes
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 120
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      width: 60
+
+    validation: 
+      value-required: false
+      maximum-length: 1000
+
+    source: 
+      type: Database Column
+      database-column: NOTES
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DEPTNO ======================================
+    id: 2143924743446982976
+    identification: 
+      column-name: DEPTNO
+      type: Select List
+
+    heading: 
+      heading: Department
+      alignment: start
+
+    layout: 
+      sequence: 130
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: SQL Query
+      sql-query: select DNAME as d, DEPTNO as r from EBA_DEMO_IG_DEPT order by 1
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: DEPTNO
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: Overview: Client Validation =================
+  id: 4016822960042360858
+  identification: 
+    name: 'Overview: Client Validation'
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This example is a copy of the <a href="f?p=&APP_ID.:31:&SESSION.:">Validation</a> example with additional client side 
+      validations implemented. Client validation uses the HTML 5 form validation feature. 
+      When a text field is declared as required, the required attribute is added. This is one of the HTML 5 validation
+      constraint attributes and is why client validation of required fields automatically works. You can use other constraint attributes such as
+      pattern, min, or max by adding those attributes in Advanced: Custom Attributes. Note that min and max only apply for inputs of type number.
+      Because of inconsistent browser support and UI for number inputs APEX does not use them for the Number Field item type. 
+      You can also do your own validation using JavaScript in a dynamic action.
+      An APEX extension to HTML 5 validation lets you specify the validation message using HTML attribute data-valid-message.
+      Notice that the same validation works in Single Row View. This is because the grid view and single row view share the same column items.
+      </p>
+      <ul>
+      <li>The name field is constrained to letters, space, quote and dash. This is done on the client using the HTML 5 pattern attribute.</li>
+      <li>The Salary and Commission columns are validated to make sure they are valid numbers between 0 and 10,000. 
+      This validation is done on both the client and the server. See the Validate SAL and Validate COMM dynamic actions for how this is done.</li>
+      <li>The row validation that the Commission must be less than 1.5 times the Salary is also checked on the client. 
+      See the Validate comm limit dynamic action. Row level validation does not use HTML 5 validation. It listens for the apexendrecordedit
+      event, checks the condition and uses a apex.model API to set the record validity.</li>
+      </ul>
+      <p>Remember to always implement corresponding server side validation. The validation that the server does must be at least as strict
+      as the client validation. Test the server validation by temporarily disabling the client validation.
+      </p>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 10438126505417813584
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 1342165149965603159
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: Next ========================================
+  id: 741926023236037884
+  identification: 
+    button-name: Next
+    label: Next
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 10438126505417813584
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillEnd
+    icon: fa-angle-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:52:&SESSION.::&DEBUG.:RP::'
+      page: 52 # Tooltips
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+- # ====== Button: PREV ========================================
+  id: 741926419401037885
+  identification: 
+    button-name: PREV
+    label: Previous
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 10438126505417813584
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillStart
+    icon: fa-angle-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:50:&SESSION.::&DEBUG.:RP::'
+      page: 50 # Feature Customization
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+dynamic-actions: 
+- # ====== Dynamic Action: Validate SAL ========================
+  id: 737904322628638667
+  identification: 
+    name: Validate SAL
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Column(s)
+    interactive-grid: Client Validation # 2143918771242982965
+    column(s): 
+    - SAL
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 737904467921638668
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        var sal = apex.item("cSal"),
+            num = sal.getValue();
+        if ( num !== "" && (parseFloat(num) != num || num < 0 || num > 10000)) {
+            sal.node.setCustomValidity("invalid number"); // this message is only shown if there is no data-valid-message attribute on the column item
+        } else {
+            sal.node.setCustomValidity(""); // clear the error
+        }
+
+    execution: 
+      sequence: 10
+      event: Validate SAL # 737904322628638667
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+- # ====== Dynamic Action: Validate COMM =======================
+  id: 737904593616638669
+  identification: 
+    name: Validate COMM
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Column(s)
+    interactive-grid: Client Validation # 2143918771242982965
+    column(s): 
+    - COMM
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 737904642082638670
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        var comm = apex.item("cComm"),
+            num = comm.getValue();
+        if ( num !== "" && (parseFloat(num) != num || num < 0 || num > 10000)) {
+            comm.node.setCustomValidity("invalid number"); // this message is only shown if there is no data-valid-message attribute on the column item
+        } else {
+            comm.node.setCustomValidity(""); // clear the error
+        }
+        
+
+    execution: 
+      sequence: 10
+      event: Validate COMM # 737904593616638669
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+- # ====== Dynamic Action: Validate comm limit =================
+  id: 737904922743638673
+  identification: 
+    name: Validate comm limit
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Custom
+    custom-event: apexendrecordedit
+    selection-type: Region
+    region: Client Validation # 2143918771242982965
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 737905108716638674
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        var validity, message,
+            ui = this.data,
+            sal = $v("cSal"),
+            comm = $v("cComm");
+        
+        if ( comm == "" || comm < 1.5 * sal ) {
+            validity = "valid";
+        } else {
+            validity = "error";
+            // use apex.lang api if you want to localize this message
+            message = "Commission must be less than 1.5 times the Salary";
+        }
+        // passing null for the field set the error on the whole row/record
+        ui.model.setValidity(validity, ui.recordId, null, message);
+        
+
+    execution: 
+      sequence: 10
+      event: Validate comm limit # 737904922743638673
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: sal in range ============================
+  id: 737904125108638665
+  identification: 
+    name: sal in range
+
+  execution: 
+    sequence: 60
+
+  validation: 
+    editable-region: Client Validation # 2143918771242982965
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':SAL is null or ( to_number(:SAL) > 0 and to_number(:SAL) < 10000 )'
+    always-execute: false
+
+  error: 
+    error-message: '#COLUMN_HEADER# must be between 0 and 10,000.'
+    display-location: Inline with Field and in Notification
+    associated-column: SAL
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Validation: comm in range ===========================
+  id: 737904280119638666
+  identification: 
+    name: comm in range
+
+  execution: 
+    sequence: 70
+
+  validation: 
+    editable-region: Client Validation # 2143918771242982965
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':COMM is null or (to_number(:COMM) > 0 and to_number(:COMM) < 10000)'
+    always-execute: false
+
+  error: 
+    error-message: '#COLUMN_HEADER# must be between 0 and 10,000.'
+    display-location: Inline with Field and in Notification
+    associated-column: COMM
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Validation: No special characters ===================
+  id: 737904799141638671
+  identification: 
+    name: No special characters
+
+  execution: 
+    sequence: 90
+
+  validation: 
+    editable-region: Client Validation # 2143918771242982965
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "REGEXP_INSTR(:ENAME, '^[-A-Z'' a-z]*$') = 1"
+    always-execute: false
+
+  error: 
+    error-message: '#COLUMN_HEADER# must not contain special characters or numbers.'
+    display-location: Inline with Field and in Notification
+    associated-column: ENAME
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Validation: hire date in past =======================
+  id: 741924659747037880
+  identification: 
+    name: hire date in past
+
+  execution: 
+    sequence: 20
+
+  validation: 
+    editable-region: Client Validation # 2143918771242982965
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'to_date(:HIREDATE) < SYSDATE'
+    always-execute: false
+
+  error: 
+    error-message: '#COLUMN_HEADER# must be in the past.'
+    display-location: Inline with Field and in Notification
+    associated-column: HIREDATE
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Validation: Comm limit ==============================
+  id: 741925067701037881
+  identification: 
+    name: Comm limit
+
+  execution: 
+    sequence: 80
+
+  validation: 
+    editable-region: Client Validation # 2143918771242982965
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ':COMM is null or to_number(:COMM) < 1.5 * to_number(:SAL)'
+    always-execute: false
+
+  error: 
+    error-message: Commission must be less than 1.5 times the Salary
+    display-location: Inline with Field and in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+processes: 
+- # ====== Process:  - Save Interactive Grid Data ==============
+  id: 741925402003037882
+  identification: 
+    name: ' - Save Interactive Grid Data'
+    type: Interactive Grid - Automatic Row Processing (DML)
+    execution-chain: None
+    editable-region: Client Validation # 2143918771242982965
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+

@@ -1,0 +1,429 @@
+---
+# ====== Page: Explain =======================================
+id: 3
+identification: 
+  name: Explain
+  alias: EXPLAIN
+  title: Explain
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    pre {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 112749808233752412
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 49866118699977284852
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+      css-classes: 
+      - u-textCenter
+
+- # ====== Region: SQL =========================================
+  id: 113300540208901484
+  identification: 
+    name: SQL
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-css-classes: 
+    - col-xxs-12
+    - col-xs-12
+    - col-sm-12
+    - col-md-12
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Explanation =================================
+  id: 116332335337091458
+  identification: 
+    name: Explanation
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: |
+      declare
+          l_explanation clob;
+          l_uses_vector_index number;
+          l_return clob;
+          l_prompt clob;
+          l_showsql OCW23_PROMPTS.showsql%type;
+          l_profile_name user_cloud_ai_profiles.profile_name%type := lower(APEX_UTIL.GET_PREFERENCE(       
+               p_preference => 'CLOUD_AI_PROFILE',
+                  p_user       => :APP_USER));
+      begin
+      
+      
+          SELECT SHOWSQL into l_showsql FROM OCW23_PROMPTS WHERE ID = :P3_CURRENT_ID;
+          SELECT PROMPT  into l_prompt FROM OCW23_PROMPTS WHERE ID = :P3_CURRENT_ID;
+      
+          -- You can't get an explanation if the current model was changed to Vector Search
+          SELECT count(*) 
+          INTO l_uses_vector_index
+          FROM user_cloud_ai_profile_attributes
+          WHERE upper(profile_name) =  upper(l_profile_name)
+            AND upper(attribute_name) = 'VECTOR_INDEX_NAME';
+      
+      
+          if l_uses_vector_index > 0 then
+              l_return := '<h3>Explanation: </h3><div><pre>
+              Unable to generate an explanation.</pre></div>';
+      
+          else
+              l_return := '<h3>Explanation: </h3><div><pre>'||
+                  dbms_cloud_ai.generate(
+                      prompt => l_prompt,
+                      action => 'explainsql',
+                      profile_name => l_profile_name)
+              ||'</pre></div>';
+          
+          end if;
+          
+          return l_return;
+          
+      
+      end;
+    page-items-to-submit: 
+    - P3_CURRENT_ID
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-css-classes: 
+    - col-xxs-12
+    - col-xs-12
+    - col-sm-12
+    - col-md-12
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-none
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: true
+
+page-items: 
+- # ====== Page Item: P3_CURRENT_ID ============================
+  id: 110739840700857184
+  identification: 
+    name: P3_CURRENT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_SQL ===================================
+  id: 112750535217755558
+  identification: 
+    name: P3_SQL
+    type: CodeMirror
+
+  label: 
+    alignment: Left
+
+  settings: 
+    run-in-fullscreen: false
+
+  layout: 
+    sequence: 20
+    region: SQL # 113300540208901484
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--large
+    - margin-bottom-sm
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: SQL Query (return single value)
+    sql-query: 'SELECT SHOWSQL FROM OCW23_PROMPTS WHERE ID = :P3_CURRENT_ID;'
+    used: Always, replacing any existing value in session state
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  read-only: 
+    type: Always
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CLOSE_SQL ===================================
+  id: 110740009415857186
+  identification: 
+    button-name: CLOSE_SQL
+    label: Close SQL
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 112749808233752412
+    slot: UP
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+      page: 1 # Home
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: UPDATE_SQL ==================================
+  id: 112751313323757474
+  identification: 
+    button-name: UPDATE_SQL
+    label: Update SQL
+
+  layout: 
+    sequence: 10
+    region: SQL # 113300540208901484
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+validations: 
+- # ====== Validation: Check Valid SQL =========================
+  id: 113300715690901486
+  identification: 
+    name: Check Valid SQL
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Function Body (returning Error Text)
+    language: PL/SQL
+    pl/sql-function-body-returning-error-text: |
+      declare
+          l_cursor NUMBER := dbms_sql.open_cursor;
+      BEGIN
+                  DBMS_SQL.PARSE (l_cursor, :P3_SQL, DBMS_SQL.native);
+                  return null;
+              EXCEPTION
+                  WHEN OTHERS THEN
+                      return sqlerrm;
+      END;
+    always-execute: false
+
+  error: 
+    display-location: Inline with Field and in Notification
+
+processes: 
+- # ====== Process: update SQL =================================
+  id: 113300423355901483
+  identification: 
+    name: update SQL
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: "update OCW23_PROMPTS set showsql = REPLACE(:P3_SQL,';') where id = :P3_CURRENT_ID;"
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: SQL Updated
+
+  error: 
+    display-location: Inline in Notification
+

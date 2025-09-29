@@ -1,0 +1,82 @@
+---
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 23642682153763625
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 23643064779763630
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 23643319716763631
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-144-rounded.p
+  id: 23643672261763632
+  identification: 
+    file-name: icons/app-icon-144-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-256-rounded.p
+  id: 23643882012763633
+  identification: 
+    file-name: icons/app-icon-256-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/employees.docx ===
+  id: 23681504591121440
+  identification: 
+    file-name: templates/employees.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/emp_per_dept.docx 
+  id: 23681859388123034
+  identification: 
+    file-name: templates/emp_per_dept.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/customer-order.doc
+  id: 23682117247123999
+  identification: 
+    file-name: templates/customer-order.docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: templates/employees (1).docx
+  id: 23706350581169528
+  identification: 
+    file-name: templates/employees (1).docx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    file-character-set: Unicode UTF-8
+

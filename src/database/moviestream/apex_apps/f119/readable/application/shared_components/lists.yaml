@@ -1,0 +1,786 @@
+---
+- # ====== List: Home Page =====================================
+  id: 101146871209978601
+  identification: 
+    name: Home Page
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Oracle on Github =============================
+    id: 101147434148978602
+    label: 
+      label: Oracle on Github
+
+    icon: 
+      image/icon-css-classes: fa-github
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:221:&SESSION.::&DEBUG.::::'
+        page: 221 # Github Repositories
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Report on Oracle's Github repositories, and their details like Issues, Commits or Pull Requests. See data visualized as Classic or Interactive Reports, in a Cards layout, as a Calendar or as a JET Chart.
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name = 'Github API' and last_status = 'OK'
+
+  - # ====== Entry: Web Sources and PL/SQL =======================
+    id: 101147868425978602
+    label: 
+      label: Web Sources and PL/SQL
+
+    icon: 
+      image/icon-css-classes: fa-wrench
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:223:&SESSION.::&DEBUG.::::'
+        page: 223 # PL/SQL Access
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: See how a Web Source Module is being programmatically accessed with PL/SQL.
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name = 'Github API' and last_status = 'OK'
+
+  - # ====== Entry: Manual PL/SQL Coding =========================
+    id: 101273803934447706
+    label: 
+      label: Manual PL/SQL Coding
+
+    icon: 
+      image/icon-css-classes: fa-file-sql
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Manual REST Services
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Explore how to manually access a REST service manually with the APEX_WEB_SERVICE and SQL/JSON parsing functions.
+
+    server-side-condition: 
+      type: Item = Value
+      item: SAMPLE_SERVICE_AVAILABLE
+      value: OK
+
+  - # ====== Entry: Test Service Endpoint ========================
+    id: 101304563242506611
+    label: 
+      label: Test Service Endpoint
+
+    icon: 
+      image/icon-css-classes: fa-cloud-check
+
+    layout: 
+      sequence: 37
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:301:&SESSION.::&DEBUG.::::'
+        page: 301 # REST Endpoint Status
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Test, whether Application Express can access the REST Service endpoints being used in this application.
+
+  - # ====== Entry: Combine with local data ======================
+    id: 115356432108577284
+    label: 
+      label: Combine with local data
+
+    icon: 
+      image/icon-css-classes: fa-table-plus
+
+    layout: 
+      sequence: 35
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:224:&SESSION.::&DEBUG.::::'
+        page: 224 # Combine with local data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Use a <em>Post Processing SQL Query</em> in order to join local table data to the Web Source response.
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name = 'Github API' and last_status = 'OK'
+
+- # ====== List: admin options =================================
+  id: 3175185404421961057
+  identification: 
+    name: admin options
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Test Service Endpoint ========================
+    id: 101266846565409686
+    label: 
+      label: Test Service Endpoint
+
+    icon: 
+      image/icon-css-classes: fa-cloud-check
+
+    layout: 
+      sequence: 25
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:301:&SESSION.::&DEBUG.::::'
+        page: 301 # REST Endpoint Status
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Test, whether Application Express can access the REST Service endpoints being used in this application.
+
+  - # ====== Entry: Set REST Endpoint for the "Manual PL/SQL Examp
+    id: 1868201430983913270
+    label: 
+      label: Set REST Endpoint for the "Manual PL/SQL Example"
+
+    icon: 
+      image/icon-css-classes: fa-cloud-cursor
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+        page: 6 # Set REST Service Endpoint
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Manually set the URL of the Example REST Service endpoint. Use this when the example REST service runs in another workspace or another machine.
+
+  - # ====== Entry: Reset Data ===================================
+    id: 3175185601155961062
+    label: 
+      label: Reset Data
+
+    icon: 
+      image/icon-css-classes: fa-refresh
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.::::'
+        page: 39 # Reset Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This application uses the sample EBA_RESTDEMO_SAMPLE_EMP to store local data, use this link to purge it.
+      2.: formIcon
+
+  - # ====== Entry: Theme Style ==================================
+    id: 3983683571013077123
+    label: 
+      label: Theme Style
+
+    icon: 
+      image/icon-css-classes: fa-desktop
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Change user interface theme style for all users.
+
+- # ====== List: REST Examples =================================
+  id: 3175193801146073721
+  identification: 
+    name: REST Examples
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Simple Report ================================
+    id: 1863991450822120655
+    label: 
+      label: Simple Report
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:2:::'
+        page: 2 # Simple Report
+        clear-cache: 2
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Display data from external REST service as a tabular report.
+
+  - # ====== Entry: Report with Pagination =======================
+    id: 1863991715170120655
+    label: 
+      label: Report with Pagination
+
+    icon: 
+      image/icon-css-classes: fa-table-play
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:3:::'
+        page: 3 # Report with Pagination
+        clear-cache: 3
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Browse through a report displaying larger REST service result sets using pagination.
+
+  - # ====== Entry: Report with Query ============================
+    id: 1863992693899126360
+    label: 
+      label: Report with Query
+
+    icon: 
+      image/icon-css-classes: fa-table-search
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:4:::'
+        page: 4 # Report with Query
+        clear-cache: 4
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Display filtered data from external REST service by typing in a query.
+
+  - # ====== Entry: Local REST Data ==============================
+    id: 1865572817853825442
+    label: 
+      label: Local REST Data
+
+    icon: 
+      image/icon-css-classes: fa-cloud-download
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:11:::'
+        page: 11 # Local REST Data
+        clear-cache: 11
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Synchronize external REST data to a local table to perform reporting and anylysis.
+
+- # ====== List: Navigation Menu ===============================
+  id: 3631449168514746257
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Web Sources and PL/SQL =======================
+    id: 92333859364980403
+    label: 
+      label: Web Sources and PL/SQL
+
+    icon: 
+      image/icon-css-classes: fa-code
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 223
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:223:&SESSION.::&DEBUG.::::'
+        page: 223 # PL/SQL Access
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name ='Github API' and last_status = 'OK'
+
+  - # ====== Entry: Combine with local data ======================
+    id: 114953308289849534
+    label: 
+      label: Combine with local data
+
+    icon: 
+      image/icon-css-classes: fa-table-plus
+
+    layout: 
+      sequence: 75
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 224
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:224:&SESSION.::&DEBUG.::::'
+        page: 224 # Combine with local data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name ='Github API' and last_status = 'OK'
+
+  - # ====== Entry: Oracle on Github =============================
+    id: 762750337323133095
+    label: 
+      label: Oracle on Github
+
+    icon: 
+      image/icon-css-classes: fa-github
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 221
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:221:&SESSION.::&DEBUG.::::'
+        page: 221 # Github Repositories
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Rows returned
+      sql-query: select 1 from eba_restdemo_sample_urls where name ='Github API' and last_status = 'OK'
+
+  - # ====== Entry: Manual PL/SQL ================================
+    id: 762875603781533501
+    label: 
+      label: Manual PL/SQL
+
+    icon: 
+      image/icon-css-classes: fa-file-sql
+
+    layout: 
+      sequence: 200
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Manual REST Services
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 1863986284367102324
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:1:::'
+        page: 1 # Example REST Application
+        clear-cache: 1
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Local REST Data ==============================
+    id: 1865527330863588698
+    label: 
+      label: Local REST Data
+
+    layout: 
+      sequence: 240
+      parent-entry: Manual PL/SQL # 762875603781533501
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 11
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:11:::'
+        page: 11 # Local REST Data
+        clear-cache: 11
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: Item = Value
+      item: SAMPLE_SERVICE_AVAILABLE
+      value: OK
+
+  - # ====== Entry: Administration ===============================
+    id: 3660686652993594319
+    label: 
+      label: Administration
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 900
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 5
+      - 35
+      - 36
+      - 39
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.::::'
+        page: 35 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Simple Report ================================
+    id: 3677971987700711665
+    label: 
+      label: Simple Report
+
+    layout: 
+      sequence: 210
+      parent-entry: Manual PL/SQL # 762875603781533501
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:2:::'
+        page: 2 # Simple Report
+        clear-cache: 2
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Display data from external REST service as a tabular report.
+
+    server-side-condition: 
+      type: Item = Value
+      item: SAMPLE_SERVICE_AVAILABLE
+      value: OK
+
+  - # ====== Entry: Report with Pagination =======================
+    id: 3677972252048711665
+    label: 
+      label: Report with Pagination
+
+    layout: 
+      sequence: 220
+      parent-entry: Manual PL/SQL # 762875603781533501
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:3:::'
+        page: 3 # Report with Pagination
+        clear-cache: 3
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Browse through a report displaying larger REST service result sets using pagination.
+
+    server-side-condition: 
+      type: Item = Value
+      item: SAMPLE_SERVICE_AVAILABLE
+      value: OK
+
+  - # ====== Entry: Report with Query ============================
+    id: 3677973230777717370
+    label: 
+      label: Report with Query
+
+    layout: 
+      sequence: 230
+      parent-entry: Manual PL/SQL # 762875603781533501
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:4:::'
+        page: 4 # Report with Query
+        clear-cache: 4
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Display filtered data from external REST service by typing in a query.
+
+    server-side-condition: 
+      type: Item = Value
+      item: SAMPLE_SERVICE_AVAILABLE
+      value: OK
+
+- # ====== List: Navigation Bar (Top) ==========================
+  id: 3631488451563793425
+  identification: 
+    name: Navigation Bar (Top)
+
+  subscription: 
+    version-number: 1089080203
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 3631488638057793432
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:HELP:&SESSION.::&DEBUG.::::'
+        page: HELP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 3631489089855793438
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: Sign Out =====================================
+    id: 3631489481879793439
+    label: 
+      label: Sign Out
+
+    layout: 
+      sequence: 50
+      parent-entry: '&APP_USER.' # 3631489089855793438
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+

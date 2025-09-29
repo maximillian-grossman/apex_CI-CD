@@ -1,0 +1,40 @@
+.chat-container{
+    font-family: Arial, sans-serif !important;
+}
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    
+    line-height: 1.4;
+    
+}
+.message.recipient {
+    background-color: #007aff;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+    font-size: calc(.5vw + .7em);
+    min-width: 75%;    
+}
+.message.user {
+    background-color: #f0f0f0;
+    color: #000;
+    align-self: flex-start;  
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+}
+.message-container {
+    display: flex;
+    flex-direction: column;
+}
+.response-box{
+     
+    font-family: Arial, sans-serif; 
+    text-wrap: wrap;
+}
+.response{
+    max-width: 100%;
+    font-size: calc(.5vw + .7em);
+    margin: 10px;
+}

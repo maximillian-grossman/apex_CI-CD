@@ -1,0 +1,611 @@
+---
+# ====== Page: Appraisal History =============================
+id: 29
+identification: 
+  name: Appraisal History
+  alias: APPRAISAL-HISTORY
+  title: Appraisal History
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Appraisal History ===========================
+  id: 1528611323979769876
+  identification: 
+    name: Appraisal History
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      with reports as (
+          select empno
+              from (
+                  select empno, ename
+                    from eba_demo_appr_emp
+                    start with empno = :CURRENT_USER_EMPNO
+                    connect by prior empno = mgr
+              )
+          where empno != :CURRENT_USER_EMPNO
+      )
+      select a.id,
+             e.ename,
+             eba_demo_appr.appraisal_period(a.period_start,a.period_end) as appraisal_period,
+             a.appraisal_date,
+             a.input_completed,
+             a.manager_completed,
+             a.vp_review_date,
+             case a.status
+                when 'ORIGINATED'    then 'Awaiting employee self-evaluation'
+                when 'SUBMITTED'     then 'Awaiting manager evaluation'
+                when 'MGR_SUBMITTED' then 'Awaiting VP review'
+                when 'VP_REVIEWED'   then 'VP Reviewed'
+                when 'COMPLETED'     then 'Completed'
+             end as status
+      from eba_demo_appr_appraisals a
+      left join eba_demo_appr_emp e on e.empno = a.empno
+      where (nvl(:P29_SHOW_FOR_SUBORDINATES,'N') = 'N' and a.empno = :CURRENT_USER_EMPNO)
+            or
+            (nvl(:P29_SHOW_FOR_SUBORDINATES,'N') = 'Y' and a.empno in (select empno from reports))
+      order by date_originated desc
+    page-items-to-submit: 
+    - P29_SHOW_FOR_SUBORDINATES
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--altRowsDefault
+      - t-Report--rowHighlight
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No appraisals yet.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: APPRAISAL_PERIOD ============================
+    id: 1528611469632769877
+    identification: 
+      column-name: APPRAISAL_PERIOD
+      type: Link
+
+    heading: 
+      heading: Period
+      alignment: start
+
+    layout: 
+      sequence: 20
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::P17_ID:#ID#'
+        page: 17 # Employee Self Review Details
+        values: 
+          p17_id: '#ID#'
+
+      link-text: '#APPRAISAL_PERIOD#'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: APPRAISAL_DATE ==============================
+    id: 1528611502764769878
+    identification: 
+      column-name: APPRAISAL_DATE
+      type: Plain Text
+
+    heading: 
+      heading: Appraisal Date
+      alignment: start
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'DD-MON-YYYY HH24:MI:SS'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: INPUT_COMPLETED =============================
+    id: 1528611659333769879
+    identification: 
+      column-name: INPUT_COMPLETED
+      type: Plain Text
+
+    heading: 
+      heading: Input Completed
+      alignment: start
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'DD-MON-YYYY HH24:MI:SS'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MANAGER_COMPLETED ===========================
+    id: 1528611728392769880
+    identification: 
+      column-name: MANAGER_COMPLETED
+      type: Plain Text
+
+    heading: 
+      heading: Manager Completed
+      alignment: start
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'DD-MON-YYYY HH24:MI:SS'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: VP_REVIEW_DATE ==============================
+    id: 1528611830302769881
+    identification: 
+      column-name: VP_REVIEW_DATE
+      type: Plain Text
+
+    heading: 
+      heading: VP Reviewed
+      alignment: start
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'DD-MON-YYYY HH24:MI:SS'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: STATUS ======================================
+    id: 1528611895036769882
+    identification: 
+      column-name: STATUS
+      type: Plain Text
+
+    heading: 
+      heading: Status
+      alignment: start
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ID ==========================================
+    id: 1535259310088633038
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    layout: 
+      sequence: 80
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ENAME =======================================
+    id: 1535259713907633042
+    identification: 
+      column-name: ENAME
+      type: Plain Text
+
+    heading: 
+      heading: Employee
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    server-side-condition: 
+      type: Item = Value
+      item: P29_SHOW_FOR_SUBORDINATES
+      value: Y
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Breadcrumb ==================================
+  id: 1535259820144633043
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 1275353707076086477
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: About this page =============================
+  id: 4769524906094635404
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          This page shows employee appraisal history for the logged-in user. If the current user
+          is a manager, they can flip the switch to see the employee appraisal history of their
+          subordinates.
+      </p>
+
+  layout: 
+    sequence: 1
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P29_SHOW_FOR_SUBORDINATES ================
+  id: 1535259386859633039
+  identification: 
+    name: P29_SHOW_FOR_SUBORDINATES
+    type: Switch
+
+  label: 
+    label: Show for Subordinates?
+    alignment: Left
+
+  settings: 
+    use-defaults: true
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: N
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select empno
+      from eba_demo_appr_emp
+      where mgr = :CURRENT_USER_EMPNO
+      fetch first row only
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: When Subordinates Switched ==========
+  id: 1535259557086633040
+  identification: 
+    name: When Subordinates Switched
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P29_SHOW_FOR_SUBORDINATES
+
+  actions: 
+  - # ====== Action: Refresh Appraisal History ===================
+    id: 1535259584799633041
+    identification: 
+      name: Refresh Appraisal History
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Appraisal History # 1528611323979769876
+
+    execution: 
+      sequence: 10
+      event: When Subordinates Switched # 1535259557086633040
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

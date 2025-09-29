@@ -1,0 +1,48 @@
+---
+- # ====== Authentication: lol =================================
+  id: 17626274308694842
+  identification: 
+    name: lol
+
+  subscription: 
+    version-number: 45023616474160
+
+  settings: 
+    type: Social Sign-In
+    credential-store: 17211273672143570
+    authentication-provider: OpenID Connect Provider
+    discovery-url: lol
+    scope: profile
+    username: '#sub# (#APEX_AUTH_NAME#)'
+    convert-username-to-upper-case: false
+    verify-attributes: true
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+
+- # ====== Authentication: Oracle APEX Accounts ================
+  id: 29407586096448376
+  identification: 
+    name: Oracle APEX Accounts
+
+  subscription: 
+    version-number: 44508792705118
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+

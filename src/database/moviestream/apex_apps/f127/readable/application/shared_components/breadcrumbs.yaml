@@ -1,0 +1,655 @@
+---
+- # ====== Breadcrumb:  Breadcrumb =============================
+  id: 6307140148628747096
+  identification: 
+    name: ' Breadcrumb'
+
+  entries: 
+  - # ====== Entry: Cards ========================================
+    id: 637928017062488129
+    identification: 
+      name: Cards
+      page-number: 41
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:41:&SESSION.::&DEBUG.:::'
+        page: 41 # Cards
+
+  - # ====== Entry: Faceted Search ===============================
+    id: 679685851279363211
+    identification: 
+      name: Faceted Search
+      page-number: 42
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:42:&SESSION.::&DEBUG.:::'
+        page: 42 # Faceted Search
+
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1066462093430212638
+    identification: 
+      name: Linking to Interactive Grids
+      page-number: 37
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&APP_SESSION.::&DEBUG.:::'
+        page: 37 # Linking to Interactive Grids
+
+  - # ====== Entry: Drill Down Reporting using Interactive Grid ==
+    id: 1066492300836754194
+    identification: 
+      name: Drill Down Reporting using Interactive Grid
+      page-number: 40
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.:::'
+        page: 40 # Drill Down IG
+
+  - # ====== Entry: Non-Tabular Templates ========================
+    id: 1258552520132145313
+    identification: 
+      name: Non-Tabular Templates
+      page-number: 13
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.:::'
+        page: 13 # Non-Tabular Templates
+
+  - # ====== Entry: Use Cases ====================================
+    id: 1334387606589420773
+    identification: 
+      name: Use Cases
+      page-number: 9
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
+        page: 9 # Use Cases
+
+  - # ====== Entry: Interactive Report ===========================
+    id: 1334393002004434742
+    identification: 
+      name: Interactive Report
+      page-number: 11
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.'
+        page: 11 # Interactive Report
+
+  - # ====== Entry: Custom Buttons ===============================
+    id: 1334639527761485505
+    identification: 
+      name: Custom Buttons
+      page-number: 12
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:::'
+        page: 12 # Custom Buttons
+
+  - # ====== Entry: Linking to Interactive Reports ===============
+    id: 1334752699463481094
+    identification: 
+      name: Linking to Interactive Reports
+      page-number: 18
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.'
+        page: 18 # Linking to Interactive Reports
+
+  - # ====== Entry: CASE Statement ===============================
+    id: 1334768306373644087
+    identification: 
+      name: CASE Statement
+      page-number: 19
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:::'
+        page: 19 # CASE Statement
+
+  - # ====== Entry: Top N Queries ================================
+    id: 1334776923153678372
+    identification: 
+      name: Top N Queries
+      page-number: 20
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.:::'
+        page: 20 # Top N Queries
+
+  - # ====== Entry: Inline Views =================================
+    id: 1334780028913686133
+    identification: 
+      name: Inline Views
+      page-number: 22
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.:::'
+        page: 22 # Inline Views
+
+  - # ====== Entry: Group By Clause ==============================
+    id: 1334784008760715683
+    identification: 
+      name: Group By Clause
+      page-number: 23
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:23:&SESSION.::&DEBUG.:::'
+        page: 23 # Group By Clause
+
+  - # ====== Entry: LEAD and LAG =================================
+    id: 1334792426738780867
+    identification: 
+      name: LEAD and LAG
+      page-number: 24
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.:::'
+        page: 24 # LEAD and LAG
+
+  - # ====== Entry: Pivot Syntax =================================
+    id: 1334795720926795185
+    identification: 
+      name: Pivot Syntax
+      page-number: 25
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.:::'
+        page: 25 # Pivot Syntax
+
+  - # ====== Entry: Connect By ===================================
+    id: 1334847016678094439
+    identification: 
+      name: Connect By
+      page-number: 26
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.:::'
+        page: 26 # Connect By
+
+  - # ====== Entry: String Functions =============================
+    id: 1334850702777110837
+    identification: 
+      name: String Functions
+      page-number: 27
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:27:&SESSION.::&DEBUG.:::'
+        page: 27 # String Functions
+
+  - # ====== Entry: Regular Expressions ==========================
+    id: 1334854325060145848
+    identification: 
+      name: Regular Expressions
+      page-number: 28
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:28:&SESSION.::&DEBUG.:::'
+        page: 28 # Regular Expressions
+
+  - # ====== Entry: Soundex ======================================
+    id: 1334899507696790691
+    identification: 
+      name: Soundex
+      page-number: 29
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:29:&SESSION.::&DEBUG.:::'
+        page: 29 # Soundex
+
+  - # ====== Entry: LISTAGG ======================================
+    id: 1334966312741077256
+    identification: 
+      name: LISTAGG
+      page-number: 30
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.:::'
+        page: 30 # LISTAGG
+
+  - # ====== Entry: RANK and DENSE_RANK ==========================
+    id: 1335001009535288868
+    identification: 
+      name: RANK and DENSE_RANK
+      page-number: 31
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.:::'
+        page: 31 # RANK and DENSE_RANK
+
+  - # ====== Entry: RATIO_TO_REPORT ==============================
+    id: 1335004719094296567
+    identification: 
+      name: RATIO_TO_REPORT
+      page-number: 33
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.:::'
+        page: 33 # RATIO_TO_REPORT
+
+  - # ====== Entry: ROW_NUMBER ===================================
+    id: 1335008718350307880
+    identification: 
+      name: ROW_NUMBER
+      page-number: 32
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Analytic Function Examples # 1620167023216015775
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.:::'
+        page: 32 # ROW_NUMBER
+
+  - # ====== Entry: Pipelined Functions ==========================
+    id: 1335012511028318872
+    identification: 
+      name: Pipelined Functions
+      page-number: 35
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: SQL Examples # 1355049527609894763
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.:::'
+        page: 35 # Pipelined Functions
+
+  - # ====== Entry: Report from Collection =======================
+    id: 1353704615254889813
+    identification: 
+      name: Report from Collection
+      page-number: 38
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.'
+        page: 38 # Report from Collection
+
+  - # ====== Entry: SQL Examples =================================
+    id: 1355049527609894763
+    identification: 
+      name: SQL Examples
+      page-number: 39
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.:::'
+        page: 39 # SQL Examples
+
+  - # ====== Entry: Bind Variables ===============================
+    id: 1355117514697113179
+    identification: 
+      name: Bind Variables
+      page-number: 15
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.'
+        page: 15 # Bind Variables
+
+  - # ====== Entry: Analytic Function Examples ===================
+    id: 1620167023216015775
+    identification: 
+      name: Analytic Function Examples
+      page-number: 21
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.'
+        page: 21 # Analytic Function Examples
+
+  - # ====== Entry: Application Theme Style ======================
+    id: 1897022139655334866
+    identification: 
+      name: Application Theme Style
+      page-number: 34
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 1897028448816351203
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:34:&SESSION.::&DEBUG.:::'
+        page: 34 # Application Theme Style
+
+  - # ====== Entry: Administration ===============================
+    id: 1897028448816351203
+    identification: 
+      name: Administration
+      page-number: 36
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:36:&SESSION.'
+        page: 36 # Administration
+
+  - # ====== Entry: Interactive Grid =============================
+    id: 1977411663433577464
+    identification: 
+      name: Interactive Grid
+      page-number: 17
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:::'
+        page: 17 # Interactive Grid
+
+  - # ====== Entry: Classic Report ===============================
+    id: 2694808202532771969
+    identification: 
+      name: Classic Report
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Classic Report
+
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 2694915318638786583
+    identification: 
+      name: Manage Sample Data
+      page-number: 4
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Administration # 1897028448816351203
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::'
+        page: 4 # Manage Sample Data
+
+  - # ====== Entry: Filtering using Classic Report ===============
+    id: 2698839315255867307
+    identification: 
+      name: Filtering using Classic Report
+      page-number: 5
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.:::'
+        page: 5 # Filtering
+
+  - # ====== Entry: Drill Down Reporting using Interactive Report 
+    id: 2701128904221211672
+    identification: 
+      name: Drill Down Reporting using Interactive Report
+      page-number: 6
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+        page: 6 # Drill Down IR
+
+  - # ====== Entry: Highlighting using Interactive Reports =======
+    id: 2701512903730358558
+    identification: 
+      name: Highlighting using Interactive Reports
+      page-number: 7
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+        page: 7 # Highlighting
+
+  - # ====== Entry: Format Masks using Interactive Reports =======
+    id: 3078172423753053906
+    identification: 
+      name: Format Masks using Interactive Reports
+      page-number: 8
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Use Cases # 1334387606589420773
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:::'
+        page: 8 # Format Masks
+
+  - # ====== Entry: Home =========================================
+    id: 3187592103681432485
+    identification: 
+      name: Home
+      page-number: 10
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&FLOW_ID.:10:&SESSION.'
+        app: '&FLOW_ID.'
+        page: 10
+
+  - # ====== Entry: Help =========================================
+    id: 3276334518249023403
+    identification: 
+      name: Help
+      page-number: 14
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.:::'
+        page: 14 # Help
+
+  - # ====== Entry: Interactive Report ===========================
+    id: 6307140560476747099
+    identification: 
+      name: Interactive Report
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+        page: 1 # Interactive Report
+

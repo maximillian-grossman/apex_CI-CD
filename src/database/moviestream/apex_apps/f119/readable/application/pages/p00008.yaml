@@ -1,0 +1,483 @@
+---
+# ====== Page: Help ==========================================
+id: 8
+identification: 
+  name: Help
+  alias: HELP
+  title: Help
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+html-header: 
+  html-header: |
+    <style>
+    div.helpContainer{width:960px;margin:16px auto;zoom:1}
+    div.helpContainer:before,div.helpContainer:after{content:"\0020";display:block;height:0;overflow:hidden}
+    div.helpContainer:after{clear:both}
+    div.helpContainer div.helpSide{float:left;width:300px}
+    div.helpContainer div.helpSide h1.appNameHeader{position:relative;font:bold 22px/36px Arial,sans-serif;color:#404040;padding:0;margin:0}
+    div.helpContainer div.helpSide h1.appNameHeader img{display:block;position:absolute;left:0;top:0}
+    div.helpContainer div.helpMain{float:right;border-left:1px solid #EEE;width:632px;padding-left:16px}
+    div.helpContainer div.helpMain h2{font:bold 20px/32px Arial,sans-serif;color:#404040;margin:0 0 8px 0}
+    div.helpContainer div.helpMain h3{font:bold 16px/24px Arial,sans-serif;color:#404040;margin:0 0 8px 0}
+    div.helpContainer div.helpMain h4{font:bold 12px/16px Arial,sans-serif;color:#404040;margin:0 0 8px 0}
+    div.helpContainer div.helpMain p{font:normal 12px/16px Arial,sans-serif;color:#404040;margin:0 0 8px 0}
+    div.helpContainer div.helpMain ul{list-style:outside disc;margin:0 0 0 24px}
+    div.helpContainer div.helpMain ul li{font:normal 12px/20px Arial,sans-serif;color:#404040}
+    div.helpContainer div.helpMain .aboutApp,div.helpContainer div.helpMain .textRegion{border-bottom:1px solid #EEE;padding-bottom:16px;margin-bottom:16px}
+    </style>
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Help Container ==============================
+  id: 3905762884562370470
+  identification: 
+    name: Help Container
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: &APP_NAME. ==================================
+  id: 3905762940680370471
+  identification: 
+    name: '&APP_NAME.'
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select aa.version app_version,
+             to_char(aa.pages,'999G999G990') pages,
+             'Oracle' vendor
+      from apex_applications aa
+      where aa.application_id = :APP_ID
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 4
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - t-HeroRegion--featured
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-512.png'
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Value Attribute Pairs - Column
+      template-options: 
+      - '#DEFAULT#'
+      - t-AVPList--rightAligned
+      show-null-values-as: '-'
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: APP_VERSION =================================
+    id: 3905763049045370472
+    identification: 
+      column-name: APP_VERSION
+      type: Plain Text
+
+    heading: 
+      heading: App version
+      alignment: start
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PAGES =======================================
+    id: 3905763196740370473
+    identification: 
+      column-name: PAGES
+      type: Plain Text
+
+    heading: 
+      heading: Pages
+      alignment: start
+
+    layout: 
+      sequence: 2
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: VENDOR ======================================
+    id: 3905763296610370474
+    identification: 
+      column-name: VENDOR
+      type: Plain Text
+
+    heading: 
+      heading: Vendor
+      alignment: start
+
+    layout: 
+      sequence: 3
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Help ========================================
+  id: 5170661093824614729
+  identification: 
+    name: Help
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 1
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Never
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Quick Start =================================
+  id: 5170661720113614736
+  identification: 
+    name: Quick Start
+    type: Static Content
+
+  source: 
+    html-code: |
+      <H2>Getting Started</h2>
+      <p>Make sure to create the Sample RESTful Service: Navigate to SQL Workshop, RESTful Services and click the "Reset Sample Data" link on the right pane.</p>
+      <p>Make sure that the APEX engine user (APEX_050100) can connect to the APEX server via HTTP. A <i>Network ACL</i> is needed. Have a look into the Application Express Installation Guide - chapter "Enabling Network Services in Oracle Database 11g or Later" for more information.</p>
+      <p>Run the application as a developer; at the bottom of the page will be buttons for viewing the page in the Application Express Application Builder. Click on the "Edit Page X" button to see how the pages are defined.</p>
+
+  layout: 
+    sequence: 20
+    parent-region: Help Container # 3905762884562370470
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-bottom-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Features ====================================
+  id: 5170661916981614737
+  identification: 
+    name: Features
+    type: Static Content
+
+  source: 
+    html-code: |
+      <h2>Features</h2>
+      <p>
+          <ul>
+              <li><b>Simple Report</b> displays REST response data as a tabular report</li>
+              <li><b>Report with Pagination</b> allows to browse through a larger REST response</li>
+              <li><b>Report with Query</b> allows to pass filters to the REST service to return only a subset of data</li>
+              <li><b>Local REST Data</b> allows to download all data from a REST service to a local table, even when data is being returned pagewise.</li>
+              <li><b>DML Form</b> shows how to execute a PUT request to a REST service from an Application Express form.</li>
+        </ul>
+      </p>
+
+  layout: 
+    sequence: 30
+    parent-region: Help Container # 3905762884562370470
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About this Application ======================
+  id: 5170662120171614737
+  identification: 
+    name: About this Application
+    type: Static Content
+
+  source: 
+    html-code: |
+      <h2>About this Application</h2>
+      
+      <p>This example application demonstrates how to access and use an external REST service with Application Express Components. Application Developers can review the components needed to display data from a REST service as a report, to use pagination or to pass filters to the REST service. An example how send data to a REST service is also contained.</p>
+      
+      <p>The first page, "Simple Report", fetches data from the REST service and displays it as a tabular report. That is a quick and easy way to display small amounts of data from a REST service within an Application Express page.</p>
+      
+      <p>The second page, "Report with Pagination", does also work with REST services returning large amounts of data. Typically, REST services only return their results page-wise. Each page contains the HTTP url to the next and to the previous page. The Report with Pagination example extracts these URLs from the service response and shows how to add Application Express buttons to navigate between the pages. So it becomes possible to browse through a larger REST response while keeping scalability - each request only contains a reasonable amount of data.</p>
+      
+      <p>The "Report with Query" page shows how to pass a query filter to the REST service. Again, when REST services return large amounts of data, it's not feasible to fetch all that data to the APEX application and do filtering there. The query filter must be sent to the REST service in order to retrieve only the desired results.</p>
+      
+      <p>The "Local Rest Data" page shows how to download the complete REST service response to a local table - in order to do extensive reporting and analytics. When REST services return their results pagewise, we have to perform multiple requests in order to download all data into a local table. That page shows how such a process looks like. Clicking a button leads to all data being fetched into the table - the process fetches the next page as long as no further pages exist.</p>
+      
+      <p>The "DML Form" page shows how to manipulate data by sending a PUT request to the server. The page displays a typicall Application Express form. However, instead of the normal Automatic Fetch Row or Automatic Row Process processes, we  have PL/SQL code which fetches form data from the REST service and which uploads the updated information to the service.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: Help Container # 3905762884562370470
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-bottom-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

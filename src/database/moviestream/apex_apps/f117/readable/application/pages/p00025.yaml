@@ -1,0 +1,443 @@
+---
+# ====== Page: Pending Actions ===============================
+id: 25
+identification: 
+  name: Pending Actions
+  alias: PENDING-ACTIONS
+  title: Pending Appraisals
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 1535260176753633046
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 1275353707076086477
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Pending Actions =============================
+  id: 1845140033694368596
+  identification: 
+    name: Pending Actions
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select t.task_id, 
+             t.subject,
+             t.priority,
+             case 
+                  when t.state_code = 'ASSIGNED' then 
+                      t.state||' to '||t.actual_owner
+                  when t.state_code = 'UNASSIGNED' then 
+                      t.state||' ('||eba_demo_appr.approvers_for_task(t.task_id)||')'
+              end status,
+              eba_demo_appr.admins_for_task(t.task_id) as admins,
+              t.due_on due_by
+      from apex_tasks t
+      left join apex_appl_taskdefs d on d.task_def_id = t.task_def_id
+      where t.state_code in ('UNASSIGNED','ASSIGNED')
+      and t.task_type_code = 'ACTION'
+      and t.application_id = :APP_ID
+      order by due_by
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 50
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--staticRowColors
+      - t-Report--rowHighlight
+      - t-Report--inline
+      - t-Report--hideNoPagination
+
+    pagination: 
+      type: Row Ranges X to Y (with next and previous links)
+      display-position: Bottom - Right
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 500
+
+    messages: 
+      when-no-data-found: No pending actions
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: TASK_ID =====================================
+    id: 1528178893199903077
+    identification: 
+      column-name: TASK_ID
+      type: Hidden
+
+    layout: 
+      sequence: 1
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: SUBJECT =====================================
+    id: 1528179370009903078
+    identification: 
+      column-name: SUBJECT
+      type: Plain Text
+
+    heading: 
+      heading: Subject
+      alignment: start
+
+    layout: 
+      sequence: 11
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PRIORITY ====================================
+    id: 1528179686197903079
+    identification: 
+      column-name: PRIORITY
+      type: Plain Text
+
+    heading: 
+      heading: Priority
+      alignment: start
+
+    layout: 
+      sequence: 21
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: STATUS ======================================
+    id: 1528180168242903079
+    identification: 
+      column-name: STATUS
+      type: Plain Text
+
+    heading: 
+      heading: Status
+      alignment: start
+
+    layout: 
+      sequence: 31
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ADMINS ======================================
+    id: 1528180557292903079
+    identification: 
+      column-name: ADMINS
+      type: Plain Text
+
+    heading: 
+      heading: Admins
+      alignment: start
+
+    layout: 
+      sequence: 41
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DUE_BY ======================================
+    id: 1528180890948903080
+    identification: 
+      column-name: DUE_BY
+      type: Plain Text
+
+    heading: 
+      heading: Due By
+      alignment: start
+
+    layout: 
+      sequence: 51
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'DD-MON-YYYY HH24:MI'
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: About this page =============================
+  id: 4746508920563946071
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          This page is handy for demo purposes since it shows the relevant assignees and administrators
+          determined at task creation time for each pending action task. Use this information
+          to know which sample user to log in as to complete or administer a given action task. The
+          three action tasks below each dynamically computes its assignee at runtime by calling a
+          PL/SQL function that uses the primary key of the EBA_DEMO_APPR_APPRAISALS table, passed in
+          using the bind variable <code>:APEX$TASK_PK</code>, to return the following usernames related
+          to the employee to whom the appraisal pertains:
+      </p>
+      <ul>
+          <li>
+              the employee themselves, for the <em>Appraisal - Employee Input</em> action task,
+          </li>
+          <li>
+              the manager of the employee, for the <em>Appraisal - Manager Input</em> action task, and
+          </li>
+          <li>
+              the second-level manager of the employee (or null if none exists), for the  <em>Appraisal - VP Review</em> action task.
+          </li>         
+      </ul>
+      <p>
+          This page's classic report region queries data from <strong>APEX_TASKS</strong>, 
+          <strong>APEX_TASK_PARTICIPANTS</strong>, and 
+          <strong>APEX_APPL_TASKDEFS</strong> views. It filters the list to only include action
+          tasks using the WHERE clause <code>TASK_TYPE_CODE = 'ACTION'</code>. Most applications 
+          using approvals would typically only need one or more of the unified task list pages to allow
+          end users to work with tasks. This sample includes <strong>My Tasks</strong>, 
+          <strong>My Requests</strong>, and <strong>Task Administration</strong>
+          unified task list pages for that purpose.
+      </p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

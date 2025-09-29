@@ -1,0 +1,302 @@
+---
+# ====== Page: AI Settings ===================================
+id: 20020
+identification: 
+  name: AI Settings
+  alias: AI-SETTINGS
+  title: AI Settings
+  page-group: User Settings # 106834739868280575
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+javascript: 
+  execute-when-page-loads: apex.pwa.initPushSubscriptionPage();
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: This page contains the settings for controlling push notification subscription for the current user.
+
+configuration: 
+  build-option: 'Feature: Push Notifications' # 106834925540280582
+
+regions: 
+- # ====== Region: Push Notifications ==========================
+  id: 117406801190638015
+  identification: 
+    name: Push Notifications
+    type: Static Content
+
+  source: 
+    html-code: Please select a Profile to be used by the application. Profile selected here will be saved as a user preference.
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--colorBG
+    - t-Alert--wizard
+    - t-Alert--customIcons
+    - t-Alert--info
+    - t-Alert--removeHeading js-removeLandmark
+    - t-Form--xlarge
+    css-classes: 
+    - a-pwaPush--subscriptionRegion
+    icon: fa-bell-o
+    render-components: Below Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P20020_SERVICE ===========================
+  id: 106847037125307683
+  identification: 
+    name: P20020_SERVICE
+    type: Select List
+
+  label: 
+    label: Service
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 20
+    region: Push Notifications # 117406801190638015
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: select profile_name d, profile_name r from user_cloud_ai_profiles;
+    display-extra-values: false
+    display-null-value: true
+    null-display-value: '-- Select a Profile --'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      RETURN APEX_UTIL.GET_PREFERENCE(      
+              p_preference => 'CLOUD_AI_PROFILE',
+              p_user       => :APP_USER);
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: BACK ========================================
+  id: 106845068406304586
+  identification: 
+    button-name: BACK
+    label: Settings
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Right
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+    - t-Button--iconLeft
+    css-classes: 
+    - t-Button--inlineLink
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20000:&APP_SESSION.::&DEBUG.:::'
+      page: 20000 # Settings
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Set AI_SERVICE ======================
+  id: 106071064306719341
+  identification: 
+    name: Set AI_SERVICE
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P20020_SERVICE
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 106071131129719342
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |2
+          APEX_UTIL.SET_PREFERENCE(        
+                p_preference => 'CLOUD_AI_PROFILE',
+                p_value      => :P20020_SERVICE,      
+                p_user       => :APP_USER); 
+      items-to-submit: 
+      - P20020_SERVICE
+
+    execution: 
+      sequence: 10
+      event: Set AI_SERVICE # 106071064306719341
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: Change P20020_ENABLE_PUSH ===========
+  id: 106845618410304589
+  identification: 
+    name: Change P20020_ENABLE_PUSH
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P20020_ENABLE_PUSH
+
+  client-side-condition: 
+    type: Item = Value
+    item: P20020_ENABLE_PUSH
+    value: Y
+
+  actions: 
+  - # ====== Action: Subscribe to push notifications =============
+    id: 106846061423304591
+    identification: 
+      name: Subscribe to push notifications
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.pwa.subscribePushNotifications();
+
+    execution: 
+      sequence: 10
+      event: Change P20020_ENABLE_PUSH # 106845618410304589
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Unsubscribe from push notifications =========
+    id: 106846586022304593
+    identification: 
+      name: Unsubscribe from push notifications
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.pwa.unsubscribePushNotifications();
+
+    execution: 
+      sequence: 10
+      event: Change P20020_ENABLE_PUSH # 106845618410304589
+      fire-when-event-result-is: False
+      fire-on-initialization: false
+

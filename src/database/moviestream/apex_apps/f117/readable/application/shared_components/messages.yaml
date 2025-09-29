@@ -1,0 +1,16 @@
+---
+- # ====== Text Message: SUBSTITUTE_SAME_AS_ORIGINAL ===========
+  id: 353157483631068053
+  identification: 
+    name: SUBSTITUTE_SAME_AS_ORIGINAL
+
+  message: 
+    text: The substitute user must be different from the original user.
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: false
+
+  subscription: 
+    version-number: 738875874
+

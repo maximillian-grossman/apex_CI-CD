@@ -1,0 +1,33 @@
+---
+- # ====== Install Script: Load Data Procedure =================
+  id: 811462698996483557
+  identification: 
+    name: Load Data Procedure
+
+  execution: 
+    sequence: 40
+
+- # ====== Install Script: Create Spatial Indexes ==============
+  id: 1569907533668836010
+  identification: 
+    name: Create Spatial Indexes
+
+  execution: 
+    sequence: 30
+
+- # ====== Install Script: Table EBA_SAMPLE_MAP_STATES =========
+  id: 1575908012691885814
+  identification: 
+    name: Table EBA_SAMPLE_MAP_STATES
+
+  execution: 
+    sequence: 20
+
+- # ====== Install Script: Table EBA_SAMPLE_MAP_AIRPORTS =======
+  id: 1576908150835711624
+  identification: 
+    name: Table EBA_SAMPLE_MAP_AIRPORTS
+
+  execution: 
+    sequence: 10
+

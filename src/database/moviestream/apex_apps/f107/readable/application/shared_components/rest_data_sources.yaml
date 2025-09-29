@@ -1,0 +1,80 @@
+---
+- # ====== REST Data Source: test ==============================
+  id: 17216435038805581
+  identification: 
+    name: test
+
+  subscription: 
+    version-number: 44618971091650
+
+  source: 
+    type: OCI
+    remote-server: natdcshjumpstartprod-objectstorage-us-ashburn-1-oci-customer-oci-com-n-natdcshjumpstartprod # 17215765532805571
+    url-path-prefix: /b/bucket-20240514-1532/o/
+
+  authentication: 
+    credentials: API_KEY # 17211273672143570
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: test
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 17215972991805573
+    identification: 
+      name: test
+
+    data-profile: 
+      format: JSON
+      row-selector: objects
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: NAME ========================================
+      id: 17216137868805578
+      identification: 
+        column-name: NAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: name
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 17216648919805585
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+

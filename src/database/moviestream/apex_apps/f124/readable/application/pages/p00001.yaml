@@ -1,0 +1,420 @@
+---
+# ====== Page: Home ==========================================
+id: 1
+identification: 
+  name: Home
+  alias: HOME
+  title: '&APP_NAME. '
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Map App Pages ===============================
+  id: 806429222410001627
+  identification: 
+    name: Map App Pages
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select
+          list_entry_id as id,
+          display_sequence,
+          entry_text as title,
+          CURRENT_FOR_PAGES_EXPRESSION as card_link_page_id,
+          'fa ' || entry_image as card_icon,
+          entry_attribute_01 as description,
+          entry_attribute_02 as screenshot_img_path
+      from
+          apex_application_list_entries
+      where
+          application_id = :APP_ID
+      and
+          list_name = 'All Maps'
+      order by
+          display_sequence asc
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: select 1 from eba_sample_map_states
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 806429348652001628
+    appearance: 
+      layout: Grid
+      grid-columns: 4 Columns
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: TITLE
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <h4 class="a-CardView-subTitle">&DESCRIPTION!RAW.</h4>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_IMAGES#&SCREENSHOT_IMG_PATH.'
+      position: First
+      appearance: Widescreen
+      sizing: Fit
+      image-description: '&TITLE.'
+
+    performance: 
+      lazy-loading: true
+
+    pagination: 
+      type: Page
+      show-total-count: false
+      cards-per-page: 15
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 806429435291001629
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:&CARD_LINK_PAGE_ID.:&SESSION.::&DEBUG.:::'
+          page: '&CARD_LINK_PAGE_ID.'
+
+- # ====== Region: Map App Pages ===============================
+  id: 812006205362506122
+  identification: 
+    name: Map App Pages
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select
+          list_entry_id as id,
+          display_sequence,
+          entry_text as title,
+          CURRENT_FOR_PAGES_EXPRESSION as card_link_page_id,
+          'fa ' || entry_image as card_icon,
+          entry_attribute_01 as description,
+          entry_attribute_02 as screenshot_img_path
+      from
+          apex_application_list_entries
+      where
+          application_id = :APP_ID
+      and
+          list_name = 'All Maps'
+      and 
+          condition_type_code is null
+      order by
+          display_sequence asc
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: select 1 from eba_sample_map_states
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 812006270663506123
+    appearance: 
+      layout: Grid
+      grid-columns: 4 Columns
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: TITLE
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <h4 class="a-CardView-subTitle">&DESCRIPTION!RAW.</h4>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_IMAGES#&SCREENSHOT_IMG_PATH.'
+      position: First
+      appearance: Widescreen
+      sizing: Fit
+
+    performance: 
+      lazy-loading: true
+
+    pagination: 
+      type: Page
+      show-total-count: false
+      cards-per-page: 15
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 812006334256506124
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:&CARD_LINK_PAGE_ID.:&SESSION.::&DEBUG.:::'
+          page: '&CARD_LINK_PAGE_ID.'
+
+- # ====== Region: Sample Maps Application =====================
+  id: 1572118488986032294
+  identification: 
+    name: Sample Maps Application
+    type: Static Content
+
+  source: 
+    html-code: This application contains usage examples for the APEX Map Region.
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-512.png'
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Info ========================================
+  id: 1575186938943459872
+  identification: 
+    name: Info
+    type: Static Content
+
+  source: 
+    html-code: Welcome to the <strong>Sample Maps</strong> Application. This application contains numerous examples which make use of the Map Region and Oracle Spatial, a feature which is included in every Oracle Database.
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Airport Pages ===============================
+  id: 2350867417537825549
+  identification: 
+    name: Airport Pages
+    type: List
+
+  source: 
+    list: All Maps # 805941914005687255
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Never
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      list-template: Cards
+      template-options: 
+      - '#DEFAULT#'
+      - u-colors
+      - t-Cards--featured force-fa-lg
+      - t-Cards--displayIcons
+      - t-Cards--4cols
+      - t-Cards--iconsRounded
+      - t-Cards--animColorFill
+

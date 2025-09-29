@@ -1,0 +1,13 @@
+---
+- # ====== REST Data Source Server: api-github-com-repos-maximil
+  id: 20083739280957323
+  identification: 
+    name: api-github-com-repos-maximillian-grossman
+
+  endpoint-url: 
+    url: 'https://api.github.com/repos/maximillian-grossman/'
+
+  advanced: 
+    static-id: api_github_com_repos_maximillian_grossman
+    prompt-on-install: false
+

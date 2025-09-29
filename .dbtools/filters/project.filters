@@ -47,7 +47,7 @@ export_type not in ('USER'),
 -- export_type = 'APEX_APPLICATIONS',
 
 -- Export applications 200 and 300:
--- application_id in (200, 300),
+application_id in (123),
 
 -- More APEX filters:
 -- is_working_copy = 'Yes', -- Yes/No

@@ -1,0 +1,190 @@
+---
+- # ====== Static Application File: readme_laptopprocurementwork
+  id: 41918851776956485
+  identification: 
+    file-name: readme_laptopprocurementworkflow.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_approvals.jpg =======
+  id: 1204288545156109459
+  identification: 
+    file-name: readme_approvals.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_employees2.jpg ======
+  id: 1204289059826109463
+  identification: 
+    file-name: readme_employees2.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_salapprovers.jpg ====
+  id: 1204291341386109479
+  identification: 
+    file-name: readme_salapprovers.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_taskviews.jpg =======
+  id: 1204551748022081486
+  identification: 
+    file-name: readme_taskviews.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 1275549406103086739
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 1275549634228086741
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 1275549991642086743
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app.css ====================
+  id: 1278923577295861277
+  identification: 
+    file-name: app.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app.min.css ================
+  id: 1278950566076011216
+  identification: 
+    file-name: app.min.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: AboutTheWorkflowFeature.md =
+  id: 1547993053005360901
+  identification: 
+    file-name: AboutTheWorkflowFeature.md
+
+  attributes: 
+    mime-type: text/markdown
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: AboutTheSampleApplication.md
+  id: 1547993198662360903
+  identification: 
+    file-name: AboutTheSampleApplication.md
+
+  attributes: 
+    mime-type: text/markdown
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: AboutTheApprovalsFeature.md 
+  id: 1547993506999360905
+  identification: 
+    file-name: AboutTheApprovalsFeature.md
+
+  attributes: 
+    mime-type: text/markdown
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_workflowviews.jpg ===
+  id: 1550998764009589664
+  identification: 
+    file-name: readme_workflowviews.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_datamodel.jpg =======
+  id: 1552075076977299325
+  identification: 
+    file-name: readme_datamodel.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_appraisalworkflow.jpg
+  id: 1554823033929895854
+  identification: 
+    file-name: readme_appraisalworkflow.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_laptopworkflow.jpg ==
+  id: 1554823213174895855
+  identification: 
+    file-name: readme_laptopworkflow.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: UsingTheSample.md ==========
+  id: 1557443071528751887
+  identification: 
+    file-name: UsingTheSample.md
+
+  attributes: 
+    mime-type: text/markdown
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_employees.jpg =======
+  id: 1557451904798850125
+  identification: 
+    file-name: readme_employees.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_laptopordermgmt.jpg =
+  id: 1557810808203297142
+  identification: 
+    file-name: readme_laptopordermgmt.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: readme_selfeval.jpg ========
+  id: 1557818315934353424
+  identification: 
+    file-name: readme_selfeval.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+

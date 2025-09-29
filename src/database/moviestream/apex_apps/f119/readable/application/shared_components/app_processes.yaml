@@ -1,0 +1,137 @@
+---
+- # ====== Application Process: Determine Endpoint URL =========
+  id: 1859055824449538503
+  identification: 
+    name: Determine Endpoint URL
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_path_prefix apex_applications.workspace%type;
+      begin
+          begin
+              select url into :SAMPLE_ENDPOINT_URL
+                from eba_restdemo_sample_urls
+               where name = 'ORDS EMP';
+          exception 
+              when NO_DATA_FOUND then
+                  if not apex_application_global.g_cloud then
+                      select rtrim( w.path_prefix, '/' ) || '/'
+                        into l_path_prefix
+                        from apex_applications a, apex_workspaces w
+                       where a.workspace_id = w.workspace_id
+                         and a.application_id = v( 'APP_ID' );
+                  end if;
+      
+                  :SAMPLE_ENDPOINT_URL := apex_util.host_url('APEX_PATH') ||
+                      lower( l_path_prefix ) ||
+                     'hr/employees/';
+          end;
+      end;
+
+  execution: 
+    sequence: 1
+    point: New Session
+
+  subscription: 
+    version-number: 37166093930407
+
+- # ====== Application Process: Check REST Service Availibility 
+  id: 1868188527995678581
+  identification: 
+    name: Check REST Service Availibility
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+        l_response    clob;
+        l_version_url varchar2(500);
+      
+        l_parsed_json apex_json.t_values;
+      begin
+        :SAMPLE_SERVICE_AVAILABLE := 'OK';
+        
+        l_version_url := replace( :SAMPLE_ENDPOINT_URL, '/employees', '/version' );
+        l_response := apex_web_service.make_rest_request( l_version_url, 'GET' );
+        
+        if apex_web_service.g_status_code not between 200 and 299 then
+          :SAMPLE_SERVICE_AVAILABLE := 'HTTP-'|| apex_web_service.g_status_code;
+        else
+          begin
+            apex_json.parse(
+              p_values => l_parsed_json,
+              p_source => l_response
+            );
+            if apex_json.get_varchar2( p_values => l_parsed_json, p_path => 'version' ) = '21.2'
+            then
+              null;
+            else 
+              :SAMPLE_SERVICE_AVAILABLE := 'WRONG_SERVICE';
+            end if;   
+          exception when others then 
+            :SAMPLE_SERVICE_AVAILABLE := 'WRONG_SERVICE';
+          end;
+        end if;
+        
+      exception
+        when others then
+          if sqlcode = -29273 then
+            if instr(sqlerrm, '24247') > 0 then 
+              :SAMPLE_SERVICE_AVAILABLE := 'NO_ACL';
+            elsif instr(sqlerrm, '29024') > 0 then
+              :SAMPLE_SERVICE_AVAILABLE := 'NO_WALLET';
+            else 
+              :SAMPLE_SERVICE_AVAILABLE := 'NO_NETWORK';
+            end if;
+          end if;
+      end;
+
+  execution: 
+    sequence: 2
+    point: New Session
+
+  subscription: 
+    version-number: 37166093930415
+
+- # ====== Application Process: Trim All Page Items ============
+  id: 3412003106828447553
+  identification: 
+    name: Trim All Page Items
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          for c1 in (select item_name
+                     from apex_application_page_items
+                     where application_id = :APP_ID
+                         and page_id = :APP_PAGE_ID
+                         and display_as_code in ('NATIVE_TEXT_FIELD',
+                                                 'NATIVE_TEXTAREA',
+                                                 'NATIVE_NUMBER_FIELD') ) loop
+              apex_util.set_session_state( c1.item_name,
+                  regexp_replace(apex_util.get_session_state( c1.item_name ),
+                      '^[[:space:]]*(.*?)[[:space:]]*$', '\1'
+                  )
+              );
+          end loop;
+      end;
+
+  execution: 
+    sequence: 1
+    point: After Submit
+
+  error: 
+    display-location: Inline in Notification
+
+  subscription: 
+    version-number: 37166093930419
+

@@ -1,0 +1,633 @@
+---
+# ====== Page: House Bill Detail =============================
+id: 12
+identification: 
+  name: House Bill Detail
+  alias: LLM-CONVERSATION
+  title: Search House Bills
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 29436035749075361
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 40060727131315943
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: LLM Conversation ============================
+  id: 29436722587075958
+  identification: 
+    name: LLM Conversation
+    type: House Bill Detail
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: PROMPTS
+    include-rowid-column: false
+    where-clause: 'conv_id=:P12_CONV_ID'
+
+  order-by: 
+    type: Static Value
+    order-by-clause: asked_on asc
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      prompt: PROMPT
+      id: ID
+      response: RESPONSE
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+  columns: 
+  - # ====== Column: ID ==========================================
+    id: 29436934176075960
+    identification: 
+      name: ID
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CONV_ID =====================================
+    id: 29439748794075988
+    identification: 
+      name: CONV_ID
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: CONV_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: PROMPT ======================================
+    id: 29439853304075989
+    identification: 
+      name: PROMPT
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: PROMPT
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: RESPONSE ====================================
+    id: 29439887450075990
+    identification: 
+      name: RESPONSE
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: RESPONSE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ASKED_ON ====================================
+    id: 29440015970075991
+    identification: 
+      name: ASKED_ON
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: ASKED_ON
+      data-type: TIMESTAMP
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+- # ====== Region: Footer ======================================
+  id: 29440314475075994
+  identification: 
+    name: Footer
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_05
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Item Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P12_CONV_ID ==============================
+  id: 29277732001708281
+  identification: 
+    name: P12_CONV_ID
+    type: Number Field
+
+  label: 
+    label: Conv Id
+    alignment: Left
+
+  settings: 
+    number-alignment: Start
+    virtual-keyboard: Decimal
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: SQL Query (return single value)
+    sql-query: 'select max(id) from conversations where app_session=:APP_SESSION'
+    used: Always, replacing any existing value in session state
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_PROMPT ===============================
+  id: 29440429597075995
+  identification: 
+    name: P12_PROMPT
+    type: Text Field
+
+  label: 
+    label: Prompt
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: Footer # 29440314475075994
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_RESPONSE =============================
+  id: 29440851061075999
+  identification: 
+    name: P12_RESPONSE
+    type: Textarea
+
+  label: 
+    label: Response
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 5
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: create_new_conversation =====================
+  id: 29276749401708271
+  identification: 
+    button-name: create_new_conversation
+    label: Create New Conversation
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 29436035749075361
+    slot: SMART_FILTERS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-color-1
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: Submit ======================================
+  id: 29440552673075996
+  identification: 
+    button-name: Submit
+    label: Submit
+
+  layout: 
+    sequence: 30
+    region: Footer # 29440314475075994
+    slot: BUTTON_END
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-send-o
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: create_conversation =================
+  id: 29276830981708272
+  identification: 
+    name: create_conversation
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: create_new_conversation # 29276749401708271
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 29276901065708273
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: 'chathistory_pkg.prc_add_conversation(:APP_USER, SYSTIMESTAMP, :APP_SESSION);'
+
+    execution: 
+      sequence: 10
+      event: create_conversation # 29276830981708272
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Clear state =================================
+    id: 29277361112708277
+    identification: 
+      name: Clear state
+      action: Clear
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P12_PROMPT
+      - P12_RESPONSE
+
+    execution: 
+      sequence: 20
+      event: create_conversation # 29276830981708272
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 29277581010708279
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 30
+      event: create_conversation # 29276830981708272
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: Invoke API =================================
+  id: 29440221892075993
+  identification: 
+    name: Invoke API
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Procedure or Function
+    owner: PARSING SCHEMA
+    procedure-or-function: GEN_AI_CHAT_LEGISLATION
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: Submit # 29440552673075996
+
+  parameters: 
+  - # ====== Parameter: Function Result ==========================
+    id: 29440588874075997
+    identification: 
+      name: Function Result
+
+    parameter: 
+      direction: Out
+      data-type: CLOB
+      ignore-output: false
+
+    value: 
+      item: P12_RESPONSE
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_ai_message =============================
+    id: 29440742331075998
+    identification: 
+      name: p_ai_message
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P12_PROMPT
+
+    advanced: 
+      display-sequence: 20
+

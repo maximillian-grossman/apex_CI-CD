@@ -1,0 +1,51 @@
+---
+- # ====== Classic Navigation Bar Entry: Administration ========
+  id: 3234582199288524341
+  label: 
+    label: Administration
+
+  layout: 
+    sequence: 10
+
+  feedback: 
+    feedback-entry: false
+
+  link: 
+    target: 
+      url: 'f?p=&APP_ID.:settings:&SESSION.::&DEBUG.:::'
+      page: SETTINGS
+
+- # ====== Classic Navigation Bar Entry: Help ==================
+  id: 3234582415218528969
+  label: 
+    label: Help
+
+  layout: 
+    sequence: 20
+
+  feedback: 
+    feedback-entry: false
+
+  link: 
+    target: 
+      url: 'f?p=&APP_ID.:help:&SESSION.::&DEBUG.::::'
+      page: HELP
+
+- # ====== Classic Navigation Bar Entry: Logout ================
+  id: 6307138359095747084
+  label: 
+    label: Logout
+
+  layout: 
+    sequence: 30
+
+  icon: 
+    height: 32
+    width: 32
+
+  feedback: 
+    feedback-entry: false
+
+  link: 
+    target: '&LOGOUT_URL.'
+

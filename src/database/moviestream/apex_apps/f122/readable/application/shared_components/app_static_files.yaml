@@ -1,0 +1,82 @@
+---
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 2218111805854745267
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 2218112002522745283
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 2218112301126745312
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: Employees.json =============
+  id: 3353801824588090325
+  identification: 
+    file-name: Employees.json
+
+  attributes: 
+    mime-type: application/json
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: Employees.xml ==============
+  id: 3353802591243087555
+  identification: 
+    file-name: Employees.xml
+
+  attributes: 
+    mime-type: application/xml
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: SalesData.zip ==============
+  id: 3354420000344879338
+  identification: 
+    file-name: SalesData.zip
+
+  attributes: 
+    mime-type: application/zip
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: Employees.csv ==============
+  id: 3354477992125802828
+  identification: 
+    file-name: Employees.csv
+
+  attributes: 
+    mime-type: text/csv
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: Employees.xlsx =============
+  id: 3354478411982801315
+  identification: 
+    file-name: Employees.xlsx
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: Employees_TransformNLookup.c
+  id: 3354478792773799931
+  identification: 
+    file-name: Employees_TransformNLookup.csv
+
+  attributes: 
+    mime-type: text/csv
+    file-character-set: Unicode UTF-8
+

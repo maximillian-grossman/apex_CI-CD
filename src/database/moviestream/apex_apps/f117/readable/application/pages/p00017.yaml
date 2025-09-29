@@ -1,0 +1,1599 @@
+---
+# ====== Page: Employee Self Review Details ==================
+id: 17
+identification: 
+  name: Employee Self Review Details
+  title: Employee Self Review Details
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+read-only: 
+  type: Expression
+  language: PL/SQL
+  pl/sql-expression: ":P17_APPRAISAL_ID_PROVIDED = 'Y' or :P17_EXPECTING_INPUT_FROM != :APP_USER"
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: No - Prevent page from being re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Employee Self Review ========================
+  id: 1242598363571420561
+  identification: 
+    name: Employee Self Review
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_APPR_APPRAISALS
+    include-rowid-column: false
+
+  layout: 
+    sequence: 110
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  read-only: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      apex_approval.is_allowed (
+          p_task_id   => :P17_TASK_ID,
+          p_operation => apex_approval.c_task_op_claim )
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: false
+
+- # ====== Region: Subject =====================================
+  id: 1246768072497027938
+  identification: 
+    name: Subject
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: |
+      declare
+          l_result clob;
+      begin
+          select to_clob(replace(replace(replace('
+                  <div class="a-CardView has-title has-badge">
+                    <div class="a-CardView-header">
+                      <div class="a-CardView-headerBody">
+                        <h3 class="a-CardView-title">#SUBJECT#</h3>
+                      </div>
+                      <div class="a-CardView-badge #BADGE_CSS_CLASSES#" title="#BADGE_TEXT#">
+                        <span class="a-CardView-badgeValue">#BADGE_TEXT#</span>
+                      </div>
+                    </div>
+                  </div>',
+                 '#SUBJECT#'          , subject          ),
+                 '#BADGE_TEXT#'       , badge_text       ),
+                 '#BADGE_CSS_CLASSES#', badge_css_classes) )
+            into l_result
+            from table ( apex_approval.get_tasks (
+                             p_context => 'SINGLE_TASK',
+                             p_task_id => :P17_TASK_ID ) );
+      
+          return l_result;
+      exception
+          when no_data_found then
+              return l_result;
+      end;
+    page-items-to-submit: 
+    - P17_TASK_ID
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P17_EMPNO
+    value: '&CURRENT_USER_EMPNO.'
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
+
+- # ====== Region: Buttons =====================================
+  id: 1246798017790027966
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 210
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--stickToBottom
+    - t-ButtonRegion--slimPadding
+    - margin-bottom-none
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P17_ID ===================================
+  id: 1242598490401420563
+  identification: 
+    name: P17_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_EMPNO ================================
+  id: 1242598648475420564
+  identification: 
+    name: P17_EMPNO
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: EMPNO
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_PERIOD_START =========================
+  id: 1242598741911420565
+  identification: 
+    name: P17_PERIOD_START
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: PERIOD_START
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_PERIOD_END ===========================
+  id: 1242598792254420566
+  identification: 
+    name: P17_PERIOD_END
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: PERIOD_END
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_APPRAISAL_DATE =======================
+  id: 1242598940018420567
+  identification: 
+    name: P17_APPRAISAL_DATE
+    type: Display Only
+
+  label: 
+    label: Appraisal Date
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 60
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: APPRAISAL_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_ORIGINATOR ===========================
+  id: 1242599001024420568
+  identification: 
+    name: P17_ORIGINATOR
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 130
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: ORIGINATOR
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_STATUS ===============================
+  id: 1242599099519420569
+  identification: 
+    name: P17_STATUS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 120
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: STATUS
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_EMP_ACHIEVEMENTS =====================
+  id: 1242599265633420570
+  identification: 
+    name: P17_EMP_ACHIEVEMENTS
+    type: Markdown Editor
+
+  label: 
+    label: Self Review - My Achievements
+    alignment: Left
+
+  settings: 
+    toolbar: Simple
+    syntax-highlighting: true
+
+  layout: 
+    sequence: 100
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: EMP_ACHIEVEMENTS
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  read-only: 
+    type: Item != Value
+    item: P17_STATUS
+    value: ORIGINATED
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_EMP_DEVELOPMENT_GOALS ================
+  id: 1242599350090420571
+  identification: 
+    name: P17_EMP_DEVELOPMENT_GOALS
+    type: Markdown Editor
+
+  label: 
+    label: Self Review -  Development Goals
+    alignment: Left
+
+  settings: 
+    toolbar: Simple
+    syntax-highlighting: true
+
+  layout: 
+    sequence: 110
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: EMP_DEVELOPMENT_GOALS
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  read-only: 
+    type: Item != Value
+    item: P17_STATUS
+    value: ORIGINATED
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_MGR_APPRAISAL ========================
+  id: 1242599417684420572
+  identification: 
+    name: P17_MGR_APPRAISAL
+    type: Markdown Editor
+
+  label: 
+    label: Manager Appraisal Comments
+    alignment: Left
+
+  settings: 
+    toolbar: Simple
+    syntax-highlighting: true
+
+  layout: 
+    sequence: 80
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: MGR_APPRAISAL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  server-side-condition: 
+    type: Item is in colon delimited list
+    item: P17_STATUS
+    list: 'SUBMITTED:MGR_SUBMITTED:VP_REVIEWED:COMPLETED'
+
+  read-only: 
+    type: Item is NOT in colon delimited list
+    item: P17_STATUS
+    list: SUBMITTED
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_MGR_OBJECTIVES =======================
+  id: 1242599538859420573
+  identification: 
+    name: P17_MGR_OBJECTIVES
+    type: Markdown Editor
+
+  label: 
+    label: Manager's Objectives Comments
+    alignment: Left
+
+  settings: 
+    toolbar: Simple
+    syntax-highlighting: true
+
+  layout: 
+    sequence: 90
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: MGR_OBJECTIVES
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  server-side-condition: 
+    type: Item is in colon delimited list
+    item: P17_STATUS
+    list: 'SUBMITTED:MGR_SUBMITTED:VP_REVIEWED:COMPLETED'
+
+  read-only: 
+    type: Item is NOT in colon delimited list
+    item: P17_STATUS
+    list: SUBMITTED
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_DATE_ORIGINATED ======================
+  id: 1242599685109420575
+  identification: 
+    name: P17_DATE_ORIGINATED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 140
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: DATE_ORIGINATED
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_INPUT_COMPLETED ======================
+  id: 1242599850787420576
+  identification: 
+    name: P17_INPUT_COMPLETED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 150
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: INPUT_COMPLETED
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_VP_REVIEW_DATE =======================
+  id: 1242600008396420578
+  identification: 
+    name: P17_VP_REVIEW_DATE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 160
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: VP_REVIEW_DATE
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_TASK_ID ==============================
+  id: 1246767238988027937
+  identification: 
+    name: P17_TASK_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_SUCCESS_MESSAGE ======================
+  id: 1246767590761027938
+  identification: 
+    name: P17_SUCCESS_MESSAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_APPRAISAL_PERIOD =====================
+  id: 1515034966904611572
+  identification: 
+    name: P17_APPRAISAL_PERIOD
+    type: Display Only
+
+  label: 
+    label: Appraisal Period
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 30
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_MANAGER_COMPLETED ====================
+  id: 1528607792993769841
+  identification: 
+    name: P17_MANAGER_COMPLETED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 170
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Employee Self Review # 1242598363571420561
+    column: MANAGER_COMPLETED
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_APPRAISAL_ID_PROVIDED ================
+  id: 1528612085709769884
+  identification: 
+    name: P17_APPRAISAL_ID_PROVIDED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 120
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: N
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_ENAME ================================
+  id: 1535259888988633044
+  identification: 
+    name: P17_ENAME
+    type: Display Only
+
+  label: 
+    label: Employee
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 70
+    region: Employee Self Review # 1242598363571420561
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ":P17_APPRAISAL_ID_PROVIDED = 'Y' or :P17_EMPNO != :CURRENT_USER_EMPNO"
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P17_EXPECTING_INPUT_FROM =================
+  id: 1545481727213617172
+  identification: 
+    name: P17_EXPECTING_INPUT_FROM
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 130
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 1246798446700027966
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Buttons # 1246798017790027966
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P17_APPRAISAL_ID_PROVIDED
+    value: N
+
+- # ====== Button: SAVE ========================================
+  id: 1246799250201027967
+  identification: 
+    button-name: SAVE
+    label: Save
+
+  layout: 
+    sequence: 30
+    region: Buttons # 1246798017790027966
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P17_APPRAISAL_ID_PROVIDED = 'N' and
+      apex_approval.is_allowed (
+          p_task_id   => :P17_TASK_ID,
+          p_operation => apex_approval.c_task_op_complete )
+
+- # ====== Button: COMPLETE ====================================
+  id: 1246799658266027967
+  identification: 
+    button-name: COMPLETE
+    label: Complete
+
+  layout: 
+    sequence: 40
+    region: Buttons # 1246798017790027966
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--success
+    - t-Button--iconLeft
+    icon: fa-box-arrow-out-east
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P17_APPRAISAL_ID_PROVIDED = 'N' and
+      apex_approval.is_allowed (
+          p_task_id   => :P17_TASK_ID,
+          p_operation => apex_approval.c_task_op_complete )
+
+- # ====== Button: CLOSE =======================================
+  id: 1528612031635769883
+  identification: 
+    button-name: CLOSE
+    label: Close
+
+  layout: 
+    sequence: 20
+    region: Buttons # 1246798017790027966
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+  server-side-condition: 
+    type: Item = Value
+    item: P17_APPRAISAL_ID_PROVIDED
+    value: Y
+
+dynamic-actions: 
+- # ====== Dynamic Action: Refresh - Comments ==================
+  id: 1246808170060027973
+  identification: 
+    name: Refresh - Comments
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P17_ALL_COMMENTS
+
+- # ====== Dynamic Action: Refresh - History ===================
+  id: 1246809031599027974
+  identification: 
+    name: Refresh - History
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P17_ALL_HISTORY
+
+- # ====== Dynamic Action: Cancel ==============================
+  id: 1246812828685027977
+  identification: 
+    name: Cancel
+
+  execution: 
+    sequence: 220
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 1246798446700027966
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 1246813192151027977
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: Cancel # 1246812828685027977
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: On Click Ok =========================
+  id: 1528612374869769886
+  identification: 
+    name: On Click Ok
+
+  execution: 
+    sequence: 230
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CLOSE # 1528612031635769883
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 1535259259633633037
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: On Click Ok # 1528612374869769886
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P17_ID =================================
+  id: 1242600249112420580
+  identification: 
+    item-name: P17_ID
+
+  execution: 
+    sequence: 20
+    point: Before Header
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select detail_pk
+      from apex_tasks
+      where task_id = :P17_TASK_ID
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P17_ID
+
+- # ====== Computation: P17_APPRAISAL_ID_PROVIDED ==============
+  id: 1528612221197769885
+  identification: 
+    item-name: P17_APPRAISAL_ID_PROVIDED
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "CASE WHEN :P17_ID IS NOT NULL THEN 'Y' ELSE 'N' END"
+
+- # ====== Computation: P17_ENAME ==============================
+  id: 1535260013678633045
+  identification: 
+    item-name: P17_ENAME
+
+  execution: 
+    sequence: 10
+    point: After Header
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select ename
+      from eba_demo_appr_emp
+      where empno = :P17_EMPNO
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: ":P17_APPRAISAL_ID_PROVIDED = 'Y' or :P17_EMPNO != :CURRENT_USER_EMPNO"
+
+- # ====== Computation: P17_EXPECTING_INPUT_FROM ===============
+  id: 1545481809658617173
+  identification: 
+    item-name: P17_EXPECTING_INPUT_FROM
+
+  execution: 
+    sequence: 30
+    point: Before Header
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select actual_owner
+      from apex_tasks
+      where task_id = :P17_TASK_ID
+
+processes: 
+- # ====== Process: Initialize form Employee Self Review Details
+  id: 1242598477674420562
+  identification: 
+    name: Initialize form Employee Self Review Details
+    type: Form - Initialization
+    execution-chain: None
+    form-region: Employee Self Review # 1242598363571420561
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Appraisal Region Automatic DML =============
+  id: 1242600123230420579
+  identification: 
+    name: Appraisal Region Automatic DML
+    type: Form - Automatic Row Processing (DML)
+    execution-chain: None
+    form-region: Employee Self Review # 1242598363571420561
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: Yes
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Evaluation Saved
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Request is contained in Value
+    value: COMPLETE,SAVE
+
+- # ====== Process: Claim ======================================
+  id: 1246814535930027978
+  identification: 
+    name: Claim
+    type: Human Task - Manage
+    execution-chain: None
+
+  settings: 
+    type: Claim
+    task-id-item: P17_TASK_ID
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    error-message: '#SQLERRM_TEXT#'
+    display-location: Inline in Notification
+
+  configuration: 
+    build-option: Commented Out # 1275353158916086473
+
+- # ====== Process: Complete ===================================
+  id: 1246814951538027978
+  identification: 
+    name: Complete
+    type: Human Task - Manage
+    execution-chain: None
+
+  settings: 
+    type: Complete (without Outcome)
+    task-id-item: P17_TASK_ID
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    error-message: '#SQLERRM_TEXT#'
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: COMPLETE # 1246799658266027967
+
+- # ====== Process: Set Success Message ========================
+  id: 1246819605275027982
+  identification: 
+    name: Set Success Message
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: ':P17_SUCCESS_MESSAGE := apex_application.g_print_success_message;'
+
+  execution: 
+    sequence: 150
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    error-message: '#SQLERRM_TEXT#'
+    display-location: Inline in Notification
+
+- # ====== Process: Close Dialog ===============================
+  id: 1246819991561027982
+  identification: 
+    name: Close Dialog
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    show-success-messages: true
+
+  execution: 
+    sequence: 160
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: '&P17_SUCCESS_MESSAGE.'
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Request is NOT contained in Value
+    value: CLAIM,SET_PRIORITY,SET_DUE,INVITE_PARTICIPANT,REMOVE_PARTICIPANT,RENEW,UPDATE_PARAMETER,SAVE
+
+- # ====== Process: Compute Appraisal Period ===================
+  id: 1515035112775611574
+  identification: 
+    name: Compute Appraisal Period
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: EBA_DEMO_APPR
+    procedure-or-function: APPRAISAL_PERIOD
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  parameters: 
+  - # ====== Parameter: Function Result ==========================
+    id: 1515035279707611575
+    identification: 
+      name: Function Result
+
+    parameter: 
+      direction: Out
+      data-type: VARCHAR2
+      ignore-output: false
+
+    value: 
+      item: P17_APPRAISAL_PERIOD
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_start_date =============================
+    id: 1515035322655611576
+    identification: 
+      name: p_start_date
+
+    parameter: 
+      direction: In
+      data-type: DATE
+      has-default: false
+
+    value: 
+      type: Item
+      item: P17_PERIOD_START
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_end_date ===============================
+    id: 1515035397427611577
+    identification: 
+      name: p_end_date
+
+    parameter: 
+      direction: In
+      data-type: DATE
+      has-default: false
+
+    value: 
+      type: Item
+      item: P17_PERIOD_END
+
+    advanced: 
+      display-sequence: 30
+
+branches: 
+- # ====== Branch: Reload Dialog ===============================
+  id: 1246820391767027982
+  identification: 
+    name: Reload Dialog
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:&APP_PAGE_ID.:&APP_SESSION.::&DEBUG.::P17_TASK_ID:&P17_TASK_ID.&success_msg=#SUCCESS_MSG#'
+      page: '&APP_PAGE_ID.'
+      values: 
+        p17_task_id: '&P17_TASK_ID.'
+

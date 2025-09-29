@@ -1,0 +1,61 @@
+---
+- # ====== Text Message: ADMINISTRATION ========================
+  id: 2583705921271379656
+  identification: 
+    name: ADMINISTRATION
+
+  message: 
+    text: Administration
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: false
+
+  subscription: 
+    version-number: 37166093866984
+
+- # ====== Text Message: HELP ==================================
+  id: 2583710023003380198
+  identification: 
+    name: HELP
+
+  message: 
+    text: Help
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: false
+
+  subscription: 
+    version-number: 37166093866984
+
+- # ====== Text Message: LOGOUT ================================
+  id: 2583714125773380938
+  identification: 
+    name: LOGOUT
+
+  message: 
+    text: Logout
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: false
+
+  subscription: 
+    version-number: 37166093866984
+
+- # ====== Text Message: USER ==================================
+  id: 2711436807442154037
+  identification: 
+    name: USER
+
+  message: 
+    text: User
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: false
+
+  subscription: 
+    version-number: 37166093866984
+

@@ -1,0 +1,280 @@
+---
+# ====== Application: Sample Maps ============================
+id: 124
+identification: 
+  name: Sample Maps
+  alias: SAMPLE-MAPS
+  version: 24.2.0
+  application-group: Sample Apps # 8966220573157898
+
+row-search: 
+  tokenize: false
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Native Printing
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: false
+  logging: true
+  debugging: true
+  compatibility-mode: 24.2
+  accessible-read-only-items: true
+  pass-ecid: N
+  copyright-banner: |
+    Name: #APP_NAME#
+    Copyright (c) 2012, #YEAR# Oracle and/or its affiliates.
+    Licensed under the Universal Permissive License v 1.0
+    as shown at https://oss.oracle.com/licenses/upl/
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Application Express Accounts # 1575511597637929800
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Enabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+
+database-session: 
+  parsing-schema: MOVIESTREAM
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Left-To-Right
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Text
+  text: Sample Maps
+
+progressive-web-app: 
+  enable: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&SESSION.'
+    page: 1 # Home
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - js-defaultCollapsed
+  - js-navCollapsed--hidden
+  - t-TreeNav--styleA
+  list-position: Side
+  list: Desktop Navigation Menu # 1575512491748929807
+
+navigation-bar: 
+  implementation: List
+  list: Desktop Navigation Bar # 1575655651589930120
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  include-jquery-migrate: false
+
+css: 
+  file-urls: 
+  - '#APP_IMAGES#app-icon.css?version=#APP_VERSION#'
+
+attributes: 
+  theme: Universal Theme # 42
+  global-page: 0
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: true
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 45167213244289
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: Sample Maps
+
+- # ====== Substitution: AIRPORT_DATA ==========================
+  id: 2
+  identification: 
+    name: AIRPORT_DATA
+
+  value: 
+    static-value: <small>US Airports data from bts.gov "Airports", Bureau of Transportation Statistics / Federal Government.</small>
+
+- # ====== Substitution: US_STATES_DATA ========================
+  id: 3
+  identification: 
+    name: US_STATES_DATA
+
+  value: 
+    static-value: <small>US States data from Data.gov "US Boundaries TIGER/Shapefiles", Federal government.</small>
+
+component-settings: 
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 27191971443860593
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 185030827
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 28797384057358657
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 37167665080521
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 28797756518358657
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 37167665080525
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 28817466889199331
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 155473169
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 148645752563664788
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 150407857254338988
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 151583420994849819
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 37165931336889
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 307243349710118359
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 1575508937578929789
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 1575509534883929791
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 1575509881200929792
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 1575510789396929795
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 1575511006904929795
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 1575511330915929795
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 37165931336884
+

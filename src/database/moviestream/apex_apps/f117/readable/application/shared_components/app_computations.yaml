@@ -1,0 +1,54 @@
+---
+- # ====== Application Computation: CURRENT_USER_EMPNO =========
+  id: 1535273390837725199
+  identification: 
+    item-name: CURRENT_USER_EMPNO
+
+  execution: 
+    sequence: 10
+    point: AFTER_LOGIN
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select empno
+        from eba_demo_appr_emp
+       where ename = :APP_USER
+
+  subscription: 
+    version-number: 37166355852589
+
+- # ====== Application Computation: P8_SHOW_ONLY_SUBORDINATES ==
+  id: 1537499901602517124
+  identification: 
+    item-name: P8_SHOW_ONLY_SUBORDINATES
+
+  execution: 
+    sequence: 10
+    point: AFTER_LOGIN
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: null
+
+  subscription: 
+    version-number: 37166357209411
+
+- # ====== Application Computation: P29_SHOW_FOR_SUBORDINATES ==
+  id: 1537510283311546438
+  identification: 
+    item-name: P29_SHOW_FOR_SUBORDINATES
+
+  execution: 
+    sequence: 10
+    point: New Session
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: null
+
+  subscription: 
+    version-number: 37166357216470
+

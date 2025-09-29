@@ -1,0 +1,133 @@
+---
+- # ====== Workflow: New =======================================
+  id: 16726161278545838
+  identification: 
+    name: New
+    title: New
+
+  advanced: 
+    static-id: New
+
+  versions: 
+  - # ====== Version: New ========================================
+    id: 16726292462545839
+    identification: 
+      workflow-version: New
+
+    settings: 
+      state: In Development
+
+    activities: 
+    - # ====== Activity: Start =====================================
+      id: 16726343847545840
+      identification: 
+        name: Start
+        type: Workflow Start
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 10
+
+      advanced: 
+        static-id: New
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 16726681554545843
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Start # 16726343847545840
+          to: Activity # 16726477799545841
+
+    - # ====== Activity: Activity ==================================
+      id: 16726477799545841
+      identification: 
+        name: Activity
+        type: Human Task - Create
+
+      settings: 
+        definition: Aprrove_Change # 17698561292559354
+        initiator-can-complete: Yes
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 20
+
+      advanced: 
+        static-id: New_1
+
+      connections: 
+      - # ====== Connection: New =====================================
+        id: 16726725104545844
+        identification: 
+          name: New
+          type: Normal
+
+        activity: 
+          from: Activity # 16726477799545841
+          to: End # 16726535652545842
+
+      parameters: 
+      - # ====== Parameter: Session Id ===============================
+        id: 17830021303672135
+        identification: 
+          name: Session Id # 17829612322672132
+
+        value: 
+          type: Static Value
+          static-value: '#PLEASE_CHANGE#'
+
+    - # ====== Activity: End =======================================
+      id: 16726535652545842
+      identification: 
+        name: End
+        type: Workflow End
+
+      settings: 
+        end-state: Completed
+
+      deadline: 
+        due-on-type: None
+
+      layout: 
+        sequence: 30
+
+      advanced: 
+        static-id: New_2
+
+    variables: 
+    - # ====== Variable: Approver ==================================
+      id: 16726979809545846
+      identification: 
+        static-id: APPROVER
+
+      label: 
+        label: Approver
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+
+    - # ====== Variable: TaskOutcome ===============================
+      id: 16727086837545847
+      identification: 
+        static-id: TASK_OUTCOME
+
+      label: 
+        label: TaskOutcome
+
+      parameter: 
+        data-type: VARCHAR2
+
+      value: 
+        type: Null
+

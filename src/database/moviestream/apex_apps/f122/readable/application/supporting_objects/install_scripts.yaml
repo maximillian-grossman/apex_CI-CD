@@ -1,0 +1,33 @@
+---
+- # ====== Install Script: eba_demo_data_load ==================
+  id: 3349092670929783923
+  identification: 
+    name: eba_demo_data_load
+
+  execution: 
+    sequence: 30
+
+- # ====== Install Script: seed sample data ====================
+  id: 3356419201558449639
+  identification: 
+    name: seed sample data
+
+  execution: 
+    sequence: 40
+
+- # ====== Install Script: Create Tables =======================
+  id: 5923651048931421393
+  identification: 
+    name: Create Tables
+
+  execution: 
+    sequence: 10
+
+- # ====== Install Script: Set plscope_settings ================
+  id: 6688017924242652837
+  identification: 
+    name: Set plscope_settings
+
+  execution: 
+    sequence: 5
+

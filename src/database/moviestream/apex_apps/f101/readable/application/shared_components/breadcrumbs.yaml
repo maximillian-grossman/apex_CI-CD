@@ -1,0 +1,49 @@
+---
+- # ====== Breadcrumb: Breadcrumb ==============================
+  id: 49856871598052140028
+  identification: 
+    name: Breadcrumb
+
+  entries: 
+  - # ====== Entry: Explain ======================================
+    id: 103503146045607588
+    identification: 
+      name: Explain
+      page-number: 3
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Explain
+
+  - # ====== Entry: Explore ======================================
+    id: 107021045276033881
+    identification: 
+      name: Explore
+      page-number: 2
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
+        page: 2 # Explore
+
+  - # ====== Entry: Home =========================================
+    id: 49856871781201140028
+    identification: 
+      name: Home
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+

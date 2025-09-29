@@ -1,0 +1,978 @@
+---
+# ====== Page: Progressive Scroll ============================
+id: 2
+identification: 
+  name: Progressive Scroll
+  alias: PROGRESSIVE-SCROLL
+  title: Progressive Scroll
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+css: 
+  file-urls: 
+  - '#APP_FILES#sample-interactive-grid#MIN#.css'
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Progressive Scroll ==========================
+  id: 6917051905949158559
+  identification: 
+    name: Progressive Scroll
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID, RATING, NAME, COUNTRY, FROM_YR,
+              TO_YR,
+              LINK, CATEGORY,
+              coalesce( to_yr, extract(year from sysdate) ) - FROM_YR as AGE,
+              case CATEGORY
+                  when 'S_T' then 'fa fa-rocket'
+                  when 'P' then 'fa fa-university'
+                  when 'A' then 'fa fa-paint-brush'
+                  when 'S' then 'fa fa-bicycle'
+                  when 'B_L' then 'fa fa-money'
+                  else 'fa fa-question'
+              end as ICON,
+              case CATEGORY
+                  when 'S_T' then 'Science & Technology'
+                  when 'P' then 'Politics'
+                  when 'A' then 'Art'
+                  when 'S' then 'Sports'
+                  when 'B_L' then 'Business & Law'
+                  else 'Undefined'
+              end as DISPLAY_CATEGORY,
+              GENDER
+          from EBA_DEMO_IG_PEOPLE
+      
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: people
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 6917056450821158568
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Region
+      fixed-report-height: 518
+
+    icon-view: 
+      show: true
+      custom: true
+      custom-icon: |
+        <li class="t-Cards-item" data-id='&APEX$ROW_ID.'>
+            <div class="t-Card">
+                <div class="t-Card-wrap">
+                    <div class="t-Card-icon u-color"><span class="t-Icon &ICON."></span></div>
+                    <div class="t-Card-titleWrap"><h3 class="t-Card-title">&NAME.</h3></div>
+                    <div class="t-Card-body">
+                        <div class="t-Card-desc">Country: &COUNTRY.<br>Age: &AGE.</div>
+                        <div class="t-Card-info">&DISPLAY_CATEGORY.</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    detail-view: 
+      show: true
+      before-rows: |
+        <ul class="t-MediaList t-MediaList--showDesc t-MediaList--showIcons t-MediaList--showBadges">
+        
+      for-each-row: |
+        <li class="t-MediaList-item  ">
+            <div class="t-MediaList-itemWrap">
+                <div class="t-MediaList-iconWrap">
+                    <span class="t-MediaList-icon"><span class="t-Icon fa &ICON."></span></span>
+                </div>
+                <div class="t-MediaList-body">
+                    <h3 class="t-MediaList-title">&NAME.</h3>
+                    <p class="t-MediaList-desc">
+                        Country: &COUNTRY.<br>
+                        Born: &FROM_YR.<br>
+                        Age: &AGE.
+                    </p>
+                </div>
+                <div class="t-MediaList-badgeWrap">
+                    <span class="t-MediaList-badge">&DISPLAY_CATEGORY.</span>
+                </div>
+            </div>
+        </li>
+      after-rows: </ul>
+
+    advanced: 
+      initialization-javascript-function: |
+        function(config) {
+            config.defaultGridViewOptions = {
+                rowHeader: "sequence"
+            };
+            config.defaultIconViewOptions = {
+                collectionClasses: "t-Cards t-Cards--5cols t-Cards--animColorFill t-Cards--basic t-Cards--displayIcons u-colors"
+            };
+            return config; // don't forget to return this!
+        }
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 6917056884674158569
+      identification: 
+        name: Primary Report
+        alias: 14435
+
+  columns: 
+  - # ====== Column: DISPLAY_CATEGORY ============================
+    id: 652785777740475835
+    identification: 
+      column-name: DISPLAY_CATEGORY
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 130
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DISPLAY_CATEGORY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: ICON ========================================
+    id: 2253115893251383845
+    identification: 
+      column-name: ICON
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 110
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ICON
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: GENDER ======================================
+    id: 2253115934876383846
+    identification: 
+      column-name: GENDER
+      type: Display Only
+
+    heading: 
+      heading: Gender
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Display Value of List of Values
+
+    layout: 
+      sequence: 120
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: PEOPLE_GENDER # 737885612450560140
+      display-extra-values: true
+
+    source: 
+      type: Database Column
+      database-column: GENDER
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ID ==========================================
+    id: 3111229530128115761
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 20
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: RATING ======================================
+    id: 3111229615182115762
+    identification: 
+      column-name: RATING
+      type: Text Field
+
+    heading: 
+      heading: Popularity
+      alignment: end
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 30
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: RATING
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: NAME ========================================
+    id: 3111229743766115763
+    identification: 
+      column-name: NAME
+      type: Text Field
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 255
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNTRY =====================================
+    id: 3111229856163115764
+    identification: 
+      column-name: COUNTRY
+      type: Text Field
+
+    heading: 
+      heading: Country
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 50
+
+    source: 
+      type: Database Column
+      database-column: COUNTRY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: FROM_YR =====================================
+    id: 3111229945328115765
+    identification: 
+      column-name: FROM_YR
+      type: Text Field
+
+    heading: 
+      heading: Born
+      alignment: end
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 40
+
+    source: 
+      type: Database Column
+      database-column: FROM_YR
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TO_YR =======================================
+    id: 3111230067398115766
+    identification: 
+      column-name: TO_YR
+      type: Text Field
+
+    heading: 
+      heading: Died
+      alignment: end
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 70
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 40
+
+    source: 
+      type: Database Column
+      database-column: TO_YR
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: LINK ========================================
+    id: 3111230125161115767
+    identification: 
+      column-name: LINK
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 90
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: LINK
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: CATEGORY ====================================
+    id: 3111230222919115768
+    identification: 
+      column-name: CATEGORY
+      type: Display Only
+
+    heading: 
+      heading: Category
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Display Value of List of Values
+
+    layout: 
+      sequence: 100
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: PEOPLE_CATEGORIES # 737882866737555995
+      display-extra-values: true
+
+    source: 
+      type: Database Column
+      database-column: CATEGORY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AGE =========================================
+    id: 3111230303260115769
+    identification: 
+      column-name: AGE
+      type: Text Field
+
+    heading: 
+      heading: Age
+      alignment: end
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: AGE
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: Row Header ==================================
+    id: 3111230418768115770
+    identification: 
+      column-name: Row Header
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: false
+      hide-control: true
+
+    layout: 
+      sequence: 10
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: Overview: Progressive Scroll Paging =========
+  id: 7457673952826369809
+  identification: 
+    name: 'Overview: Progressive Scroll Paging'
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>Progressive scroll paging is very similar to scroll paging in that additional rows are added to the Interactive Grid. The difference is that when the total number of rows is not known it is not possible to set the height of the virtual scrolling area. New rows are added as the user scrolls to the end. It is not possible to jump to the end of the result set and scroll backwards. To use progressive scroll paging set the Pagination: Type to Scroll and Show Total Row Count to No. Note that progressive scroll paging applies to Icon and Details views as well.
+      </p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 8363408862552974861
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 1342165149965603159
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: Next ========================================
+  id: 1536194512842325470
+  identification: 
+    button-name: Next
+    label: Next
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 8363408862552974861
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillEnd
+    icon: fa-angle-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.:RP::'
+      page: 20 # Load More Paging
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+- # ====== Button: PREV ========================================
+  id: 1536194862535325472
+  identification: 
+    button-name: PREV
+    label: Previous
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 8363408862552974861
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillStart
+    icon: fa-angle-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:RP::'
+      page: 19 # Scroll Paging
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+

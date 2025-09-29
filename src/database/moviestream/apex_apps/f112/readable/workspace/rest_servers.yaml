@@ -1,0 +1,25 @@
+---
+- # ====== REST Data Source Server: api-openai-com =============
+  id: 62426771183626119
+  identification: 
+    name: api-openai-com
+
+  endpoint-url: 
+    url: 'https://api.openai.com/'
+
+  advanced: 
+    static-id: api_openai_com
+    prompt-on-install: false
+
+- # ====== REST Data Source Server: api-cohere-ai ==============
+  id: 49815239263382569479
+  identification: 
+    name: api-cohere-ai
+
+  endpoint-url: 
+    url: 'https://api.cohere.ai/'
+
+  advanced: 
+    static-id: api_cohere_ai
+    prompt-on-install: false
+

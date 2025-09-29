@@ -1,0 +1,31 @@
+---
+- # ====== Report Query: Employees =============================
+  id: 23656232726799065
+  identification: 
+    name: Employees
+
+  advanced: 
+    static-id: EMPLOYEES
+
+  output: 
+    file-name: Employees
+    format: PDF
+    layout: Employees # 23655473112768268
+    view-file-as: Attachment
+
+  session-state: 
+
+  source-queries: 
+  - # ====== Source Query: Employees =============================
+    id: 23656561757799074
+    source: 
+      location: Local Database
+      type: SQL Query
+      sql-query: 'select e.* from EBA_DEMO_DG_EMP e '
+
+    identification: 
+      name: Employees
+
+    layout: 
+      sequence: 1
+

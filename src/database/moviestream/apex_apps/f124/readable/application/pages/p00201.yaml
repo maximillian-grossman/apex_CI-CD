@@ -1,0 +1,167 @@
+---
+# ====== Page: Legacy Oracle Maps Plug-In ====================
+id: 201
+identification: 
+  name: Legacy Oracle Maps Plug-In
+  alias: LEGACY-ORACLE-MAPS-PLUG-IN
+  title: '&APP_NAME. - Legacy Oracle Maps Plug-In'
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: US States (Legacy Oracle Maps Plug-In) ======
+  id: 1568719226110744786
+  identification: 
+    name: US States (Legacy Oracle Maps Plug-In)
+    type: 'Legacy: Oracle HTML5 Maps - Region'
+
+  source: 
+    sql-query: |
+      select id,
+             name as infotip,
+             geometry,
+             'blue' as style,
+             null as markersize
+        from eba_sample_map_states
+      union all
+      select id,
+             city || ' (' || iata_code || ')' as infotip,
+             geometry,
+             'red' as style,
+             'C' || round(commercial_ops/10000) as markersize
+        from eba_sample_map_airports
+       where commercial_ops > 50000
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      map-server-url: 'https://elocation.oracle.com/mapviewer'
+      map-size-(width,-height): 100,500
+      map-width-interpretation: Percent
+      external-map-tile-layer: OpenStreetMap "Positron"
+      map-center-(lon,-lat): '-115,35'
+      initial-zoom-level: 4
+      save-map-position-in-cookie: true
+      navigation-bar: Left
+      navigation-bar-options: Complete
+      additional-map-features: 'MARQUEE:DISTANCE:SCALE'
+      unit-system: Metric System (km,m,cm)
+      show-sql-foi: true
+      maximum-number-of-rows: 500
+      sql-foi-lazy-loading: false
+      sql-foi-info-window-width-in-pixel: 250
+      sql-foi-info-window-height-in-pixel: 150
+
+- # ====== Region: About This Page =============================
+  id: 1575188404844459886
+  identification: 
+    name: About This Page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      This map visualizes US states as a <em>Polygon</em>) layer and the large airports (with more than 50,000 commercial operations) as a <em>Point</em> layer on top.</p>
+      <p>The region uses the <strong>Oracle Maps Region Plug-In</strong> from the <strong>Sample Geolocation Showcase</strong> packaged application, which was shipped with APEX up to version 20.2.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Popup
+    template-options: 
+    - '#DEFAULT#'
+    - js-dialog-autoheight
+    - js-popup-noOverlay
+    - js-popup-callout
+    - js-dialog-size480x320
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: about_this_page
+    custom-attributes: 
+    - data-parent-element="#help_button"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

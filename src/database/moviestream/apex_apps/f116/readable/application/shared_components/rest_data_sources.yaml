@@ -1,0 +1,769 @@
+---
+- # ====== REST Data Source: test ==============================
+  id: 16775826561617320
+  identification: 
+    name: test
+
+  subscription: 
+    version-number: 44992776958538
+
+  source: 
+    type: HTTP
+    remote-server: catfact-ninja # 16773964706617306
+    url-path-prefix: /breeds
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: test
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 16774148009617308
+    identification: 
+      name: test
+
+    data-profile: 
+      format: JSON
+      row-selector: data
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COAT ========================================
+      id: 16774373437617314
+      identification: 
+        column-name: COAT
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: coat
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: BREED =======================================
+      id: 16774628258617315
+      identification: 
+        column-name: BREED
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: breed
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: ORIGIN ======================================
+      id: 16774919365617315
+      identification: 
+        column-name: ORIGIN
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: origin
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: COUNTRY =====================================
+      id: 16775248109617316
+      identification: 
+        column-name: COUNTRY
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: country
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: PATTERN =====================================
+      id: 16775564582617317
+      identification: 
+        column-name: PATTERN
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        path-expression: pattern
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+        data-type: string
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 16776079301617324
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+- # ====== REST Data Source: Doc Understanding API =============
+  id: 20672657290449062
+  identification: 
+    name: Doc Understanding API
+
+  subscription: 
+    version-number: 44653338795012
+
+  source: 
+    type: OCI
+    remote-server: document-aiservice-us-ashburn-1-oci-oraclecloud-com-20221109-actions # 20671374649449050
+    url-path-prefix: /analyzeDocument
+
+  authentication: 
+    credentials: DOC_UNDERSTANDING_KEY # 20670585567446899
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: doc_understanding_api
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 20671516160449053
+    identification: 
+      name: Doc Understanding API
+
+    data-profile: 
+      format: JSON
+      row-selector: items
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COLUMN_1_ID =================================
+      id: 20671742961449058
+      identification: 
+        column-name: COLUMN_1_ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        path-expression: id
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: COLUMN_2_NAME ===============================
+      id: 20672099288449059
+      identification: 
+        column-name: COLUMN_2_NAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 2000
+        primary-key: false
+
+      parsing: 
+        path-expression: name
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: COLUMN_3_HIREDATE ===========================
+      id: 20672359853449059
+      identification: 
+        column-name: COLUMN_3_HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: hire-date
+        format-mask: 'YYYY-MM-DD"T"HH24:MI:SS'
+        has-time-zone: false
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 20672860941449065
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+  - # ====== Operation: POST =====================================
+    id: 20673204664449068
+    label: 
+      label: POST
+
+    operation: 
+      url-pattern: .
+      http-method: POST
+      database-operation: Insert Row
+      request-body-template: |
+        {
+        "compartmentId" : "#COMPARTMENT_ID#",
+        "document" :
+            {
+                "namespaceName" : "#NAMESPACE_NAME#",
+                "bucketName" : "#BUCKET_NAME#",
+                "objectName" : "#OBJECT_NAME#",
+                "source" : "OBJECT_STORAGE"
+            },
+        "features" :
+            [
+                {
+                    "featureType" : "#FEATURE_TYPE#",
+                    "modelId": "ocid1.aidocumentmodel.oc1.iad.amaaaaaazxs35qaaqojwmnpr5csxk35pintmi7czki7ghyntdattpvdbwp5q"
+                }
+            ]
+         }
+
+    parameters: 
+    - # ====== Parameter: COMPARTMENT_ID ===========================
+      id: 20674817958460561
+      identification: 
+        name: COMPARTMENT_ID
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: NAMESPACE_NAME ===========================
+      id: 20675356778460562
+      identification: 
+        name: NAMESPACE_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: BUCKET_NAME ==============================
+      id: 20675841226460562
+      identification: 
+        name: BUCKET_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: OBJECT_NAME ==============================
+      id: 20676384576460563
+      identification: 
+        name: OBJECT_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: FEATURE_TYPE =============================
+      id: 20676808998460564
+      identification: 
+        name: FEATURE_TYPE
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: Content-Type =============================
+      id: 20677309974482973
+      identification: 
+        name: Content-Type
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: HTTP Header
+        data-type: String
+
+      value: 
+        direction: In
+        static: true
+        value: application/json
+
+      advanced: 
+        omit-when-value-is-empty: false
+
+    - # ====== Parameter: RESPONSE =================================
+      id: 20677778669487040
+      identification: 
+        name: RESPONSE
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+
+      value: 
+        direction: Out
+
+  - # ====== Operation: PUT - /:id ===============================
+    id: 20673681524449069
+    label: 
+      label: 'PUT - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: PUT
+      database-operation: Update Row
+
+  - # ====== Operation: DELETE - /:id ============================
+    id: 20674061882449069
+    label: 
+      label: 'DELETE - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: DELETE
+      database-operation: Delete Row
+
+- # ====== REST Data Source: DOC UNDERSTANDING - STEVE =========
+  id: 20954683088045360
+  identification: 
+    name: DOC UNDERSTANDING - STEVE
+
+  subscription: 
+    version-number: 44653306709443
+
+  source: 
+    type: HTTP
+    remote-server: document-aiservice-us-ashburn-1-oci-oraclecloud-com # 20953340450045351
+    url-path-prefix: /20221109/processorJobs
+
+  settings: 
+    pagination-type: NO PAGINATION
+
+  authentication: 
+    credentials: DOC_UNDERSTANDING_KEY # 20670585567446899
+
+  rest-synchronization: 
+    job-is-active: false
+    local-table-owner: Parsing Schema
+
+  advanced: 
+    static-id: doc_understanding_steve
+    pass-ecid: Application Default
+
+  data-profiles: 
+    id: 20953582304045352
+    identification: 
+      name: DOC UNDERSTANDING - STEVE
+
+    data-profile: 
+      format: JSON
+      row-selector: items
+      contains-single-row: false
+      use-raw-selectors: false
+
+    advanced: 
+      encoding: Database Character Set
+
+    columns: 
+    - # ====== Column: COLUMN_1_ID =================================
+      id: 20953750439045356
+      identification: 
+        column-name: COLUMN_1_ID
+
+      source: 
+        type: Data
+        data-type: NUMBER
+        primary-key: false
+
+      parsing: 
+        path-expression: id
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 1
+        hidden: false
+
+    - # ====== Column: COLUMN_2_NAME ===============================
+      id: 20954047463045357
+      identification: 
+        column-name: COLUMN_2_NAME
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 2000
+        primary-key: false
+
+      parsing: 
+        path-expression: name
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: COLUMN_3_HIREDATE ===========================
+      id: 20954337069045357
+      identification: 
+        column-name: COLUMN_3_HIREDATE
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        path-expression: hire-date
+        format-mask: 'YYYY-MM-DD"T"HH24:MI:SS'
+        has-time-zone: false
+
+      remote-rest-data-source-server: 
+        filterable: true
+        is-common: true
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+  operations: 
+  - # ====== Operation: GET ======================================
+    id: 20954864763045361
+    label: 
+      label: GET
+
+    operation: 
+      url-pattern: .
+      http-method: GET
+      database-operation: Fetch Rows
+
+    remote-cache: 
+      caching: Disabled
+
+    advanced: 
+      allow-fetching-all-rows: false
+      force-raise-http-404-error: false
+
+  - # ====== Operation: POST =====================================
+    id: 20955253905045363
+    label: 
+      label: POST
+
+    operation: 
+      url-pattern: .
+      http-method: POST
+      database-operation: Insert Row
+      request-body-template: |
+        {
+          "processorConfig": {
+            "processorType": "GENERAL",
+            "features": [
+              {
+                "modelId": "ocid1.aidocumentmodel.oc1.iad.amaaaaaazxs35qaaqojwmnpr5csxk35pintmi7czki7ghyntdattpvdbwp5q",
+                "featureType": "#FEATURE_TYPE#"
+              }
+            ],
+            "isZipOutputEnabled": false,
+            "language": "ENG"
+          },
+          "compartmentId": "#COMPARTMENT_ID#",
+            "inputLocation": {
+                "sourceType": "OBJECT_STORAGE_LOCATIONS",
+                "objectLocations": [
+                    {
+                        "bucketName": "#BUCKET_NAME#",
+                        "namespaceName": "#NAMESPACE_NAME#",
+                        "objectName": "#OBJECT_NAME#"
+                    }
+                ]
+            },  "outputLocation": {
+            "namespaceName": "#NAMESPACE_NAME#",
+            "bucketName": "#BUCKET_NAME#",
+            "prefix": "result"
+          }
+        }
+
+    parameters: 
+    - # ====== Parameter: FEATURE_TYPE =============================
+      id: 20956711769052620
+      identification: 
+        name: FEATURE_TYPE
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: COMPARTMENT_ID ===========================
+      id: 20957205688052621
+      identification: 
+        name: COMPARTMENT_ID
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: BUCKET_NAME ==============================
+      id: 20957759187052621
+      identification: 
+        name: BUCKET_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: NAMESPACE_NAME ===========================
+      id: 20958288307052622
+      identification: 
+        name: NAMESPACE_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+    - # ====== Parameter: RESPONSE =================================
+      id: 20958707642055391
+      identification: 
+        name: RESPONSE
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+
+      value: 
+        direction: Out
+
+    - # ====== Parameter: Content-Type =============================
+      id: 20959170155059526
+      identification: 
+        name: Content-Type
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: HTTP Header
+        data-type: String
+
+      value: 
+        direction: In
+        static: true
+        value: application/json
+
+      advanced: 
+        omit-when-value-is-empty: false
+
+    - # ====== Parameter: OBJECT_NAME ==============================
+      id: 20959738383064947
+      identification: 
+        name: OBJECT_NAME
+
+      operation: 
+        database-operation: Insert Row
+
+      parameter: 
+        type: Request or Response Body
+        data-type: String
+
+      value: 
+        direction: In
+        static: false
+        required: false
+
+  - # ====== Operation: PUT - /:id ===============================
+    id: 20955694827045363
+    label: 
+      label: 'PUT - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: PUT
+      database-operation: Update Row
+
+  - # ====== Operation: DELETE - /:id ============================
+    id: 20956007446045364
+    label: 
+      label: 'DELETE - /:id'
+
+    operation: 
+      url-pattern: '/:id'
+      http-method: DELETE
+      database-operation: Delete Row
+

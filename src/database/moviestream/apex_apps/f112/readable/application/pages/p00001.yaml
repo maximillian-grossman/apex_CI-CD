@@ -1,0 +1,982 @@
+---
+# ====== Page: Home ==========================================
+id: 1
+identification: 
+  name: Home
+  alias: HOME
+  title: ADBChat
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+javascript: 
+  file-urls: 
+  - '#APP_FILES#speechRecognition#MIN#.js'
+
+css: 
+  inline: |
+    /* Container Flex */
+    .t-Body-mainContent,
+    .t-Body-contentInner,
+    .t-Body-contentInner > .container,
+    .t-Body-contentInner > .container > .row,
+    .t-Body-contentInner > .container > .row > .col,
+    #PROMPTS,
+    #PROMPTS_TemplateComponent {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+    }
+    
+    .t-Body-mainContent {
+      overflow: clip;
+    }
+    
+    .t-Body-contentInner {
+      padding: 0;
+    }
+    
+    #PROMPTS_TemplateComponent {
+      flex-shrink: 1;
+    }
+    
+    
+    /* Hide Footer */
+    .t-Footer {
+      --ut-footer-padding-y: .5rem;
+    }
+    
+    .t-Footer-top,
+    .t-Footer-body {
+      display: none;
+    }
+    
+    /* Prompt */
+    .a-TMV-altMessage {
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .a-TMV-altMessage-icon {
+      display: none;
+    }
+    
+    
+    /* Question */
+    .sticky-Footer {
+      --ut-field-padding-y: 0rem;
+      --ut-field-padding-x: 0rem;
+    
+      position: sticky;
+      inset-inline: 0;
+      inset-block-end: 0;
+      background-color: #eeeae7;
+      border-block-start: 1px solid #e6e6e6;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+    
+    .sticky-Footer .t-Button--icon {
+      --a-button-padding-y: .625rem;
+      --a-button-icon-size: 1.5rem;
+    }
+    
+    .sticky-Footer .t-Button--icon .t-Icon {
+      min-inline-size: var(--a-button-line-height, 1rem);
+    }
+    
+    .llm-recording {
+      pointer-events: auto !important;
+      cursor: pointer;
+    }
+    
+    .llm-recording:after {
+      content: '';
+      display: block;
+      position: absolute;
+      block-size: 2rem;
+      inline-size: 2rem;
+      border-radius: .25rem;
+    }
+    
+    .llm-recording:hover:after {
+      background-color: rgba(0, 0, 0, .1);
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Prompts =====================================
+  id: 116500890192680078
+  identification: 
+    name: Prompts
+    type: LLM Conversation
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID,
+             CONV_ID,
+             PROMPT,
+             RESPONSE,
+             ASKED_ON,
+             SHOWSQL,
+             (case when RESPONSE is not null then 'CHAT' ELSE NULL END) RESPONSE_TYPE
+        from OCW23_PROMPTS
+       where CONV_ID = :P1_CONV_ID
+       order by ASKED_ON
+    page-items-to-submit: 
+    - P1_CONV_ID
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Below Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    static-id: PROMPTS
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      prompt: PROMPT
+      id: ID
+      response-type: RESPONSE_TYPE
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+  columns: 
+  - # ====== Column: RESPONSE_TYPE ===============================
+    id: 109528827632494685
+    identification: 
+      name: RESPONSE_TYPE
+
+    layout: 
+      sequence: 70
+
+    source: 
+      type: Database Column
+      database-column: RESPONSE_TYPE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ID ==========================================
+    id: 116500995126680079
+    identification: 
+      name: ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      primary-key: true
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CONV_ID =====================================
+    id: 116501085122680080
+    identification: 
+      name: CONV_ID
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: CONV_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: PROMPT ======================================
+    id: 116501205522680081
+    identification: 
+      name: PROMPT
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: PROMPT
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: RESPONSE ====================================
+    id: 116501235297680082
+    identification: 
+      name: RESPONSE
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: RESPONSE
+      data-type: CLOB
+
+  - # ====== Column: SHOWSQL =====================================
+    id: 116501338590680083
+    identification: 
+      name: SHOWSQL
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: SHOWSQL
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ASKED_ON ====================================
+    id: 116501496959680084
+    identification: 
+      name: ASKED_ON
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: ASKED_ON
+      data-type: TIMESTAMP
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Explore =====================================
+    id: 116502141793680091
+    identification: 
+      position: Additional Actions # 116710977217022940
+      label: Explore
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:RR,2:P2_CURRENT_ID:&ID.'
+        page: 2 # Explore
+        clear-cache: RR,2
+        values: 
+          p2_current_id: '&ID.'
+
+    appearance: 
+      display-type: Text
+      hot: false
+      show-as-disabled: false
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: SHOWSQL
+      execute-condition: For Each Row
+
+  - # ====== Action: Explain =====================================
+    id: 116502329964680092
+    identification: 
+      position: Additional Actions # 116710977217022940
+      label: Explain
+
+    layout: 
+      sequence: 20
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_CURRENT_ID:&ID.'
+        page: 3 # Explain
+        values: 
+          p3_current_id: '&ID.'
+
+    appearance: 
+      display-type: Text
+      hot: false
+      show-as-disabled: false
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: SHOWSQL
+      execute-condition: For Each Row
+
+- # ====== Region: Question ====================================
+  id: 48314685563779943906
+  identification: 
+    name: Question
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Prompts # 116500890192680078
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Item Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ItemContainer--alignStart
+    css-classes: 
+    - sticky-Footer
+    - padding-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P1_ASK_ADB ===============================
+  id: 109528919657494686
+  identification: 
+    name: P1_ASK_ADB
+    type: Radio Group
+
+  label: 
+    label: Choose Your Response Type
+    alignment: Left
+
+  settings: 
+    number-of-columns: 2
+    page-action-on-selection: None
+
+  layout: 
+    sequence: 20
+    region: Question # 48314685563779943906
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-sm
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:Conversational;C,Tabular;T'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_CONV_ID ===============================
+  id: 113489048151734059
+  identification: 
+    name: P1_CONV_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_PROMPT ================================
+  id: 48314685217265943903
+  identification: 
+    name: P1_PROMPT
+    type: Text Field
+
+  label: 
+    label: Prompt
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: true
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: Question # 48314685563779943906
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-microphone llm-recording
+    value-placeholder: Ask a question
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: Help ========================================
+  id: 8121072728160127
+  identification: 
+    button-name: Help
+    label: Help
+
+  layout: 
+    sequence: 40
+    region: Question # 48314685563779943906
+    slot: BUTTON_END
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--small
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: RUN =========================================
+  id: 48314685382161943904
+  identification: 
+    button-name: RUN
+    label: Run
+
+  layout: 
+    sequence: 30
+    region: Question # 48314685563779943906
+    slot: BUTTON_END
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--gapLeft
+    icon: fa-send-o
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Open AI Settings ====================
+  id: 110737164443857158
+  identification: 
+    name: Open AI Settings
+
+  execution: 
+    sequence: 60
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  server-side-condition: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      return APEX_UTIL.GET_PREFERENCE(       
+               p_preference => 'CLOUD_AI_PROFILE',
+                  p_user       => :APP_USER) is null;
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 110737252179857159
+    identification: 
+      action: Submit Page
+
+    settings: 
+      request-/-button-name: OPEN_AI_SETTINGS
+      show-processing: false
+
+    execution: 
+      sequence: 10
+      event: Open AI Settings # 110737164443857158
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: AI Call_1 ==================================
+  id: 8120103822160118
+  identification: 
+    name: AI Call_1
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_response clob;
+          l_sql clob;
+          l_has_summary number;
+          l_prompt varchar2(4000);
+          l_uses_vector_index number;
+          l_cursor NUMBER := dbms_sql.open_cursor;
+          l_profile_name user_cloud_ai_profiles.profile_name%type := lower(APEX_UTIL.GET_PREFERENCE(       
+               p_preference => 'CLOUD_AI_PROFILE',
+                  p_user       => :APP_USER));
+      begin
+      
+      -- ENABLE DEBUG
+      --apex_debug.enable(apex_debug.c_log_level_info);
+      --APEX_DEBUG.MESSAGE(p_message => 'Marty enabled debug');
+      
+              -- question about customer data
+      
+              -- Check if this should use vector search or nl2sql. The AI profile will be able to tell us
+                 
+                if :P1_ASK_ADB = 'T' then
+                  -- generate the sql and then execute it
+                  l_sql := dbms_cloud_ai.generate(
+                      prompt => :P1_PROMPT,
+                      action => 'showsql',
+                      profile_name => l_profile_name
+                      );
+                  
+                  -- check if SQL could be generated.
+                  -- if not, then return the response 
+                  BEGIN
+                      DBMS_SQL.PARSE (l_cursor, l_sql, DBMS_SQL.native);
+                  EXCEPTION
+                      WHEN OTHERS THEN
+                          l_response := l_sql;
+                  END;
+                 end if;
+          if :P1_ASK_ADB = 'C' then
+              -- general chat
+              l_response := dbms_cloud_ai.generate(
+                  prompt => :P1_PROMPT,
+                  action => 'narrate',
+                  profile_name => l_profile_name
+                  );
+             
+             
+          end if;
+      
+          -- Generate a summary?
+          select count(*)
+          into l_has_summary
+          from OCW23_CONVERSATIONS
+          where id = :p1_conv_id 
+            and summary is not null;
+          
+      
+          if l_has_summary = 0 then
+              -- Yes! Generate the summary b/c one does not exist.
+              l_prompt := dbms_cloud_ai.generate(
+                              prompt => 'Rewrite as a short title : '||:P1_PROMPT,
+                              action => 'chat',
+                              profile_name => l_profile_name
+                          );
+      
+              
+              update OCW23_CONVERSATIONS set summary = l_prompt
+              where id = :p1_conv_id and summary is null;
+          
+          end if;
+      
+          insert into OCW23_PROMPTS (conv_id, prompt, response, asked_on, showsql) 
+          values (:p1_conv_id, :p1_prompt, l_response, systimestamp, l_sql);
+      
+      end;
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: New ========================================
+  id: 8120347998160120
+  identification: 
+    name: New
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+      l_id number;
+      begin
+      INSERT INTO OCW23_CONVERSATIONS (USERNAME, STARTED_ON) VALUES (:APP_USER, SYSTIMESTAMP) returning id into l_id;
+      insert into OCW23_PROMPTS (conv_id, prompt, response, asked_on) 
+          values (l_id, 'Chat Interface Instructions', '<ul><li>step 1</li><li>step 2</li><li>step 3</li></ul>', systimestamp);
+      :P1_CONV_ID := l_id;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P1_CONV_ID
+
+- # ====== Process: Create a Conversation ======================
+  id: 113489227858734060
+  identification: 
+    name: Create a Conversation
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: 'INSERT INTO OCW23_CONVERSATIONS (USERNAME, STARTED_ON) VALUES (:APP_USER, SYSTIMESTAMP) returning id into :P1_CONV_ID;'
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P1_CONV_ID
+
+  configuration: 
+    build-option: Commented Out # 49866118029159284852
+
+- # ====== Process: AI Call ====================================
+  id: 118190113150297560
+  identification: 
+    name: AI Call
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_response clob;
+          l_sql clob;
+          l_has_summary number;
+          l_prompt varchar2(4000);
+          l_uses_vector_index number;
+          l_cursor NUMBER := dbms_sql.open_cursor;
+          l_profile_name user_cloud_ai_profiles.profile_name%type := lower(APEX_UTIL.GET_PREFERENCE(       
+               p_preference => 'CLOUD_AI_PROFILE',
+                  p_user       => :APP_USER));
+      begin
+      
+      -- ENABLE DEBUG
+      --apex_debug.enable(apex_debug.c_log_level_info);
+      --APEX_DEBUG.MESSAGE(p_message => 'Marty enabled debug');
+      
+          if :P1_ASK_ADB = 'T' then
+              -- question about customer data
+      
+              -- Check if this should use vector search or nl2sql. The AI profile will be able to tell us
+              SELECT count(*) 
+              INTO l_uses_vector_index
+              FROM user_cloud_ai_profile_attributes
+              WHERE upper(profile_name) =  upper(l_profile_name)
+                AND upper(attribute_name) = 'VECTOR_INDEX_NAME';
+         
+      
+              if l_uses_vector_index > 0 then
+      
+                  -- use narrate to get the response with the help from the vector index
+                  l_response := dbms_cloud_ai.generate(
+                      prompt => :P1_PROMPT,
+                      action => 'narrate',
+                      profile_name => l_profile_name
+                      );
+                      
+                  l_sql := null;
+                 
+              else
+                  -- generate the sql and then execute it
+                  l_sql := dbms_cloud_ai.generate(
+                      prompt => :P1_PROMPT,
+                      action => 'showsql',
+                      profile_name => l_profile_name
+                      );
+                  
+                  -- check if SQL could be generated.
+                  -- if not, then return the response 
+                  BEGIN
+                      DBMS_SQL.PARSE (l_cursor, l_sql, DBMS_SQL.native);
+                  EXCEPTION
+                      WHEN OTHERS THEN
+                          l_response := l_sql;
+                  END;
+              end if;
+                 
+          else
+              -- general chat
+              l_response := dbms_cloud_ai.generate(
+                  prompt => :P1_PROMPT,
+                  action => 'chat',
+                  profile_name => l_profile_name
+                  );
+             
+          end if;
+      
+          -- Generate a summary?
+          select count(*)
+          into l_has_summary
+          from OCW23_CONVERSATIONS
+          where id = :p1_conv_id 
+            and summary is not null;
+          
+      
+          if l_has_summary = 0 then
+              -- Yes! Generate the summary b/c one does not exist.
+              l_prompt := dbms_cloud_ai.generate(
+                              prompt => 'Rewrite as a short title : '||:P1_PROMPT,
+                              action => 'chat',
+                              profile_name => l_profile_name
+                          );
+      
+              
+              update OCW23_CONVERSATIONS set summary = l_prompt
+              where id = :p1_conv_id and summary is null;
+          
+          end if;
+      
+          insert into OCW23_PROMPTS (conv_id, prompt, response, asked_on, showsql) 
+          values (:p1_conv_id, :p1_prompt, l_response, systimestamp, l_sql);
+      
+      end;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  configuration: 
+    build-option: Commented Out # 49866118029159284852
+
+branches: 
+- # ====== Branch: Go To Page 20020 ============================
+  id: 110737369827857160
+  identification: 
+    name: Go To Page 20020
+
+  execution: 
+    sequence: 10
+    point: After Submit
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:20020:&SESSION.::&DEBUG.:::'
+      page: 20020 # AI Settings
+
+  server-side-condition: 
+    type: Request = Value
+    value: OPEN_AI_SETTINGS
+
+- # ====== Branch: Go To Page 1 ================================
+  id: 113489804305734066
+  identification: 
+    name: Go To Page 1
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::P1_CONV_ID:&P1_CONV_ID.&success_msg=#SUCCESS_MSG#'
+      page: 1 # Home
+      values: 
+        p1_conv_id: '&P1_CONV_ID.'
+

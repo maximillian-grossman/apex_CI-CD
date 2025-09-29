@@ -1,0 +1,111 @@
+---
+- # ====== Classic Report Template: [Sample Reporting] Active Fi
+  id: 2134627942451254952
+  identification: 
+    name: '[Sample Reporting] Active Filters'
+    identifier: '[SAMPLE_REPORTING]_ACTIVE_FILTERS'
+    class: Custom 1
+
+  advanced: 
+    translatable: false
+
+  attributes: 
+    type: Named Column (row template)
+
+  report-template: 
+    top: <div class="t-Form-fieldContainer t-Form-fieldContainer--stacked">
+    bottom: </div>
+
+  row-template-1: 
+    template: |2
+          <div class="t-Form-labelContainer">
+              <label for="ACTIVE_FILTERS" id="ACTIVE_FILTER_#FILTER_GROUP#_LABEL" class="t-Form-label">#FILTER_GROUP#</label>
+          </div>
+          <div class="t-Form-inputContainer">
+              <fieldset tabindex="-1" id="ACTIVE_FILTER_#FILTER_GROUP#"
+                  aria-labelledby="ACTIVE_FILTER_#FILTER_GROUP#_LABEL" class="checkbox_group">
+                  <input class="filterLink" type="checkbox" id="ACTIVE_FILTER_#FILTER_SEQUENCE#"
+                      data-group="#FILTER_GROUP#" data-sequence="#FILTER_SEQUENCE#"
+                      checked value="#FILTER_SEQUENCE#">
+                  <label for="ACTIVE_FILTER_#FILTER_SEQUENCE#">#FILTER_DISPLAY#</label>
+               </fieldset>
+          </div>
+    condition: Use Based on PL/SQL Expression
+    pl/sql-expression: '#ROW_NUM# = 1 AND #TOTAL_ROWS# = 1'
+
+  row-template-2: 
+    template: |2
+          <div class="t-Form-labelContainer">
+              <label for="ACTIVE_FILTERS" id="ACTIVE_FILTER_#FILTER_GROUP#_LABEL" class="t-Form-label">#FILTER_GROUP#</label>
+          </div>
+          <div class="t-Form-inputContainer">
+              <fieldset tabindex="-1" id="ACTIVE_FILTER_#FILTER_GROUP#"
+                  aria-labelledby="ACTIVE_FILTER_#FILTER_GROUP#_LABEL" class="checkbox_group">
+                  <input class="filterLink" type="checkbox" id="ACTIVE_FILTER_#FILTER_SEQUENCE#"
+                      data-group="#FILTER_GROUP#" data-sequence="#FILTER_SEQUENCE#"
+                      checked value="#FILTER_SEQUENCE#">
+                  <label for="ACTIVE_FILTER_#FILTER_SEQUENCE#">#FILTER_DISPLAY#</label>
+                  <br>
+    condition: Use Based on PL/SQL Expression
+    pl/sql-expression: '#ROW_NUM# = 1 AND #TOTAL_ROWS# > 1'
+
+  row-template-3: 
+    template: |2
+                  <input class="filterLink" type="checkbox" id="ACTIVE_FILTER_#FILTER_SEQUENCE#"
+                      data-group="#FILTER_GROUP#" data-sequence="#FILTER_SEQUENCE#"
+                      checked value="#FILTER_SEQUENCE#">
+                  <label for="ACTIVE_FILTER_#FILTER_SEQUENCE#">#FILTER_DISPLAY#</label>
+                  <br>
+    condition: Use Based on PL/SQL Expression
+    pl/sql-expression: '#ROW_NUM# > 1 AND #ROW_NUM# < #TOTAL_ROWS#'
+
+  row-template-4: 
+    template: |2
+                  <input class="filterLink" type="checkbox" id="ACTIVE_FILTER_#FILTER_SEQUENCE#"
+                      data-group="#FILTER_GROUP#" data-sequence="#FILTER_SEQUENCE#"
+                      checked value="#FILTER_SEQUENCE#">
+                  <label for="ACTIVE_FILTER_#FILTER_SEQUENCE#">#FILTER_DISPLAY#</label>
+              </fieldset>
+          </div>
+    condition: Use Based on PL/SQL Expression
+
+- # ====== Classic Report Template: [Sample Reports] Comment Bub
+  id: 2134737208746337978
+  identification: 
+    name: '[Sample Reports] Comment Bubbles'
+    identifier: '[SAMPLE_REPORTS]_COMMENT_BUBBLES'
+    class: Custom 1
+
+  advanced: 
+    translatable: false
+
+  attributes: 
+    type: Named Column (row template)
+
+  report-template: 
+    top: <ul class="commentBubbles">
+    bottom: |
+      </ul>
+      <table class="uPaginationTable">
+      #PAGINATION#
+      </table>
+
+  row-template-1: 
+    template: |
+      <li class="#1#">
+      <div>
+      	<em>#2#</em>
+      	#3##4##5##6##7#
+      </div>
+      <span>
+      	#8# (#9#) #10#
+      </span>
+      </li>
+    condition: 0
+
+  pagination-subtemplates: 
+    next-page: <a href="#LINK#" class="sPaginationNext">#PAGINATION_NEXT#</a>
+    previous-page: <a href="#LINK#" class="sPaginationPrev">#PAGINATION_PREVIOUS#</a>
+    next-set: <a href="#LINK#" class="sPaginationNext">#PAGINATION_NEXT_SET#</a>
+    previous-set: <a href="#LINK#" class="sPaginationPrev">#PAGINATION_PREVIOUS_SET#</a>
+

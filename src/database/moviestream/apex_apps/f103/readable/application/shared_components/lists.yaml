@@ -1,0 +1,227 @@
+---
+- # ====== List: Examples ======================================
+  id: 1868983212119859456
+  identification: 
+    name: Examples
+
+  subscription: 
+    version-number: 37167715869267
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Employees Per Department =====================
+    id: 1852580688284465355
+    label: 
+      label: Employees Per Department
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A report with employees per department per page.
+      2.: document-screenshots/emp_per_dept.png
+      3.: templates/emp_per_dept.docx
+      4.: EMP_PER_DEPT
+
+  - # ====== Entry: Customer Order ===============================
+    id: 1868983490097859458
+    label: 
+      label: Customer Order
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A purchase order form, based on the Order / Order Item Sample Data Set.
+      2.: document-screenshots/customer-order.png
+      3.: templates/customer-order.docx
+      4.: ORDER
+
+  - # ====== Entry: Employee Overview ============================
+    id: 1868983848903859459
+    label: 
+      label: Employee Overview
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    user-defined-attributes: 
+      translatable: false
+      1.: A report with a table containing employee details.
+      2.: document-screenshots/employees.png
+      3.: templates/employees.docx
+      4.: EMPLOYEES
+
+- # ====== List: Navigation Menu ===============================
+  id: 2623126801248129492
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 37167715869267
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Home =========================================
+    id: 2623421400295129698
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar ================================
+  id: 2623410641011129678
+  identification: 
+    name: Navigation Bar
+
+  subscription: 
+    version-number: 37167715869267
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 2623424979962129708
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10010:&SESSION.::&DEBUG.::::'
+        page: 10010 # About
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 2623426507287129710
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: --- ==========================================
+    id: 2623427075833129710
+    label: 
+      label: '---'
+
+    layout: 
+      sequence: 60
+      parent-entry: '&APP_USER.' # 2623426507287129710
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: separator
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+  - # ====== Entry: Sign Out =====================================
+    id: 2623427490396129710
+    label: 
+      label: Sign Out
+
+    icon: 
+      image/icon-css-classes: fa-sign-out
+
+    layout: 
+      sequence: 70
+      parent-entry: '&APP_USER.' # 2623426507287129710
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+    server-side-condition: 
+      type: User is Authenticated (not public)
+
+- # ====== List: Configure DocGen ==============================
+  id: 2623428257837143049
+  identification: 
+    name: Configure DocGen
+
+  subscription: 
+    version-number: 37167715869267
+
+  source: 
+    type: Static Values
+

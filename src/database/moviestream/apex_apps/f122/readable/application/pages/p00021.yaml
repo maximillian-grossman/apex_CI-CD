@@ -1,0 +1,1482 @@
+---
+# ====== Page: Data Load Source ==============================
+id: 21
+identification: 
+  name: Data Load Source
+  alias: DATA-LOAD-SOURCE
+  title: Data Load Source
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+javascript: 
+  function-and-global-variable-declaration: |
+    function set_item()
+    {
+    $s("P21_IMPORT_FROM", "PASTE");
+    $x('P21_COPY_PASTE').value= $v('P21_SAMPLE_DATA');
+    $x('P21_SEPARATOR').value= ',';
+    $s('P21_FIRST_ROW', 'Y');
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 3355783624080310645
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 11539353657713410830
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: About this page =============================
+  id: 3403999534410661997
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: <p>The Data Loading available starting from APEX 21.1 does not allow end users to speficy column mappings.  If it is important to allow your end users to do column mappings, please use the Legacy Data Loading Wizard.</a>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--info
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Page Instructions ===========================
+  id: 4320543277914232080
+  identification: 
+    name: Page Instructions
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>Choose the <b>Import From</b> of "Copy and Paste", input <b>Separator</b> as "," and ensure the <b>First Row has Column Names</b> is checked.</br>
+       <b>
+      <a href="javascript:set_item();"> Click here </b></a> to copy and paste, or select the text below and paste it into the <b>Copy and Paste Delimited Data</b> section. <br> 
+      </p>
+      Empno,Ename,Job,Mgr,Hiredate,Sal,Comm,Deptno</br>
+      8011,Campbell,CLERK,King,1-Nov-11,1300,,ACCOUNTING</br>
+      8021,Chevy,ANALYST,Ford,20-Oct-11,3000,,RESEARCH</br>
+      7788,Scott,SALESMAN,BLAKE,9-Dec-82,3000,200,RESEARCH</br>
+      7698,BLAKE,MANAGER,CLARK,1-May-81,3500,,ACCOUNTING</br>
+      8118,BENZ,ANALYST,FORD,10-Oct-11,2800,,ACCOUNTING</br>
+      </br>
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Data Load Wizard Progress ===================
+  id: 4358006919758259087
+  identification: 
+    name: Data Load Wizard Progress
+    type: List
+
+  source: 
+    list: Data Load Wizard Progress - Load Employees # 4358004199035259081
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Wizard Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-Wizard--hideStepsSmall
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: true
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      list-template: Wizard Progress
+      template-options: 
+      - '#DEFAULT#'
+      - t-WizardSteps--displayLabels
+
+- # ====== Region: Data Load Source ============================
+  id: 4358007149856259088
+  identification: 
+    name: Data Load Source
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: Data Load Wizard Progress # 4358006919758259087
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="width:100%;max-width:none;"'
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: Text (escape special characters)
+      show-line-breaks: true
+
+page-items: 
+- # ====== Page Item: P21_SAMPLE_DATA ==========================
+  id: 4320543423505232081
+  identification: 
+    name: P21_SAMPLE_DATA
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Page Instructions # 4320543277914232080
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Static Value
+    static-value: |
+      Empno,Ename,Job,Mgr,Hiredate,Sal,Comm,Deptno
+      8011,Campbell,CLERK,King,1-Nov-11,1300,,ACCOUNTING
+      8021,Chevy,ANALYST,Ford,20-Oct-11,3000,,RESEARCH
+      7788,Scott,SALESMAN,BLAKE,9-Dec-82,3000,200,RESEARCH
+      7698,BLAKE,MANAGER,CLARK,1-May-81,3500,,ACCOUNTING
+      8118,BENZ,ANALYST,FORD,10-Oct-11,2800,,ACCOUNTING
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_IMPORT_FROM ==========================
+  id: 4358008525568259089
+  identification: 
+    name: P21_IMPORT_FROM
+    type: Radio Group
+
+  label: 
+    label: Import From
+    alignment: Left
+
+  settings: 
+    number-of-columns: 1
+    page-action-on-selection: None
+
+  layout: 
+    sequence: 10
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: DATA_LOAD_OPTION # 5989152044380189349
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: PASTE
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_FILE_NAME ============================
+  id: 4358008779324259089
+  identification: 
+    name: P21_FILE_NAME
+    type: File Upload
+
+  label: 
+    label: File Name
+    alignment: Left
+
+  display: 
+    display-as: Inline File Browse
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Request
+    allow-multiple-files: false
+
+  layout: 
+    sequence: 20
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: Name of the file to upload
+
+- # ====== Page Item: P21_COPY_PASTE ===========================
+  id: 4358010059107259091
+  identification: 
+    name: P21_COPY_PASTE
+    type: Textarea
+
+  label: 
+    label: Copy and Paste Delimited Data
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: None
+
+  layout: 
+    sequence: 15
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required
+    template-options: 
+    - '#DEFAULT#'
+    width: 80
+    height: 10
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_SEPARATOR ============================
+  id: 4358010592504259092
+  identification: 
+    name: P21_SEPARATOR
+    type: Text Field
+
+  label: 
+    label: Separator
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Required
+    template-options: 
+    - '#DEFAULT#'
+    width: 2
+
+  validation: 
+    value-required: true
+    maximum-length: 2
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: \t
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: Identify a column separator character. Use <code>\t</code> for tab separators.
+
+- # ====== Page Item: P21_ENCLOSED_BY ==========================
+  id: 4358011519434259092
+  identification: 
+    name: P21_ENCLOSED_BY
+    type: Text Field
+
+  label: 
+    label: Optionally Enclosed By
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 40
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 2
+
+  validation: 
+    value-required: false
+    maximum-length: 2
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: '"'
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: Enter a delimiter character. You can use this character to delineate the starting and ending boundary of a data value. If you specify a delimiter character, Data Workshop ignores whitespace occurring before the starting and ending boundary of a data value. You can also use this option to enclose a data value with the specified delimiter character.
+
+- # ====== Page Item: P21_FIRST_ROW ============================
+  id: 4358012355212259093
+  identification: 
+    name: P21_FIRST_ROW
+    type: Checkbox Group
+
+  label: 
+    label: '&nbsp;'
+    alignment: Left
+
+  settings: 
+    number-of-columns: 1
+
+  multiple-values: 
+    type: Delimited List
+    separator: ':'
+
+  layout: 
+    sequence: 50
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:First Row has Column Names;Y'
+    display-extra-values: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: Y
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_SHOW_ADV_SETTINGS ====================
+  id: 4358013282363259094
+  identification: 
+    name: P21_SHOW_ADV_SETTINGS
+    type: Checkbox Group
+
+  label: 
+    alignment: Left
+
+  settings: 
+    number-of-columns: 1
+
+  multiple-values: 
+    type: Delimited List
+    separator: ':'
+
+  layout: 
+    sequence: 55
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:Use Advanced Settings;Y'
+    display-extra-values: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P21_APP_DATE_FORMAT ======================
+  id: 4358015966875259096
+  identification: 
+    name: P21_APP_DATE_FORMAT
+    type: Radio Group
+
+  label: 
+    label: Date / Number Formats to use
+    alignment: Left
+
+  settings: 
+    number-of-columns: 1
+    page-action-on-selection: None
+
+  layout: 
+    sequence: 150
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: DATE_FORMAT_OPT # 4357827635378633963
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: Y
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: Choose whether to provide custom or to use standard format masks
+
+- # ====== Page Item: P21_CHAR_SET =============================
+  id: 4358016874077259099
+  identification: 
+    name: P21_CHAR_SET
+    type: Select List
+
+  label: 
+    label: File Character Set
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 140
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: DATA_LOAD_CHARSET # 5524294673916963701
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: UTF-8
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: DATA_LOAD.CHAR_SET_ITEM_HELP
+
+- # ====== Page Item: P21_CURRENCY =============================
+  id: 4358017799889259099
+  identification: 
+    name: P21_CURRENCY
+    type: Text Field
+
+  label: 
+    label: Currency Symbol
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 130
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 2
+
+  validation: 
+    value-required: false
+    maximum-length: 2
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select value
+        from nls_session_parameters
+       where parameter = 'NLS_CURRENCY'
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: $
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: If your data contains international currency symbol, enter it here. For example, if your data has "&euro;1,234.56" or "&yen;1,234.56", enter "&euro;" or "&yen;".  Otherwise the data will not load correctly.
+
+- # ====== Page Item: P21_GROUP_SEPARATOR ======================
+  id: 4358018641775259100
+  identification: 
+    name: P21_GROUP_SEPARATOR
+    type: Text Field
+
+  label: 
+    label: Group Separator
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 120
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 2
+
+  validation: 
+    value-required: false
+    maximum-length: 2
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_application.get_nls_group_separator
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: |
+      <p>A group separator is a character that separates integer groups, for example to show thousands and millions.</p>
+      <p>Any character can be the group separator. The character specified must be single-byte, and the group separator must be different from any other decimal character. The character can be a space, but cannot be a numeric character or any of the following:</p>
+      <ul class="noIndent">
+      <li>plus (+)</li>
+      <li>hyphen (-)</li> 
+      <li>less than sign (<)</li>
+      <li>greater than sign (>)</li> 
+      </ul>
+
+- # ====== Page Item: P21_DECIMAL_CHARACTER ====================
+  id: 4358019448776259101
+  identification: 
+    name: P21_DECIMAL_CHARACTER
+    type: Text Field
+
+  label: 
+    label: Decimal Character
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 110
+    region: Data Load Source # 4358007149856259088
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 2
+
+  validation: 
+    value-required: false
+    maximum-length: 2
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_application.get_nls_decimal_separator
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+  help: 
+    help-text: |
+      <p>The decimal character separates the integer and decimal parts of a number.</p>
+      <p> Any character can be the decimal character. The character specified must be single-byte, and the decimal character must be different from group separator. The character can be a space, but cannot be any numeric character or any of the following characters:</p>
+      <ul class="noIndent">
+      <li>plus (+)</li>
+      <li>hyphen (-)</li> 
+      <li>less than sign (<)</li>
+      <li>greater than sign (>)</li> 
+      </ul>
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 4358007600493259088
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Data Load Wizard Progress # 4358006919758259087
+    slot: PREVIOUS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.'
+      page: 1 # Sample Data Loading
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Never
+
+- # ====== Button: NEXT ========================================
+  id: 4358008027680259088
+  identification: 
+    button-name: NEXT
+    label: Next
+
+  layout: 
+    sequence: 20
+    region: Data Load Wizard Progress # 4358006919758259087
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconRight
+    icon: fa-chevron-right
+
+  behavior: 
+    action: Redirect to URL
+    target: "javascript:apex.widget.textareaClob.uploadNonEmpty('P21_COPY_PASTE', 'NEXT');"
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Show/Hide Advanced Settings =========
+  id: 4358014534205259095
+  identification: 
+    name: Show/Hide Advanced Settings
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P21_SHOW_ADV_SETTINGS
+
+  client-side-condition: 
+    type: Item = Value
+    item: P21_SHOW_ADV_SETTINGS
+    value: Y
+
+  actions: 
+  - # ====== Action: Show ========================================
+    id: 4358014950569259095
+    identification: 
+      action: Show
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_CURRENCY
+      - P21_GROUP_SEPARATOR
+      - P21_DECIMAL_CHARACTER
+      - P21_APP_DATE_FORMAT
+      - P21_CHAR_SET
+
+    execution: 
+      sequence: 10
+      event: Show/Hide Advanced Settings # 4358014534205259095
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Hide ========================================
+    id: 4358015518095259096
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_CURRENCY
+      - P21_GROUP_SEPARATOR
+      - P21_DECIMAL_CHARACTER
+      - P21_APP_DATE_FORMAT
+      - P21_CHAR_SET
+
+    execution: 
+      sequence: 10
+      event: Show/Hide Advanced Settings # 4358014534205259095
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+- # ====== Dynamic Action: Import From Copy and Paste ==========
+  id: 4358020255600259101
+  identification: 
+    name: Import From Copy and Paste
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P21_IMPORT_FROM
+
+  client-side-condition: 
+    type: Item = Value
+    item: P21_IMPORT_FROM
+    value: PASTE
+
+  actions: 
+  - # ====== Action: Show ========================================
+    id: 4358020753004259101
+    identification: 
+      action: Show
+
+    settings: 
+      show-all-on-the-same-line: true
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_COPY_PASTE
+
+    execution: 
+      sequence: 20
+      event: Import From Copy and Paste # 4358020255600259101
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Set Value ===================================
+    id: 4358021335058259102
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      value: \t
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_SEPARATOR
+
+    execution: 
+      sequence: 20
+      event: Import From Copy and Paste # 4358020255600259101
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Hide ========================================
+    id: 4358021783429259102
+    identification: 
+      action: Hide
+
+    settings: 
+      hide-all-page-items-on-the-same-line: true
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_COPY_PASTE
+
+    execution: 
+      sequence: 20
+      event: Import From Copy and Paste # 4358020255600259101
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+- # ====== Dynamic Action: Import from File ====================
+  id: 4358022165494259103
+  identification: 
+    name: Import from File
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P21_IMPORT_FROM
+
+  client-side-condition: 
+    type: Item = Value
+    item: P21_IMPORT_FROM
+    value: UPLOAD
+
+  actions: 
+  - # ====== Action: Show ========================================
+    id: 4358022719939259103
+    identification: 
+      action: Show
+
+    settings: 
+      show-all-on-the-same-line: true
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_FILE_NAME
+
+    execution: 
+      sequence: 10
+      event: Import from File # 4358022165494259103
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+  - # ====== Action: Set Value ===================================
+    id: 4358023205278259103
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      value: ','
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_SEPARATOR
+
+    execution: 
+      sequence: 20
+      event: Import from File # 4358022165494259103
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Hide ========================================
+    id: 4358023705727259104
+    identification: 
+      action: Hide
+
+    settings: 
+      hide-all-page-items-on-the-same-line: true
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P21_FILE_NAME
+
+    execution: 
+      sequence: 20
+      event: Import from File # 4358022165494259103
+      fire-when-event-result-is: False
+      fire-on-initialization: true
+
+validations: 
+- # ====== Validation: Filename is not null ====================
+  id: 4358009808020259091
+  identification: 
+    name: Filename is not null
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Item is NOT NULL
+    item: P21_FILE_NAME
+    always-execute: false
+
+  error: 
+    error-message: '#LABEL# must have some value.'
+    display-location: Inline with Field and in Notification
+    associated-item: P21_FILE_NAME # 4358008779324259089
+
+  server-side-condition: 
+    when-button-pressed: NEXT # 4358008027680259088
+    type: Item = Value
+    item: P21_IMPORT_FROM
+    value: UPLOAD
+
+- # ====== Validation: Uploaded data is not null ===============
+  id: 4358014230211259094
+  identification: 
+    name: Uploaded data is not null
+
+  execution: 
+    sequence: 20
+
+  validation: 
+    type: Item is NOT NULL
+    item: P21_COPY_PASTE
+    always-execute: false
+
+  error: 
+    error-message: '#LABEL# must have some value.'
+    display-location: Inline with Field and in Notification
+    associated-item: P21_COPY_PASTE # 4358010059107259091
+
+  server-side-condition: 
+    when-button-pressed: NEXT # 4358008027680259088
+    type: Item = Value
+    item: P21_IMPORT_FROM
+    value: PASTE
+
+computations: 
+- # ====== Computation: P21_COPY_PASTE =========================
+  id: 4320544169935232089
+  identification: 
+    item-name: P21_COPY_PASTE
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Static Value
+
+processes: 
+- # ====== Process: Parse Uploaded Data ========================
+  id: 4358024169171259104
+  identification: 
+    name: Parse Uploaded Data
+    type: Parse Uploaded Data [Legacy]
+    execution-chain: None
+
+  settings: 
+    data-load-definition: Load Employees # 5989148250197189307
+    import-from-item: P21_IMPORT_FROM
+    separator-item: P21_SEPARATOR
+    enclosed-by-item: P21_ENCLOSED_BY
+    first-row-item: P21_FIRST_ROW
+    currency-symbol-item: P21_CURRENCY
+    group-separator-item: P21_GROUP_SEPARATOR
+    decimal-character-item: P21_DECIMAL_CHARACTER
+    file-name-item: P21_FILE_NAME
+    copy-and-paste-item: P21_COPY_PASTE
+    character-set-item: P21_CHAR_SET
+    date-format-item: P21_APP_DATE_FORMAT
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: NEXT # 4358008027680259088
+
+branches: 
+- # ====== Branch: Go To Page 22 ===============================
+  id: 4358024614164259104
+  identification: 
+    name: Go To Page 22
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:22:&SESSION.&success_msg=#SUCCESS_MSG#'
+      page: 22
+
+  server-side-condition: 
+    when-button-pressed: NEXT # 4358008027680259088
+

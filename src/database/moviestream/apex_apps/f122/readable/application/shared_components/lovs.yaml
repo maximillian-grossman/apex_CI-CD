@@ -1,0 +1,345 @@
+---
+- # ====== List of Values: DATE_FORMAT_OPT =====================
+  id: 4357827635378633963
+  identification: 
+    name: DATE_FORMAT_OPT
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Use application standard format masks ========
+    id: 4357827973592633967
+    entry: 
+      sequence: 10
+      display: Use application standard format masks
+      return: Y
+
+  - # ====== Entry: Provide custom formats for uploaded columns ==
+    id: 4357828351052633970
+    entry: 
+      sequence: 20
+      display: Provide custom formats for uploaded columns
+      return: N
+
+- # ====== List of Values: DATE_FORMAT_OPTION ==================
+  id: 5524293068393963699
+  identification: 
+    name: DATE_FORMAT_OPTION
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Yes ==========================================
+    id: 5524293522956963700
+    entry: 
+      sequence: 10
+      display: Yes
+      return: Y
+
+- # ====== List of Values: DATA_LOAD_CHARSET ===================
+  id: 5524294673916963701
+  identification: 
+    name: DATA_LOAD_CHARSET
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Unicode UTF-16 Little Endian =================
+    id: 5524295136443963703
+    entry: 
+      sequence: 1
+      display: Unicode UTF-16 Little Endian
+      return: utf-16le
+
+  - # ====== Entry: Unicode UTF-16 Big Endian ====================
+    id: 5524295473542963704
+    entry: 
+      sequence: 1
+      display: Unicode UTF-16 Big Endian
+      return: utf-16be
+
+  - # ====== Entry: US-ASCII =====================================
+    id: 5524295860979963704
+    entry: 
+      sequence: 1
+      display: US-ASCII
+      return: us-ascii
+
+  - # ====== Entry: Arabic ISO-8859-6 ============================
+    id: 5524296268377963705
+    entry: 
+      sequence: 1
+      display: Arabic ISO-8859-6
+      return: iso-8859-6
+
+  - # ====== Entry: Arabic Windows 1256 ==========================
+    id: 5524296699184963705
+    entry: 
+      sequence: 1
+      display: Arabic Windows 1256
+      return: windows-1256
+
+  - # ====== Entry: Chinese Big5 =================================
+    id: 5524297084271963705
+    entry: 
+      sequence: 1
+      display: Chinese Big5
+      return: big5
+
+  - # ====== Entry: Chinese GBK ==================================
+    id: 5524297520593963705
+    entry: 
+      sequence: 1
+      display: Chinese GBK
+      return: gbk
+
+  - # ====== Entry: Cyrilic ISO-8859-5 ===========================
+    id: 5524297846497963705
+    entry: 
+      sequence: 1
+      display: Cyrilic ISO-8859-5
+      return: iso-8859-5
+
+  - # ====== Entry: Cyrilic KOI8-R ===============================
+    id: 5524298274836963706
+    entry: 
+      sequence: 1
+      display: Cyrilic KOI8-R
+      return: koi8-r
+
+  - # ====== Entry: Cyrilic KOI8-U ===============================
+    id: 5524298727269963707
+    entry: 
+      sequence: 1
+      display: Cyrilic KOI8-U
+      return: koi8-u
+
+  - # ====== Entry: Cyrilic Windows 1251 =========================
+    id: 5524299075245963707
+    entry: 
+      sequence: 1
+      display: Cyrilic Windows 1251
+      return: windows-1251
+
+  - # ====== Entry: Eastern European ISO-8859-2 ==================
+    id: 5524299478237963709
+    entry: 
+      sequence: 1
+      display: Eastern European ISO-8859-2
+      return: iso-8859-2
+
+  - # ====== Entry: Eastern European Windows 1250 ================
+    id: 5524299851748963709
+    entry: 
+      sequence: 1
+      display: Eastern European Windows 1250
+      return: windows-1250
+
+  - # ====== Entry: Greek ISO-8859-7 =============================
+    id: 5524300341366963709
+    entry: 
+      sequence: 1
+      display: Greek ISO-8859-7
+      return: iso-8859-7
+
+  - # ====== Entry: Greek Windows 1253 ===========================
+    id: 5524300738167963709
+    entry: 
+      sequence: 1
+      display: Greek Windows 1253
+      return: windows-1253
+
+  - # ====== Entry: Hebrew ISO-8859-8-i ==========================
+    id: 5524301071069963709
+    entry: 
+      sequence: 1
+      display: Hebrew ISO-8859-8-i
+      return: iso-8859-8-i
+
+  - # ====== Entry: Hebrew Windows 1255 ==========================
+    id: 5524301478582963710
+    entry: 
+      sequence: 1
+      display: Hebrew Windows 1255
+      return: windows-1255
+
+  - # ====== Entry: Japanese EUC =================================
+    id: 5524301874344963710
+    entry: 
+      sequence: 1
+      display: Japanese EUC
+      return: euc-jp
+
+  - # ====== Entry: Japanese Shift JIS ===========================
+    id: 5524302335354963711
+    entry: 
+      sequence: 1
+      display: Japanese Shift JIS
+      return: shift_jis
+
+  - # ====== Entry: Korean EUC ===================================
+    id: 5524302662113963711
+    entry: 
+      sequence: 1
+      display: Korean EUC
+      return: euc-kr
+
+  - # ====== Entry: Northern European ISO-8859-4 =================
+    id: 5524303111390963711
+    entry: 
+      sequence: 1
+      display: Northern European ISO-8859-4
+      return: iso-8859-4
+
+  - # ====== Entry: Northern European Windows 1257 ===============
+    id: 5524303522402963711
+    entry: 
+      sequence: 1
+      display: Northern European Windows 1257
+      return: windows-1257
+
+  - # ====== Entry: Southern European ISO-8859-3 =================
+    id: 5524303927518963711
+    entry: 
+      sequence: 1
+      display: Southern European ISO-8859-3
+      return: iso-8859-3
+
+  - # ====== Entry: Thai TIS-620 =================================
+    id: 5524304262977963711
+    entry: 
+      sequence: 1
+      display: Thai TIS-620
+      return: tis-620
+
+  - # ====== Entry: Turkish ISO-8859-9 ===========================
+    id: 5524304741941963712
+    entry: 
+      sequence: 1
+      display: Turkish ISO-8859-9
+      return: iso-8859-9
+
+  - # ====== Entry: Turkish Windows 1254 =========================
+    id: 5524305100029963712
+    entry: 
+      sequence: 1
+      display: Turkish Windows 1254
+      return: windows-1254
+
+  - # ====== Entry: Unicode UTF-8 ================================
+    id: 5524305447231963712
+    entry: 
+      sequence: 1
+      display: Unicode UTF-8
+      return: utf-8
+
+  - # ====== Entry: Vietnamese Windows 1258 ======================
+    id: 5524305847171963713
+    entry: 
+      sequence: 1
+      display: Vietnamese Windows 1258
+      return: windows-1258
+
+  - # ====== Entry: Western European ISO-8859-1 ==================
+    id: 5524306341916963713
+    entry: 
+      sequence: 1
+      display: Western European ISO-8859-1
+      return: iso-8859-1
+
+  - # ====== Entry: Western European Windows 1252 ================
+    id: 5524306743654963714
+    entry: 
+      sequence: 1
+      display: Western European Windows 1252
+      return: windows-1252
+
+- # ====== List of Values: EMPLOYEES ===========================
+  id: 5989039138806138690
+  identification: 
+    name: EMPLOYEES
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Local Database
+    type: Legacy SQL Query
+    sql-query: |
+      select ename d, empno r
+      from   eba_demo_load_emp
+      order by 1
+
+- # ====== List of Values: DEPARTMENTS =========================
+  id: 5989054948156141467
+  identification: 
+    name: DEPARTMENTS
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Local Database
+    type: Legacy SQL Query
+    sql-query: |
+      select dname d, deptno r
+      from   eba_demo_load_dept
+      order by 1
+
+- # ====== List of Values: DATA_LOAD_OPTION ====================
+  id: 5989152044380189349
+  identification: 
+    name: DATA_LOAD_OPTION
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Upload file, comma separated (*.csv) or tab de
+    id: 5989152327363189350
+    entry: 
+      sequence: 10
+      display: Upload file, comma separated (*.csv) or tab delimited
+      return: UPLOAD
+
+  - # ====== Entry: Copy and Paste ===============================
+    id: 5989152541456189354
+    entry: 
+      sequence: 20
+      display: Copy and Paste
+      return: PASTE
+
+- # ====== List of Values: FIRST_ROW_OPTION ====================
+  id: 5989154526867189366
+  identification: 
+    name: FIRST_ROW_OPTION
+
+  subscription: 
+    version-number: 1089079098
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Yes ==========================================
+    id: 5989154820151189367
+    entry: 
+      sequence: 10
+      display: Yes
+      return: Y
+

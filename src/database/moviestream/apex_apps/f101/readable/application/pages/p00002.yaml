@@ -1,0 +1,1836 @@
+---
+# ====== Page: Explore =======================================
+id: 2
+identification: 
+  name: Explore
+  alias: REPORT
+  title: Explore
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 123206116822884189
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 49856871598052140028
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+      css-classes: 
+      - u-textCenter
+
+- # ====== Region: REPORT ======================================
+  id: 155173082758876410
+  identification: 
+    name: REPORT
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Function Body returning SQL Query
+    language: PL/SQL
+    pl/sql-function-body-returning-sql-query: |
+      IF :P2_SQL IS NULL THEN
+      RETURN Q'[select
+             C001,
+             C002,
+             C003,
+             C004,
+             C005,
+             N001,
+             N002,
+             N003,
+             N004,
+             N005,
+             D001,
+             D002,
+             D003,
+             D004,
+             D005
+        from APEX_COLLECTIONS]';
+        ELSE RETURN :P2_SQL;
+        END IF;
+    page-items-to-submit: 
+    - P2_VAR_COL_LABEL_1
+    - P2_VAR_COL_LABEL_2
+    - P2_VAR_COL_LABEL_3
+    - P2_VAR_COL_LABEL_4
+    - P2_VAR_COL_LABEL_5
+    - P2_NUM_COL_LABEL_1
+    - P2_NUM_COL_LABEL_2
+    - P2_NUM_COL_LABEL_3
+    - P2_NUM_COL_LABEL_4
+    - P2_NUM_COL_LABEL_5
+    - P2_DATE_COL_LABEL_1
+    - P2_DATE_COL_LABEL_2
+    - P2_DATE_COL_LABEL_3
+    - P2_DATE_COL_LABEL_4
+    - P2_DATE_COL_LABEL_5
+    - P2_SQL
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 103973960620644743
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: true
+
+    appearance: 
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 104054665738759392
+      identification: 
+        name: Primary Report
+        alias: 167440
+
+  columns: 
+  - # ====== Column: C001 ========================================
+    id: 103974266142644746
+    identification: 
+      column-name: C001
+      type: Text Field
+
+    heading: 
+      heading: '&P2_VAR_COL_LABEL_1.'
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: C001
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_VAR_COL_LABEL_1
+
+  - # ====== Column: C002 ========================================
+    id: 103974432570644747
+    identification: 
+      column-name: C002
+      type: Text Field
+
+    heading: 
+      heading: '&P2_VAR_COL_LABEL_2.'
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: C002
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_VAR_COL_LABEL_2
+
+  - # ====== Column: C003 ========================================
+    id: 103974452383644748
+    identification: 
+      column-name: C003
+      type: Text Field
+
+    heading: 
+      heading: '&P2_VAR_COL_LABEL_3.'
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: C003
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_VAR_COL_LABEL_3
+
+  - # ====== Column: C004 ========================================
+    id: 103974578866644749
+    identification: 
+      column-name: C004
+      type: Text Field
+
+    heading: 
+      heading: '&P2_VAR_COL_LABEL_4.'
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: C004
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_VAR_COL_LABEL_4
+
+  - # ====== Column: C005 ========================================
+    id: 103974655654644750
+    identification: 
+      column-name: C005
+      type: Text Field
+
+    heading: 
+      heading: '&P2_VAR_COL_LABEL_5.'
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 32767
+
+    source: 
+      type: Database Column
+      database-column: C005
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_VAR_COL_LABEL_5
+
+  - # ====== Column: N001 ========================================
+    id: 104052202111756648
+    identification: 
+      column-name: N001
+      type: Number Field
+
+    heading: 
+      heading: '&P2_NUM_COL_LABEL_1.'
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 550
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 999G999G999G999G990D00
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: N001
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_NUM_COL_LABEL_1
+
+  - # ====== Column: N002 ========================================
+    id: 104052282520756649
+    identification: 
+      column-name: N002
+      type: Number Field
+
+    heading: 
+      heading: '&P2_NUM_COL_LABEL_2.'
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 560
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 999G999G999G999G990D00
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: N002
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_NUM_COL_LABEL_2
+
+  - # ====== Column: N003 ========================================
+    id: 104052437241756650
+    identification: 
+      column-name: N003
+      type: Number Field
+
+    heading: 
+      heading: '&P2_NUM_COL_LABEL_3.'
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 570
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 999G999G999G999G990D00
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: N003
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_NUM_COL_LABEL_3
+
+  - # ====== Column: N004 ========================================
+    id: 104052532484756651
+    identification: 
+      column-name: N004
+      type: Number Field
+
+    heading: 
+      heading: '&P2_NUM_COL_LABEL_4.'
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 580
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 999G999G999G999G990D00
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: N004
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_NUM_COL_LABEL_4
+
+  - # ====== Column: N005 ========================================
+    id: 104052632244756652
+    identification: 
+      column-name: N005
+      type: Number Field
+
+    heading: 
+      heading: '&P2_NUM_COL_LABEL_5.'
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 590
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 999G999G999G999G990D00
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: N005
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_NUM_COL_LABEL_5
+
+  - # ====== Column: D001 ========================================
+    id: 104052734851756653
+    identification: 
+      column-name: D001
+      type: Date Picker
+
+    heading: 
+      heading: '&P2_DATE_COL_LABEL_1.'
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 600
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: D001
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_DATE_COL_LABEL_1
+
+  - # ====== Column: D002 ========================================
+    id: 104052802805756654
+    identification: 
+      column-name: D002
+      type: Date Picker
+
+    heading: 
+      heading: '&P2_DATE_COL_LABEL_2.'
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 610
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: D002
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_DATE_COL_LABEL_2
+
+  - # ====== Column: D003 ========================================
+    id: 104052928510756655
+    identification: 
+      column-name: D003
+      type: Date Picker
+
+    heading: 
+      heading: '&P2_DATE_COL_LABEL_3.'
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 620
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: D003
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_DATE_COL_LABEL_3
+
+  - # ====== Column: D004 ========================================
+    id: 104053017643756656
+    identification: 
+      column-name: D004
+      type: Date Picker
+
+    heading: 
+      heading: '&P2_DATE_COL_LABEL_4.'
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 630
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: D004
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_DATE_COL_LABEL_4
+
+  - # ====== Column: D005 ========================================
+    id: 104053088731756657
+    identification: 
+      column-name: D005
+      type: Date Picker
+
+    heading: 
+      heading: '&P2_DATE_COL_LABEL_5.'
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 640
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: D005
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P2_DATE_COL_LABEL_5
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: REPORT
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+page-items: 
+- # ====== Page Item: P2_CURRENT_ID ============================
+  id: 103776413690418355
+  identification: 
+    name: P2_CURRENT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 90
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_SQL ===================================
+  id: 104223458230451022
+  identification: 
+    name: P2_SQL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_NUM_COL_LABEL_1 =======================
+  id: 136622637049470067
+  identification: 
+    name: P2_NUM_COL_LABEL_1
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 150
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_NUM_COL_LABEL_2 =======================
+  id: 136622723725470068
+  identification: 
+    name: P2_NUM_COL_LABEL_2
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 160
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_NUM_COL_LABEL_3 =======================
+  id: 136622825056470069
+  identification: 
+    name: P2_NUM_COL_LABEL_3
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 170
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_NUM_COL_LABEL_4 =======================
+  id: 136622924440470070
+  identification: 
+    name: P2_NUM_COL_LABEL_4
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 180
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_NUM_COL_LABEL_5 =======================
+  id: 136623002366470071
+  identification: 
+    name: P2_NUM_COL_LABEL_5
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 190
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_DATE_COL_LABEL_1 ======================
+  id: 136623112211470072
+  identification: 
+    name: P2_DATE_COL_LABEL_1
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 200
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_DATE_COL_LABEL_2 ======================
+  id: 136623257211470073
+  identification: 
+    name: P2_DATE_COL_LABEL_2
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 210
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_DATE_COL_LABEL_3 ======================
+  id: 136623318552470074
+  identification: 
+    name: P2_DATE_COL_LABEL_3
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 220
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_DATE_COL_LABEL_4 ======================
+  id: 136623402124470075
+  identification: 
+    name: P2_DATE_COL_LABEL_4
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 230
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_DATE_COL_LABEL_5 ======================
+  id: 136623573628470076
+  identification: 
+    name: P2_DATE_COL_LABEL_5
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 240
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_COL_COUNT =============================
+  id: 158060671237310123
+  identification: 
+    name: P2_COL_COUNT
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 70
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_VAR_COL_LABEL_1 =======================
+  id: 158359549453706241
+  identification: 
+    name: P2_VAR_COL_LABEL_1
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 100
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_VAR_COL_LABEL_2 =======================
+  id: 158359660610706242
+  identification: 
+    name: P2_VAR_COL_LABEL_2
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 110
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_VAR_COL_LABEL_3 =======================
+  id: 158359759485706243
+  identification: 
+    name: P2_VAR_COL_LABEL_3
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 120
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_VAR_COL_LABEL_4 =======================
+  id: 158359881890706244
+  identification: 
+    name: P2_VAR_COL_LABEL_4
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 130
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P2_VAR_COL_LABEL_5 =======================
+  id: 158359902961706245
+  identification: 
+    name: P2_VAR_COL_LABEL_5
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 140
+    region: REPORT # 155173082758876410
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CLOSE_REPORT ================================
+  id: 103805872326440592
+  identification: 
+    button-name: CLOSE_REPORT
+    label: Close Report
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 123206116822884189
+    slot: UP
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+      page: 1 # Home
+
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Fill Collection ============================
+  id: 103822703037440606
+  identification: 
+    name: Fill Collection
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare 
+          l_sql VARCHAR2(4000);
+          l_cursor_id INTEGER;
+          l_desc_tab dbms_sql.desc_tab;
+          l_col_cnt   INTEGER;
+          l_char_columns varchar2(4000);
+          l_date_columns varchar2(4000);
+          l_num_columns varchar2(4000);
+          l_char_counter number := 0;
+          l_num_counter number := 0;
+          l_date_counter number := 0;
+      begin
+      
+       
+      
+      
+        SELECT showsql into l_sql from OCW23_PROMPTS where id = :P2_CURRENT_ID;
+      
+         APEX_DEBUG.INFO('INIT l_sql - '||l_sql || ' id - '||:P2_CURRENT_ID);
+         begin
+            APEX_COLLECTION.DELETE_COLLECTION(
+                  p_collection_name => 'RESPONSE_REPORT_JARVIS') ;
+          exception
+          when others then 
+              null;
+          end;
+      
+        l_cursor_id := DBMS_SQL.OPEN_CURSOR;
+        dbms_sql.parse(l_cursor_id, l_sql, dbms_sql.native);
+        dbms_sql.describe_columns(l_cursor_id, l_col_cnt, l_desc_tab);
+      
+        :P2_COL_COUNT := l_col_cnt;
+      
+        FOR i IN 1..l_col_cnt LOOP
+      
+        IF  l_desc_tab(i).col_type = 1 then -- VARCHAR2
+          l_char_counter := l_char_counter + 1;
+          if l_char_counter > 5 then
+              CONTINUE;
+          end if;
+          APEX_UTIL.SET_SESSION_STATE('P2_VAR_COL_LABEL_'||l_char_counter, l_desc_tab(i).col_name, true); 
+      
+          l_char_columns := l_char_columns || ',"'||l_desc_tab(i).col_name||'" AS C00'||l_char_counter;
+      
+        ELSif l_desc_tab(i).col_type = 2 then -- NUMBER
+          l_num_counter := l_num_counter + 1;
+          if l_num_counter > 5 then
+              CONTINUE;
+          end if;
+          APEX_UTIL.SET_SESSION_STATE('P2_NUM_COL_LABEL_'||l_num_counter, l_desc_tab(i).col_name, true); 
+      APEX_DEBUG.INFO('P2_NUM_COL_LABEL_'||l_num_counter ||'- '||APEX_UTIL.gET_SESSION_STATE('P2_NUM_COL_LABEL_'||l_num_counter));
+          l_num_columns := l_num_columns || ',"'||l_desc_tab(i).col_name ||'" AS N00'||l_num_counter;
+         ELSif l_desc_tab(i).col_type = 12 then -- DATE
+          l_date_counter := l_date_counter + 1;
+           if l_date_counter > 5 then
+              CONTINUE;
+          end if;
+          APEX_UTIL.SET_SESSION_STATE('P2_DATE_COL_LABEL_'||l_date_counter, l_desc_tab(i).col_name, true); 
+      
+          l_date_columns := l_date_columns || ',"'||l_desc_tab(i).col_name||'" AS D00'||l_date_counter;
+      
+        END IF;
+      
+        
+      
+        
+        end loop;
+      
+        
+      
+        if l_num_counter < 5 then 
+          for i in l_num_counter +1..5 loop
+              l_num_columns := l_num_columns ||',null AS N00'||i;
+          end loop;
+        end if;
+      
+       if l_date_counter < 5 then 
+          for i in l_date_counter+1..5 loop
+              l_date_columns := l_date_columns ||',null AS D00'||i;
+          end loop;
+        end if;
+      
+      
+      
+        IF INSTR(l_CHAR_columns, ',') = 1 THEN 
+          l_CHAR_columns := SUBSTR(l_CHAR_columns, 2);
+        END IF;
+      
+        IF INSTR(l_num_columns, ',') = 1 THEN 
+          l_num_columns := SUBSTR(l_num_columns, 2);
+        END IF;
+      
+       IF INSTR(l_date_columns, ',') = 1 THEN 
+          l_date_columns := SUBSTR(l_date_columns, 2);
+        END IF;
+      
+      
+        APEX_DEBUG.INFO('l_date_columns - '||l_date_columns);
+        APEX_DEBUG.INFO('l_num_columns - '||l_num_columns);
+        APEX_DEBUG.INFO('l_CHAR_columns - '||l_CHAR_columns);
+      
+       
+        l_sql := 'SELECT ' || l_num_columns||
+        (CASE WHEN l_date_columns is not null then ' , '||l_date_columns
+          else null end )||(CASE WHEN l_char_columns is not null then ' , '||l_char_columns
+          else null end ) ||' FROM ('||l_sql||' )';
+      
+        APEX_DEBUG.INFO('l_sql - '||l_sql);
+      
+      --   APEX_COLLECTION.CREATE_COLLECTION_FROM_QUERY2 (
+      --         p_collection_name => 'RESPONSE_REPORT_JARVIS', 
+      --         p_query => l_sql,
+      --         p_generate_md5 => 'NO');
+      
+      :P2_SQL := l_sql;
+      
+      
+      end;
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Init Items =================================
+  id: 103973861128644742
+  identification: 
+    name: Init Items
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P2_VAR_COL_LABEL_1   := NULL;
+      :P2_VAR_COL_LABEL_2   := null;  
+      :P2_VAR_COL_LABEL_3  := null;
+      :P2_VAR_COL_LABEL_4  := null;
+      :P2_VAR_COL_LABEL_5  := null;
+      :P2_NUM_COL_LABEL_1  := null;
+      :P2_NUM_COL_LABEL_2  := null;
+      :P2_NUM_COL_LABEL_3  := null;
+      :P2_NUM_COL_LABEL_4  := null;
+      :P2_NUM_COL_LABEL_5  := null;
+      :P2_DATE_COL_LABEL_1  := NULL; 
+      :P2_DATE_COL_LABEL_2  := NULL; 
+      :P2_DATE_COL_LABEL_3  := NULL; 
+      :P2_DATE_COL_LABEL_4  := NULL; 
+      :P2_DATE_COL_LABEL_5  := NULL;
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+

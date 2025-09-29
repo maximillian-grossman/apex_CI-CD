@@ -1,0 +1,21 @@
+---
+- # ====== Authorization: Oracle Text is available =============
+  id: 1176167065401001527
+  identification: 
+    name: Oracle Text is available
+
+  subscription: 
+    version-number: 1089079761
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: return eba_demo_ig_text_pkg.text_is_available;
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: Oracle Text is not available in this workspace.
+

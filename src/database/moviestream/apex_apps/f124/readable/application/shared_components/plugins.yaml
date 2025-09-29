@@ -1,0 +1,3765 @@
+---
+- # ====== Plugin: Oracle Elocation Geocoder ===================
+  id: 1571410807574738600
+  identification: 
+    name: Oracle Elocation Geocoder
+    internal-name: COM.ORACLE.APEX.ELOCGEOCODER
+    type: Dynamic Action
+
+  advanced: 
+    category: Miscellaneous
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: eba_spatial_gcdr_pkg.render_elocation_geocoder
+    ajax-procedure/function-name: eba_spatial_gcdr_pkg.ajax_elocation_geocoder
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Collection Name ===================
+    id: 1571411027688738604
+    identification: 
+      attribute: 1
+      name: Collection Name
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 30
+      maximum-length: 30
+
+    default: 
+      value: GEOCODER_RESULTS
+
+    help: 
+      help-text: |
+        <p>
+        Enter the name of a collection to store the geocoding results here. The collection can be queried as follows:
+        </p>
+        <pre>
+        select 
+             c001 as street,
+             c002 as house_number,
+             c003 as postal_code,
+             c004 as settlement,
+             c005 as builtup_area,
+             c006 as municipality,
+             c007 as order1_area,
+             c008 as side,
+             c009 as error_message,
+             c010 as match_vector,
+             c011 as country,
+             n001 as sequence,
+             n002 as longitude,
+             n003 as latitude,
+             n004 as edge_id
+            from apex_collections where collection_name = '<i>{Collection Name}</i>'
+            order by seq_id
+        </pre>
+        <p>
+         To display geocoding results, create a Report based on that query and add another <i>true action</i> to this dynamic action, in order to refresh that report.
+        </p>
+        
+
+  - # ====== Custom Attribute: Geocoder match mode ===============
+    id: 1571411443094738608
+    identification: 
+      attribute: 2
+      name: Geocoder match mode
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: DEFAULT
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: NORMAL
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>Match Modes for Geocoding Operations</p>
+        <table cellspacing="0" cellpadding="3" border="1" dir="ltr" >
+        <tr valign="top" align="left">
+        <th valign="bottom" align="left" >Match Mode</th>
+        <th valign="bottom" align="left" >Description</th>
+        </tr>
+        <tr valign="top" align="left">
+        <td align="left" headers="r1c1-t3" >
+        <p>EXACT</p>
+        </td>
+        <td align="left" headers="r2c1-t3 r1c2-t3">
+        <p>All attributes of the input address must match the data used for geocoding. However, if the house or building number, base name (street name), street type, street prefix, and street suffix do not all match the geocoding data, a location in the first match found in the following is returned: postal code, city or town (settlement) within the state, and state. For example, if the street name is incorrect but a valid postal code is specified, a location in the postal code is returned.</p>
+        </td>
+        </tr>
+        <tr valign="top" align="left">
+        <td align="left" headers="r1c1-t3" >
+        <p>RELAX_BASE_NAME</p>
+        </td>
+        <td align="left" headers="r6c1-t3 r1c2-t3">
+        <p>The base name of the street, the house or building number, and the street type can be different from the data used for geocoding. For example, if <i>Pleasant Valley</i> is the base name of a street in the data used for geocoding, <i>Pleasant Vale</i> would also match as long as there were no ambiguities or other matches in the data.</p>
+        </td>
+        </tr>
+        <tr valign="top" align="left">
+        <td align="left" headers="r1c1-t3" >
+        <p>RELAX_POSTAL_CODE</p>
+        </td>
+        <td align="left" headers="r7c1-t3 r1c2-t3">
+        <p>The postal code (if provided), base name, house or building number, and street type can be different from the data used for geocoding.</p>
+        </td>
+        </tr>
+        <tr valign="top" align="left">
+        <td align="left" headers="r1c1-t3" >
+        <p>DEFAULT</p>
+        </td>
+        <td align="left" headers="r8c1-t3 r1c2-t3">
+        <p>The address can be outside the city specified as long as it is within the same county. Also includes the characteristics of RELAX_POSTAL_CODE.</p>
+        </td>
+        </tr>
+        </table>
+
+    entries: 
+    - # ====== Entry: Do only exact matches ========================
+      id: 1571411770570738608
+      entry: 
+        sequence: 10
+        display: Do only exact matches
+        return: EXACT
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Relax Postal Code ============================
+      id: 1571412268542738609
+      entry: 
+        sequence: 20
+        display: Relax Postal Code
+        return: RELAX_POSTAL_CODE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Relax Base Name ==============================
+      id: 1571412721317738609
+      entry: 
+        sequence: 30
+        display: Relax Base Name
+        return: RELAX_BASE_NAME
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Use Server Default ===========================
+      id: 1571413207550738609
+      entry: 
+        sequence: 40
+        display: Use Server Default
+        return: DEFAULT
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Item containing Country Code ======
+    id: 1571413782656738609
+    identification: 
+      attribute: 3
+      name: Item containing Country Code
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: PX_GEOCODER_COUNTRY
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: NORMAL
+      always-evaluate: true
+
+    help: 
+      help-text: Enter the name of the item containing the country code for the Geocoder.
+
+  - # ====== Custom Attribute: Item containing address lines =====
+    id: 1571414197457738609
+    identification: 
+      attribute: 4
+      name: Item containing address lines
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: PX_GEOCODER_ADDRESS
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: NORMAL
+      always-evaluate: true
+
+    help: 
+      help-text: Enter the name of the item containing the address to geocode.
+
+  - # ====== Custom Attribute: Separator for address elements ====
+    id: 1571414551542738609
+    identification: 
+      attribute: 5
+      name: Separator for address elements
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 2
+      maximum-length: 2
+
+    default: 
+      value: ','
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: NORMAL
+      always-evaluate: true
+
+    help: 
+      help-text: Enter the character which separates the parts of an address.
+
+  - # ====== Custom Attribute: Geocoding type ====================
+    id: 1571414951175738609
+    identification: 
+      attribute: 8
+      name: Geocoding type
+      scope: Component
+
+    layout: 
+      sequence: 5
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: NORMAL
+
+    help: 
+      help-text: Specify the kind of geocoding here. <b>Geocoding</b> is converting a postal address to a coordinate - <b>Reverse Geocoding</b> is determining the postal address from the coordinate.
+
+    entries: 
+    - # ====== Entry: Geocoding ====================================
+      id: 1571415359954738609
+      entry: 
+        sequence: 10
+        display: Geocoding
+        return: NORMAL
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Reverse Geocoding ============================
+      id: 1571415828250738610
+      entry: 
+        sequence: 20
+        display: Reverse Geocoding
+        return: REVERSE
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Item containing Longitude value ===
+    id: 1571416386000738610
+    identification: 
+      attribute: 9
+      name: Item containing Longitude value
+      scope: Component
+
+    layout: 
+      sequence: 90
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: REVERSE
+      always-evaluate: true
+
+    help: 
+      help-text: Specify the APEX item containing the longitude value here.
+
+  - # ====== Custom Attribute: Item containing Latitude value ====
+    id: 1571416789415738610
+    identification: 
+      attribute: 10
+      name: Item containing Latitude value
+      scope: Component
+
+    layout: 
+      sequence: 100
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    condition: 
+      depending-on-custom-attribute: Geocoding type # 1571414951175738609
+      depending-on-condition-type: equal to
+      expression: REVERSE
+      always-evaluate: true
+
+    help: 
+      help-text: Specify the item containing the Latitude value.
+
+  events: 
+  - # ====== Event: com_oracle_eloc_gcdr_done ====================
+    id: 1571418966025738620
+    identification: 
+      name: elocation_geocoder_success
+      internal-name: com_oracle_eloc_gcdr_done
+
+  - # ====== Event: com_oracle_eloc_gcdr_error ===================
+    id: 1571419355130738620
+    identification: 
+      name: elocation_geocoder_error
+      internal-name: com_oracle_eloc_gcdr_error
+
+- # ====== Plugin: Legacy: Oracle Maps - Get Data  =============
+  id: 1571419736921738625
+  identification: 
+    name: 'Legacy: Oracle Maps - Get Data '
+    internal-name: COM.ORACLE.APEX.ORAMAPS.GETDATA
+    type: Dynamic Action
+
+  advanced: 
+    category: Miscellaneous
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_getdata(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_type           varchar2(30)   := upper(p_dynamic_action.attribute_01);
+          l_srid           varchar2(30)   := upper(p_dynamic_action.attribute_02);
+          l_region_id      apex_application_page_regions.static_id%type;
+          l_it_map_bb_xmin p_dynamic_action.attribute_03%type := upper(p_dynamic_action.attribute_03);
+          l_it_map_bb_ymin p_dynamic_action.attribute_04%type := upper(p_dynamic_action.attribute_04);
+          l_it_map_bb_xmax p_dynamic_action.attribute_05%type := upper(p_dynamic_action.attribute_05);
+          l_it_map_bb_ymax p_dynamic_action.attribute_06%type := upper(p_dynamic_action.attribute_06);
+          l_it_map_ctr_x   p_dynamic_action.attribute_07%type := upper(p_dynamic_action.attribute_07);
+          l_it_map_ctr_y   p_dynamic_action.attribute_08%type := upper(p_dynamic_action.attribute_08);
+          l_it_map_mse_x   p_dynamic_action.attribute_09%type := upper(p_dynamic_action.attribute_09);
+          l_it_map_mse_y   p_dynamic_action.attribute_10%type := upper(p_dynamic_action.attribute_10);
+          l_it_map_zl_cur  p_dynamic_action.attribute_11%type := upper(p_dynamic_action.attribute_11);
+          l_it_map_zl_max  p_dynamic_action.attribute_12%type := upper(p_dynamic_action.attribute_12);
+          l_it_map_srid    p_dynamic_action.attribute_13%type := upper(p_dynamic_action.attribute_13);
+          l_it_mapdata     p_dynamic_action.attribute_14%type := upper(p_dynamic_action.attribute_14);
+          l_result         apex_plugin.t_dynamic_action_render_result;       
+      
+          l_js             varchar2(32767):='';
+          l_dec_char       varchar2(1);
+      begin
+        l_dec_char := substr(to_char(1/2, 'FM0D0'),2,1);
+        begin
+          select nvl(r.static_id, 'R'||to_char(d.affected_region_id)) into l_region_id
+          from apex_application_page_da_acts d, apex_application_page_regions r
+          where d.affected_region_id = r.region_id and d.application_id = r.application_id and d.page_id = r.page_id
+          and d.application_id = v('APP_ID') and d.page_id = v('APP_PAGE_ID')
+          and d.action_id = p_dynamic_action.id;
+      
+        exception
+          when NO_DATA_FOUND then 
+            apex_debug.message(
+              p_message => 'ORAMAPS_DA_GETDATA: FATAL ERROR: Dynamic Action ID "%s" not found in the APEX dictionary!',
+              p0      => p_dynamic_action.id,
+              p_level   => apex_debug.c_log_level_error
+            );
+            raise_application_error(-20000, 'FATAL ERROR: '||p_dynamic_action.id||' not found in dictionary for APP:PAGE '||v('APP_ID')||':'||v('APP_PAGE_ID'), true);
+        end;
+      
+        apex_debug.message(
+          p_message => 'ORAMAPS_DA_GETDATA: found affected region: %s',
+          p0        => l_region_id,
+          p_level   => apex_debug.c_log_level_info
+        );
+        
+        l_js := 
+          'function () {'                                                          ||
+             'getOramaps_mapdata('                                                 ||
+                apex_javascript.add_value(l_region_id, true)                       ||
+                '"JSON", '                                                         ||
+                apex_javascript.add_value(l_srid, true)                            ||
+                'function( pData ) { '                                             ||
+                'var lData = JSON.parse(pData);'                                   ;
+      
+            if l_it_map_bb_xmin is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_bb_xmin, false)||', String(lData.mapdata.bbox.xmin).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_bb_ymin is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_bb_ymin, false)||', String(lData.mapdata.bbox.ymin).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_bb_xmax is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_bb_xmax, false)||', String(lData.mapdata.bbox.xmax).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_bb_ymax is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_bb_ymax, false)||', String(lData.mapdata.bbox.ymax).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_ctr_x is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_ctr_x, false)||', String(lData.mapdata.center.x).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_ctr_y is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_ctr_y, false)||', String(lData.mapdata.center.y).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_mse_x is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_mse_x, false)||', String(lData.mapdata.mouse_location.x).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_mse_y is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_mse_y, false)||', String(lData.mapdata.mouse_location.y).replace(".", "'||l_dec_char||'"));';
+            end if;
+            if l_it_map_zl_cur is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_zl_cur, false)||', lData.mapdata.zoomlevel.current);';
+            end if;
+            if l_it_map_zl_max is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_zl_max, false)||', lData.mapdata.zoomlevel.max);';
+            end if;
+            if l_it_map_srid is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_map_srid, false)||', lData.mapdata.srid);';
+            end if;
+      
+            if l_it_mapdata is not null then 
+              l_js := l_js || 
+               '$s('||apex_javascript.add_value(l_it_mapdata, false)||', pData );';
+            end if;
+      
+      
+        l_js := l_js || '});}';
+         
+           
+        l_result.javascript_function := l_js;
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_GETDATA: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramaps_getdata;
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_getdata
+
+  standard-attributes: 
+    attributes: 
+    - For Region
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Render Data As ... ================
+    id: 1571420061171738627
+    identification: 
+      attribute: 1
+      name: Render Data As ...
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: JSON
+
+    entries: 
+    - # ====== Entry: JSON =========================================
+      id: 1571420416649738627
+      entry: 
+        sequence: 10
+        display: JSON
+        return: JSON
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: XML ==========================================
+      id: 1571420980135738627
+      entry: 
+        sequence: 20
+        display: XML
+        return: XML
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Coordinate System =================
+    id: 1571421466138738627
+    identification: 
+      attribute: 2
+      name: Coordinate System
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: WGS84
+
+    entries: 
+    - # ====== Entry: Longitiude / Latitude (WGS84) ================
+      id: 1571421853885738627
+      entry: 
+        sequence: 10
+        display: Longitiude / Latitude (WGS84)
+        return: WGS84
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Current map projection =======================
+      id: 1571422322892738628
+      entry: 
+        sequence: 20
+        display: Current map projection
+        return: MAP
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Item for Map BBOX XMIN  ===========
+    id: 1571422875253738628
+    identification: 
+      attribute: 3
+      name: 'Item for Map BBOX XMIN '
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Map BBOX YMIN ============
+    id: 1571423298936738628
+    identification: 
+      attribute: 4
+      name: Item for Map BBOX YMIN
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Map BBOX XMAX ============
+    id: 1571423659956738628
+    identification: 
+      attribute: 5
+      name: Item for Map BBOX XMAX
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Map BBOX YMAX ============
+    id: 1571424065518738628
+    identification: 
+      attribute: 6
+      name: Item for Map BBOX YMAX
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Map Center X =============
+    id: 1571424428486738628
+    identification: 
+      attribute: 7
+      name: Item for Map Center X
+      scope: Component
+
+    layout: 
+      sequence: 70
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Map Center Y =============
+    id: 1571424837477738628
+    identification: 
+      attribute: 8
+      name: Item for Map Center Y
+      scope: Component
+
+    layout: 
+      sequence: 80
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Mouse Location X =========
+    id: 1571425300087738628
+    identification: 
+      attribute: 9
+      name: Item for Mouse Location X
+      scope: Component
+
+    layout: 
+      sequence: 90
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for Mouse Location Y =========
+    id: 1571425690593738629
+    identification: 
+      attribute: 10
+      name: Item for Mouse Location Y
+      scope: Component
+
+    layout: 
+      sequence: 100
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for current Zoomlevel ========
+    id: 1571426100089738629
+    identification: 
+      attribute: 11
+      name: Item for current Zoomlevel
+      scope: Component
+
+    layout: 
+      sequence: 110
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for max. Zoomlevel ===========
+    id: 1571426439544738629
+    identification: 
+      attribute: 12
+      name: Item for max. Zoomlevel
+      scope: Component
+
+    layout: 
+      sequence: 120
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for MAP SRID value ===========
+    id: 1571426805556738629
+    identification: 
+      attribute: 13
+      name: Item for MAP SRID value
+      scope: Component
+
+    layout: 
+      sequence: 130
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+  - # ====== Custom Attribute: Item for whole "Map Data" content (
+    id: 1571427216144738630
+    identification: 
+      attribute: 14
+      name: Item for whole "Map Data" content (JSON / XML)
+      scope: Component
+
+    layout: 
+      sequence: 140
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+- # ====== Plugin: Legacy: Oracle Maps - Get Redline ===========
+  id: 1571427667859738631
+  identification: 
+    name: 'Legacy: Oracle Maps - Get Redline'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.GETREDLIN
+    type: Dynamic Action
+
+  advanced: 
+    category: Miscellaneous
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_getRedline(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_type          varchar2(30)   := upper(p_dynamic_action.attribute_01);
+          l_item_names    apex_application_page_da_acts.affected_elements%type;
+          l_result        apex_plugin.t_dynamic_action_render_result;       
+      begin
+        begin
+          select affected_elements into l_item_names
+          from apex_application_page_da_acts
+          where application_id = v('APP_ID') and page_id = v('APP_PAGE_ID')
+          and action_id = p_dynamic_action.id;
+        exception
+          when NO_DATA_FOUND then 
+            apex_debug.message(
+              p_message => 'ORAMAPS_DA_GETREDLINE: FATAL ERROR: Dynamic Action ID "%s" not found in the APEX dictionary!',
+              p0      => p_dynamic_action.id,
+              p_level   => apex_debug.c_log_level_error
+            );
+            raise_application_error(-20000, 'FATAL ERROR: '||p_dynamic_action.id||' not found in dictionary for APP:PAGE '||v('APP_ID')||':'||v('APP_PAGE_ID'), true);
+        end;
+      
+        apex_debug.message(
+          p_message => 'ORAMAPS_DA_GETREDLINE: found affected elements: %s',
+          p0        => l_item_names,
+          p_level   => apex_debug.c_log_level_info
+        );
+        l_result.javascript_function := 'function () {
+           $s('||apex_javascript.add_value(l_item_names, false)||', getOramaps_redlinegeom(this.triggeringElement.id, '||apex_javascript.add_value(l_type, false)||'));
+        }';
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_GETREDLINE: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramaps_getRedline;
+      
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_getRedline
+
+  standard-attributes: 
+    attributes: 
+    - For Item(s)
+    - Affected Element Required
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Render Data as ====================
+    id: 1571427958012738631
+    identification: 
+      attribute: 1
+      name: Render Data as
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: XML
+
+    entries: 
+    - # ====== Entry: JSON =========================================
+      id: 1571428330612738631
+      entry: 
+        sequence: 10
+        display: JSON
+        return: JSON
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: XML ==========================================
+      id: 1571428809762738631
+      entry: 
+        sequence: 20
+        display: XML
+        return: XML
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Well Known Text (WKT) ========================
+      id: 1571429363432738631
+      entry: 
+        sequence: 30
+        display: Well Known Text (WKT)
+        return: WKT
+
+      advanced: 
+        quick-pick: false
+
+- # ====== Plugin: Legacy: Oracle Maps - Map Actions ===========
+  id: 1571429859136738632
+  identification: 
+    name: 'Legacy: Oracle Maps - Map Actions'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.CLEARRL
+    type: Dynamic Action
+
+  advanced: 
+    category: Execute
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_redline_acts(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_region_id     apex_application_page_da_acts.affected_elements%type;
+          l_action        p_dynamic_action.attribute_01%type := upper(p_dynamic_action.attribute_01);
+        
+          l_result        apex_plugin.t_dynamic_action_render_result;       
+      begin
+        begin
+          select nvl(r.static_id, 'R'||da.affected_region_id) into l_region_id
+          from apex_application_page_da_acts da, apex_application_page_regions r
+          where da.affected_region_id = r.region_id
+          and da.application_id = v('APP_ID') and da.page_id = v('APP_PAGE_ID')
+          and da.action_id = p_dynamic_action.id;
+        exception
+          when NO_DATA_FOUND then 
+            apex_debug.message(
+              p_message => 'ORAMAPS_DA_REDLINE_ACT: FATAL ERROR: Dynamic Action ID "%s" not found in the APEX dictionary!',
+              p0      => p_dynamic_action.id,
+              p_level   => apex_debug.c_log_level_error
+            );
+            raise_application_error(-20000, 'FATAL ERROR: '||p_dynamic_action.id||' not found in dictionary for APP:PAGE '||v('APP_ID')||':'||v('APP_PAGE_ID'), true);
+        end;
+      
+        apex_debug.message(
+          p_message => 'ORAMAPS_DA_REDLINE_ACT: found affected region: %s',
+          p0        => l_region_id,
+          p_level   => apex_debug.c_log_level_info
+        );
+        if l_action = 'RLCLEAR' then
+          l_result.javascript_function := 'function () {
+             getOramaps_clearRedLine('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'CLEARCIRCLE' then
+          l_result.javascript_function := 'function () {
+             getOramaps_clearCircle('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'ENDCIRCLE' then
+          l_result.javascript_function := 'function () {
+             getOramaps_finishCircle('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'STARTCIRCLE' then
+          l_result.javascript_function := 'function () {
+             getOramaps_startCircle('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'RLSTART' then
+          l_result.javascript_function := 'function () {
+             getOramaps_startRedLine('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'REMOVEMARKER' then
+          l_result.javascript_function := 'function () {
+             getOramaps_removeCustomMarker('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'REFRESHFOI' then
+          l_result.javascript_function := 'function () {
+             getOramaps_refreshSqlFOI('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'RLFINISH' then
+          l_result.javascript_function := 'function () {
+             getOramaps_finishRedLine('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'RECTZOOM' then
+          l_result.javascript_function := 'function () {
+             getOramaps_startRectZoom('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        elsif l_action = 'DISTANCE' then
+          l_result.javascript_function := 'function () {
+             getOramaps_startDistanceTool('||apex_javascript.add_value(l_region_id, false)||');
+          }';
+        end if;
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_REDLINE_ACT: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramaps_redline_acts; 
+      
+      
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_redline_acts
+
+  standard-attributes: 
+    attributes: 
+    - For Region
+    - Affected Element Required
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Map Action ========================
+    id: 1571430195216738633
+    identification: 
+      attribute: 1
+      name: Map Action
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: RECTZOOM
+
+    entries: 
+    - # ====== Entry: Rectangle Zoom ===============================
+      id: 1571430547757738633
+      entry: 
+        sequence: 10
+        display: Rectangle Zoom
+        return: RECTZOOM
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Distance Tool ================================
+      id: 1571431058962738634
+      entry: 
+        sequence: 20
+        display: Distance Tool
+        return: DISTANCE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Start Drawing ================================
+      id: 1571431523270738634
+      entry: 
+        sequence: 30
+        display: Start Drawing
+        return: RLSTART
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Finish Drawing ===============================
+      id: 1571432022781738634
+      entry: 
+        sequence: 40
+        display: Finish Drawing
+        return: RLFINISH
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Clear Drawing ================================
+      id: 1571432583855738634
+      entry: 
+        sequence: 50
+        display: Clear Drawing
+        return: RLCLEAR
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Refresh SQL Features =========================
+      id: 1571433016987738634
+      entry: 
+        sequence: 60
+        display: Refresh SQL Features
+        return: REFRESHFOI
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Remove Markers ===============================
+      id: 1571433595950738634
+      entry: 
+        sequence: 70
+        display: Remove Markers
+        return: REMOVEMARKER
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Clear Circle Tool ============================
+      id: 1571434016828738634
+      entry: 
+        sequence: 80
+        display: Clear Circle Tool
+        return: CLEARCIRCLE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Start Circle Tool ============================
+      id: 1571434577822738635
+      entry: 
+        sequence: 90
+        display: Start Circle Tool
+        return: STARTCIRCLE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Finish Circle Tool ===========================
+      id: 1571435015501738635
+      entry: 
+        sequence: 100
+        display: Finish Circle Tool
+        return: ENDCIRCLE
+
+      advanced: 
+        quick-pick: false
+
+- # ====== Plugin: Legacy: Oracle Maps - get Circle ============
+  id: 1571435526007738635
+  identification: 
+    name: 'Legacy: Oracle Maps - get Circle'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.GETCIRCLE
+    type: Dynamic Action
+
+  advanced: 
+    category: Miscellaneous
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_getcircle(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_region_id      apex_application_page_regions.static_id%type;
+          l_it_map_ctr_x   p_dynamic_action.attribute_01%type := upper(p_dynamic_action.attribute_01);
+          l_it_map_ctr_y   p_dynamic_action.attribute_02%type := upper(p_dynamic_action.attribute_02);
+          l_it_radius      p_dynamic_action.attribute_03%type := upper(p_dynamic_action.attribute_03);
+          l_it_srid        p_dynamic_action.attribute_04%type := upper(p_dynamic_action.attribute_04);
+          l_ret_srid       p_dynamic_action.attribute_05%type := upper(p_dynamic_action.attribute_05);
+          l_result         apex_plugin.t_dynamic_action_render_result;       
+      
+          l_js             varchar2(32767):='';
+          l_dec_char       varchar2(1);
+      begin
+        l_dec_char := substr(to_char(1/2, 'FM0D0'),2,1);
+        l_js := 
+          'function ( ) {' ||
+            'getOramaps_circledata(this.triggeringElement.id, '||apex_javascript.add_value(l_ret_srid, true)||' function (pData) {';
+        l_js := l_js || 
+           '$s('||apex_javascript.add_value(l_it_map_ctr_x, false)||', String(pData.center.x).replace(".", "'||l_dec_char||'"));';
+        l_js := l_js || 
+           '$s('||apex_javascript.add_value(l_it_map_ctr_y, false)||', String(pData.center.y).replace(".", "'||l_dec_char||'"));';
+          l_js := l_js || 
+           '$s('||apex_javascript.add_value(l_it_radius,    false)||', String(pData.radius).replace(".", "'||l_dec_char||'"));';
+          l_js := l_js || 
+           '$s('||apex_javascript.add_value(l_it_srid  ,    false)||', String(pData.srid).replace(".", "'||l_dec_char||'"));';
+        l_js := l_js || '});}';
+        l_result.javascript_function := l_js;
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_GETCIRCLE: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramaps_getcircle;
+      
+      
+      
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_getcircle
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Item for Circle Center X ==========
+    id: 1571435895680738636
+    identification: 
+      attribute: 1
+      name: Item for Circle Center X
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    help: 
+      help-text: Provide an APEX item to store the X-coordinate of the circle center in.
+
+  - # ====== Custom Attribute: Item for Circle Center Y ==========
+    id: 1571436226569738636
+    identification: 
+      attribute: 2
+      name: Item for Circle Center Y
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    help: 
+      help-text: Provide an APEX item to store the Y-coordinate of the circle center in.
+
+  - # ====== Custom Attribute: Item for circle radius ============
+    id: 1571436645073738638
+    identification: 
+      attribute: 3
+      name: Item for circle radius
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    help: 
+      help-text: Provide an APEX item to store the circle radius in.
+
+  - # ====== Custom Attribute: SRID of Circle Center (Map SRID) ==
+    id: 1571437039636738638
+    identification: 
+      attribute: 4
+      name: SRID of Circle Center (Map SRID)
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    help: 
+      help-text: Provide an APEX item to store the SRID value in which the circle center is being returned.
+
+  - # ====== Custom Attribute: Coordinte system for return data ==
+    id: 1571437481541738639
+    identification: 
+      attribute: 5
+      name: Coordinte system for return data
+      scope: Component
+
+    layout: 
+      sequence: 5
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: WGS84
+
+    help: 
+      help-text: Determine whether the circle center should be returned in the map coordinate system or as longitude / latitude (WGS84).
+
+    entries: 
+    - # ====== Entry: Longitiude / Latitude (WGS84) ================
+      id: 1571437891684738639
+      entry: 
+        sequence: 10
+        display: Longitiude / Latitude (WGS84)
+        return: WGS84
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Current map projection =======================
+      id: 1571438330113738639
+      entry: 
+        sequence: 20
+        display: Current map projection
+        return: MAP
+
+      advanced: 
+        quick-pick: false
+
+- # ====== Plugin: Legacy: Oracle Maps - get HTML5 Location ====
+  id: 1571438854054738640
+  identification: 
+    name: 'Legacy: Oracle Maps - get HTML5 Location'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.GETLOC
+    type: Dynamic Action
+
+  advanced: 
+    category: Miscellaneous
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_getlocation(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_item_lat      varchar2(30)   := upper(p_dynamic_action.attribute_02);
+          l_item_lon      varchar2(30)   := upper(p_dynamic_action.attribute_01);
+          l_item_status   varchar2(30)   := upper(p_dynamic_action.attribute_03);
+          l_result        apex_plugin.t_dynamic_action_render_result;       
+      begin
+        l_result.javascript_function := 'function () {
+          if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition (
+            function (pos) {
+             try {
+               if ($x('||apex_javascript.add_value(l_item_lat, false)||')) {
+                 $s('||apex_javascript.add_value(l_item_lat, false)||', String(pos.coords.latitude).replace(".", "'||substr(to_char((1/2), 'FM0D0'),2,1)||'"));
+               }
+               if ($x('||apex_javascript.add_value(l_item_lon, false)||')) {
+                 $s('||apex_javascript.add_value(l_item_lon, false)||', String(pos.coords.longitude).replace(".", "'||substr(to_char((1/2), 'FM0D0'),2,1)||'"));
+               }
+               if ($x('||apex_javascript.add_value(l_item_status, false)||')) {
+                 $s('||apex_javascript.add_value(l_item_status, false)||', "SUCCESS");
+               }
+               apex.event.trigger(
+                 document,
+                 "com_oracle_oramapshtml5_locsuccess"
+               );
+             } catch (e) {
+               if ($v("pDebug")=="YES") {
+                 console.log(e);
+               }
+               apex.event.trigger(
+                 document,
+                 "com_oracle_oramapshtml5_locerror"
+               );
+             }
+            },
+            function(error) {
+             var mesg;
+             if ($v("pDebug")=="YES") {
+               console.log(e);
+             }
+             switch (error.code) {
+              case error.PERMISSION_DENIED:
+               mesg = "ERROR: Permission denied.";
+               break;
+              case error.POSITION_UNAVAILABLE:
+               mesg = "ERROR: Location information unavailable.";
+               break;
+              case error.TIMEOUT:
+               mesg = "ERROR: Location retrieval timed out.";
+               break;
+              case error.UNKNOWN_ERROR:
+               mesg = "ERROR: Unknown error.";
+               break;
+             } 
+             if ($x('||apex_javascript.add_value(l_item_status, false)||')) {
+               $s('||apex_javascript.add_value(l_item_status, false)||', mesg);
+             }
+             console.log(mesg);
+             apex.event.trigger(
+               document,
+               "com_oracle_oramapshtml5_locerror"
+             );
+            } 
+           );
+          } else {
+           mesg = "ERROR: No Geolocation capability available.";
+           if ($x('||apex_javascript.add_value(l_item_status, false)||')) {
+             $s('||apex_javascript.add_value(l_item_status, false)||', mesg);
+           }
+           console.log(mesg);
+           apex.event.trigger(
+             document,
+             "com_oracle_oramapshtml5_locerror"
+           );
+          }
+        }';
+        return l_result;
+      end render_da_oramaps_getlocation; 
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_getlocation
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+    help-text: |
+      <p>
+      	This plugin uses the Browsers&#39; HTML5 capabilities to get the current location. The longitude and latitude values are being stored in APEX items provided by the application developer. Upon receiving of the coordinate values from the browser the plugin fires the<strong> HTML5 Location received</strong> event on the <strong>document</strong> DOM Element. You can create additional Dynamic Actions based on this in order to further process the coordinates.</p>
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Item for Longitude value ==========
+    id: 1571439139811738640
+    identification: 
+      attribute: 1
+      name: Item for Longitude value
+      scope: Component
+
+    layout: 
+      sequence: 5
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    help: 
+      help-text: Specify Item to store the longitude value.
+
+  - # ====== Custom Attribute: Item for Latitude value ===========
+    id: 1571439580054738640
+    identification: 
+      attribute: 2
+      name: Item for Latitude value
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    help: 
+      help-text: Item to store the longitude value.
+
+  - # ====== Custom Attribute: Item for Status Message ===========
+    id: 1571439932143738640
+    identification: 
+      attribute: 3
+      name: Item for Status Message
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    help: 
+      help-text: Specify the APEX item, in which to store the Status message (Success / Error) here.
+
+  events: 
+  - # ====== Event: com_oracle_oramapshtml5_locerror =============
+    id: 1571440341150738641
+    identification: 
+      name: HTML5 Location error
+      internal-name: com_oracle_oramapshtml5_locerror
+
+  - # ====== Event: com_oracle_oramapshtml5_locsuccess ===========
+    id: 1571440764953738641
+    identification: 
+      name: HTML5 Location received
+      internal-name: com_oracle_oramapshtml5_locsuccess
+
+- # ====== Plugin: Legacy: Oracle Maps - set Center / Zoomlevel 
+  id: 1571441154175738641
+  identification: 
+    name: 'Legacy: Oracle Maps - set Center / Zoomlevel'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.SETCENTZO
+    type: Dynamic Action
+
+  advanced: 
+    category: Execute
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramap_setCentZo(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_item_cx       varchar2(30)   := upper(p_dynamic_action.attribute_01);
+          l_item_cy       varchar2(30)   := upper(p_dynamic_action.attribute_02);
+          l_item_srid     varchar2(30)   := upper(p_dynamic_action.attribute_03);
+          l_item_zoom     varchar2(30)   := upper(p_dynamic_action.attribute_04);
+          l_type          varchar2(30)   := upper(p_dynamic_action.attribute_05);
+          l_srid          varchar2(100);
+      
+          l_region_id     apex_application_page_da_acts.affected_elements%type;
+          l_result        apex_plugin.t_dynamic_action_render_result;       
+      begin
+        begin
+          select nvl(r.static_id, 'R'||da.affected_region_id) into l_region_id
+          from apex_application_page_da_acts da, apex_application_page_regions r
+          where da.affected_region_id = r.region_id
+          and da.application_id = v('APP_ID') and da.page_id = v('APP_PAGE_ID')
+          and da.action_id = p_dynamic_action.id;
+        exception
+          when NO_DATA_FOUND then 
+            apex_debug.message(
+              p_message => 'ORAMAPS_DA_SETCENTERZOOM: FATAL ERROR: Dynamic Action ID "%s" not found in the APEX dictionary!',
+              p0      => p_dynamic_action.id,
+              p_level   => apex_debug.c_log_level_error
+            );
+            raise_application_error(-20000, 'FATAL ERROR: '||p_dynamic_action.id||' not found in dictionary for APP:PAGE '||v('APP_ID')||':'||v('APP_PAGE_ID'), true);
+        end;
+      
+        apex_debug.message(
+          p_message => 'ORAMAPS_DA_SETCENTERZOOM: found affected region: %s',
+          p0        => l_region_id,
+          p_level   => apex_debug.c_log_level_info
+        );
+      
+        if l_item_srid = 'WGS84' then 
+          l_srid := '4326';
+        else
+          l_srid := '';
+        end if;
+      
+        if l_type = 'ZOOM' then 
+          l_result.javascript_function := 'function () {
+              getOramaps_setZoomLevel('||apex_javascript.add_value(l_region_id, false)||', $v('||apex_javascript.add_value(l_item_zoom, false)||'));
+           }';
+        elsif l_type = 'CENTER' then
+          l_result.javascript_function := 'function () {
+             getOramaps_setCenter('||
+               apex_javascript.add_value(l_region_id, false) || ', ' ||
+               '$v('||apex_javascript.add_value(l_item_cx, false) ||'), ' ||
+               '$v('||apex_javascript.add_value(l_item_cy, false) ||'), ' ||
+               apex_javascript.add_value(l_srid, false) ||
+            ');
+          }';
+        else 
+          l_result.javascript_function := 'function () {
+             getOramaps_setCenterZoom('||
+               apex_javascript.add_value(l_region_id, false)||', '||
+               '$v('||apex_javascript.add_value(l_item_cx, false)||'), '||
+               '$v('||apex_javascript.add_value(l_item_cy, false)||'), '||
+               apex_javascript.add_value(l_srid, false)||', ' ||
+               '$v('||apex_javascript.add_value(l_item_zoom, false)||')'||
+            ');
+          }';
+        end if;
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_SETCENTERZOOM: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramap_setCentZo; 
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramap_setCentZo
+
+  standard-attributes: 
+    attributes: 
+    - For Region
+    - Affected Element Required
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Item containing Center X value ====
+    id: 1571441417357738642
+    identification: 
+      attribute: 1
+      name: Item containing Center X value
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    condition: 
+      depending-on-custom-attribute: Set # 1571444032153738644
+      depending-on-condition-type: in list
+      expression: CENTER,CENTERZOOM
+      always-evaluate: true
+
+  - # ====== Custom Attribute: Item containing Center Y value ====
+    id: 1571441818317738642
+    identification: 
+      attribute: 2
+      name: Item containing Center Y value
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    condition: 
+      depending-on-custom-attribute: Set # 1571444032153738644
+      depending-on-condition-type: in list
+      expression: CENTER,CENTERZOOM
+      always-evaluate: true
+
+  - # ====== Custom Attribute: Coordinate System =================
+    id: 1571442298073738642
+    identification: 
+      attribute: 3
+      name: Coordinate System
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: WGS84
+
+    condition: 
+      depending-on-custom-attribute: Set # 1571444032153738644
+      depending-on-condition-type: in list
+      expression: CENTER,CENTERZOOM
+      always-evaluate: true
+
+    help: 
+      help-text: 'SRID of the coordinate values to set the map center. Choose <b>WGS84</b> for standard latitude/longitude values or <b>MAP</b> for values in the map region coordinate system. '
+
+    entries: 
+    - # ====== Entry: Longitude/Latitude (WGS84) ===================
+      id: 1571442690664738642
+      entry: 
+        sequence: 10
+        display: Longitude/Latitude (WGS84)
+        return: WGS84
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Use Map Region Coordinate System =============
+      id: 1571443134174738644
+      entry: 
+        sequence: 20
+        display: Use Map Region Coordinate System
+        return: MAP
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Item containing Zoom Level value ==
+    id: 1571443648553738644
+    identification: 
+      attribute: 4
+      name: Item containing Zoom Level value
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    condition: 
+      depending-on-custom-attribute: Set # 1571444032153738644
+      depending-on-condition-type: in list
+      expression: ZOOM,CENTERZOOM
+      always-evaluate: true
+
+    help: 
+      help-text: Specify the item containing the new Zoom Level value here.
+
+  - # ====== Custom Attribute: Set ===============================
+    id: 1571444032153738644
+    identification: 
+      attribute: 5
+      name: Set
+      scope: Component
+
+    layout: 
+      sequence: 5
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: CENTER
+
+    entries: 
+    - # ====== Entry: Set Map Center ===============================
+      id: 1571444489827738645
+      entry: 
+        sequence: 10
+        display: Set Map Center
+        return: CENTER
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Set Zoomlevel ================================
+      id: 1571444923300738645
+      entry: 
+        sequence: 20
+        display: Set Zoomlevel
+        return: ZOOM
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Set Map Center and Zoomlevel =================
+      id: 1571445408718738645
+      entry: 
+        sequence: 30
+        display: Set Map Center and Zoomlevel
+        return: CENTERZOOM
+
+      advanced: 
+        quick-pick: false
+
+- # ====== Plugin: Legacy: Oracle Maps - set Custom Marker =====
+  id: 1571447148883738646
+  identification: 
+    name: 'Legacy: Oracle Maps - set Custom Marker'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.SETMARKER
+    type: Dynamic Action
+
+  advanced: 
+    category: Execute
+    quick-pick: false
+
+  subscription: 
+    version-number: 1089080485
+
+  source: 
+    pl/sql-code: |
+      function render_da_oramaps_setcustfoi(
+          p_dynamic_action in apex_plugin.t_dynamic_action,
+          p_plugin         in apex_plugin.t_plugin )
+          return apex_plugin.t_dynamic_action_render_result
+      is
+          l_item_x        varchar2(30)   := upper(p_dynamic_action.attribute_01);
+          l_item_y        varchar2(30)   := upper(p_dynamic_action.attribute_02);
+          l_item_srid     varchar2(30)   := upper(p_dynamic_action.attribute_03);
+          l_style         varchar2(10)   := upper(p_dynamic_action.attribute_04);
+          l_text          varchar2(100)  := upper(p_dynamic_action.attribute_05);
+          l_region_id     apex_application_page_da_acts.affected_elements%type;
+          l_result        apex_plugin.t_dynamic_action_render_result;       
+          l_srid          varchar2(100);
+      begin
+        begin
+          select nvl(r.static_id, 'R'||da.affected_region_id) into l_region_id
+          from apex_application_page_da_acts da, apex_application_page_regions r
+          where da.affected_region_id = r.region_id
+          and da.application_id = v('APP_ID') and da.page_id = v('APP_PAGE_ID')
+          and da.action_id = p_dynamic_action.id;
+        exception
+          when NO_DATA_FOUND then 
+            apex_debug.message(
+              p_message => 'ORAMAPS_DA_SETZOOM: FATAL ERROR: Dynamic Action ID "%s" not found in the APEX dictionary!',
+              p0      => p_dynamic_action.id,
+              p_level   => apex_debug.c_log_level_error
+            );
+            raise_application_error(-20000, 'FATAL ERROR: '||p_dynamic_action.id||' not found in dictionary for APP:PAGE '||v('APP_ID')||':'||v('APP_PAGE_ID'), true);
+        end;
+      
+        apex_debug.message(
+          p_message => 'ORAMAPS_DA_SETZOOM: found affected region: %s',
+          p0        => l_region_id,
+          p_level   => apex_debug.c_log_level_info
+        );
+      
+        if l_item_srid = 'WGS84' then 
+          l_srid := '4326';
+        else
+          l_srid := '';
+        end if;
+      
+        l_result.javascript_function := 'function () {
+           getOramaps_setCustomMarker('||
+             apex_javascript.add_value(l_region_id, false) || ', ' ||
+             '$v('||apex_javascript.add_value(l_item_x, false)||'), ' ||
+             '$v('||apex_javascript.add_value(l_item_y, false)||'), ' ||
+             apex_javascript.add_value(l_srid, false) ||', '||
+             apex_javascript.add_value(l_style, false) ||', '||
+             apex_javascript.add_value(l_text, false)||
+          ');
+        }';
+        apex_debug.message(
+             p_message => 'ORAMAPS_DA_SETZOOM: JavaScript function is: %s',
+              p0      => l_result.javascript_function,
+              p_level   => apex_debug.c_log_level_info
+            );
+        return l_result;
+      end render_da_oramaps_setcustfoi; 
+      
+      
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_da_oramaps_setcustfoi
+
+  standard-attributes: 
+    attributes: 
+    - For Region
+    - Affected Element Required
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  information: 
+    version: 20140707
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Item containing Position X value: =
+    id: 1571447452313738648
+    identification: 
+      attribute: 1
+      name: 'Item containing Position X value:'
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+  - # ====== Custom Attribute: Item containing Position Y value: =
+    id: 1571447900493738648
+    identification: 
+      attribute: 2
+      name: 'Item containing Position Y value:'
+      scope: Component
+
+    layout: 
+      sequence: 20
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+  - # ====== Custom Attribute: Coordinate System =================
+    id: 1571448251474738649
+    identification: 
+      attribute: 3
+      name: Coordinate System
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: WGS84
+
+    help: 
+      help-text: 'SRID of the coordinate values. Choose between <b>WGS84</b> (standard latitude/longitude) and the Coordinate System (projection) of the map. '
+
+    entries: 
+    - # ====== Entry: Longitude/Latitude (WGS84) ===================
+      id: 1571448644661738649
+      entry: 
+        sequence: 10
+        display: Longitude/Latitude (WGS84)
+        return: WGS84
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Use Map Region Coordinate System =============
+      id: 1571449133983738649
+      entry: 
+        sequence: 20
+        display: Use Map Region Coordinate System
+        return: MAP
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Marker Style: =====================
+    id: 1571449681805738649
+    identification: 
+      attribute: 4
+      name: 'Marker Style:'
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: gray
+
+    entries: 
+    - # ====== Entry: Gray =========================================
+      id: 1571450085777738649
+      entry: 
+        sequence: 10
+        display: Gray
+        return: gray
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Blue =========================================
+      id: 1571450534516738649
+      entry: 
+        sequence: 20
+        display: Blue
+        return: blue
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Red ==========================================
+      id: 1571451038253738649
+      entry: 
+        sequence: 30
+        display: Red
+        return: red
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Green ========================================
+      id: 1571451591745738650
+      entry: 
+        sequence: 40
+        display: Green
+        return: green
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Purple =======================================
+      id: 1571452037611738650
+      entry: 
+        sequence: 50
+        display: Purple
+        return: purple
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Yellow =======================================
+      id: 1571452581705738650
+      entry: 
+        sequence: 60
+        display: Yellow
+        return: yellow
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Marker Title ======================
+    id: 1571453024149738650
+    identification: 
+      attribute: 5
+      name: Marker Title
+      scope: Component
+
+    layout: 
+      sequence: 50
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 15
+      maximum-length: 50
+
+    default: 
+      value: The Position!
+
+- # ====== Plugin: Legacy: Oracle HTML5 Maps - Region ==========
+  id: 1571453469447738651
+  identification: 
+    name: 'Legacy: Oracle HTML5 Maps - Region'
+    internal-name: COM.ORACLE.APEX.ORAMAPS.HTML5
+    type: Region
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    version-number: 37167705139372
+
+  source: 
+    pl/sql-code: |
+      procedure intfunc_printjsonforgeom(
+        p_attr_name  varchar2
+       ,p_geom       mdsys.sdo_geometry
+      ) is 
+      begin
+        apex_json.open_object(p_attr_name);
+        apex_json.write('sdo_gtype', p_geom.sdo_gtype );
+        apex_json.write('sdo_srid',  p_geom.sdo_srid);
+        if p_geom.sdo_point is not null then
+          apex_json.open_object('sdo_point');
+          apex_json.write('x', nvl(replace(to_char(p_geom.sdo_point.x), ',', '.'),'null'));
+          apex_json.write('y', nvl(replace(to_char(p_geom.sdo_point.y), ',', '.'),'null'));
+          apex_json.write('z', nvl(replace(to_char(p_geom.sdo_point.z), ',', '.'),'null'));
+          apex_json.close_object;
+        elsif  p_geom.sdo_gtype = 2001 and p_geom.sdo_ordinates.count >= 2 then
+          apex_json.open_object('sdo_point');
+          apex_json.write('x', nvl(replace(to_char(p_geom.sdo_ordinates( 1 )), ',', '.'),'null'));
+          apex_json.write('y', nvl(replace(to_char(p_geom.sdo_ordinates( 2 )), ',', '.'),'null'));
+          apex_json.write('z', 'null');
+          apex_json.close_object;  
+        else 
+          apex_json.write('sdo_point', 'null');
+        end if;
+        if p_geom.sdo_elem_info is not null then
+          apex_json.open_array('sdo_elem_info');
+          for i in p_geom.sdo_elem_info.first.. p_geom.sdo_elem_info.last loop
+            apex_json.write(replace(to_char(p_geom.sdo_elem_info(i)),',','.'));
+          end loop;
+          apex_json.close_array;
+        else
+          apex_json.write('sdo_elem_info', 'null');
+        end if;
+        if p_geom.sdo_ordinates is not null then
+          apex_json.open_array('sdo_ordinates');
+          for i in p_geom.sdo_ordinates.first.. p_geom.sdo_ordinates.last loop
+            apex_json.write(replace(to_char(p_geom.sdo_ordinates(i)), ',', '.'));
+          end loop;
+          apex_json.close_array;
+        else
+          apex_json.write('sdo_ordinates', 'null');
+        end if;
+        apex_json.close_object;
+      end intfunc_printjsonforgeom;
+      
+      function render_map_ajax( 
+          p_region              in apex_plugin.t_region,
+          p_plugin              in apex_plugin.t_plugin
+      ) return apex_plugin.t_region_ajax_result is
+        l_maxrows   apex_application_page_regions.attribute_14%type := p_region.attribute_14;
+        l_output    clob;
+      begin
+       if apex_application.g_x10 = 'FOIDATA' then
+         apex_debug.message(
+           p_message => 'ORACLE MAPS PLUGIN: Current Zoom Level %s.',
+           p0 => apex_application.g_x07,
+           p_level   => apex_debug.c_log_level_info
+         );
+      
+         if p_region.source is not null then 
+           declare
+             l_sql               varchar2(32767);
+             l_where             varchar2(32767);
+             l_cur               apex_plugin_util.t_sql_handler;
+      
+             l_bidx              pls_integer := 1;
+             l_bsrid             boolean := true;
+             l_bbbox             boolean := false;
+             l_bzoom             boolean := false;
+      
+             l_geomcol           varchar2(128);
+             l_minzoom           boolean := false;
+             l_maxzoom           boolean := false;
+      
+             l_geom              mdsys.sdo_geometry; 
+             l_dummy             pls_integer;
+             l_firstrow          boolean := true;
+             l_column_value_list apex_plugin_util.t_column_value_list2; 
+             l_bindlist          apex_plugin_util.t_bind_list;
+           begin
+             
+             -- parse the original SQL 
+             l_cur := apex_plugin_util.get_sql_handler(
+               p_sql_statement  => apex_plugin_util.replace_substitutions(p_region.source),
+               p_min_columns    => 3,
+               p_max_columns    => null,
+               p_component_name => p_region.name
+             );
+      
+             l_sql := 'select ';
+             for i in 1..l_cur.column_list.count loop
+              -- Select ONLY columns consumable by the plugin
+              if upper(l_cur.column_list(i).col_name) in ('ID', 'INFOTEXT', 'INFOTIP', 'GEOMETRY', 'STYLE', 'MAXZOOM', 'MINZOOM', 'MARKERTEXT', 'IMAGEURL', 'LAYER', 'MARKERSIZE') then
+       
+               -- test for object types in general 
+               if l_cur.column_list(i).col_type = 109 then 
+                 -- handle MDSYS.SDO_GEOMETRY only
+                 if l_cur.column_list(i).col_schema_name = 'MDSYS' and l_cur.column_list(i).col_type_name = 'SDO_GEOMETRY' then
+                   l_geomcol := l_cur.column_list(i).col_name;
+                   l_sql := l_sql || 'sdo_cs.transform('||l_cur.column_list(i).col_name||', to_number(:SRID)) as '||l_cur.column_list(i).col_name||',';
+                   l_bsrid := true;
+                 end if;
+                 -- and ignore all others
+               else 
+                 l_sql := l_sql || l_cur.column_list(i).col_name || ',';
+               end if;
+               if upper(l_cur.column_list(i).col_name) = 'MINZOOM' then l_minzoom := true; end if; 
+               if upper(l_cur.column_list(i).col_name) = 'MAXZOOM' then l_maxzoom := true; end if; 
+              end if;
+             end loop;
+             -- remove last comma
+             l_sql := substr(l_sql, 1, length(l_sql) - 1);
+      
+             apex_debug.message(
+               p_message => 'ORACLE MAPS PLUGIN: Generated SELECT list: %s',
+               p0 => l_sql,
+               p_level   => apex_debug.c_log_level_info
+             );
+             
+             l_sql := l_sql || ' from (';
+             l_sql := l_sql ||    apex_plugin_util.replace_substitutions(p_region.source);
+             l_sql := l_sql || ') e ';
+      
+             l_where := '';
+      
+             if apex_application.g_x06 = 'Y' then 
+               l_where := l_where || 'where sdo_filter(';
+               l_where := l_where ||   'e.' || l_geomcol || ', ';
+               l_where := l_where ||   'mdsys.sdo_geometry(';
+               l_where := l_where ||     '2003, ';
+               l_where := l_where ||     ':SRID, ';
+               l_where := l_where ||     'null, ';
+               l_where := l_where ||     'mdsys.sdo_elem_info_array(1, 1003, 3), ';
+               l_where := l_where ||     'mdsys.sdo_ordinate_array(';
+               l_where := l_where ||       '(to_number(:MINX)/1000000000),';
+               l_where := l_where ||       '(to_number(:MINY)/1000000000),';
+               l_where := l_where ||       '(to_number(:MAXX)/1000000000),';
+               l_where := l_where ||       '(to_number(:MAXY)/1000000000)';
+               l_where := l_where ||     ')';
+               l_where := l_where ||   ')';
+               l_where := l_where || ') = ''TRUE'' ';
+               l_bbbox := true;
+             else 
+               l_where := l_where || 'where 1 = 1 ';
+             end if;
+             if l_minzoom and apex_application.g_x06 = 'Y' then 
+               l_where := l_where || ' and minzoom <= to_number(:ZOOMLEVEL) ';
+               l_bzoom := true;
+             end if;
+             if l_maxzoom and apex_application.g_x06 = 'Y' then 
+               l_where := l_where || ' and maxzoom >= to_number(:ZOOMLEVEL) ';
+               l_bzoom := true;
+             end if;
+             apex_debug.message(
+               p_message => 'ORACLE MAPS PLUGIN: new WHERE clause generated: %s',
+               p0 => l_where,
+               p_level   => apex_debug.c_log_level_info
+             );
+      
+             l_sql := l_sql || l_where;
+      
+             apex_plugin_util.free_sql_handler(
+               p_sql_handler => l_cur
+             );
+             l_cur := null;
+      
+             --
+             -- SECTION II: Prepare Bind Array and Call APEX_PLUGIN_UTIL.GET_DATA2
+             --
+      
+             if l_bsrid then
+               l_bindlist(l_bidx).name := 'SRID';
+               l_bindlist(l_bidx).value := apex_application.g_x01;
+               l_bidx := l_bidx + 1;
+             end if;
+             if l_bbbox then
+               l_bindlist(l_bidx).name := 'MINX';
+               l_bindlist(l_bidx).value := apex_application.g_x02;
+               l_bindlist(l_bidx+1).name := 'MINY';
+               l_bindlist(l_bidx+1).value := apex_application.g_x03;
+               l_bindlist(l_bidx+2).name := 'MAXX';
+               l_bindlist(l_bidx+2).value := apex_application.g_x04;
+               l_bindlist(l_bidx+3).name := 'MAXY';
+               l_bindlist(l_bidx+3).value := apex_application.g_x05;
+               l_bidx := l_bidx + 4;
+             end if;
+             if l_bzoom then
+               l_bindlist(l_bidx).name := 'ZOOMLEVEL';
+               l_bindlist(l_bidx).value := apex_application.g_x07;
+             end if;
+      
+             l_column_value_list :=
+                apex_plugin_util.get_data2 (
+                  p_sql_statement    => l_sql,
+                  p_min_columns      => 3,
+                  p_max_columns      => null,
+                  p_component_name   => p_region.name,
+                  p_bind_list        => l_bindlist,
+                  p_max_rows         => l_maxrows 
+               );
+      
+             -- 
+             -- SECTION III: FETCH RESULTS and build JSON
+             --
+      
+             apex_debug.message(
+               p_message => 'ORACLE MAPS PLUGIN: found %s rows',
+               p0 => l_column_value_list(1).value_list.count,
+               p_level   => apex_debug.c_log_level_info
+             );
+      
+             apex_json.open_object;
+             apex_json.open_array('row');
+             for row in 1 .. l_column_value_list(1).value_list.count loop
+               apex_json.open_object;
+               for col in 1 .. l_column_value_list.count loop
+                 if l_column_value_list(col).data_type = 'SDO_GEOMETRY' then
+                   -- Object Type columns are always returned using ANYDATA and we have to
+                   -- use GETOBJECT to transform them back into the original object type
+                   l_dummy := l_column_value_list(col).value_list(row).anydata_value.getobject( l_geom );
+                   intfunc_printjsonforgeom(l_column_value_list(col).name, l_geom);
+                 else
+                   apex_json.write(
+                     l_column_value_list(col).name,
+                     apex_plugin_util.get_value_as_varchar2(
+                       p_data_type => l_column_value_list(col).data_type,
+                       p_value     => l_column_value_list(col).value_list(row)
+                     )
+                   );
+                 end if;
+               end loop;
+               apex_json.close_object;
+               apex_debug.message(
+                 p_message => 'ORACLE MAPS PLUGIN: row fetched.',
+                 p_level   => apex_debug.c_log_level_info
+               );
+             end loop;
+             apex_json.close_array;
+             apex_json.close_object;
+           exception 
+             when others then 
+               begin
+                 -- Close the cursor, if open
+                   apex_plugin_util.free_sql_handler(
+                     p_sql_handler => l_cur
+                   );
+               exception
+                 -- ERROR during close cursor - do nothing.
+                 when others then null;
+               end;
+               apex_debug.message(
+                 p_message => 'ORACLE MAPS PLUGIN: error: %s.',
+                 p0 => sqlerrm,
+                 p_level   => apex_debug.c_log_level_info
+               );
+               apex_json.open_object;
+               apex_json.write('error', sqlerrm);
+               apex_json.close_object;
+           end;
+         else 
+           apex_json.open_object;
+           apex_json.open_array('row');
+           apex_json.close_array;
+           apex_json.close_object;
+         end if;
+       elsif apex_application.g_x10 = 'TRANSFORM' then
+         declare
+           l_trgeom      mdsys.sdo_geometry;
+           l_xarray      APEX_APPLICATION_GLOBAL.VC_ARR2;
+           l_yarray      APEX_APPLICATION_GLOBAL.VC_ARR2;
+         begin
+           apex_debug.message(
+             p_message => 'ORACLE MAPS PLUGIN: GOT TRANSFORM DATA %s %s %s %s',
+             p0 => apex_application.g_x01, -- Array of X coordinates
+             p1 => apex_application.g_x02, -- Array of Y coordinates
+             p2 => apex_application.g_x03, -- FROM SRID
+             p3 => apex_application.g_x04, -- TO   SRID
+             p_level   => apex_debug.c_log_level_info
+           );
+           l_xarray := apex_util.string_to_table(apex_application.g_x01, ':');
+           l_yarray := apex_util.string_to_table(apex_application.g_x02, ':');
+       
+           apex_json.open_array;
+       
+           for i in l_xarray.first..l_xarray.last loop 
+             l_trgeom := mdsys.sdo_cs.transform(
+               mdsys.sdo_geometry(
+                 2001, 
+                 to_number(apex_application.g_x03), 
+                 mdsys.sdo_point_type(
+                    to_number(l_xarray(i))/1000000000,
+                    to_number(l_yarray(i))/1000000000,
+                    null
+                 ),
+                 null, 
+                 null
+               ), 
+               to_number(apex_application.g_x04)
+             );
+             apex_json.open_object;
+             apex_json.write('x', to_char(l_trgeom.sdo_point.x, '9999999990D9999999999','nls_numeric_characters=''.,'''));
+             apex_json.write('y', to_char(l_trgeom.sdo_point.y, '9999999990D9999999999','nls_numeric_characters=''.,'''));
+             apex_json.close_object;
+           end loop;
+      
+           apex_json.close_array;
+         end;
+       end if;
+       return null;
+      end;
+      
+      function render_map (
+          p_region              in apex_plugin.t_region,
+          p_plugin              in apex_plugin.t_plugin,
+          p_is_printer_friendly in boolean 
+      ) return apex_plugin.t_region_render_result
+      is
+          l_baseurl_host  apex_application_page_regions.attribute_01%type := p_region.attribute_01;
+          l_mapsize       apex_application_page_regions.attribute_03%type := p_region.attribute_03;
+          l_basemap       apex_application_page_regions.attribute_04%type := p_region.attribute_04;
+          l_mapcenter     apex_application_page_regions.attribute_06%type := p_region.attribute_06;
+          l_zoomlevel     apex_application_page_regions.attribute_07%type := p_region.attribute_07;
+          l_nav           apex_application_page_regions.attribute_08%type := p_region.attribute_08;
+          l_navopt        apex_application_page_regions.attribute_09%type := p_region.attribute_09;
+          l_additional    apex_application_page_regions.attribute_13%type := p_region.attribute_13;
+          l_copyright     apex_application_page_regions.attribute_20%type := p_region.attribute_20;
+      
+          l_showsqlfoi    apex_application_page_regions.attribute_17%type := p_region.attribute_17;
+          l_sqlfoiinfow   apex_application_page_regions.attribute_16%type := p_region.attribute_16;
+          l_sqlfoiinfoh   apex_application_page_regions.attribute_15%type := p_region.attribute_15;
+          l_sqlfoilazy    apex_application_page_regions.attribute_19%type := p_region.attribute_19;
+          l_sqlfoimaxrow  apex_application_page_regions.attribute_14%type := p_region.attribute_14;
+          l_usecookie     apex_application_page_regions.attribute_18%type := p_region.attribute_18;
+          l_sizetype      apex_application_page_regions.attribute_21%type := p_region.attribute_21;
+          l_unitsystem    apex_application_page_regions.attribute_22%type := nvl(p_region.attribute_22, 'METRIC');
+          l_unitsystem_it apex_application_page_regions.attribute_23%type := nvl(p_region.attribute_23, 'ORACLEMAPS_UNITSYSTEM');
+          l_use_eloc      apex_application_page_regions.attribute_24%type := nvl(p_region.attribute_24, 'YES');
+      
+          l_onloadCode    varchar2(32767);
+      
+          l_mapWidth      number;
+          l_mapHeight     number;
+          l_mapCenterX    number;
+          l_mapCenterY    number;
+      
+          l_escape_html   varchar2(1);
+      begin
+          if l_unitsystem = 'ITEM' then
+            l_unitsystem := v(l_unitsystem_it);
+          end if;
+      
+          if l_mapcenter is null then
+            l_mapcenter := '-100,38';
+            l_zoomlevel := 1;
+          end if;
+        
+          begin
+            l_mapCenterX := to_number(substr(l_mapcenter, 1, instr(l_mapcenter, ',') - 1), '999999999D999999','nls_numeric_characters=''.,''');
+            l_mapCenterY := to_number(substr(l_mapcenter, instr(l_mapcenter,',') + 1), '999999999D999999','nls_numeric_characters=''.,''');
+          exception
+            when others then
+              raise_application_error(-20000, 'error in parsing MAP CENTER attribute:'||l_mapcenter);
+          end;
+      
+          begin
+            l_mapWidth := to_number(substr(l_mapsize, 1, instr(l_mapsize, ',') - 1));
+            l_mapHeight := to_number(substr(l_mapsize, instr(l_mapsize, ',') + 1));
+          exception
+            when others then
+              raise_application_error(-20000, 'error in parsing MAP WIDTH and HEIGHT attribute');
+          end;
+      
+          if p_region.escape_output then 
+            l_escape_html := 'Y';
+          else 
+            l_escape_html := 'N';
+          end if;
+      
+          if l_basemap is null and l_use_eloc = 'NONE' then 
+            raise_application_error(-20000, 'At least one custom or external Map Tile Layer is required.');
+          end if;
+      
+          apex_javascript.add_library (
+              p_name           => 'oraclemapsv2.js',
+              p_directory      => l_baseurl_host || '/jslib/v19.1/', 
+              p_version        => null,
+              p_skip_extension => true );
+      
+        
+          if l_sizetype = 'PIXEL' then
+          sys.htp.p('<div id="'||p_region.static_id||'_map" style="width:'||l_mapWidth||'px; height:'||l_mapHeight||'px"></div>');
+          else 
+          sys.htp.p('<div id="'||p_region.static_id||'_map" style="width:'||l_mapWidth||'%; height:'||l_mapHeight||'px"></div>');
+          end if;
+          l_onloadCode := 'createPluginMap(' ||
+            apex_javascript.add_value(p_region.static_id,              true) ||
+            apex_javascript.add_value(apex_plugin.get_ajax_identifier, true) ||
+            apex_javascript.add_value(p_plugin.file_prefix,            true) ||
+            apex_javascript.add_value(l_baseurl_host,                  true) ||
+            apex_javascript.add_value(l_basemap,                       true) ||
+            apex_javascript.add_value(l_mapCenterX,                    true) ||
+            apex_javascript.add_value(l_mapCenterY,                    true) ||
+            apex_javascript.add_value(l_zoomlevel,                     true) ||
+            apex_javascript.add_value(l_nav,                           true) ||
+            apex_javascript.add_value(l_navopt,                        true) ||
+            apex_javascript.add_value(l_mapwidth,                      true) ||
+            apex_javascript.add_value(l_mapHeight,                     true) ||
+            apex_javascript.add_value(l_additional,                    true) ||
+            apex_javascript.add_value(nvl(l_sqlfoiinfow, 0),           true) ||
+            apex_javascript.add_value(nvl(l_sqlfoiinfoh, 0),           true) ||
+            apex_javascript.add_value(apex_util.host_url('SCRIPT'),    true) ||
+            apex_javascript.add_value(l_escape_html,                   true) ||
+            apex_javascript.add_value(p_region.ajax_items_to_submit,   true) ||
+            apex_javascript.add_value(l_showsqlfoi,                    true) ||
+            apex_javascript.add_value(l_usecookie,                     true) ||
+            apex_javascript.add_value(l_copyright,                     true) ||
+            apex_javascript.add_value(l_sqlfoilazy,                    true) ||
+            apex_javascript.add_value(l_sizetype,                      true) ||
+            apex_javascript.add_value(l_unitsystem,                    true) ||
+            apex_javascript.add_value(lower(v('BROWSER_LANGUAGE')),    true) ||
+            apex_javascript.add_value(l_use_eloc,                      true) ||
+            apex_javascript.add_value(substr(to_char((1/2), 'FM0D0'), 2,1), false)||
+            ');' || chr(10);
+      
+          apex_javascript.add_onload_code (l_onloadCode);
+          return null;
+      end;
+      
+
+  callbacks: 
+    api-interface: Function
+    render-procedure/function-name: render_map
+    ajax-procedure/function-name: render_map_ajax
+
+  standard-attributes: 
+    attributes: 
+    - Region Source is SQL Statement [Deprecated]
+    - Has "Page Items to Submit" Attribute
+    - Has "Escape Special Characters" Region Attribute
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  javascript: 
+    file-urls: 
+    - '#PLUGIN_FILES#apx-maps-plugin-html5.js'
+
+  information: 
+    version: 21.1
+    about-url: 'http://apex.oracle.com/plugins'
+    help-text: |
+      <p>
+      	This plugin integrates Oracle Maps as a region into an APEX application. This plugins requires an running installation of Oracle&#39;s Fusion Middleware MapViewer in order to run properly. The Map Tile Layers and Features of Interest to be displayed are being configured as Plugin parameters.</p>
+      <p>
+      	<br />
+      	&nbsp;</p>
+
+  standard-attributes: 
+  - # ====== Standard Attribute: SOURCE_SQL ======================
+    id: 1571477708644738663
+    identification: 
+      name: SOURCE_SQL
+
+    value: 
+      required: false
+
+    settings: 
+      minimum-columns: 3
+
+    examples: 
+      examples: |
+        <p>The <i>Feature Of Interest</i> (FOI) display style and information text depends on your SQL query. Make sure that it returns the following columns.</p>
+        <ul>
+        <li><b>ID</b> (Mandatory): Must uniquely identify a row - use the primary key for this. </li>
+        <li><b>GEOMETRY</b> (Mandatory): Must be a column of type SDO_GEOMETRY. Currently only point geometries are supported.</li>
+        <li><b>STYLE</b> (Mandatory): Determines the marker style: <b>blue|red|green|purple|yellow|gray</b>: Displays the marker as a pin in the given color. <b>IMAGE</b> allows to use custom images as markers. The image will be loaded from the URL given in the <b>IMAGEURL</b> column.</li>
+        <li><b>MARKERSIZE</b> (Optional): Provide a value in the form <b>R|C{size})</b> (e.g. R10 or C5). Values starting with a <b>C</b> are rendered as a circle with the specifed radius. Values starting with <b>R</b> are rendered as a rectangle with the specified size. The no MARKERSIZE is given, a pin image will be used as the marker.</li>
+        <li><b>IMAGEURL</b> (Optional): Provide a URL to the image you want to use as marker here. You can use APEX Application images with #APP_IMAGES#. Note that images need a transparent background for optimal display.</li>
+        <li><b>LAYER</b> (Optional): Assign this row to a layer number from 0 to 9. Layer 9 is the top layer. Use this to determine which FOI are to be layered on top of others. If not given, the row will be assigned to layer 1. Use <b>HEAT</b> as Layer to generate a heat map from the data. A Heat Map is always Layer 0.</li>
+        <li><b>INFOTIP</b> (Optional): This column content will be displayed when hovering the marker with the mouse.</li>
+        <li><b>INFOTEXT</b> (Optional): If given, the marker will get a clickable information window with the content of this column.</li>
+        <li><b>MINZOOM</b> (Optional): Display the FOI only, if the map is zoomed at least to this level. Only supported, when "Lazy Load" is set to <b>Yes</b>.</li>
+        <li><b>MAXZOOM</b> (Optional): Display the FOI only unitl the map is zoomed to this level. Only supported, when "Lazy Load" is set to <b>Yes</b>.</li>
+        </ul>
+        <p>
+        SQL Query for simple marker display.
+        </p>
+        <pre>
+        select 
+          id, 
+          name as infotip,
+          'Customer: '||name||'&lt;br/&gt;Revenue: '||revenue as infotext, 
+          geometry, 
+          case 
+            when revenue < 5000 then 'blue' 
+            when revenue between 5000 and 10000 then 'red' 
+            else 'purple' 
+          end as style 
+        from customers
+        where revenue is not null
+        </pre>
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Map Server URL ====================
+    id: 1571453711863738652
+    identification: 
+      static-id: attribute_01
+      attribute: 1
+      name: Map Server URL
+      scope: Component
+
+    layout: 
+      sequence: 10
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 50
+      maximum-length: 200
+
+    default: 
+      value: 'https://elocation.oracle.com/mapviewer'
+
+    help: 
+      help-text: |
+        <p>
+        	Enter the URL of the Oracle Maps Server to use. It typically ends with </b>/mapviewer.</b></p>
+        <ul>
+        	<li>
+        		<strong>https://elocation.oracle.com/mapviewer</strong></li>
+        	<li>
+        		<strong>http://mapserver.mydomain.com:8888/mapviewer<br />
+        		</strong></li>
+        </ul>
+        
+
+  - # ====== Custom Attribute: Map Size (width, height) ==========
+    id: 1571454145216738652
+    identification: 
+      static-id: attribute_03
+      attribute: 3
+      name: Map Size (width, height)
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 20
+      maximum-length: 20
+
+    default: 
+      value: 100,500
+
+    help: 
+      help-text: |
+        <p>
+        	Enter the size of the map on the screen (width, height). Note the next attribute which controls the interpretation.</p>
+        
+
+  - # ====== Custom Attribute: Custom map tile layers ============
+    id: 1571454578394738653
+    identification: 
+      static-id: attribute_04
+      attribute: 4
+      name: Custom map tile layers
+      scope: Component
+
+    layout: 
+      sequence: 40
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 100
+      maximum-length: 500
+
+    condition: 
+      depending-on-custom-attribute: External map tile layer # 1571470952718738659
+      depending-on-condition-type: equal to
+      expression: NONE
+      always-evaluate: true
+
+    help: 
+      help-text: |
+        <p>
+        	Enter map tile layers defined within the Oracle Maps server to be added to the map. Separate multiple map tile layers by colons. If more then one map tile layer is being added the plugin adds buttons to switch between the map tile layers. You might use a comma to specify a label for those switch buttons.</p>
+        <p>
+        	Examples:</p>
+        <ul>
+        	<li>
+        		<strong>elocation_mercator.world_map</strong></li>
+        	<li>
+        		<strong>elocation</strong><strong>_mercator</strong><strong>.world_map:geows.free_map</strong></li>
+        	<li>
+        		<strong>elocation</strong><strong>_mercator</strong><strong>.world_map,Dataset One:geows.free_map,Dataset Two</strong></li>
+        </ul>
+        
+
+  - # ====== Custom Attribute: Map Center (lon, lat) =============
+    id: 1571454964567738653
+    identification: 
+      static-id: attribute_06
+      attribute: 6
+      name: Map Center (lon, lat)
+      scope: Component
+
+    layout: 
+      sequence: 60
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 20
+      maximum-length: 20
+
+    default: 
+      value: 10,50
+
+    help: 
+      help-text: |
+        <p>
+        	Enter the map center (longitude, latitude) here. Example:</p>
+        <p>
+        	<strong>10,50</strong></p>
+        <p>
+        	The longitude and latitude value is excpected as a decimal value. So 50&deg;N, 30&#39; is being expressed as 50,5. Southern latitudes and western longitudes are negative.</p>
+        
+
+  - # ====== Custom Attribute: Initial Zoom Level ================
+    id: 1571455378140738653
+    identification: 
+      static-id: attribute_07
+      attribute: 7
+      name: Initial Zoom Level
+      scope: Component
+
+    layout: 
+      sequence: 70
+
+    settings: 
+      type: Text
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 20
+      maximum-length: 20
+
+    default: 
+      value: 8
+
+    help: 
+      help-text: |
+        <p>
+        	Enter the initial zoom level of the map here. The available zoom levels depend on the chosen map tile laver. Zero (0) is the level in which most of the map area is visible. </p>
+        
+
+  - # ====== Custom Attribute: Navigation Bar ====================
+    id: 1571455766071738653
+    identification: 
+      static-id: attribute_08
+      attribute: 8
+      name: Navigation Bar
+      scope: Component
+
+    layout: 
+      sequence: 80
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: WEST
+
+    help: 
+      help-text: |
+        <p>
+        	Choose the position of the map navigation bar.</p>
+        
+
+    entries: 
+    - # ====== Entry: None =========================================
+      id: 1571456136600738653
+      entry: 
+        sequence: 10
+        display: None
+        return: NONE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Left =========================================
+      id: 1571456640136738653
+      entry: 
+        sequence: 20
+        display: Left
+        return: WEST
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Right ========================================
+      id: 1571457124290738654
+      entry: 
+        sequence: 30
+        display: Right
+        return: EAST
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Navigation Bar Options ============
+    id: 1571457620513738654
+    identification: 
+      static-id: attribute_09
+      attribute: 9
+      name: Navigation Bar Options
+      scope: Component
+
+    layout: 
+      sequence: 90
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: 1
+
+    condition: 
+      depending-on-custom-attribute: Navigation Bar # 1571455766071738653
+      depending-on-condition-type: not equal to
+      expression: NONE
+      always-evaluate: true
+
+    help: 
+      help-text: Configure the appearance of the navigation bar.
+
+    entries: 
+    - # ====== Entry: Navigation Panel only ========================
+      id: 1571458040662738654
+      entry: 
+        sequence: 10
+        display: Navigation Panel only
+        return: 4
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Zoom buttons only ============================
+      id: 1571458524206738654
+      entry: 
+        sequence: 20
+        display: Zoom buttons only
+        return: 3
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Slide bar and zoom buttons ===================
+      id: 1571459060985738655
+      entry: 
+        sequence: 30
+        display: Slide bar and zoom buttons
+        return: 2
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Complete =====================================
+      id: 1571459507789738655
+      entry: 
+        sequence: 40
+        display: Complete
+        return: 1
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Additional Map Features ===========
+    id: 1571460035505738655
+    identification: 
+      static-id: attribute_13
+      attribute: 13
+      name: Additional Map Features
+      scope: Component
+
+    layout: 
+      sequence: 100
+
+    settings: 
+      type: Checkboxes
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    help: 
+      help-text: Choose additional map features.
+
+    entries: 
+    - # ====== Entry: Overview Map =================================
+      id: 1571460433001738655
+      entry: 
+        sequence: 10
+        display: Overview Map
+        return: OVER
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Show an overview map in the lower right corner of the screen
+
+    - # ====== Entry: Rectangle Zoom ===============================
+      id: 1571460983424738655
+      entry: 
+        sequence: 20
+        display: Rectangle Zoom
+        return: MARQUEE
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Zoom into the map by drawing a rectangle
+
+    - # ====== Entry: Distance tool ================================
+      id: 1571461481833738655
+      entry: 
+        sequence: 30
+        display: Distance tool
+        return: DISTANCE
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Add a tool to measure distances to the map
+
+    - # ====== Entry: Draw Polygons ================================
+      id: 1571461908569738655
+      entry: 
+        sequence: 40
+        display: Draw Polygons
+        return: REDLINE
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Activate the "redlining" tool to draw polygons on the map
+
+    - # ====== Entry: Circle Tool ==================================
+      id: 1571462444498738656
+      entry: 
+        sequence: 45
+        display: Circle Tool
+        return: CIRCLE
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Tool to draw a circle on the map
+
+    - # ====== Entry: Scale bar ====================================
+      id: 1571462965160738656
+      entry: 
+        sequence: 50
+        display: Scale bar
+        return: SCALE
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Add a scale bar to the map
+
+    - # ====== Entry: Cluster SQL Features =========================
+      id: 1571463438853738656
+      entry: 
+        sequence: 60
+        display: Cluster SQL Features
+        return: FOICLUSTERS
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Enable this to automatically cluster colocatred SQL features.
+
+    - # ====== Entry: Mousewheel zoom ==============================
+      id: 1571463932499738656
+      entry: 
+        sequence: 70
+        display: Mousewheel zoom
+        return: MOUSEWHEEL
+
+      advanced: 
+        quick-pick: false
+
+      help: 
+        help-text: Enable Mousewheel zooming
+
+  - # ====== Custom Attribute: Maximum number of Rows ============
+    id: 1571464444912738657
+    identification: 
+      static-id: attribute_14
+      attribute: 14
+      name: Maximum number of Rows
+      scope: Component
+
+    layout: 
+      sequence: 115
+
+    settings: 
+      type: Number
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      display-width: 10
+      maximum-length: 10
+
+    default: 
+      value: 500
+
+    condition: 
+      depending-on-custom-attribute: Show SQL FOI # 1571465629081738657
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Determines the maximum number of objects to fetch by the region source SQL query. Be aware that too many FOI objects slow down the browsers' javascript engine.
+
+  - # ====== Custom Attribute: SQL FOI Info Window Height in Pixel
+    id: 1571464809283738657
+    identification: 
+      static-id: attribute_15
+      attribute: 15
+      name: SQL FOI Info Window Height in Pixel
+      scope: Component
+
+    layout: 
+      sequence: 200
+
+    settings: 
+      type: Number
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 5
+      maximum-length: 10
+
+    default: 
+      value: 150
+
+    condition: 
+      depending-on-custom-attribute: Show SQL FOI # 1571465629081738657
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Determines the height of the Marker FOI's information window in pixels.
+
+  - # ====== Custom Attribute: SQL FOI Info Window Width in Pixel 
+    id: 1571465264690738657
+    identification: 
+      static-id: attribute_16
+      attribute: 16
+      name: SQL FOI Info Window Width in Pixel
+      scope: Component
+
+    layout: 
+      sequence: 160
+
+    settings: 
+      type: Number
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 5
+      maximum-length: 150
+
+    default: 
+      value: 250
+
+    condition: 
+      depending-on-custom-attribute: Show SQL FOI # 1571465629081738657
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Determines the width of the Marker FOI's information window in pixels.
+
+  - # ====== Custom Attribute: Show SQL FOI ======================
+    id: 1571465629081738657
+    identification: 
+      static-id: attribute_17
+      attribute: 17
+      name: Show SQL FOI
+      scope: Component
+
+    layout: 
+      sequence: 114
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: Set to <b>Yes</b> to show the Features of Interest provides by the SQL query in the region source.
+
+  - # ====== Custom Attribute: Save map position in Cookie =======
+    id: 1571466044548738657
+    identification: 
+      static-id: attribute_18
+      attribute: 18
+      name: Save map position in Cookie
+      scope: Component
+
+    layout: 
+      sequence: 75
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: Y
+
+    help: 
+      help-text: If set to <b>Yes</b>, the Maps Plugin will store the current map center and zoom level in a cookie. The map will then initialize with the last position after an APEX page refresh.
+
+  - # ====== Custom Attribute: SQL FOI Lazy Loading ==============
+    id: 1571466489912738657
+    identification: 
+      static-id: attribute_19
+      attribute: 19
+      name: SQL FOI Lazy Loading
+      scope: Component
+
+    layout: 
+      sequence: 140
+
+    settings: 
+      type: Yes/No
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: N
+
+    condition: 
+      depending-on-custom-attribute: Show SQL FOI # 1571465629081738657
+      depending-on-condition-type: equal to
+      expression: Y
+      always-evaluate: true
+
+    help: 
+      help-text: Setting Lazy Loading to <b>No</b> lets the plugin load all FOI data at initialization time. Choosing <b>Yes</b> will only load the FOI data for the current map window. For large amounts of FOI data distributed over large areas, choose <b>Yes</b>. <i>Note that you need a spatial index on your SDO_GEOMETRY column in the latter case</i>.
+
+  - # ====== Custom Attribute: Copyright Notice ==================
+    id: 1571466863439738657
+    identification: 
+      static-id: attribute_20
+      attribute: 20
+      name: Copyright Notice
+      scope: Component
+
+    layout: 
+      sequence: 105
+
+    settings: 
+      type: Textarea
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+      display-width: 50
+      maximum-length: 100
+
+    default: 
+      value: (c) 2020 Oracle Corp., (c) 2020 HERE
+
+    help: 
+      help-text: Enter the copyright notice to be displayed on the map here.
+
+  - # ====== Custom Attribute: Map Width Interpretation ==========
+    id: 1571467298332738658
+    identification: 
+      static-id: attribute_21
+      attribute: 21
+      name: Map Width Interpretation
+      scope: Component
+
+    layout: 
+      sequence: 35
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: PERCENT
+
+    help: 
+      help-text: |
+        <p>The Map Window size can be specified either in <b>Pixels</b> or in <b>Percent</b>. If specified in Pixel, then the map size will be static on all devices and for all screens. If <b>Percent</b> is chosen, the <b>Width</b> will be interpreted in percent of the region width. The Map height will still be in pixels. </p>
+        <p><b>100,75<b> means that the map will use 100% of the region width, and the height will be 75% of the map width.
+        </p>
+
+    entries: 
+    - # ====== Entry: Pixel ========================================
+      id: 1571467686653738658
+      entry: 
+        sequence: 10
+        display: Pixel
+        return: PIXEL
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Percent ======================================
+      id: 1571468135600738658
+      entry: 
+        sequence: 20
+        display: Percent
+        return: PERCENT
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Unit System =======================
+    id: 1571468661407738658
+    identification: 
+      static-id: attribute_22
+      attribute: 22
+      name: Unit System
+      scope: Component
+
+    layout: 
+      sequence: 110
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: METRIC
+
+    condition: 
+      depending-on-custom-attribute: Additional Map Features # 1571460035505738655
+      depending-on-condition-type: in list
+      expression: DISTANCE,SCALE
+      always-evaluate: true
+
+    help: 
+      help-text: Specify whether the results of the "Distance tool" should be given in the metric or imperial system. If <b>Item or Substitution</b> is chosen, enter the name of an item or substitution string which contains either <b>METRIC</b> or <b>IMPERIAL</b>.
+
+    entries: 
+    - # ====== Entry: Metric System (km,m,cm) ======================
+      id: 1571469012954738658
+      entry: 
+        sequence: 10
+        display: Metric System (km,m,cm)
+        return: METRIC
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Imperial System (mile,yard,foot) =============
+      id: 1571469544138738658
+      entry: 
+        sequence: 20
+        display: Imperial System (mile,yard,foot)
+        return: IMPERIAL
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Derived from Item or Substitution String =====
+      id: 1571470005786738658
+      entry: 
+        sequence: 30
+        display: Derived from Item or Substitution String
+        return: ITEM
+
+      advanced: 
+        quick-pick: false
+
+  - # ====== Custom Attribute: Item or substitution containing uni
+    id: 1571470536154738659
+    identification: 
+      static-id: attribute_23
+      attribute: 23
+      name: Item or substitution containing unit system to use
+      scope: Component
+
+    layout: 
+      sequence: 112
+
+    settings: 
+      type: Page Item
+      common: true
+      show-in-wizard: true
+      required: false
+      translatable: false
+
+    default: 
+      value: ORACLEMAPS_UNITSYSTEM
+
+    condition: 
+      depending-on-custom-attribute: Unit System # 1571468661407738658
+      depending-on-condition-type: equal to
+      expression: ITEM
+      always-evaluate: true
+
+    help: 
+      help-text: Enter the name of a page item, application item or substitution string, which contains either <b>METRIC</b> or <b>IMPERIAL</b>.
+
+  - # ====== Custom Attribute: External map tile layer ===========
+    id: 1571470952718738659
+    identification: 
+      static-id: attribute_24
+      attribute: 24
+      name: External map tile layer
+      scope: Component
+
+    layout: 
+      sequence: 38
+
+    settings: 
+      type: Select List
+      lov-type: Static
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+
+    default: 
+      value: OSM
+
+    help: 
+      help-text: |
+        <p>Choose an external map tile layer as your background map.</p>
+        <p>
+        To use Bing maps as a map tile layer, your usage of the maps must meet the Terms of Service defined by Microsoft(http://www.microsoft.com/maps/product/terms.html). You must create a Bing Maps Developer Account(https://www.bingmapsportal.com/) and create a Bing Maps key for your application before you can display Bing Maps with this class. Please refer to this link(http://msdn.microsoft.com/en-us/library/ee692181.aspx) for more information about creating Bing Maps Developer Account and aquiring Bing Maps key. Note that you need a  Bing developer account in order to use Bing Maps. 
+        </p>
+
+    entries: 
+    - # ====== Entry: None (Use Custom) ============================
+      id: 1571471326617738659
+      entry: 
+        sequence: 10
+        display: None (Use Custom)
+        return: NONE
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Oracle Elocation  ============================
+      id: 1571471833218738659
+      entry: 
+        sequence: 20
+        display: 'Oracle Elocation '
+        return: ELOCATION
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: OpenStreetMap "Positron" =====================
+      id: 1571472377712738659
+      entry: 
+        sequence: 30
+        display: OpenStreetMap "Positron"
+        return: OSM
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: OpenStreetMap "Bright" =======================
+      id: 1571472858016738659
+      entry: 
+        sequence: 40
+        display: OpenStreetMap "Bright"
+        return: OSM_BRIGHT
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: OpenStreetMap "Dark Matter" ==================
+      id: 1571473402898738660
+      entry: 
+        sequence: 50
+        display: OpenStreetMap "Dark Matter"
+        return: OSM_DARK
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Bing Auto (Deprecated) =======================
+      id: 1571473813664738660
+      entry: 
+        sequence: 220
+        display: Bing Auto (Deprecated)
+        return: BING_AUTO
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Bing Aerial (Deprecated) =====================
+      id: 1571474345228738660
+      entry: 
+        sequence: 230
+        display: Bing Aerial (Deprecated)
+        return: BING_AERIAL
+
+      advanced: 
+        quick-pick: false
+
+    - # ====== Entry: Bing Road (Deprecated) =======================
+      id: 1571474877045738660
+      entry: 
+        sequence: 240
+        display: Bing Road (Deprecated)
+        return: BING
+
+      advanced: 
+        quick-pick: false
+
+  events: 
+  - # ====== Event: com_oracle_oramapshtml5_circleclear ==========
+    id: 1571478201277738663
+    identification: 
+      name: map_circletool_clear
+      internal-name: com_oracle_oramapshtml5_circleclear
+
+  - # ====== Event: com_oracle_oramapshtml5_circlefinish =========
+    id: 1571478541004738663
+    identification: 
+      name: map_circletool_finish
+      internal-name: com_oracle_oramapshtml5_circlefinish
+
+  - # ====== Event: com_oracle_oramapshtml5_circlestart ==========
+    id: 1571478976895738663
+    identification: 
+      name: map_circletool_start
+      internal-name: com_oracle_oramapshtml5_circlestart
+
+  - # ====== Event: com_oracle_oramapshtml5_distanceclear ========
+    id: 1571479389439738663
+    identification: 
+      name: map_distance_clear
+      internal-name: com_oracle_oramapshtml5_distanceclear
+
+  - # ====== Event: com_oracle_oramapshtml5_distancefinish =======
+    id: 1571479740491738663
+    identification: 
+      name: map_distance_finish
+      internal-name: com_oracle_oramapshtml5_distancefinish
+
+  - # ====== Event: com_oracle_oramapshtml5_distancestart ========
+    id: 1571480204900738663
+    identification: 
+      name: map_distance_start
+      internal-name: com_oracle_oramapshtml5_distancestart
+
+  - # ====== Event: com_oracle_oramapshtml5_foiclick =============
+    id: 1571480561235738664
+    identification: 
+      name: map_foi_click
+      internal-name: com_oracle_oramapshtml5_foiclick
+
+  - # ====== Event: com_oracle_oramapshtml5_mapchanged ===========
+    id: 1571480957829738664
+    identification: 
+      name: map_changed
+      internal-name: com_oracle_oramapshtml5_mapchanged
+
+  - # ====== Event: com_oracle_oramapshtml5_mapinitialized =======
+    id: 1571481368465738664
+    identification: 
+      name: map_initialized
+      internal-name: com_oracle_oramapshtml5_mapinitialized
+
+  - # ====== Event: com_oracle_oramapshtml5_maprecenter ==========
+    id: 1571481725863738664
+    identification: 
+      name: map_center_changed
+      internal-name: com_oracle_oramapshtml5_maprecenter
+
+  - # ====== Event: com_oracle_oramapshtml5_mapzoomchanged =======
+    id: 1571482174319738664
+    identification: 
+      name: map_zoomlevel_changed
+      internal-name: com_oracle_oramapshtml5_mapzoomchanged
+
+  - # ====== Event: com_oracle_oramapshtml5_mousedblclick ========
+    id: 1571482572480738664
+    identification: 
+      name: map_mouse_dbl_click
+      internal-name: com_oracle_oramapshtml5_mousedblclick
+
+  - # ====== Event: com_oracle_oramapshtml5_mouseleftclick =======
+    id: 1571482998804738664
+    identification: 
+      name: map_mouse_left_click
+      internal-name: com_oracle_oramapshtml5_mouseleftclick
+
+  - # ====== Event: com_oracle_oramapshtml5_mouserightclick ======
+    id: 1571483326772738664
+    identification: 
+      name: map_mouse_right_click
+      internal-name: com_oracle_oramapshtml5_mouserightclick
+
+  - # ====== Event: com_oracle_oramapshtml5_redlineclear =========
+    id: 1571483757978738664
+    identification: 
+      name: map_redlinetool_clear
+      internal-name: com_oracle_oramapshtml5_redlineclear
+
+  - # ====== Event: com_oracle_oramapshtml5_redlinefinish ========
+    id: 1571484178735738664
+    identification: 
+      name: map_redline_finish
+      internal-name: com_oracle_oramapshtml5_redlinefinish
+
+  - # ====== Event: com_oracle_oramapshtml5_redlinepoint =========
+    id: 1571484514612738665
+    identification: 
+      name: map_redlinetool_pointadded
+      internal-name: com_oracle_oramapshtml5_redlinepoint
+
+  - # ====== Event: com_oracle_oramapshtml5_redlinestart =========
+    id: 1571484917547738665
+    identification: 
+      name: map_redlinetool_start
+      internal-name: com_oracle_oramapshtml5_redlinestart
+
+  files: 
+  - # ====== File: apx-maps-plugin-html5.js ======================
+    id: 1571485313353738665
+    identification: 
+      file-name: apx-maps-plugin-html5.js
+
+    attributes: 
+      mime-type: application/javascript
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-blue.png ====================================
+    id: 1571485792238738667
+    identification: 
+      file-name: m-blue.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-cluster.png =================================
+    id: 1571486121649738667
+    identification: 
+      file-name: m-cluster.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-darkblue.png ================================
+    id: 1571486547812738667
+    identification: 
+      file-name: m-darkblue.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-darkgray.png ================================
+    id: 1571486926074738667
+    identification: 
+      file-name: m-darkgray.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-darkred.png =================================
+    id: 1571487322097738668
+    identification: 
+      file-name: m-darkred.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-gray.png ====================================
+    id: 1571487737365738668
+    identification: 
+      file-name: m-gray.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-green.png ===================================
+    id: 1571488198332738668
+    identification: 
+      file-name: m-green.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-lightgray.png ===============================
+    id: 1571488582834738668
+    identification: 
+      file-name: m-lightgray.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-orange.png ==================================
+    id: 1571488954749738668
+    identification: 
+      file-name: m-orange.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-purple.png ==================================
+    id: 1571489312321738668
+    identification: 
+      file-name: m-purple.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-red.png =====================================
+    id: 1571489771928738669
+    identification: 
+      file-name: m-red.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-violet.png ==================================
+    id: 1571490139751738669
+    identification: 
+      file-name: m-violet.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: m-yellow.png ==================================
+    id: 1571490514823738669
+    identification: 
+      file-name: m-yellow.png
+
+    attributes: 
+      mime-type: image/png
+      file-character-set: Unicode UTF-8
+
+  - # ====== File: transp.png ====================================
+    id: 1571490906704738669
+    identification: 
+      file-name: transp.png
+
+    attributes: 
+      mime-type: image/png
+

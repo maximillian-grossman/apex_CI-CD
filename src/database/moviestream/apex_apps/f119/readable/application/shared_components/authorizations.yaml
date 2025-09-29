@@ -1,0 +1,21 @@
+---
+- # ====== Authorization: Not all Endpoints Successfully tested 
+  id: 101304981583514258
+  identification: 
+    name: Not all Endpoints Successfully tested
+
+  subscription: 
+    version-number: 1089080203
+
+  authorization-scheme: 
+    type: Exists SQL Query
+
+  settings: 
+    sql-query: select 1 from eba_restdemo_sample_urls where last_status is null or last_status !='OK'
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: Not all REST endpoints successfully tested.
+

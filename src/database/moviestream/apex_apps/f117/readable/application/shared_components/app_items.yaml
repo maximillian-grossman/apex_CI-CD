@@ -1,0 +1,14 @@
+---
+- # ====== Application Item: CURRENT_USER_EMPNO ================
+  id: 1535272932215717682
+  identification: 
+    name: CURRENT_USER_EMPNO
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166355847850
+

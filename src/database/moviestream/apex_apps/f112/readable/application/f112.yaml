@@ -1,0 +1,258 @@
+---
+# ====== Application: ADB Chat ===============================
+id: 112
+identification: 
+  name: ADB Chat
+  alias: CHATDB112
+  version: Release 1.0
+
+row-search: 
+  tokenize: true
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Use Instance Settings
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: true
+  logging: true
+  debugging: true
+  compatibility-mode: 21.2 to 24.1
+  accessible-read-only-items: false
+  pass-ecid: Y
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Oracle APEX Accounts # 49866118389205284852
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Disabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+  http-response-headers: 'Access-Control-Allow-Origin : http://100.110.38.63:7875'
+
+database-session: 
+  parsing-schema: MOVIESTREAM
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Left-To-Right
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Image and Text
+  image-url: '#APP_FILES#icons/app-icon-256-rounded.png'
+  text: ADB Chat
+
+progressive-web-app: 
+  enable: true
+  installable: true
+  display: Fullscreen
+  screen-orientation: Any
+  ios-status-bar-style: Default
+  enable-push-notifications: true
+  pwa-push-notifications-credentials: App 101 Push Notifications Credentials # 63220596975778592
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+    page: 1 # Home
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - js-defaultCollapsed
+  - js-navCollapsed--hidden
+  - t-TreeNav--styleA
+  list-position: Side
+  list: LLM Conversations # 115283419127198376
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 49866804221517284980
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  include-jquery-migrate: false
+
+attributes: 
+  theme: Universal Theme # 42
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: true
+  auto-dismiss-success-messages: false
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: Cohere
+
+component-settings: 
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 1459032716103564
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 44702215372733
+
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 32490020768386590
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 41807807635747
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 32490524655386594
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 41807807637027
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 32490898276386597
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 41807807637731
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 55155407652920002
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 41042850900805
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 49866115398759284850
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 41042850903503
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 49866115691503284851
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 41042850903523
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 49866116000100284851
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 41042850903526
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 49866116238573284851
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 41042850903545
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 49866116550211284851
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 41042850903545
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 49866116859046284851
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 41042850903546
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 49866117188644284851
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 41042850903549
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 49866117482270284851
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 41042850903550
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 49866117747487284852
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 41042850903550
+

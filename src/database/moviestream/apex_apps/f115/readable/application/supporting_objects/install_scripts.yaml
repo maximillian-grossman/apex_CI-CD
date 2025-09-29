@@ -1,0 +1,17 @@
+---
+- # ====== Install Script: Create Tables =======================
+  id: 27403943348670559889
+  identification: 
+    name: Create Tables
+
+  execution: 
+    sequence: 10
+
+- # ====== Install Script: Create Data Package =================
+  id: 27403996363767570657
+  identification: 
+    name: Create Data Package
+
+  execution: 
+    sequence: 20
+

@@ -1,0 +1,73 @@
+.prompt-container {
+  padding: 1rem;
+}
+
+.prompt-container > p {
+  font-size: .875rem;
+  color: var(--ut-component-text-muted-color);
+}
+
+.prompt-box {
+  padding: 1rem;
+  border: var(--ut-component-border-width) solid var(--ut-component-border-color);
+  border-radius: var(--ut-component-border-radius);
+  margin: 0;
+  background-color: var(--ut-component-toolbar-background-color);
+  font-weight: bold;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+.response-box {
+  padding: 1rem;
+  border: var(--ut-component-border-width) solid var(--ut-component-border-color);
+  border-radius: var(--ut-component-border-radius);
+  background-color: var(--ut-component-background-color);
+  margin: 0;
+  margin-block-end: 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.response-box:empty,
+.response-box:empty + .t-Button,
+.response-box:empty + .t-Button + .t-Button {
+  display: none;
+}
+
+.prompt-box + .response-box {
+  border-top: 0;
+}
+
+.llm-actions {
+  margin-inline-start: 1rem;
+}
+
+.response-box table,
+.response-box th,
+.response-box td {
+  border: var(--ut-component-border-width) solid var(--ut-component-border-color);
+  border-collapse: collapse;
+  text-align: start;
+}
+
+.response-box td,
+.response-box th {
+  padding: .5rem 1rem;
+}
+
+.llm-chat {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.a-TMV-llm-conversation {
+  --a-tmv-footer-padding-y: 0rem;
+}

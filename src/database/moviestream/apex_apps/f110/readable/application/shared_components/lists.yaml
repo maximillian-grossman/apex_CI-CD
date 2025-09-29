@@ -1,0 +1,2368 @@
+---
+- # ====== List: Home Page List ================================
+  id: 733149713128508878
+  identification: 
+    name: Home Page List
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Reporting ====================================
+    id: 733150282219508880
+    label: 
+      label: Reporting
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 11
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.::::'
+        page: 37 # Read Only Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrations of reporting (read-only) capabilities of Interactive Grid
+
+  - # ====== Entry: Pagination ===================================
+    id: 733150645788508881
+    label: 
+      label: Pagination
+
+    icon: 
+      image/icon-css-classes: fa-chevron-circle-right
+
+    layout: 
+      sequence: 12
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.::::'
+        page: 38 # Pagination
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrations of pagination options of Interactive Grid
+
+  - # ====== Entry: Editing ======================================
+    id: 733151066268508881
+    label: 
+      label: Editing
+
+    icon: 
+      image/icon-css-classes: fa-pencil-square-o
+
+    layout: 
+      sequence: 13
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.::::'
+        page: 39 # Editing
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrations of the editing capabilities of Interactive Grid
+
+  - # ====== Entry: Advanced =====================================
+    id: 733151423477508881
+    label: 
+      label: Advanced
+
+    icon: 
+      image/icon-css-classes: fa-rocket
+
+    layout: 
+      sequence: 14
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.::::'
+        page: 40 # Advanced
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrations of advanced Interactive Grid techniques
+
+- # ====== List: Administration ================================
+  id: 733350183451837226
+  identification: 
+    name: Administration
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Manage Sample Data ===========================
+    id: 733350465073837229
+    label: 
+      label: Manage Sample Data
+
+    icon: 
+      image/icon-css-classes: fa-edit
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:25:&SESSION.::&DEBUG.::::'
+        page: 25 # Manage Sample Data
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This application ships with sample data.  You can reset the sample data using this administrative page.
+
+  - # ====== Entry: Theme Style ==================================
+    id: 733350914666837229
+    label: 
+      label: Theme Style
+
+    icon: 
+      image/icon-css-classes: fa-desktop
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.::::'
+        page: 26 # Application Theme Style
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Set application user interface theme style for all users.
+
+- # ====== List: Reporting List ================================
+  id: 738139106538672845
+  identification: 
+    name: Reporting List
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Basic Reporting ==============================
+    id: 738139313796672848
+    label: 
+      label: Basic Reporting
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+        page: 3 # Basic Reporting
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a basic read only report.
+
+  - # ====== Entry: Column Groups ================================
+    id: 738139714929672848
+    label: 
+      label: Column Groups
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Column Groups
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how column groups can be applied to different columns.
+
+  - # ====== Entry: Add Toolbar Button ===========================
+    id: 738140051913672849
+    label: 
+      label: Add Toolbar Button
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # Add Toolbar Button
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to add a toolbar button to an Interactive Grid region.
+
+  - # ====== Entry: Row Header ===================================
+    id: 738140474891672849
+    label: 
+      label: Row Header
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+        page: 6 # Row Header
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to add a row header to a report.
+
+  - # ====== Entry: Sequence Row Header ==========================
+    id: 738149236209777939
+    label: 
+      label: Sequence Row Header
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::::'
+        page: 7 # Sequence Row Header
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to add a sequence number for each row.
+
+  - # ====== Entry: Multiple Selection ===========================
+    id: 738149548893781892
+    label: 
+      label: Multiple Selection
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
+        page: 8 # Multiple Selection
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to utilize the rows selected to populate a second region.
+
+  - # ====== Entry: Saved Reports ================================
+    id: 738149856010786847
+    label: 
+      label: Saved Reports
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Saved Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrate the different types of saved reports.
+
+  - # ====== Entry: Single Row View ==============================
+    id: 738150124582791216
+    label: 
+      label: Single Row View
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Single Row View
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates including the single row view in a non-editable Interactive Grid.
+
+  - # ====== Entry: Icon and Detail Views ========================
+    id: 738150813613795543
+    label: 
+      label: Icon and Detail Views
+
+    layout: 
+      sequence: 90
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.::::'
+        page: 13 # Icon and Detail Views
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates including icon and detail views within an Interactive Grid.
+
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1050173303132697447
+    label: 
+      label: Linking to Interactive Grids
+
+    layout: 
+      sequence: 110
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.::::'
+        page: 15 # Linking to Interactive Grids
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates linking to an Interactive Grid.
+
+  - # ====== Entry: Chart View ===================================
+    id: 1691883130824405872
+    label: 
+      label: Chart View
+
+    layout: 
+      sequence: 100
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.::::'
+        page: 14 # Chart View
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates including a chart view within an Interactive Grid.
+
+- # ====== List: Pagination List ===============================
+  id: 738173926693884608
+  identification: 
+    name: Pagination List
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Scroll with Maximize =========================
+    id: 738174554877884609
+    label: 
+      label: Scroll with Maximize
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.::::'
+        page: 22 # Scroll with Maximize
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates scroll pagination but with the headers fixed to the page. Also includes the Universal Theme maximize region feature.
+
+  - # ====== Entry: Full Page with Maximize ======================
+    id: 738175002564884609
+    label: 
+      label: Full Page with Maximize
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.::::'
+        page: 21 # Full Page with Maximize
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates traditional pagination but with the headers fixed to the page. Also includes the Universal Theme maximize region feature.
+
+  - # ====== Entry: Load More ====================================
+    id: 738175406166884609
+    label: 
+      label: Load More
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+        page: 20 # Load More Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates progressive scrolling but with a Load More Rows button.
+
+  - # ====== Entry: Scroll =======================================
+    id: 738175727743884610
+    label: 
+      label: Scroll
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.::::'
+        page: 19 # Scroll Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates virtual paging by scrolling.
+
+  - # ====== Entry: Traditional (Select List) ====================
+    id: 738176166736884610
+    label: 
+      label: Traditional (Select List)
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.::::'
+        page: 18 # Traditional Paging (Select List)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates using advanced configuration to include a select list for the pages.
+
+  - # ====== Entry: Traditional (Custom) =========================
+    id: 738176541345884611
+    label: 
+      label: Traditional (Custom)
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Traditional Paging (Custom)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates using advanced configuration to remove the page range and increase the number of links to 12.
+
+  - # ====== Entry: Traditional (Total Rows) =====================
+    id: 738176928434884611
+    label: 
+      label: Traditional (Total Rows)
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Traditional Paging (Total Rows)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates additional features available when the total number of rows is known.
+
+  - # ====== Entry: Traditional ==================================
+    id: 738177371701884611
+    label: 
+      label: Traditional
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Traditional Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates traditional paging with next and previous buttons.
+
+  - # ====== Entry: Progressive Scroll ===========================
+    id: 1628873127871404788
+    label: 
+      label: Progressive Scroll
+
+    layout: 
+      sequence: 55
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+        page: 2 # Progressive Scroll
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates progressive or infinite scrolling.
+
+- # ====== List: Editing List ==================================
+  id: 738220286752069224
+  identification: 
+    name: Editing List
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Master Detail ================================
+    id: 738220893980069257
+    label: 
+      label: Master Detail
+
+    layout: 
+      sequence: 70
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.::::'
+        page: 35 # Master Detail
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a master grid, with detail grids which display the child records for the selected master record.
+
+  - # ====== Entry: Form with Grid ===============================
+    id: 738221312961069258
+    label: 
+      label: Form with Grid
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:34:&SESSION.::&DEBUG.::::'
+        page: 34 # Form with Grid
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a single updateable record (form) and an editable report (grid).
+
+  - # ====== Entry: Protected Rows ===============================
+    id: 738221645585069258
+    label: 
+      label: Protected Rows
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.::::'
+        page: 33 # Protected Rows
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how you can control the ability to update or delete rows.
+
+  - # ====== Entry: Delete Only ==================================
+    id: 738222100967069258
+    label: 
+      label: Delete Only
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.::::'
+        page: 32 # Delete Only
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates changing a grid to only allow deletion of rows.
+
+  - # ====== Entry: Other Column Types ===========================
+    id: 738222510827069259
+    label: 
+      label: Other Column Types
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:36:&SESSION.::&DEBUG.::::'
+        page: 36 # Other Column Types
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates some of the different column types that can be included.
+
+  - # ====== Entry: Validation ===================================
+    id: 738222906725069259
+    label: 
+      label: Validation
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # Validation
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to include validation in your Interactive Grid.
+
+  - # ====== Entry: Basic Editing ================================
+    id: 738223259313069259
+    label: 
+      label: Basic Editing
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # Basic Editing
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates a standard editable Interactive Grid.
+
+  - # ====== Entry: People (paging) ==============================
+    id: 1630080371817404877
+    label: 
+      label: People (paging)
+
+    layout: 
+      sequence: 80
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:60:&SESSION.::&DEBUG.::::'
+        page: 60 # People (paging)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates editing a larger data set using traditional paging.
+
+  - # ====== Entry: Editing in a modal dialog ====================
+    id: 1876940473880439947
+    label: 
+      label: Editing in a modal dialog
+
+    layout: 
+      sequence: 90
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:54:&SESSION.::&DEBUG.::::'
+        page: 54 # Editing (Dialog)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Shows how interactive grids work in a modal dialog.
+
+  - # ====== Entry: Dynamic Actions ==============================
+    id: 1960664701246765866
+    label: 
+      label: Dynamic Actions
+
+    layout: 
+      sequence: 75
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:58:&SESSION.::&DEBUG.:58:::'
+        page: 58 # Dynamic Actions
+        clear-cache: 58
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: This example shows how to use Dynamic Actions within an Interactive Grid.
+
+- # ====== List: Advanced List =================================
+  id: 738266322661212945
+  identification: 
+    name: Advanced List
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Feature Customization ========================
+    id: 738266533876212948
+    label: 
+      label: Feature Customization
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:50:&SESSION.::&DEBUG.::::'
+        page: 50 # Feature Customization
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to use JavaScript to customize feature configuration settings.
+
+  - # ====== Entry: Client Validation ============================
+    id: 777635081423539677
+    label: 
+      label: Client Validation
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:51:&SESSION.::&DEBUG.::::'
+        page: 51 # Client Validation
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates using HTML5 form validation to implement client side validations.
+
+  - # ====== Entry: Tooltips =====================================
+    id: 777635372805547790
+    label: 
+      label: Tooltips
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:52:&SESSION.::&DEBUG.::::'
+        page: 52 # Tooltips
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to integrate jQuery UI Tooltips to provide tooltips for Interactive Grid rows and cells.
+
+  - # ====== Entry: Advanced Delete ==============================
+    id: 777635747860552194
+    label: 
+      label: Advanced Delete
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:53:&SESSION.::&DEBUG.::::'
+        page: 53 # Advanced Delete
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to customize Interactive Grid to focus on the task of deleting. Includes a custom row delete button.
+
+  - # ====== Entry: Item Type Plugins ============================
+    id: 1919794240092892309
+    label: 
+      label: Item Type Plugins
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:56:&SESSION.::&DEBUG.:56:::'
+        page: 56 # Item Type Plug-Ins
+        clear-cache: 56
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: Demonstrates how to use an Item Type Plug-In ("Modern Star Rating") within an interactive grid.
+
+  - # ====== Entry: Custom Server Processing =====================
+    id: 1919794586760896755
+    label: 
+      label: Custom Server Processing
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:57:&SESSION.::&DEBUG.:57:::'
+        page: 57 # Custom Server Processing
+        clear-cache: 57
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: 'Shows how to process the submitted interactive grid rows with custom PL/SQL logic. '
+
+- # ====== List: IG Report Linking Examples ====================
+  id: 1050137582729454259
+  identification: 
+    name: IG Report Linking Examples
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Clearing report settings =====================
+    id: 1050137897399454261
+    label: 
+      label: Clearing report settings
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:CR:::'
+        page: 15 # Linking to Interactive Grids
+        clear-cache: CR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Resetting to Developer Defaults ==============
+    id: 1050138303032454262
+    label: 
+      label: Resetting to Developer Defaults
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:RR:::'
+        page: 15 # Linking to Interactive Grids
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Invoking a Saved Report ======================
+    id: 1050138700127454262
+    label: 
+      label: Invoking a Saved Report
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.:IG_Roles:&DEBUG.:RR:::'
+        page: 15 # Linking to Interactive Grids
+        request: IG_Roles
+        clear-cache: RR
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Linking to a Saved Report ====================
+    id: 1050139501200454263
+    label: 
+      label: Linking to a Saved Report
+
+    layout: 
+      sequence: 60
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.:IG[emp]_Main:&DEBUG.:CR:IGGT_SAL:3000:'
+        page: 9 # Saved Reports
+        request: IG[emp]_Main
+        clear-cache: CR
+        values: 
+          iggt_sal: 3000
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+  - # ====== Entry: Filtering Report for salaries greater than 300
+    id: 1050161093541568219
+    label: 
+      label: Filtering Report for salaries greater than 3000
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&SESSION.::&DEBUG.:CR:IG_SAL:3000:'
+        page: 15 # Linking to Interactive Grids
+        clear-cache: CR
+        values: 
+          ig_sal: 3000
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: reportIcon
+
+- # ====== List: Desktop Navigation Menu =======================
+  id: 1342119902799603035
+  identification: 
+    name: Desktop Navigation Menu
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Traditional ==================================
+    id: 717407915020540510
+    label: 
+      label: Traditional
+
+    layout: 
+      sequence: 100
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 11
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Traditional Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Traditional (Total Rows) =====================
+    id: 717438425625146671
+    label: 
+      label: Traditional (Total Rows)
+
+    layout: 
+      sequence: 110
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 12
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # Traditional Paging (Total Rows)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Traditional (Custom) =========================
+    id: 717448783074269381
+    label: 
+      label: Traditional (Custom)
+
+    layout: 
+      sequence: 120
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 17
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.::&DEBUG.::::'
+        page: 17 # Traditional Paging (Custom)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Traditional (Select List) ====================
+    id: 717457306969431245
+    label: 
+      label: Traditional (Select List)
+
+    layout: 
+      sequence: 130
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 18
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:18:&SESSION.::&DEBUG.::::'
+        page: 18 # Traditional Paging (Select List)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Scroll =======================================
+    id: 717469290011520358
+    label: 
+      label: Scroll
+
+    layout: 
+      sequence: 140
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 19
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:19:&SESSION.::&DEBUG.::::'
+        page: 19 # Scroll Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Load More ====================================
+    id: 717479396536728218
+    label: 
+      label: Load More
+
+    layout: 
+      sequence: 150
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 20
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
+        page: 20 # Load More Paging
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Icon and Detail Views ========================
+    id: 717604233351073490
+    label: 
+      label: Icon and Detail Views
+
+    layout: 
+      sequence: 95
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 13
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.::::'
+        page: 13 # Icon and Detail Views
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Basic Editing ================================
+    id: 719613785168506410
+    label: 
+      label: Basic Editing
+
+    layout: 
+      sequence: 160
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 30
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:30:&SESSION.::&DEBUG.::::'
+        page: 30 # Basic Editing
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Validation ===================================
+    id: 724350960121599221
+    label: 
+      label: Validation
+
+    layout: 
+      sequence: 170
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 31
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:31:&SESSION.::&DEBUG.::::'
+        page: 31 # Validation
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Reporting ====================================
+    id: 733047308559128195
+    label: 
+      label: Reporting
+
+    icon: 
+      image/icon-css-classes: fa-table
+
+    layout: 
+      sequence: 11
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:37:&SESSION.::&DEBUG.::::'
+        page: 37 # Read Only Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Pagination ===================================
+    id: 733047584499139591
+    label: 
+      label: Pagination
+
+    icon: 
+      image/icon-css-classes: fa-arrow-circle-o-right
+
+    layout: 
+      sequence: 12
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:38:&SESSION.::&DEBUG.::::'
+        page: 38 # Pagination
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Editing ======================================
+    id: 733047884552143236
+    label: 
+      label: Editing
+
+    icon: 
+      image/icon-css-classes: fa-pencil-square-o
+
+    layout: 
+      sequence: 13
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:39:&SESSION.::&DEBUG.::::'
+        page: 39 # Editing
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Advanced =====================================
+    id: 733048230003146808
+    label: 
+      label: Advanced
+
+    icon: 
+      image/icon-css-classes: fa-rocket
+
+    layout: 
+      sequence: 14
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.::::'
+        page: 40 # Advanced
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Administration ===============================
+    id: 733048888792157773
+    label: 
+      label: Administration
+
+    icon: 
+      image/icon-css-classes: fa-gear
+
+    layout: 
+      sequence: 15
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:24:&SESSION.::&DEBUG.::::'
+        page: 24 # Administration
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Delete Only ==================================
+    id: 734145101754554324
+    label: 
+      label: Delete Only
+
+    layout: 
+      sequence: 180
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 32
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:32:&SESSION.::&DEBUG.'
+        page: 32 # Delete Only
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Protected Rows ===============================
+    id: 734192164160789336
+    label: 
+      label: Protected Rows
+
+    layout: 
+      sequence: 190
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 33
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:33:&SESSION.::&DEBUG.'
+        page: 33 # Protected Rows
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Form with Grid ===============================
+    id: 734208541669024361
+    label: 
+      label: Form with Grid
+
+    layout: 
+      sequence: 200
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 34
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:34:&SESSION.::&DEBUG.::::'
+        page: 34 # Form with Grid
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Master Detail ================================
+    id: 734231910243439105
+    label: 
+      label: Master Detail
+
+    layout: 
+      sequence: 210
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 35
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.'
+        page: 35 # Master Detail
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Other Column Types ===========================
+    id: 735515183095586452
+    label: 
+      label: Other Column Types
+
+    layout: 
+      sequence: 172
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 36
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:36:&SESSION.::&DEBUG.::::'
+        page: 36 # Other Column Types
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Full Page with Maximize ======================
+    id: 735601147328971963
+    label: 
+      label: Full Page with Maximize
+
+    layout: 
+      sequence: 220
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 21
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:21:&SESSION.::&DEBUG.'
+        page: 21 # Full Page with Maximize
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Scroll with Maximize =========================
+    id: 735617858558998119
+    label: 
+      label: Scroll with Maximize
+
+    layout: 
+      sequence: 230
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 22
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:22:&SESSION.::&DEBUG.'
+        page: 22 # Scroll with Maximize
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Feature Customization ========================
+    id: 738740478760920053
+    label: 
+      label: Feature Customization
+
+    layout: 
+      sequence: 240
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 50
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:50:&SESSION.::&DEBUG.'
+        page: 50 # Feature Customization
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Client Validation ============================
+    id: 741916055939037853
+    label: 
+      label: Client Validation
+
+    layout: 
+      sequence: 250
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 51
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:51:&SESSION.::&DEBUG.'
+        page: 51 # Client Validation
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Tooltips =====================================
+    id: 741986453213397581
+    label: 
+      label: Tooltips
+
+    layout: 
+      sequence: 260
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 52
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:52:&SESSION.::&DEBUG.'
+        page: 52 # Tooltips
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Advanced Delete ==============================
+    id: 742915301546105633
+    label: 
+      label: Advanced Delete
+
+    layout: 
+      sequence: 270
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 53
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:53:&SESSION.::&DEBUG.'
+        page: 53 # Advanced Delete
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: People (paging) ==============================
+    id: 777861521162014872
+    label: 
+      label: People (paging)
+
+    layout: 
+      sequence: 280
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 60
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:60:&SESSION.::&DEBUG.'
+        page: 60 # People (paging)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Linking to Interactive Grids =================
+    id: 1050130575740454218
+    label: 
+      label: Linking to Interactive Grids
+
+    layout: 
+      sequence: 330
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 15
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:15:&APP_SESSION.::&DEBUG.:::'
+        page: 15 # Linking to Interactive Grids
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Oracle Text ==================================
+    id: 1176169114798038819
+    label: 
+      label: Oracle Text
+
+    layout: 
+      sequence: 290
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 70
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:70:&SESSION.::&DEBUG.'
+        page: 70 # Oracle Text
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 1342165183092603162
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 1
+      - 23
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'
+        page: 1 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Basic Reporting ==============================
+    id: 1353254991857741987
+    label: 
+      label: Basic Reporting
+
+    layout: 
+      sequence: 20
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::::'
+        page: 3 # Basic Reporting
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Column Groups ================================
+    id: 1358404774740400742
+    label: 
+      label: Column Groups
+
+    layout: 
+      sequence: 30
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 4
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Column Groups
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Add Toolbar Button ===========================
+    id: 1358512299137105724
+    label: 
+      label: Add Toolbar Button
+
+    layout: 
+      sequence: 40
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 5
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
+        page: 5 # Add Toolbar Button
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Row Header ===================================
+    id: 1358833483084807931
+    label: 
+      label: Row Header
+
+    layout: 
+      sequence: 50
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 6
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::::'
+        page: 6 # Row Header
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Sequence Row Header ==========================
+    id: 1358853620910911227
+    label: 
+      label: Sequence Row Header
+
+    layout: 
+      sequence: 60
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 7
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.::::'
+        page: 7 # Sequence Row Header
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Multiple Selection ===========================
+    id: 1358869793584071230
+    label: 
+      label: Multiple Selection
+
+    layout: 
+      sequence: 70
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 8
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
+        page: 8 # Multiple Selection
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Saved Reports ================================
+    id: 1364050717345151681
+    label: 
+      label: Saved Reports
+
+    layout: 
+      sequence: 80
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 9
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Saved Reports
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Single Row View ==============================
+    id: 1364096353914466926
+    label: 
+      label: Single Row View
+
+    layout: 
+      sequence: 90
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+        page: 10 # Single Row View
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Progressive Scroll ===========================
+    id: 1536193899513325456
+    label: 
+      label: Progressive Scroll
+
+    layout: 
+      sequence: 145
+      parent-entry: Pagination # 733047584499139591
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 2
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
+        page: 2 # Progressive Scroll
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Chart View ===================================
+    id: 1691868431795234913
+    label: 
+      label: Chart View
+
+    layout: 
+      sequence: 285
+      parent-entry: Reporting # 733047308559128195
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 14
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.::::'
+        page: 14 # Chart View
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Editing (Dialog) =============================
+    id: 1876842069933954798
+    label: 
+      label: Editing (Dialog)
+
+    layout: 
+      sequence: 300
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 54
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:54:&SESSION.::&DEBUG.'
+        page: 54 # Editing (Dialog)
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Item Type Plug-Ins ===========================
+    id: 1888806159100132138
+    label: 
+      label: Item Type Plug-Ins
+
+    layout: 
+      sequence: 310
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 56
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:56:&SESSION.::&DEBUG.'
+        page: 56 # Item Type Plug-Ins
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Custom Server Processing =====================
+    id: 1888909879777538344
+    label: 
+      label: Custom Server Processing
+
+    layout: 
+      sequence: 320
+      parent-entry: Advanced # 733048230003146808
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 57
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:57:&SESSION.::&DEBUG.'
+        page: 57 # Custom Server Processing
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Dynamic Actions ==============================
+    id: 1960650566128687289
+    label: 
+      label: Dynamic Actions
+
+    layout: 
+      sequence: 215
+      parent-entry: Editing # 733047884552143236
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 58
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:58:&SESSION.::&DEBUG.::::'
+        page: 58 # Dynamic Actions
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar (Top) ==========================
+  id: 1342163692906603120
+  identification: 
+    name: Navigation Bar (Top)
+
+  subscription: 
+    version-number: 1089079761
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Help =========================================
+    id: 733041260849859396
+    label: 
+      label: Help
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:HELP:&SESSION.::&DEBUG.::::'
+        page: HELP
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: &APP_USER. ===================================
+    id: 733041742664864894
+    label: 
+      label: '&APP_USER.'
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: has-username
+
+  - # ====== Entry: Sign Out =====================================
+    id: 1342163880728603143
+    label: 
+      label: Sign Out
+
+    layout: 
+      sequence: 30
+      parent-entry: '&APP_USER.' # 733041742664864894
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '&LOGOUT_URL.'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+

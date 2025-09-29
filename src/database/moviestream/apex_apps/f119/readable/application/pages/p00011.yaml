@@ -1,0 +1,1206 @@
+---
+# ====== Page: Local REST Data ===============================
+id: 11
+identification: 
+  name: Local REST Data
+  alias: LOCAL-REST-DATA
+  title: Local REST Data
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    section.infoRegion {
+        border: 1px solid #9AAEC8;
+        background-color: #DDE7F5;
+    }
+    section.infoRegion > div.uRegionHeading {
+        background: none transparent;
+    }
+    .infoRegionIcon {
+        position: absolute;
+        left: 0;
+        margin: 16px;
+        top: 0;
+    }
+    section.infoRegion.uRegion > div.uRegionContent {
+        position: relative;
+        min-height: 32px;
+        padding: 16px 16px 16px 64px;
+    }
+    .infoRegion h1 {
+        font-weight: bold;
+        font-size: 14px;
+        color: #202020;
+        text-shadow: 0 1px 0 rgba(255,255,255,.65);
+    }
+    .infoRegion p {
+        font-size: 12px;
+        line-height: 20px;
+        padding: 8px 0 0 0;
+        text-shadow: 0 1px 0 rgba(255,255,255,.25);
+        color: #303030;
+    }
+    .infoRegion p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    
+    
+    div.featuredBlock{
+    	-webkit-border-radius:3px;
+    	-moz-border-radius:3px;
+    	border-radius:3px;
+    	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	border:1px solid #E1E6EB;
+    	margin-bottom:18px
+    }
+    div.featuredBlock div.featuredIcon{
+    	background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmNGY0ZjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+    	background-size:100%;
+    	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(60%, #f4f4f8), color-stop(100%, #ffffff));
+    	background-image:-webkit-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:-moz-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	-webkit-border-radius:3px 3px 0 0;
+    	-moz-border-radius:3px 3px 0 0;
+    	border-radius:3px 3px 0 0;
+    	padding:8px 0;
+    	min-height: 90px;
+    	text-align:center;
+    }
+    div.featuredBlock div.featuredIcon img{
+    	display:block;
+    	margin:0 auto 0 auto;
+    	-webkit-box-reflect:below -20px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(65%, transparent), to(rgba(255,255,255,0.2)));
+    }
+    div.featuredBlock div.featuredIcon h1{
+    	font-size:12px;
+    	line-height:12px;
+    	color:#404040;
+    	margin:0 8px;
+    	padding:0;
+    	text-align:center;
+    }
+    a.blockLink,a.blockLink:hover{
+    	text-decoration:none
+    }
+    a.blockLink:hover div.featuredBlock{
+    	border:1px solid #b1bbcb
+    }
+    a.blockLink:hover div.featuredBlock div.featuredIcon{
+    	background: none #e5effb;
+    	-webkit-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	-moz-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    }
+    .regionDivider {
+    	border-top: 2px solid #F0F0F0 !important;
+    	padding-top: 8px;;
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Chart (Local Data) ==========================
+  id: 1800052055602651707
+  identification: 
+    name: Chart (Local Data)
+    type: Chart
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: select * from eba_restdemo_sample_emp
+
+  security: 
+    escape-special-characters: true
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1800052059207651708
+    chart: 
+      type: Combination
+
+    appearance: 
+      orientation: Vertical
+      stack: false
+
+    data-cursor: 
+      cursor: Automatic
+      behavior: Automatic
+      dim-on-hover: false
+
+    multi-series-chart-data: 
+      fill-gaps-in-chart-data: true
+      sort-order: Label - Ascending
+      render-gap-as-zero: true
+
+    settings: 
+      zoom-and-scroll: No
+
+    animation: 
+      on-display: None
+      on-data-change: None
+
+    tooltip: 
+      show: true
+      show-series-name: true
+      show-group-name: true
+      show-value: true
+
+    legend: 
+      show: true
+      position: Automatic
+      hide-and-show-behavior: None
+
+    series: 
+    - # ====== Series: Salary By Department ========================
+      id: 1800052240575651709
+      identification: 
+        name: Salary By Department
+        type: Bar
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select nvl(to_char(deptno), 'None') as deptno, sum(sal) as sal from eba_restdemo_sample_emp
+          group by deptno
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: DEPTNO
+        value: SAL
+
+      appearance: 
+        assigned-to-y2-axis: false
+
+      line: 
+        style: Solid
+
+      label: 
+        show: false
+
+    - # ====== Series: Commission By Department ====================
+      id: 1800052472384651712
+      identification: 
+        name: Commission By Department
+        type: Bar
+
+      execution: 
+        sequence: 20
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select nvl(to_char(deptno), 'None') as deptno, sum(rn) as rn from eba_restdemo_sample_emp
+          group by deptno
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: DEPTNO
+        value: RN
+
+      appearance: 
+        assigned-to-y2-axis: false
+
+      line: 
+        style: Solid
+
+      label: 
+        show: false
+
+    - # ====== Series: Employee Count ==============================
+      id: 1800052600861651713
+      identification: 
+        name: Employee Count
+        type: Bar
+
+      execution: 
+        sequence: 30
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select nvl(to_char(deptno), 'None') as deptno, count(empno) as emp_cnt from eba_restdemo_sample_emp
+          group by deptno
+
+      order-by: 
+        type: None
+
+      column-mapping: 
+        label: DEPTNO
+        value: EMP_CNT
+
+      appearance: 
+        assigned-to-y2-axis: true
+
+      line: 
+        style: Solid
+
+      label: 
+        show: false
+
+    axes: 
+    - # ====== Axis: x =============================================
+      id: 1800052288240651710
+      identification: 
+        name: x
+        show-axis: true
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+        rotation: true
+        position: Outside
+
+    - # ====== Axis: y =============================================
+      id: 1800052381556651711
+      identification: 
+        name: y
+        show-axis: true
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      appearance: 
+        position: Automatic
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+
+    - # ====== Axis: y2 ============================================
+      id: 1800052718050651714
+      identification: 
+        name: y2
+        show-axis: true
+
+      value: 
+        format-scaling: Automatic
+        baseline-scaling: Zero
+        scale: Linear
+
+      appearance: 
+        position: Automatic
+
+      major-ticks: 
+        show: Yes
+
+      minor-ticks: 
+        show: false
+
+      tick-label: 
+        show: true
+
+      dual-y-axes: 
+        show: Automatic
+
+- # ====== Region: Breadcrumb ==================================
+  id: 1800052831813651715
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: About this page =============================
+  id: 8519515614479260964
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>When doing extensive reporting and analysis on data from REST services, it often makes sense to download the data to a local table beforehand.</p>
+      <ul>
+      <li>The local application becomes independent from REST service availibility</li>
+      <li>Savings on network bandwidth or REST Call Rate consumption: A REST request is not being performed for each page visit any more</li>
+      <li>Some REST services even don't allow to fetch all their data with one request - clients must fetch the data on a page by page basis.</li>
+      </ul>
+      <p>This page shows how to first download data from the REST service to a local table - the PL/SQL loading code detects when there is a "next" page and fetches all pages until the end of response has been reached. Then a tabular report and a JET chart visualize data from the local tables..</p>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - margin-bottom-lg
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Footer ======================================
+  id: 8708545740504083185
+  identification: 
+    name: Footer
+    type: Sample Apps Footer
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: None
+    render-components: Above Content
+
+  advanced: 
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: Data from RESTful Service ===================
+  id: 15725649583064592823
+  identification: 
+    name: Data from RESTful Service
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: select * from eba_restdemo_sample_emp
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: report
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 15725649667635592823
+    link: 
+      link-column: Exclude Link Column
+
+    appearance: 
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 10000
+
+    messages: 
+      when-no-data-found: No local data found. Click the <b>Load Data</b> button.
+      when-more-data-found: This query returns more than 10,000 rows, please filter your data to ensure complete results.
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: true
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: true
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - HTML
+      - CSV
+      send-as-email: false
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 15725651183487593331
+      identification: 
+        name: Primary Report
+        alias: 18155176
+
+    columns: 
+    - # ====== Column: EMPNO =======================================
+      id: 1865528355395588739
+      identification: 
+        column-name: EMPNO
+        type: Plain Text
+
+      heading: 
+        heading: Empno
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 20
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ENAME =======================================
+      id: 1865528657009588744
+      identification: 
+        column-name: ENAME
+        type: Plain Text
+
+      heading: 
+        heading: Ename
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 30
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: JOB =========================================
+      id: 1865529033303588744
+      identification: 
+        column-name: JOB
+        type: Plain Text
+
+      heading: 
+        heading: Job
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 40
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: MGR =========================================
+      id: 1865529394633588744
+      identification: 
+        column-name: MGR
+        type: Plain Text
+
+      heading: 
+        heading: Mgr
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 50
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: HIREDATE ====================================
+      id: 1865529804262588745
+      identification: 
+        column-name: HIREDATE
+        type: Plain Text
+
+      heading: 
+        heading: Hiredate
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 60
+        column-alignment: center
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: SAL =========================================
+      id: 1865530205204588745
+      identification: 
+        column-name: SAL
+        type: Plain Text
+
+      heading: 
+        heading: Sal
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 70
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: DEPTNO ======================================
+      id: 1865530638464588745
+      identification: 
+        column-name: DEPTNO
+        type: Plain Text
+
+      heading: 
+        heading: Deptno
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 80
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: RN ==========================================
+      id: 1865530974272588746
+      identification: 
+        column-name: RN
+        type: Plain Text
+
+      heading: 
+        heading: Row Number
+        alignment: center
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 10
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+page-items: 
+- # ====== Page Item: P11_ROWS_LOADED ==========================
+  id: 1800051839370651705
+  identification: 
+    name: P11_ROWS_LOADED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Data from RESTful Service # 15725649583064592823
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P11_PAGES_FETCHED ========================
+  id: 1800051910236651706
+  identification: 
+    name: P11_PAGES_FETCHED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Data from RESTful Service # 15725649583064592823
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: DOWNLOAD ====================================
+  id: 1800051638653651703
+  identification: 
+    button-name: DOWNLOAD
+    label: Load Data
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 1800052831813651715
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconRight
+    icon: fa-cloud-download
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: select * from eba_restdemo_sample_emp
+
+- # ====== Button: PURGE =======================================
+  id: 1800052920822651716
+  identification: 
+    button-name: PURGE
+    label: Purge Local Data
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 1800052831813651715
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: select * from eba_restdemo_sample_emp
+
+processes: 
+- # ====== Process: Load REST data into local table ============
+  id: 1800051541212651702
+  identification: 
+    name: Load REST data into local table
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          C_MAX_ROWS     number           := null;
+      
+          l_response     clob;
+          l_url          varchar2(32767);
+          l_finish       boolean          := false;
+          l_rows_loaded  number           := 0;
+          l_pages_fetched number          := 0;
+      begin
+          l_url := :SAMPLE_ENDPOINT_URL;
+          
+          delete from "EBA_RESTDEMO_SAMPLE_EMP";
+          
+          while not l_finish loop
+              l_response := apex_web_service.make_rest_request(
+                  p_url              => l_url,
+                  p_http_method      => 'GET');
+      
+              insert into "EBA_RESTDEMO_SAMPLE_EMP" (
+                  select 
+                      x.EMPNO, 
+                      x.ENAME, 
+                      x.JOB, 
+                      x.MGR, 
+                      to_date( x.HIREDATE, 'YYYY-MM-DD"T"HH24:MI:SS"Z"' ) as HIREDATE, 
+                      x.SAL, 
+                      x.DEPTNO, 
+                      x.RN
+                  from xmltable(
+                      '/json/items/row'
+                      passing apex_json.to_xmltype( l_response )
+                      columns
+                          EMPNO      NUMBER          path 'empno',
+                          ENAME      VARCHAR2(4000)  path 'ename',
+                          JOB        VARCHAR2(4000)  path 'job',
+                          MGR        NUMBER          path 'mgr',
+                          HIREDATE   VARCHAR2(4000)  path 'hiredate',
+                          SAL        NUMBER          path 'sal',
+                          DEPTNO     NUMBER          path 'deptno',
+                          RN         NUMBER          path 'rn'
+                  ) x
+              );
+      
+              l_rows_loaded := l_rows_loaded + nvl( sql%rowcount, 0 );
+              l_pages_fetched := l_pages_fetched + 1;
+              if l_rows_loaded >= C_MAX_ROWS then 
+                  l_finish := true;
+              end if;
+              
+              select
+                  x.next_page into l_url 
+              from xmltable( 
+                  '/json'
+                  passing apex_json.to_xmltype( l_response )
+                  columns
+                      next_page varchar2(500) path 'next/_ref'
+              ) x;
+              
+              if l_url is null then l_finish := true; end if;
+          end loop;
+          :P11_PAGES_FETCHED := l_pages_fetched;
+          :P11_ROWS_LOADED := l_rows_loaded;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: '&P11_ROWS_LOADED. row(s) fetched in &P11_PAGES_FETCHED. page(s).'
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: DOWNLOAD # 1800051638653651703
+
+- # ====== Process: Purge Local Data ===========================
+  id: 1800052988498651717
+  identification: 
+    name: Purge Local Data
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: delete from eba_restdemo_sample_emp;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: PURGE # 1800052920822651716
+
+branches: 
+- # ====== Branch: Go To Page &APP_PAGE_ID. ====================
+  id: 1800051694139651704
+  identification: 
+    name: Go To Page &APP_PAGE_ID.
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:&APP_PAGE_ID.:&SESSION.::&DEBUG.:RP::&success_msg=#SUCCESS_MSG#'
+      page: '&APP_PAGE_ID.'
+      clear-cache: RP
+

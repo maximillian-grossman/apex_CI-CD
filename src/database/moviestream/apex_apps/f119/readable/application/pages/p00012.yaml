@@ -1,0 +1,981 @@
+---
+# ====== Page: DML Form ======================================
+id: 12
+identification: 
+  name: DML Form
+  alias: DML-FORM
+  title: DML Form
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    section.infoRegion {
+        border: 1px solid #9AAEC8;
+        background-color: #DDE7F5;
+    }
+    section.infoRegion > div.uRegionHeading {
+        background: none transparent;
+    }
+    .infoRegionIcon {
+        position: absolute;
+        left: 0;
+        margin: 16px;
+        top: 0;
+    }
+    section.infoRegion.uRegion > div.uRegionContent {
+        position: relative;
+        min-height: 32px;
+        padding: 16px 16px 16px 64px;
+    }
+    .infoRegion h1 {
+        font-weight: bold;
+        font-size: 14px;
+        color: #202020;
+        text-shadow: 0 1px 0 rgba(255,255,255,.65);
+    }
+    .infoRegion p {
+        font-size: 12px;
+        line-height: 20px;
+        padding: 8px 0 0 0;
+        text-shadow: 0 1px 0 rgba(255,255,255,.25);
+        color: #303030;
+    }
+    .infoRegion p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    
+    
+    div.featuredBlock{
+    	-webkit-border-radius:3px;
+    	-moz-border-radius:3px;
+    	border-radius:3px;
+    	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	border:1px solid #E1E6EB;
+    	margin-bottom:18px
+    }
+    div.featuredBlock div.featuredIcon{
+    	background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmNGY0ZjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+    	background-size:100%;
+    	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(60%, #f4f4f8), color-stop(100%, #ffffff));
+    	background-image:-webkit-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:-moz-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	-webkit-border-radius:3px 3px 0 0;
+    	-moz-border-radius:3px 3px 0 0;
+    	border-radius:3px 3px 0 0;
+    	padding:8px 0;
+    	min-height: 90px;
+    	text-align:center;
+    }
+    div.featuredBlock div.featuredIcon img{
+    	display:block;
+    	margin:0 auto 0 auto;
+    	-webkit-box-reflect:below -20px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(65%, transparent), to(rgba(255,255,255,0.2)));
+    }
+    div.featuredBlock div.featuredIcon h1{
+    	font-size:12px;
+    	line-height:12px;
+    	color:#404040;
+    	margin:0 8px;
+    	padding:0;
+    	text-align:center;
+    }
+    a.blockLink,a.blockLink:hover{
+    	text-decoration:none
+    }
+    a.blockLink:hover div.featuredBlock{
+    	border:1px solid #b1bbcb
+    }
+    a.blockLink:hover div.featuredBlock div.featuredIcon{
+    	background: none #e5effb;
+    	-webkit-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	-moz-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    }
+    .regionDivider {
+    	border-top: 2px solid #F0F0F0 !important;
+    	padding-top: 8px;;
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: EMP Form ====================================
+  id: 1865579577910855981
+  identification: 
+    name: EMP Form
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Buttons =====================================
+  id: 1865580671873855992
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: REST Service Endpoint =======================
+  id: 10920511962201956022
+  identification: 
+    name: REST Service Endpoint
+    type: PL/SQL Dynamic Content [Legacy]
+
+  source: 
+    pl/sql-code: |
+      begin
+      sys.htp.p('REST Service Endpoint: <b>' || apex_escape.html(:SAMPLE_ENDPOINT_URL) || '/' || apex_escape.html(:P12_EMPNO) || '</b>');
+      end;
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    - margin-top-lg
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: About this page =============================
+  id: 12142485246834047403
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This page shows a data manipulation form for a REST service. On page load, the individual row is being fetched from the REST service. Using the form, the data might be changed and saved back to the REST service using a <b>PUT</b> request.</p>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P12_EMPNO ================================
+  id: 1865579695381855982
+  identification: 
+    name: P12_EMPNO
+    type: Display Only
+
+  label: 
+    label: Empno
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 10
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_MGR ==================================
+  id: 1865579805343855983
+  identification: 
+    name: P12_MGR
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_JOB ==================================
+  id: 1865579857394855984
+  identification: 
+    name: P12_JOB
+    type: Text Field
+
+  label: 
+    label: Job
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_COMM =================================
+  id: 1865579960161855985
+  identification: 
+    name: P12_COMM
+    type: Number Field
+
+  label: 
+    label: Commission
+    alignment: Left
+
+  settings: 
+    number-alignment: End
+    virtual-keyboard: Text
+
+  layout: 
+    sequence: 70
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_ENAME ================================
+  id: 1865580069083855986
+  identification: 
+    name: P12_ENAME
+    type: Text Field
+
+  label: 
+    label: Name
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 20
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_HIREDATE =============================
+  id: 1865580162415855987
+  identification: 
+    name: P12_HIREDATE
+    type: Date Picker
+
+  label: 
+    label: Hire Date
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 40
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: YYYY/MM/DD
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_SAL ==================================
+  id: 1865580350481855988
+  identification: 
+    name: P12_SAL
+    type: Number Field
+
+  label: 
+    label: Salary
+    alignment: Left
+
+  settings: 
+    number-alignment: End
+    virtual-keyboard: Text
+
+  layout: 
+    sequence: 60
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_DEPTNO ===============================
+  id: 1865580377658855989
+  identification: 
+    name: P12_DEPTNO
+    type: Display Only
+
+  label: 
+    label: 'Department #'
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 90
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_BACK_TO_PAGE =========================
+  id: 1865581337489855998
+  identification: 
+    name: P12_BACK_TO_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 100
+    region: EMP Form # 1865579577910855981
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: SAVE ========================================
+  id: 1865580793226855993
+  identification: 
+    button-name: SAVE
+    label: Apply Changes
+
+  layout: 
+    sequence: 20
+    region: Buttons # 1865580671873855992
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: CANCEL ======================================
+  id: 1865581013678855995
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Buttons # 1865580671873855992
+    slot: PREVIOUS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: Close Dialog ========================
+  id: 1865581117923855996
+  identification: 
+    name: Close Dialog
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 1865581013678855995
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 1865581176491855997
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: Close Dialog # 1865581117923855996
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: Parse JSON data to items ===================
+  id: 1865580526717855990
+  identification: 
+    name: Parse JSON data to items
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+      -- fetch data into items
+          select 
+              x.ENAME, 
+              x.JOB, 
+              x.MGR, 
+              to_date( x.HIREDATE, 'YYYY-MM-DD"T"HH24:MI:SS"Z"' ) as HIREDATE, 
+              x.SAL, 
+              x.comm,
+              x.DEPTNO 
+          into
+              :P12_ENAME,
+              :P12_JOB,
+              :P12_MGR,
+              :P12_HIREDATE,
+              :P12_SAL,
+              :P12_COMM,
+              :P12_DEPTNO
+          from apex_collections c, xmltable(
+              '/json'
+              passing apex_json.to_xmltype( c.clob001 )
+              columns
+                  ENAME      VARCHAR2(4000)  path 'ename',
+                  JOB        VARCHAR2(4000)  path 'job',
+                  MGR        NUMBER          path 'mgr',
+                  HIREDATE   VARCHAR2(4000)   path 'hiredate',
+                  SAL        NUMBER          path 'sal',
+                  COMM       NUMBER          path 'comm',
+                  DEPTNO     NUMBER          path 'deptno'
+          ) x
+          where c.collection_name = 'REST_COLLECTION';
+      end;
+
+  execution: 
+    sequence: 20
+    point: After Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: Save Changes ===============================
+  id: 1865580902918855994
+  identification: 
+    name: Save Changes
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      -- PL/SQL code to perform DML on REST service
+      declare
+          l_request  clob;
+          l_response clob;
+      begin
+          -- Set HTTP Request Headers
+          apex_web_service.g_request_headers.delete;
+      
+          apex_web_service.g_request_headers(1).name  := q'#Content-Type#';
+          apex_web_service.g_request_headers(1).value := q'#application/json#';
+          
+          apex_json.initialize_clob_output(DBMS_LOB.CALL, true, 2);
+          apex_json.open_object();
+          apex_json.write('ename',    :P12_ENAME);
+          apex_json.write('job',      :P12_JOB);
+          apex_json.write('hiredate', to_date( :P12_HIREDATE, 'YYYY/MM/DD' ));
+          apex_json.write('sal',      to_number( :P12_SAL) );
+          apex_json.write('comm',     to_number( :P12_COMM) );
+          apex_json.write('mgr',      to_number( :P12_MGR) );
+          apex_json.write('deptno',   to_number( :P12_DEPTNO) );
+          apex_json.close_object; 
+      
+          l_response := apex_web_service.make_rest_request(
+              p_url         => :SAMPLE_ENDPOINT_URL || '/' || :P12_EMPNO,
+              p_http_method => 'PUT',
+              p_body        => apex_json.get_clob_output );
+              
+          -- test whether request was successful - HTTP Status code is 2xx, then
+          if apex_web_service.g_status_code not between 200 and 299 then
+              raise_application_error(-20000, 'HTTP-'|| apex_web_service.g_status_code);
+          end if;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: REST PUT request sent - changes applied.
+
+  error: 
+    error-message: 'REST PUT request failed with server response: #SQLERRM_TEXT#'
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SAVE # 1865580793226855993
+
+- # ====== Process: Fetch data into Collection =================
+  id: 1865633630783672340
+  identification: 
+    name: Fetch data into Collection
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_response clob;
+      begin
+          -- load REST response into a collection
+          l_response := apex_web_service.make_rest_request(
+              p_url              => :SAMPLE_ENDPOINT_URL || '/' || :P12_EMPNO,
+              p_http_method      => 'GET');
+      
+          apex_collection.create_or_truncate_collection( 'REST_COLLECTION' );
+          apex_collection.add_member(
+              p_collection_name => 'REST_COLLECTION',
+              p_clob001 =>         l_response );       
+             
+      end;
+
+  execution: 
+    sequence: 10
+    point: After Header
+    run-process: Once Per Page Visit (default)
+
+branches: 
+- # ====== Branch: Go To Page &P12_BACK_TO_PAGE. ===============
+  id: 1865581417615855999
+  identification: 
+    name: Go To Page &P12_BACK_TO_PAGE.
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:&P12_BACK_TO_PAGE.:&SESSION.::&DEBUG.:RP::&success_msg=#SUCCESS_MSG#'
+      page: '&P12_BACK_TO_PAGE.'
+      clear-cache: RP
+

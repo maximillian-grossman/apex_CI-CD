@@ -1,0 +1,1148 @@
+---
+# ====== Page: Report and Marquee - Report ===================
+id: 4
+identification: 
+  name: Report and Marquee - Report
+  alias: REPORT-AND-MARQUEE-REPORT
+  title: Report and Marquee - Report
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* Remove duplicate borders on hover */
+    .a-IconList-item:hover {
+      box-shadow: none;
+      background: transparent;
+    }
+    
+    .t-Cards {
+      margin: 8px;
+    }
+    
+    .t-Cards-item.a-IconList-item {
+      margin: 0;
+      padding: 0;
+    }
+    
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Overview: Report and Marquee ================
+  id: 5656563779824037742
+  identification: 
+    name: 'Overview: Report and Marquee'
+    type: Static Content
+
+  source: 
+    html-code: This example consists of a report page that drills down to a marquee page. On the marquee page each of the detail tables are shown using a classic report. Separate modal popups are used to edit the master and detail tables.
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: comments
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Projects ====================================
+  id: 48377138374129062899
+  identification: 
+    name: Projects
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select 
+      "ID",
+      "NAME",
+      "DESCRIPTION",
+      "PROJECT_LEAD",
+      "COMPLETED_DATE",
+      "STATUS_CD",
+      'fa-folder-o' card_icon,
+      apex_string.get_initials(project_lead) card_initials,
+      apex_util.prepare_url('f?p='||:APP_ID||':11:'||:APP_SESSION||':::11:P11_PROJECT_ID:'||id) card_link,
+      (select count('x')
+       from eba_demo_md_milestones m
+       where m.project_id = p.id
+      ) milestones,
+      (select count('x')
+       from eba_demo_md_tasks t
+       where t.project_id = p.id
+      ) tasks,
+      (select count('x')
+       from eba_demo_md_task_todos t
+       where t.project_id = p.id
+      ) todos,
+      (select count('x')
+       from eba_demo_md_task_links l
+       where l.project_id = p.id
+      ) links,
+      (select count('x')
+       from eba_demo_md_comments c
+       where c.project_id = p.id
+      ) comments
+      from eba_demo_md_projects p
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: projects
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 4923790067229480868
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: true
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: true
+      custom: true
+      custom-icon: |
+        <li data-id="&APEX$ROW_ID." class="t-Cards-item">
+          <div class="t-Card">
+            <div class="t-Card-wrap">
+              <div class="t-Card-icon u-color &CARD_COLOR."><span class="t-Icon fa &CARD_ICON."><span class="t-Card-initials" role="presentation">&CARD_INITIALS.</span></span></div>
+              <div class="t-Card-titleWrap"><h3 class="t-Card-title"><a href=" &APEX$ROW_URL!ATTR.">&NAME.</a></h3></div>
+              <div class="t-Card-body">
+                <div class="t-Card-desc">&STATUS_CD.</div>
+                <div class="t-Card-info">&MILESTONES_LABEL.: &MILESTONES., &TASKS_LABEL.: &TASKS., &TODOS_LABEL.: &TODOS., &LINKS_LABEL.: &LINKS., &COMMENTS_LABEL.: &COMMENTS.</div>
+              </div>
+              <span class="t-Card-colorFill u-color &CARD_COLOR."></span>
+            </div>
+          </div>
+        </li>
+      link-target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:RP,11:P11_PROJECT_ID:&ID.'
+        page: 11 # Report and Marquee - Marquee
+        clear-cache: RP,11
+        values: 
+          p11_project_id: '&ID.'
+
+    detail-view: 
+      show: false
+
+    advanced: 
+      initialization-javascript-function: |
+        function(config) {
+            config.defaultGridViewOptions = {
+                rowHeader: "sequence"
+            };
+            config.defaultIconViewOptions = {
+                collectionClasses: "t-Cards t-Cards--basic t-Cards--displayIcons u-colors t-Cards--desc-2ln t-Cards--4cols"
+            };
+            return config; // don't forget to return this!
+        }
+        
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 4923818452177582979
+      identification: 
+        name: Primary Report
+        alias: 14339
+
+  column-groups: 
+  - # ====== Column Group: Project Details =======================
+    id: 4924118051365677806
+    heading: 
+      heading: Project Details
+
+  - # ====== Column Group: Progress ==============================
+    id: 4924118145443677807
+    heading: 
+      heading: Progress
+
+  - # ====== Column Group: Associated Records ====================
+    id: 4924118286995677808
+    heading: 
+      heading: Associated Records
+
+  columns: 
+  - # ====== Column: CARD_ICON ===================================
+    id: 3830391181204829425
+    identification: 
+      column-name: CARD_ICON
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 130
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CARD_ICON
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: CARD_INITIALS ===============================
+    id: 3830391327216829426
+    identification: 
+      column-name: CARD_INITIALS
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 140
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CARD_INITIALS
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: CARD_LINK ===================================
+    id: 3830391413443829427
+    identification: 
+      column-name: CARD_LINK
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 150
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CARD_LINK
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_CD ===================================
+    id: 4356759861574026615
+    identification: 
+      column-name: STATUS_CD
+      type: Select List
+
+    heading: 
+      heading: Status
+      alignment: start
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      group: Progress # 4924118145443677807
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: SQL Query
+      sql-query: |
+        select description d, cd r
+        from eba_demo_md_status
+        order by 1
+      display-extra-values: false
+      display-null-value: true
+      null-display-value: '- Status -'
+
+    source: 
+      type: Database Column
+      database-column: STATUS_CD
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: LINKS =======================================
+    id: 4421759815780555366
+    identification: 
+      column-name: LINKS
+      type: Display Only
+
+    heading: 
+      heading: Links
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      group: Associated Records # 4924118286995677808
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: LINKS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DESCRIPTION =================================
+    id: 4421759831733555367
+    identification: 
+      column-name: DESCRIPTION
+      type: Textarea
+
+    heading: 
+      heading: Description
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      group: Project Details # 4924118051365677806
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 4000
+
+    source: 
+      type: Database Column
+      database-column: DESCRIPTION
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TODOS =======================================
+    id: 4547020204962787493
+    identification: 
+      column-name: TODOS
+      type: Display Only
+
+    heading: 
+      heading: To Dos
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      group: Associated Records # 4924118286995677808
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TODOS
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ID ==========================================
+    id: 4923790099413480869
+    identification: 
+      column-name: ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 20
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  - # ====== Column: NAME ========================================
+    id: 4923790283911480870
+    identification: 
+      column-name: NAME
+      type: Text Field
+
+    heading: 
+      heading: Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      group: Project Details # 4924118051365677806
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 255
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:RP,11:P11_PROJECT_ID:&ID.'
+        page: 11 # Report and Marquee - Marquee
+        clear-cache: RP,11
+        values: 
+          p11_project_id: '&ID.'
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: PROJECT_LEAD ================================
+    id: 4923790443767480872
+    identification: 
+      column-name: PROJECT_LEAD
+      type: Select List
+
+    heading: 
+      heading: Project Lead
+      alignment: start
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      group: Project Details # 4924118051365677806
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: TEAM MEMBERS # 48798657501137298823
+      display-extra-values: false
+      display-null-value: true
+      null-display-value: '- Select Project Lead -'
+
+    source: 
+      type: Database Column
+      database-column: PROJECT_LEAD
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COMPLETED_DATE ==============================
+    id: 4923790536647480873
+    identification: 
+      column-name: COMPLETED_DATE
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: Completed Date
+      alignment: start
+
+    settings: 
+      show: On icon click
+      show-other-months: false
+      navigation-list-for: None
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      group: Progress # 4924118145443677807
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: COMPLETED_DATE
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: MILESTONES ==================================
+    id: 4923791108816480879
+    identification: 
+      column-name: MILESTONES
+      type: Display Only
+
+    heading: 
+      heading: Milestones
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      group: Associated Records # 4924118286995677808
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: MILESTONES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TASKS =======================================
+    id: 4923791241682480880
+    identification: 
+      column-name: TASKS
+      type: Display Only
+
+    heading: 
+      heading: Tasks
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      group: Associated Records # 4924118286995677808
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TASKS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COMMENTS ====================================
+    id: 4923791460354480882
+    identification: 
+      column-name: COMMENTS
+      type: Display Only
+
+    heading: 
+      heading: Comments
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      group: Associated Records # 4924118286995677808
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COMMENTS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#9bafde'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#efefef'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: Breadcrumbs =================================
+  id: 48377139664061062902
+  identification: 
+    name: Breadcrumbs
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 48377130449411062623
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: CREATE ======================================
+  id: 48377143081623063033
+  identification: 
+    button-name: CREATE
+    label: Create Project
+
+  layout: 
+    sequence: 10
+    region: Breadcrumbs # 48377139664061062902
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.:RP,5::'
+      page: 5 # Project Detail
+      clear-cache: RP,5
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Create Button - Dialog Closed =======
+  id: 48377143159306063034
+  identification: 
+    name: Create Button - Dialog Closed
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Button
+    button: CREATE # 48377143081623063033
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 48377143193274063034
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Projects # 48377138374129062899
+
+    execution: 
+      sequence: 10
+      event: Create Button - Dialog Closed # 48377143159306063034
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Edit Report - Dialog Closed =========
+  id: 48377143390559063034
+  identification: 
+    name: Edit Report - Dialog Closed
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Projects # 48377138374129062899
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 48377143460940063034
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Projects # 48377138374129062899
+
+    execution: 
+      sequence: 10
+      event: Edit Report - Dialog Closed # 48377143390559063034
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: LAST_VIEW ==============================
+  id: 3941584727695599095
+  identification: 
+    item-name: LAST_VIEW
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Item
+    item-name: APP_PAGE_ID
+

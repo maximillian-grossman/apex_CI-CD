@@ -1,0 +1,20 @@
+---
+- # ====== Report Layout: Employees ============================
+  id: 23655473112768268
+  identification: 
+    name: Employees
+    type: Named Columns (DOCX)
+    file-name: employees.docx
+
+  advanced: 
+    static-id: EMPLOYEES
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+  templates: 
+    data-loop-name: employees
+
+  subscription: 
+    version-number: 44452507321256
+

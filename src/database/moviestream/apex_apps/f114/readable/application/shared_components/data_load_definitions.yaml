@@ -1,0 +1,455 @@
+---
+- # ====== Data Load Definition: Master Data Upload ============
+  id: 30213370470252069
+  identification: 
+    name: Master Data Upload
+
+  subscription: 
+    version-number: 44520378102781
+
+  target: 
+    type: Table
+    table-owner: Parsing Schema
+    table-name: TEMP_TABLE
+    loading-method: Replace
+
+  error-handling: 
+    when-on-error: Stop
+
+  advanced: 
+    commit-interval: 200
+    static-id: master_data_upload
+
+  data-profiles: 
+    id: 30206258704252039
+    identification: 
+      name: Master Data Upload
+
+    data-profile: 
+      format: XLSX
+
+    advanced: 
+      encoding: Unicode UTF-8
+      default-xlsx-sheet-name: sheet1.xml
+      first-line-contains-headers: true
+
+    columns: 
+    - # ====== Column: RCO_DIRECTORY ===============================
+      id: 30206859166252043
+      identification: 
+        column-name: RCO_DIRECTORY
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: RCO_DIRECTORY
+
+      advanced: 
+        sequence: 2
+        hidden: false
+
+    - # ====== Column: FACILITY_DISP ===============================
+      id: 30207109924252044
+      identification: 
+        column-name: FACILITY_DISP
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: FACILITY_DISP
+
+      advanced: 
+        sequence: 3
+        hidden: false
+
+    - # ====== Column: FACILITY_DESC ===============================
+      id: 30207426954252046
+      identification: 
+        column-name: FACILITY_DESC
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 255
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: FACILITY_DESC
+
+      advanced: 
+        sequence: 4
+        hidden: false
+
+    - # ====== Column: BLDG_DISP ===================================
+      id: 30207743804252047
+      identification: 
+        column-name: BLDG_DISP
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: BLDG_DISP
+
+      advanced: 
+        sequence: 5
+        hidden: false
+
+    - # ====== Column: BLDG_DESC ===================================
+      id: 30208009147252048
+      identification: 
+        column-name: BLDG_DESC
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 255
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: BLDG_DESC
+
+      advanced: 
+        sequence: 6
+        hidden: false
+
+    - # ====== Column: NURSE_UNIT_DISP =============================
+      id: 30208363934252049
+      identification: 
+        column-name: NURSE_UNIT_DISP
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: NURSE_UNIT_DISP
+
+      advanced: 
+        sequence: 7
+        hidden: false
+
+    - # ====== Column: NURSE_UNIT_DESC =============================
+      id: 30208610926252051
+      identification: 
+        column-name: NURSE_UNIT_DESC
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 255
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: NURSE_UNIT_DESC
+
+      advanced: 
+        sequence: 8
+        hidden: false
+
+    - # ====== Column: NU_OUTBOUND_ALIAS ===========================
+      id: 30208994057252052
+      identification: 
+        column-name: NU_OUTBOUND_ALIAS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: NU_OUTBOUND_ALIAS
+
+      advanced: 
+        sequence: 9
+        hidden: false
+
+    - # ====== Column: ENCOUNTER_ORG ===============================
+      id: 30209298987252053
+      identification: 
+        column-name: ENCOUNTER_ORG
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ENCOUNTER_ORG
+
+      advanced: 
+        sequence: 10
+        hidden: false
+
+    - # ====== Column: AFF_FAC_POOL_ALIAS ==========================
+      id: 30209546518252054
+      identification: 
+        column-name: AFF_FAC_POOL_ALIAS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: AFF_FAC_POOL_ALIAS
+
+      advanced: 
+        sequence: 11
+        hidden: false
+
+    - # ====== Column: CLUSTER_ ====================================
+      id: 30209857893252056
+      identification: 
+        column-name: CLUSTER_
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: CLUSTER_
+
+      advanced: 
+        sequence: 12
+        hidden: false
+
+    - # ====== Column: PATIENT_TYPE ================================
+      id: 30210165013252057
+      identification: 
+        column-name: PATIENT_TYPE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: PATIENT_TYPE
+
+      advanced: 
+        sequence: 13
+        hidden: false
+
+    - # ====== Column: PATIENT_TYPE_ALIAS ==========================
+      id: 30210460820252058
+      identification: 
+        column-name: PATIENT_TYPE_ALIAS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: PATIENT_TYPE_ALIAS
+
+      advanced: 
+        sequence: 14
+        hidden: false
+
+    - # ====== Column: MEDICAL_SERVICE =============================
+      id: 30210762261252059
+      identification: 
+        column-name: MEDICAL_SERVICE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: MEDICAL_SERVICE
+
+      advanced: 
+        sequence: 15
+        hidden: false
+
+    - # ====== Column: OP_PREFIX ===================================
+      id: 30211093274252060
+      identification: 
+        column-name: OP_PREFIX
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: OP_PREFIX
+
+      advanced: 
+        sequence: 16
+        hidden: false
+
+    - # ====== Column: AFF_SRVC_POOL_ALIAS =========================
+      id: 30211323459252062
+      identification: 
+        column-name: AFF_SRVC_POOL_ALIAS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: AFF_SRVC_POOL_ALIAS
+
+      advanced: 
+        sequence: 17
+        hidden: false
+
+    - # ====== Column: MED_SVC_ALIAS ===============================
+      id: 30211632337252063
+      identification: 
+        column-name: MED_SVC_ALIAS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: MED_SVC_ALIAS
+
+      advanced: 
+        sequence: 18
+        hidden: false
+
+    - # ====== Column: PATIENT_SERVICE_CODE ========================
+      id: 30211943062252064
+      identification: 
+        column-name: PATIENT_SERVICE_CODE
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: PATIENT_SERVICE_CODE
+
+      advanced: 
+        sequence: 19
+        hidden: false
+
+    - # ====== Column: PATIENT_SERVICE_DESCRIPTION =================
+      id: 30212293202252065
+      identification: 
+        column-name: PATIENT_SERVICE_DESCRIPTION
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 32767
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: PATIENT_SERVICE_DESCRIPTION
+
+      advanced: 
+        sequence: 20
+        hidden: false
+
+    - # ====== Column: STATUS ======================================
+      id: 30212572248252066
+      identification: 
+        column-name: STATUS
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: STATUS
+
+      advanced: 
+        sequence: 21
+        hidden: false
+
+    - # ====== Column: ADDED_DT ====================================
+      id: 30212895742252067
+      identification: 
+        column-name: ADDED_DT
+
+      source: 
+        type: Data
+        data-type: DATE
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: ADDED_DT
+        format-mask: YYYY"-"MM"-"DD
+        has-time-zone: false
+
+      advanced: 
+        sequence: 22
+        hidden: false
+
+    - # ====== Column: INACTIVE_DT =================================
+      id: 30213195318252068
+      identification: 
+        column-name: INACTIVE_DT
+
+      source: 
+        type: Data
+        data-type: VARCHAR2
+        maximum-length: 50
+        primary-key: false
+
+      parsing: 
+        selector-type: Name
+        selector: INACTIVE_DT
+
+      advanced: 
+        sequence: 23
+        hidden: false
+

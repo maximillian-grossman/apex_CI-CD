@@ -1,0 +1,716 @@
+---
+# ====== Page: Editing (Dialog) ==============================
+id: 54
+identification: 
+  name: Editing (Dialog)
+  alias: EDITING-DIALOG
+  title: Editing (Dialog)
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 1876875645204055880
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 1342165149965603159
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Department Overview =========================
+  id: 2575475047634880904
+  identification: 
+    name: Department Overview
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select d.deptno, d.dname,
+             d.loc,
+             case when dname = 'SALES' then 'fa fa-usd fa-2x'
+                  when dname = 'RESEARCH' then 'fa fa-flask fa-2x'
+                  when dname = 'OPERATIONS' then 'fa fa-calculator fa-2x'
+                  when dname = 'ACCOUNTING' then 'fa fa-area-chart fa-2x'
+             end as dicon,
+             '<br>'||dname || ':<br> ' || count( e.empno ) || case when count(e.empno) = 1 then ' employee' else ' employees' end as dlabel,
+             count( e.empno ) EMP_CNT
+        from eba_demo_ig_emp e,
+             eba_demo_ig_dept d
+       where e.deptno (+) = d.deptno
+       group by d.deptno, d.dname, d.loc
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: emp
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 2575481514176880916
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      show-null-values-as: '-'
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: true
+      custom: false
+      icon-type: Icon CSS Classes
+      icon: DICON
+      link-target: 
+        url: 'f?p=&APP_ID.:55:&SESSION.::&DEBUG.:RP:P55_DEPTNO:&DEPTNO.'
+        page: 55 # Editing in a Dialog 
+        clear-cache: RP
+        values: 
+          p55_deptno: '&DEPTNO.'
+
+      label-column: DLABEL
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 2575481973740880917
+      identification: 
+        name: Primary Report
+        alias: 14501
+
+    - # ====== Saved Report: aaa ===================================
+      id: 4400649968743957997
+      identification: 
+        name: aaa
+        alias: aaa
+
+  columns: 
+  - # ====== Column: DNAME =======================================
+    id: 1859182142892756587
+    identification: 
+      column-name: DNAME
+      type: Link
+
+    heading: 
+      heading: Department Name
+      alignment: start
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:55:&SESSION.::&DEBUG.:RP:P55_DEPTNO:&DEPTNO.'
+        page: 55 # Editing in a Dialog 
+        clear-cache: RP
+        values: 
+          p55_deptno: '&DEPTNO.'
+
+    source: 
+      type: Database Column
+      database-column: DNAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: LOC =========================================
+    id: 1859182292067756588
+    identification: 
+      column-name: LOC
+      type: Text Field
+
+    heading: 
+      heading: Location
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 40
+
+    source: 
+      type: Database Column
+      database-column: LOC
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: EMP_CNT =====================================
+    id: 1859182440092756590
+    identification: 
+      column-name: EMP_CNT
+      type: Number Field
+
+    heading: 
+      heading: Employee Count
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 50
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: EMP_CNT
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DICON =======================================
+    id: 1859182593959756591
+    identification: 
+      column-name: DICON
+      type: Text Field
+
+    heading: 
+      heading: Dicon
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 22
+
+    source: 
+      type: Database Column
+      database-column: DICON
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DLABEL ======================================
+    id: 1859182643486756592
+    identification: 
+      column-name: DLABEL
+      type: Display Only
+
+    heading: 
+      heading: Dlabel
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DLABEL
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: DEPTNO ======================================
+    id: 1876874001160055863
+    identification: 
+      column-name: DEPTNO
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 80
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DEPTNO
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: Overview: Editing in a Dialog ===============
+  id: 4448379236434258797
+  identification: 
+    name: 'Overview: Editing in a Dialog'
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This page shows how to use Interactive Grid in a modal dialog. The first page is a normal page which shows some overview information, in this example the departments stored in the EBA_DEMO_IG_DEPT table are being shown. Clicking on one of the departments opens a dialog page in which the EBA_DEMO_IG_EMP rows for that department can be modified.</p>
+      <p>Here are some things to know about working with interactive grids on a dialog page:</p>
+      <ul>
+      <li>For the interactive grid itself, there are no differences between a normal page and a modal dialog. It's being created the same way.</li>
+      <li>In most cases, the dialog should be closed after changes have been saved. So, on the dialog page, add a <strong>Close Dialog</strong> process to be executed after the interactive grid row processing.</li>
+      <li>It's good practice to add another "Cancel" button as well. On click, execute a <strong>Cancel Dialog</strong> dynamic action.</li>
+      <li>When the dialog is closed, you may want to refresh some regions on the parent page since the shown information is outdated now. To achieve this, create a dynamic action for the <strong>Dialog Closed</strong> event, as it is done on this page. Beyond the refresh you might also display some notifications.</li>
+      </ul>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-expanded
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: Next ========================================
+  id: 1876842683875954817
+  identification: 
+    button-name: Next
+    label: Next
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 1876875645204055880
+    slot: PREVIOUS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillEnd
+    icon: fa-angle-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.:RP::'
+      page: 40 # Advanced
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+- # ====== Button: PREV ========================================
+  id: 1876843053883954820
+  identification: 
+    button-name: PREV
+    label: Previous
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 1876875645204055880
+    slot: PREVIOUS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--pillStart
+    icon: fa-angle-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:60:&SESSION.::&DEBUG.:RP::'
+      page: 60 # People (paging)
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Page Default
+
+dynamic-actions: 
+- # ====== Dynamic Action: Edit Dialog closed. =================
+  id: 1876874685476055870
+  identification: 
+    name: Edit Dialog closed.
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: JavaScript Expression
+    javascript-expression: window
+
+  client-side-condition: 
+    type: JavaScript expression
+    javascript-expression: this.data && this.data.dialogPageId === 55
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 1876874750597055871
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.message.showPageSuccess( "Changes successfully saved.");
+
+    execution: 
+      sequence: 20
+      event: Edit Dialog closed. # 1876874685476055870
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 1876874975823055873
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Department Overview # 2575475047634880904
+
+    execution: 
+      sequence: 10
+      event: Edit Dialog closed. # 1876874685476055870
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

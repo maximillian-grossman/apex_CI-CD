@@ -1,0 +1,45 @@
+---
+- # ====== Automation: Load Employee Data ======================
+  id: 3346294250510548595
+  identification: 
+    name: Load Employee Data
+    static-id: load-employee-data
+
+  execution: 
+    type: Scheduled
+    schedule-expression: FREQ=HOURLY;INTERVAL=1;BYMINUTE=0
+    schedule-status: Disabled
+    actions-initiated-on: Rows returned
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_LOAD_EMP
+    include-rowid-column: false
+
+  action-execution: 
+    commit: Once
+    action-error-handling: Ignore
+
+  actions: 
+  - # ====== Action: New Action ==================================
+    id: 3346294506302548640
+    identification: 
+      name: New Action
+      type: Execute Code
+
+    source: 
+      location: Local Database
+      language: PL/SQL
+      pl/sql-code: |
+        begin
+            null;
+        end;
+
+    execution: 
+      sequence: 10
+
+    error: 
+      stop-execution-on-error: true
+

@@ -1,0 +1,39 @@
+---
+- # ====== Report Layout: testing ==============================
+  id: 9052524551595666
+  identification: 
+    name: testing
+    type: Named Columns (DOCX)
+    file-name: testing.docx
+
+  advanced: 
+    static-id: testing
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+  templates: 
+    data-loop-name: employees
+
+  subscription: 
+    version-number: 44488592698261
+
+- # ====== Report Layout: Employees ============================
+  id: 22100244645465257
+  identification: 
+    name: Employees
+    type: Named Columns (DOCX)
+    file-name: employees.docx
+
+  advanced: 
+    static-id: EMPLOYEES
+
+  attributes: 
+    mime-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+  templates: 
+    data-loop-name: employees
+
+  subscription: 
+    version-number: 44485289790122
+

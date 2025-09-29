@@ -1,0 +1,1013 @@
+---
+# ====== Page: Report with Pagination ========================
+id: 3
+identification: 
+  name: Report with Pagination
+  alias: REPORT-WITH-PAGINATION
+  title: Report with Pagination
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    section.infoRegion {
+        border: 1px solid #9AAEC8;
+        background-color: #DDE7F5;
+    }
+    section.infoRegion > div.uRegionHeading {
+        background: none transparent;
+    }
+    .infoRegionIcon {
+        position: absolute;
+        left: 0;
+        margin: 16px;
+        top: 0;
+    }
+    section.infoRegion.uRegion > div.uRegionContent {
+        position: relative;
+        min-height: 32px;
+        padding: 16px 16px 16px 64px;
+    }
+    .infoRegion h1 {
+        font-weight: bold;
+        font-size: 14px;
+        color: #202020;
+        text-shadow: 0 1px 0 rgba(255,255,255,.65);
+    }
+    .infoRegion p {
+        font-size: 12px;
+        line-height: 20px;
+        padding: 8px 0 0 0;
+        text-shadow: 0 1px 0 rgba(255,255,255,.25);
+        color: #303030;
+    }
+    .infoRegion p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    
+    
+    div.featuredBlock{
+    	-webkit-border-radius:3px;
+    	-moz-border-radius:3px;
+    	border-radius:3px;
+    	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    	border:1px solid #E1E6EB;
+    	margin-bottom:18px
+    }
+    div.featuredBlock div.featuredIcon{
+    	background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmNGY0ZjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+    	background-size:100%;
+    	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(60%, #f4f4f8), color-stop(100%, #ffffff));
+    	background-image:-webkit-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:-moz-linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	background-image:linear-gradient(top, #ffffff 0%,#ffffff 40%,#f4f4f8 60%,#ffffff 100%);
+    	-webkit-border-radius:3px 3px 0 0;
+    	-moz-border-radius:3px 3px 0 0;
+    	border-radius:3px 3px 0 0;
+    	padding:8px 0;
+    	min-height: 90px;
+    	text-align:center;
+    }
+    div.featuredBlock div.featuredIcon img{
+    	display:block;
+    	margin:0 auto 0 auto;
+    	-webkit-box-reflect:below -20px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(65%, transparent), to(rgba(255,255,255,0.2)));
+    }
+    div.featuredBlock div.featuredIcon h1{
+    	font-size:12px;
+    	line-height:12px;
+    	color:#404040;
+    	margin:0 8px;
+    	padding:0;
+    	text-align:center;
+    }
+    a.blockLink,a.blockLink:hover{
+    	text-decoration:none
+    }
+    a.blockLink:hover div.featuredBlock{
+    	border:1px solid #b1bbcb
+    }
+    a.blockLink:hover div.featuredBlock div.featuredIcon{
+    	background: none #e5effb;
+    	-webkit-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	-moz-box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    	box-shadow: 0 0 10px rgba(50,117,199,0.25);
+    }
+    .regionDivider {
+    	border-top: 2px solid #F0F0F0 !important;
+    	padding-top: 8px;;
+    }
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 1800053317477651720
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: REST Service Endpoint =======================
+  id: 7291125801224377661
+  identification: 
+    name: REST Service Endpoint
+    type: Static Content
+
+  source: 
+    html-code: 'REST Service Endpoint: <b>&P3_THIS_URL.</b>'
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--noUI
+    - t-Region--scrollBody
+    - margin-top-lg
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About this page =============================
+  id: 8513099085856469042
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This page shows how to create a report to display a larger REST service response in an Application Express application. Note that it's not feasible to download the full REST service response, since it's simply too large. So, normal Application Express report pagination cannot be used here since it requires all data to be present in the local database. </p>
+      <p>This example uses REST pagination support provided by Oracle REST Data Services (ORDS). Each service response contains a link to the next and previous pages. When the <strong>Next Page</strong> or <strong>Previous Page</strong> buttons are clicked, the application page performs another REST request using the link to the next or previous result page, which have been extracted from the response.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Footer ======================================
+  id: 8702129211881291263
+  identification: 
+    name: Footer
+    type: Sample Apps Footer
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: None
+    render-components: Above Content
+
+  advanced: 
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: Data from RESTful Service ===================
+  id: 15719233054441800901
+  identification: 
+    name: Data from RESTful Service
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select 
+          x.EMPNO, 
+          x.ENAME, 
+          x.JOB, 
+          x.MGR, 
+          to_date( x.HIREDATE, 'YYYY-MM-DD"T"HH24:MI:SS"Z"' ) as HIREDATE, 
+          x.SAL, 
+          x.COMM,
+          x.DEPTNO, 
+          x.RN
+      from apex_collections c, xmltable(
+          '/json/items/row'
+          passing apex_json.to_xmltype( c.clob001 )
+          columns
+              EMPNO      NUMBER          path 'empno',
+              ENAME      VARCHAR2(4000)  path 'ename',
+              JOB        VARCHAR2(4000)  path 'job',
+              MGR        NUMBER          path 'mgr',
+              HIREDATE   VARCHAR2(4000)   path 'hiredate',
+              SAL        NUMBER          path 'sal', 
+              COMM       NUMBER          path 'comm',
+              DEPTNO     NUMBER          path 'deptno',
+              RN         NUMBER          path 'rn'
+      ) x
+      where c.collection_name = 'REST_COLLECTION'
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: report
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 50
+
+    appearance: 
+      template-type: Theme
+      template: Standard
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--altRowsDefault
+      - t-Report--rowHighlight
+      - t-Report--horizontalBorders
+      show-null-values-as: '-'
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data returned.
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: EMPNO =======================================
+    id: 1863925056939937830
+    identification: 
+      column-name: EMPNO
+      type: Plain Text
+
+    heading: 
+      heading: Empno
+      alignment: end
+
+    layout: 
+      sequence: 3
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ENAME =======================================
+    id: 1863925555328937830
+    identification: 
+      column-name: ENAME
+      type: Plain Text
+
+    heading: 
+      heading: Ename
+      alignment: start
+
+    layout: 
+      sequence: 4
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: JOB =========================================
+    id: 1863925924629937831
+    identification: 
+      column-name: JOB
+      type: Plain Text
+
+    heading: 
+      heading: Job
+      alignment: start
+
+    layout: 
+      sequence: 5
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: MGR =========================================
+    id: 1863926354164937831
+    identification: 
+      column-name: MGR
+      type: Plain Text
+
+    heading: 
+      heading: Mgr
+      alignment: end
+
+    layout: 
+      sequence: 6
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: HIREDATE ====================================
+    id: 1863926738759937831
+    identification: 
+      column-name: HIREDATE
+      type: Plain Text
+
+    heading: 
+      heading: Hiredate
+      alignment: center
+
+    layout: 
+      sequence: 7
+      column-alignment: center
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: SAL =========================================
+    id: 1863927071050937832
+    identification: 
+      column-name: SAL
+      type: Plain Text
+
+    heading: 
+      heading: Sal
+      alignment: end
+
+    layout: 
+      sequence: 8
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: COMM ========================================
+    id: 1863927492781937832
+    identification: 
+      column-name: COMM
+      type: Plain Text
+
+    heading: 
+      heading: Comm
+      alignment: end
+
+    layout: 
+      sequence: 9
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DEPTNO ======================================
+    id: 1863927862164937832
+    identification: 
+      column-name: DEPTNO
+      type: Plain Text
+
+    heading: 
+      heading: Deptno
+      alignment: end
+
+    layout: 
+      sequence: 10
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: RN ==========================================
+    id: 1863928326032937833
+    identification: 
+      column-name: RN
+      type: Plain Text
+
+    heading: 
+      heading: 'Row #'
+      alignment: end
+
+    layout: 
+      sequence: 2
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      cell-width: 100
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DERIVED$01 ==================================
+    id: 1865581595664856001
+    identification: 
+      column-name: DERIVED$01
+      type: Link
+
+    heading: 
+      heading: '&nbsp;'
+      alignment: center
+
+    layout: 
+      sequence: 1
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.:RP:P12_BACK_TO_PAGE,P12_EMPNO:3,#EMPNO#'
+        page: 12 # DML Form
+        clear-cache: RP
+        values: 
+          p12_back_to_page: 3
+          p12_empno: '#EMPNO#'
+
+      link-text: <center><img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit Employee"></center>
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      cell-width: 75
+      compute-sum: false
+
+    security: 
+      escape-special-characters: true
+
+page-items: 
+- # ====== Page Item: P3_URL_PREV_PAGE =========================
+  id: 1863929533330937834
+  identification: 
+    name: P3_URL_PREV_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Data from RESTful Service # 15719233054441800901
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_URL_NEXT_PAGE =========================
+  id: 1863929865993937839
+  identification: 
+    name: P3_URL_NEXT_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Data from RESTful Service # 15719233054441800901
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_SHOW_PAGE =============================
+  id: 1863930265792937839
+  identification: 
+    name: P3_SHOW_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Data from RESTful Service # 15719233054441800901
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_THIS_URL ==============================
+  id: 1863931320693937840
+  identification: 
+    name: P3_THIS_URL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: REST Service Endpoint # 7291125801224377661
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: NEXT ========================================
+  id: 1863928736922937833
+  identification: 
+    button-name: NEXT
+    label: Next Page
+
+  layout: 
+    sequence: 20
+    region: Data from RESTful Service # 15719233054441800901
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconRight
+    icon: fa-angle-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:P3_SHOW_PAGE:next'
+      page: 3 # Report with Pagination
+      clear-cache: RP
+      values: 
+        p3_show_page: next
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P3_URL_NEXT_PAGE
+
+- # ====== Button: PREV ========================================
+  id: 1863929097441937834
+  identification: 
+    button-name: PREV
+    label: Previous Page
+
+  layout: 
+    sequence: 10
+    region: Data from RESTful Service # 15719233054441800901
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconLeft
+    icon: fa-angle-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:P3_SHOW_PAGE:prev'
+      page: 3 # Report with Pagination
+      clear-cache: RP
+      values: 
+        p3_show_page: prev
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P3_URL_PREV_PAGE
+
+processes: 
+- # ====== Process: Fetch data into Collection =================
+  id: 1863931660091937841
+  identification: 
+    name: Fetch data into Collection
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      -- INSTRUCTIONS 
+      -- 
+      -- 1. create 3 items on your Application Express page: 
+      --    - {APEX_ITEM_URL_NEXT_PAGE}: holds the REST data URL for the next page
+      --    - {APEX_ITEM_URL_PREV_PAGE}: holds the REST data URL for the previous page
+      --    - {APEX_ITEM_SHOW_PAGE}:     determines whether to move forward or backwards 
+      -- 
+      -- 2. create two page buttons:
+      --    - "PREV": redirect to the same page and set :{APEX_ITEM_SHOW_PAGE} to "prev"
+      --    -         conditional; show only when {APEX_ITEM_URL_PREV_PAGE} is NOT NULL
+      --    - "NEXT": redirect to the same page and set :{APEX_ITEM_SHOW_PAGE} to "next"
+      --    -         conditional; show only when {APEX_ITEM_URL_NEXT_PAGE} is NOT NULL
+      --
+      -- 3. replace the on Page Load code with the following. Replace all occurrences of
+      --    :{APEX_ITEM_...} with your page item names.
+      --
+      
+      declare
+          l_response clob;
+      begin
+          :P3_THIS_URL := case 
+                                -- TODO: replace with your page item names here
+                                when :P3_SHOW_PAGE = 'next' and :P3_URL_NEXT_PAGE is not null then :P3_URL_NEXT_PAGE
+                                when :P3_SHOW_PAGE = 'prev' and :P3_URL_PREV_PAGE is not null then :P3_URL_PREV_PAGE
+                                else nvl( :P3_THIS_URL, :SAMPLE_ENDPOINT_URL )
+                            end;
+      
+          :P3_SHOW_PAGE := null;
+      
+          -- load REST response into a collection
+          l_response := apex_web_service.make_rest_request(
+              p_url              => :P3_THIS_URL,
+              p_http_method      => 'GET');
+      
+          apex_collection.create_or_truncate_collection( 'REST_COLLECTION' );
+          apex_collection.add_member(
+              p_collection_name => 'REST_COLLECTION',
+              p_clob001 =>         l_response );
+      
+          select
+              x.next_page, 
+              coalesce( x.prev_page, x.previous_page ) 
+            -- TODO: replace with your page item names here
+            into :P3_URL_NEXT_PAGE, :P3_URL_PREV_PAGE
+          from apex_collections c, xmltable( 
+              '/json'
+              passing apex_json.to_xmltype( c.clob001 )
+              columns
+                  next_page     varchar2(500) path 'next/_ref',
+                  prev_page     varchar2(500) path 'prev/_ref',
+                  previous_page varchar2(500) path 'previous/_ref'
+          ) x
+          where c.collection_name = 'REST_COLLECTION';
+      end;
+      
+
+  execution: 
+    sequence: 10
+    point: After Header
+    run-process: Once Per Page Visit (default)
+

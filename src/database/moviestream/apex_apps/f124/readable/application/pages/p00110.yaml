@@ -1,0 +1,379 @@
+---
+# ====== Page: Airports Heat Map =============================
+id: 110
+identification: 
+  name: Airports Heat Map
+  alias: AIRPORTS-HEAT-MAP
+  title: '&APP_NAME. - Airports Heat Map'
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: About This Page =============================
+  id: 1575187034472459873
+  identification: 
+    name: About This Page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      This page visualizes US <strong>Heliports</strong> as 
+       a <em>Heat Map</em>. Heat maps are used to visualize the density of spatial objects. Zoom in and out to see how the heat map visualizes point density.
+      </p>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Popup
+    template-options: 
+    - '#DEFAULT#'
+    - js-dialog-autoheight
+    - js-popup-noOverlay
+    - js-popup-callout
+    - js-dialog-size480x320
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: about_this_page
+    custom-attributes: 
+    - data-parent-element="#help_button"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: US Airports =================================
+  id: 1575317505232558825
+  identification: 
+    name: US Airports
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: airport-map-region
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1575317621389558826
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Scale Bar
+      - Infinite Map
+      - Rectangle Zoom
+
+    initial-position-and-zoom: 
+      type: Static Values
+      longitude: '-90'
+      latitude: 35
+      zoom-level: 3
+
+    legend: 
+      show: true
+      position: End
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: US State =====================================
+      id: 1572118545519032295
+      identification: 
+        name: US State
+        layer-type: Polygons
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: EBA_SAMPLE_MAP_STATES
+        include-rowid-column: false
+        where-clause: 'upper(NAME) = :P110_STATE'
+        page-items-to-submit: 
+        - P110_STATE
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: SDO_GEOMETRY
+        geometry-column: GEOMETRY
+
+      appearance: 
+        use-color-scheme: false
+        fill-color: '#808080'
+        fill-opacity: 0.3
+        stroke-color: '#101010'
+
+      tooltip: 
+        advanced-formatting: false
+        column: NAME
+
+      info-window: 
+        advanced-formatting: false
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+    - # ====== Layer: Airports Density =============================
+      id: 1575317716584558827
+      identification: 
+        name: Airports Density
+        layer-type: Heat Map
+
+      layout: 
+        sequence: 20
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: EBA_SAMPLE_MAP_AIRPORTS
+        include-rowid-column: false
+        where-clause: |
+          STATE_NAME = :P110_STATE or :P110_STATE IS NULL
+          and airport_type = 'HELIPORT' 
+        page-items-to-submit: 
+        - P110_STATE
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: SDO_GEOMETRY
+        geometry-column: GEOMETRY
+        primary-key-column: ID
+
+      appearance: 
+        color-scheme: Sequential
+        scheme-name: Sunset
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+- # ====== Region: State =======================================
+  id: 1576328472458363100
+  identification: 
+    name: State
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P110_STATE ===============================
+  id: 1576328513318363101
+  identification: 
+    name: P110_STATE
+    type: Select List
+
+  label: 
+    label: Filter for State
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: State # 1576328472458363100
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Above
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--large
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      select distinct initcap( name ) d, upper(name) r
+        from EBA_SAMPLE_MAP_STATES
+       order by 1
+    display-extra-values: false
+    display-null-value: true
+    null-display-value: All States
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Refresh Map =========================
+  id: 1576328622217363102
+  identification: 
+    name: Refresh Map
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P110_STATE
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 1576328703133363103
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: US Airports # 1575317505232558825
+
+    execution: 
+      sequence: 10
+      event: Refresh Map # 1576328622217363102
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

@@ -1,0 +1,393 @@
+---
+# ====== Page: US States (extruded) ==========================
+id: 113
+identification: 
+  name: US States (extruded)
+  alias: US-STATES-EXTRUDED
+  title: '&APP_NAME. - US States (extruded)'
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Water Area by State =========================
+  id: 1574752810703539544
+  identification: 
+    name: Water Area by State
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h1
+    - t-ContentBlock--lightBG
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: water-map-region
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1572130223811098623
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Scale Bar
+      - Infinite Map
+      - Rectangle Zoom
+
+    initial-position-and-zoom: 
+      type: Static Values
+      longitude: '-90'
+      latitude: 35
+      zoom-level: 3
+
+    legend: 
+      show: true
+      position: End
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: Water Area by State ==========================
+      id: 1572130737259098624
+      identification: 
+        name: Water Area by State
+        layer-type: Extruded Polygons
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select ID,
+                 NAME,
+                 STATE_CODE,
+                 to_char(LAND_AREA / 1000000,'9G999G999G990D000')  land_area,
+                 to_char(WATER_AREA / 1000000,'9G999G999G990D000')  water_area,
+                 case when water_area > 50000000000 then 2500000 else water_area / 20000 end as water_area_color,
+                 GEOMETRY
+            from EBA_SAMPLE_MAP_SIMPLE_STATES
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: SDO_GEOMETRY
+        geometry-column: GEOMETRY
+        primary-key-column: ID
+
+      appearance: 
+        use-color-scheme: true
+        color-scheme: Sequential
+        scheme-name: Blue to Yellow
+        color-value-column: WATER_AREA_COLOR
+        extrusion-value-column: WATER_AREA_COLOR
+        unit: Meter
+        fill-opacity: 0.7
+
+      tooltip: 
+        advanced-formatting: false
+        column: NAME
+
+      info-window: 
+        advanced-formatting: true
+        html-expression: |
+          <strong>&NAME. (&STATE_CODE.)</strong><br>
+          Land Area: &LAND_AREA. km&sup2;<br>
+          Water Area: &WATER_AREA. km&sup2;<br>
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+      messages: 
+        when-no-data-found: No States found.
+
+- # ====== Region: About This Page =============================
+  id: 1575188056414459883
+  identification: 
+    name: About This Page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      These map visualize US states as <em>Extruded</em> polygons.  Click on a state to show a info popup with details.
+      </p>
+      <p>For the map on the left, Polygon color and height are determined by the <strong>WATER_AREA</strong> column, using the built-in <strong>Blue to Yellow</strong> color scheme. For the map on the right, Polygon color and height are derived from the "airport count" by state. The airports and states table are joined using the  
+      <strong>SDO_ANYINTERACT</strong> spatial SQL function, based on airports and state coordinates.
+      </p>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Popup
+    template-options: 
+    - '#DEFAULT#'
+    - js-dialog-autoheight
+    - js-popup-noOverlay
+    - js-popup-callout
+    - js-dialog-size480x320
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: about_this_page
+    custom-attributes: 
+    - data-parent-element="#help_button"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Airports by State ===========================
+  id: 2368677360828772935
+  identification: 
+    name: Airports by State
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h1
+    - t-ContentBlock--lightBG
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 812011326969508201
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Scale Bar
+      - Infinite Map
+      - Rectangle Zoom
+
+    initial-position-and-zoom: 
+      type: Static Values
+      longitude: '-90'
+      latitude: 35
+      zoom-level: 3
+
+    legend: 
+      show: true
+      position: End
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: Airports by State ============================
+      id: 812011824234508209
+      identification: 
+        name: Airports by State
+        layer-type: Extruded Polygons
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          with data as (
+              select s.ID,
+                 s.NAME,
+                 s.STATE_CODE,
+                 ( select count( a.id ) 
+                     from eba_sample_map_airports a
+                    where commercial_ops > 0 and upper(s.name) = upper(a.state_name) ) airport_count,
+                 s.GEOMETRY
+            from EBA_SAMPLE_MAP_SIMPLE_STATES s
+          ) 
+          select id,
+                 upper(name) as name,
+                 state_code,
+                 airport_count,
+                 airport_count * 10 as polygon_height,
+                 geometry
+            from data
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: SDO_GEOMETRY
+        geometry-column: GEOMETRY
+        primary-key-column: ID
+
+      appearance: 
+        use-color-scheme: true
+        color-scheme: Diverging
+        scheme-name: Temps
+        color-value-column: AIRPORT_COUNT
+        extrusion-value-column: POLYGON_HEIGHT
+        unit: Kilometer
+        fill-opacity: 0.7
+
+      tooltip: 
+        advanced-formatting: false
+        column: NAME
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_STATE:&NAME.'
+          page: 110 # Airports Heat Map
+          clear-cache: 110
+          values: 
+            p110_state: '&NAME.'
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+      messages: 
+        when-no-data-found: No States found.
+
+dynamic-actions: 
+- # ====== Dynamic Action: On Click Point ======================
+  id: 806551708880825077
+  identification: 
+    name: On Click Point
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: NATIVE_MAP_REGION|REGION TYPE|spatialmapobjectclick
+    selection-type: Region
+    region: Water Area by State # 1574752810703539544
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 806552096556825077
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        const { lng, lat } = this.data;
+        
+        apex.region("water-map-region").call( "getMapObject" ).flyTo({ 
+            center: [ lng, lat ],
+            screenSpeed: 0.8
+        });
+
+    execution: 
+      sequence: 10
+      event: On Click Point # 806551708880825077
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

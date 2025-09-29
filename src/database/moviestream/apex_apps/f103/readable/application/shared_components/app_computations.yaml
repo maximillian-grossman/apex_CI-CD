@@ -1,0 +1,18 @@
+---
+- # ====== Application Computation: WORKSPACE_SCHEMA ===========
+  id: 1852565814184225459
+  identification: 
+    item-name: WORKSPACE_SCHEMA
+
+  execution: 
+    sequence: 10
+    point: New Session
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: sys_context('USERENV','CURRENT_SCHEMA')
+
+  subscription: 
+    version-number: 41149317311489
+

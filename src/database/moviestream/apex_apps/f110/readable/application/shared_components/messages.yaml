@@ -1,0 +1,16 @@
+---
+- # ====== Text Message: MY_CREATE_BUTTON ======================
+  id: 1003204737559534446
+  identification: 
+    name: MY_CREATE_BUTTON
+
+  message: 
+    text: Create
+
+  attributes: 
+    language: English (en)
+    used-in-javascript: true
+
+  subscription: 
+    version-number: 37166093902548
+

@@ -1,0 +1,848 @@
+---
+# ====== Page: Interactive Report ============================
+id: 1
+identification: 
+  name: Interactive Report
+  alias: INTERACTIVE-REPORT
+  title: Interactive Report
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: About this page =============================
+  id: 1334631824729414727
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: <p>This interactive report was created using the Create Page Wizard. The SQL used to create this report displays in the show/hide region at the bottom of the page. Interactive reports feature built-in search capability in that your search term is used to search across the row.  In addition to the default interactive report functionality, this report has a <strong>Detail</strong> view which you can toggle to by clicking the <strong>Detail View</strong> icon.  You can sort and filter columns by clicking on column headings, click the <strong>Actions</strong> drop down menu to control the columns to display on the report and the order in which they are displayed.  You can also save custom reports, chart data, and perform many other actions.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-bottom-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: SQL Source ==================================
+  id: 1354467219206393848
+  identification: 
+    name: SQL Source
+    type: Source Display
+
+  layout: 
+    sequence: 10
+    parent-region: Projects # 2586471725294771788
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      region-static-id: projects_report
+
+- # ====== Region: Projects ====================================
+  id: 2586471725294771788
+  identification: 
+    name: Projects
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select	ROWID,
+             ID,
+             PROJECT,
+             TASK_NAME,
+             START_DATE,
+             END_DATE,
+             STATUS,
+             ASSIGNED_TO,
+             COST,
+             BUDGET,
+             budget - cost available_budget
+      from EBA_DEMO_IR_PROJECTS
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: projects_report
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 2586471798753771788
+    link: 
+      link-column: Link to Custom Target
+      target: 
+        url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:2:P2_ROWID:#ROWID#'
+        page: 2 # Maintain Project
+        clear-cache: 2
+        values: 
+          p2_rowid: '#ROWID#'
+
+      link-icon: <img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">
+
+    appearance: 
+      show-null-values-as: '-'
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+      maximum-rows-to-process: 100000
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'This query returns more than #MAX_ROW_COUNT# rows, please filter your data to ensure complete results.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: true
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: true
+      before-rows: |
+        <style>
+        table.apexir_WORKSHEET_CUSTOM { border: none !important; -moz-box-shadow: none; box-shadow: none; -webkit-box-shadow: none; }
+        .apexir_WORKSHEET_DATA td {border-bottom: none !important;}
+        table.reportDetail td {
+        	border: none !important;
+        	font: 11px/16px Arial, sans-serif;
+        	}
+        	table.reportDetail td.separator {
+        		background: #CCC;
+        		height: 2px !important;
+        padding: 0;
+        		line-height: 2px !important;
+        overflow: hidden;
+        		}
+        table.reportDetail td h1 {margin: 8px 0 !important}
+        table.reportDetail td img {margin-top: 8px; border: 4px solid #CCC; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
+        </style>
+        <table class="reportDetail">
+      for-each-row: |
+        <tr><td colspan="4" class="separator"></td></tr>
+        <tr>
+        <td><strong><u>#PROJECT#</u></strong></td><td><i>#TASK_NAME#</i></td>
+        </tr>
+        <tr><td align="left"><strong>#STATUS_LABEL#:</strong></td><td>#STATUS#</td>
+        </tr>
+        <tr><td align="left"><strong>#ASSIGNED_TO_LABEL#:</strong></td><td>#ASSIGNED_TO#</td>
+        </tr>
+        <tr>
+        <td style="padding-bottom: 0px;"><strong>#START_DATE_LABEL#</strong></td>
+        <td style="padding-bottom: 0px;"><strong>#END_DATE_LABEL#</strong></td>
+        <td style="padding-bottom: 0px;"><strong>#BUDGET_LABEL#</strong></td>
+        <td style="padding-bottom: 0px;"><strong>#COST_LABEL#</strong></td>
+        </tr>
+        <tr>
+        <td style="padding-top: 0px;">#START_DATE#</td>
+        <td style="padding-top: 0px;">#END_DATE#</td>
+        <td style="padding-top: 0px;">#BUDGET#</td>
+        <td style="padding-top: 0px;">#COST#</td>
+        </tr>
+      after-rows: |
+        <tr><td colspan="4" class="separator"></td></tr>
+        </table>
+
+    saved-reports: 
+    - # ====== Saved Report: Pivot Example =========================
+      id: 2222016659907308710
+      identification: 
+        name: Pivot Example
+        alias: 21844430
+
+    - # ====== Saved Report: Primary Report ========================
+      id: 2586634212181796377
+      identification: 
+        name: Primary Report
+        alias: 19091460
+
+    - # ====== Saved Report: Budget Review =========================
+      id: 2586713700847849885
+      identification: 
+        name: Budget Review
+        alias: 19092255
+
+    - # ====== Saved Report: Highlighted Over Budget ===============
+      id: 2701570523634459912
+      identification: 
+        name: Highlighted Over Budget
+        alias: 20240823
+
+    columns: 
+    - # ====== Column: ID ==========================================
+      id: 2586472025702771793
+      identification: 
+        column-name: ID
+        type: Hidden
+
+      heading: 
+        heading: Id
+
+      layout: 
+        sequence: 1
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: PROJECT =====================================
+      id: 2586472103340771795
+      identification: 
+        column-name: PROJECT
+        type: Plain Text
+
+      heading: 
+        heading: Project
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 2
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: TASK_NAME ===================================
+      id: 2586472228265771795
+      identification: 
+        column-name: TASK_NAME
+        type: Plain Text
+
+      heading: 
+        heading: Task Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 3
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: START_DATE ==================================
+      id: 2586472329635771795
+      identification: 
+        column-name: START_DATE
+        type: Plain Text
+
+      heading: 
+        heading: Start Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 4
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: END_DATE ====================================
+      id: 2586472404145771795
+      identification: 
+        column-name: END_DATE
+        type: Plain Text
+
+      heading: 
+        heading: End Date
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 5
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+        date-ranges: All
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: STATUS ======================================
+      id: 2586472505145771795
+      identification: 
+        column-name: STATUS
+        type: Plain Text
+
+      heading: 
+        heading: Status
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ASSIGNED_TO =================================
+      id: 2586472619229771795
+      identification: 
+        column-name: ASSIGNED_TO
+        type: Plain Text
+
+      heading: 
+        heading: Assigned To
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 7
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COST ========================================
+      id: 2586472714966771795
+      identification: 
+        column-name: COST
+        type: Plain Text
+
+      heading: 
+        heading: Cost
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 8
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: BUDGET ======================================
+      id: 2586472797795771796
+      identification: 
+        column-name: BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Budget
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 9
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ROWID =======================================
+      id: 2586515000837774113
+      identification: 
+        column-name: ROWID
+        type: Hidden
+
+      heading: 
+        heading: Rowid
+
+      layout: 
+        sequence: 10
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: false
+
+    - # ====== Column: AVAILABLE_BUDGET ============================
+      id: 2701551321079449771
+      identification: 
+        column-name: AVAILABLE_BUDGET
+        type: Plain Text
+
+      heading: 
+        heading: Available Budget
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 11
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+- # ====== Region: Breadcrumbs =================================
+  id: 6307140655102747100
+  identification: 
+    name: Breadcrumbs
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 6307140148628747096
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: RESET_DATA ==================================
+  id: 2680077707026611932
+  identification: 
+    button-name: RESET_DATA
+    label: Reset
+
+  layout: 
+    sequence: 10
+    region: Projects # 2586471725294771788
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-undo-alt
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:RP,1,RIR::'
+      page: 1 # Interactive Report
+      clear-cache: RP,1,RIR
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Refresh on Edit =====================
+  id: 237119625436541529
+  identification: 
+    name: Refresh on Edit
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Projects # 2586471725294771788
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 237119684094541530
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Projects # 2586471725294771788
+
+    execution: 
+      sequence: 10
+      event: Refresh on Edit # 237119625436541529
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

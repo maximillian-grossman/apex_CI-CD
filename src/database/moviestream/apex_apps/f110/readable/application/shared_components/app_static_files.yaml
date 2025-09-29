@@ -1,0 +1,55 @@
+---
+- # ====== Static Application File: sample-interactive-grid.css 
+  id: 119036465149889232
+  identification: 
+    file-name: sample-interactive-grid.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: sample-interactive-grid.min.
+  id: 119037501692890826
+  identification: 
+    file-name: sample-interactive-grid.min.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: eba_demo_ig_people.json ====
+  id: 456688424865533575
+  identification: 
+    file-name: eba_demo_ig_people.json
+
+  attributes: 
+    mime-type: application/json
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 548934893287147385
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 548935079090147404
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 548935376565147423
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+

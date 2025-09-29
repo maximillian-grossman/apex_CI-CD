@@ -1,0 +1,1020 @@
+---
+# ====== Page: Drill Down IG =================================
+id: 40
+identification: 
+  name: Drill Down IG
+  alias: DRILL-DOWN-IG
+  title: Drill Down IG
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: About this page =============================
+  id: 2366067504017995649
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: <p>This interactive grid was created using the create page wizard.  The SQL used to create the report is displayed in the show/hide region at the bottom of the page. Many columns of this report provide drill down capabilities.  To make a report column "hot" you edit the Column <strong>Link</strong> attributes which are on the <strong>Columns</strong> tab of the interactive grid region.  You can link report columns to other pages in the Oracle APEX application and control the session state to be passed.  You can also link to custom URLs.  Your column link can access any of the values of a given report row using the <strong>&amp;MY_COLUMN.</strong> syntax.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: SQL Source ==================================
+  id: 2385890314027875703
+  identification: 
+    name: SQL Source
+    type: Source Display
+
+  layout: 
+    sequence: 20
+    parent-region: Container # 3242636166409037244
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      region-static-id: projects_report
+
+- # ====== Region: Container ===================================
+  id: 3242636166409037244
+  identification: 
+    name: Container
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 3732550214458675723
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: ' Breadcrumb' # 6307140148628747096
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Projects ====================================
+  id: 3732681821539715068
+  identification: 
+    name: Projects
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select
+             PROJECT,
+             count(*) tasks,
+             min(START_DATE) first_start_date,
+             max(END_DATE) last_end_date,
+             sum(decode(STATUS,'Open',1,0)) open,
+             sum(decode(STATUS,'Closed',1,0)) closed,
+             sum(decode(STATUS,'Pending',1,0)) pending,
+             sum(decode(STATUS,'On-Hold',1,0)) on_hold,   
+             count(distinct ASSIGNED_TO) assignees,
+             sum(COST) total_cost,
+             sum(BUDGET) total_budget,
+             sum(BUDGET) - sum(COST) cost_vs_budget
+      from EBA_DEMO_IR_PROJECTS
+      group by project
+
+  layout: 
+    sequence: 10
+    parent-region: Container # 3242636166409037244
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--noBorders
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: projects_report
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1064918453185008261
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: true
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Reset Button
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 1066498733519760358
+      identification: 
+        name: Primary Report
+        alias: 14149
+
+  columns: 
+  - # ====== Column: PROJECT =====================================
+    id: 1064918633208008262
+    identification: 
+      column-name: PROJECT
+      type: Link
+
+    heading: 
+      heading: Project
+      alignment: start
+
+    layout: 
+      sequence: 10
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&PROJECT.'
+
+    source: 
+      type: Database Column
+      database-column: PROJECT
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: TASKS =======================================
+    id: 1064918735661008263
+    identification: 
+      column-name: TASKS
+      type: Link
+
+    heading: 
+      heading: Tasks
+      alignment: end
+
+    layout: 
+      sequence: 20
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&TASKS.'
+
+    source: 
+      type: Database Column
+      database-column: TASKS
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FIRST_START_DATE ============================
+    id: 1064918758010008264
+    identification: 
+      column-name: FIRST_START_DATE
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: First Start Date
+      alignment: center
+
+    settings: 
+      show: On icon click
+      show-other-months: false
+      navigation-list-for: None
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: FIRST_START_DATE
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: LAST_END_DATE ===============================
+    id: 1064918891841008265
+    identification: 
+      column-name: LAST_END_DATE
+      type: Date Picker (jQuery) [Deprecated]
+
+    heading: 
+      heading: Last End Date
+      alignment: center
+
+    settings: 
+      show: On icon click
+      show-other-months: false
+      navigation-list-for: None
+
+    layout: 
+      sequence: 40
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: LAST_END_DATE
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: OPEN ========================================
+    id: 1064918996627008266
+    identification: 
+      column-name: OPEN
+      type: Link
+
+    heading: 
+      heading: Open
+      alignment: end
+
+    layout: 
+      sequence: 50
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&OPEN.'
+
+    source: 
+      type: Database Column
+      database-column: OPEN
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: CLOSED ======================================
+    id: 1066492451150759217
+    identification: 
+      column-name: CLOSED
+      type: Link
+
+    heading: 
+      heading: Closed
+      alignment: end
+
+    layout: 
+      sequence: 60
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&CLOSED.'
+
+    source: 
+      type: Database Column
+      database-column: CLOSED
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: PENDING =====================================
+    id: 1066492618632759218
+    identification: 
+      column-name: PENDING
+      type: Link
+
+    heading: 
+      heading: Pending
+      alignment: end
+
+    layout: 
+      sequence: 70
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&PENDING.'
+
+    source: 
+      type: Database Column
+      database-column: PENDING
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ON_HOLD =====================================
+    id: 1066492667187759219
+    identification: 
+      column-name: ON_HOLD
+      type: Number Field
+
+    heading: 
+      heading: On Hold
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&ON_HOLD.'
+
+    source: 
+      type: Database Column
+      database-column: ON_HOLD
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ASSIGNEES ===================================
+    id: 1066492822010759220
+    identification: 
+      column-name: ASSIGNEES
+      type: Link
+
+    heading: 
+      heading: Assignees
+      alignment: end
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:17:&SESSION.:IG[projects_report]_Costings:&DEBUG.:CR,:IG_PROJECT:&PROJECT.'
+        page: 17 # Interactive Grid
+        request: IG[projects_report]_Costings
+        clear-cache: CR
+        values: 
+          ig_project: '&PROJECT.'
+
+      link-text: '&ASSIGNEES.'
+
+    source: 
+      type: Database Column
+      database-column: ASSIGNEES
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: TOTAL_COST ==================================
+    id: 1066492909059759221
+    identification: 
+      column-name: TOTAL_COST
+      type: Number Field
+
+    heading: 
+      heading: Total Cost
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: TOTAL_COST
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TOTAL_BUDGET ================================
+    id: 1066492951595759222
+    identification: 
+      column-name: TOTAL_BUDGET
+      type: Number Field
+
+    heading: 
+      heading: Total Budget
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: TOTAL_BUDGET
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COST_VS_BUDGET ==============================
+    id: 1066493099661759223
+    identification: 
+      column-name: COST_VS_BUDGET
+      type: Number Field
+
+    heading: 
+      heading: Cost Vs Budget
+      alignment: end
+
+    settings: 
+      number-alignment: End
+      virtual-keyboard: Text
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: COST_VS_BUDGET
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Projects
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+buttons: 
+- # ====== Button: RESET_REPORT ================================
+  id: 1066491640180754190
+  identification: 
+    button-name: RESET_REPORT
+    label: Reset
+
+  layout: 
+    sequence: 10
+    region: Projects # 3732681821539715068
+    slot: RIGHT_OF_IR_SEARCH_BAR
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-undo-alt
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:40:&SESSION.::&DEBUG.:RP,RR::'
+      page: 40 # Drill Down IG
+      clear-cache: RP,RR
+
+    warn-on-unsaved-changes: Do Not Check
+

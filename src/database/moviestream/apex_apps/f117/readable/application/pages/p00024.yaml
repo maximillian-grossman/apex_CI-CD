@@ -1,0 +1,811 @@
+---
+# ====== Page: Sample Login ==================================
+id: 24
+identification: 
+  name: Sample Login
+  alias: SAMPLE-LOGIN
+  title: Sample Login
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    table.overview td:first-child {
+      text-align: right;
+    }
+    table.overview td {
+      padding: 1em;
+    }
+    .left-side {
+      min-width: 150px
+    }
+    
+
+security: 
+  authentication: Page Is Public
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-meta-tags: false
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Info ========================================
+  id: 1482591553069331870
+  identification: 
+    name: Info
+    type: Static Content
+
+  source: 
+    html-code: <p>You are not currently logged in. To login, select a user and click the (Login) button.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--info
+    - t-Alert--accessibleHeading
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: User is the Public User (user has not authenticated)
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Info ========================================
+  id: 1482591629505331871
+  identification: 
+    name: Info
+    type: Static Content
+
+  source: 
+    html-code: <p>You are currently logged in as &APP_USER.. To switch user, select a different user and click the (Login) button.</p>
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--info
+    - t-Alert--accessibleHeading
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: User is Authenticated (not public)
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Demo Purposes Only Login ====================
+  id: 1482591778918331872
+  identification: 
+    name: Demo Purposes Only Login
+    type: Tree
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select case when connect_by_isleaf = 1 then 0
+                  when level = 1             then 1
+                  else                           -1
+             end          as status, 
+             level, 
+             e.ename      as title, 
+             'fa '||case when d.deptno = 40 
+                         then 'fa-user-headset' 
+                         else 'fa-user'
+                    end   as icon, 
+             e.empno      as value, 
+             null         as tooltip, 
+             null         as link 
+      from eba_demo_appr_emp e
+      left outer join eba_demo_appr_dept d
+                   on d.deptno = e.deptno 
+      start with mgr is null
+      connect by prior empno = mgr
+      order siblings by ename
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 4
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: userTree
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      node-label-column: TITLE
+      node-value-column: VALUE
+      hierarchy: Not Computed
+      node-status-column: STATUS
+      hierarchy-level-column: LEVEL
+      tooltip: None
+      activate-node-link-with: Single Click
+      link-column: LINK
+      icon-css-class-column: ICON
+      default-icon-css-class: icon-tree-folder
+      icon-type-css-class: a-Icon
+      selected-node-page-item: P24_SELECTED_EMPNO
+
+    performance: 
+      lazy-loading: false
+
+- # ====== Region: Operations Team =============================
+  id: 1545478994057617145
+  identification: 
+    name: Operations Team
+    type: Static Content
+
+  source: 
+    html-code: |
+      
+      
+
+  layout: 
+    sequence: 10
+    parent-region: Right Side # 1565183820370342666
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 8
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-user-headset
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Team Members ================================
+  id: 1565183766624342665
+  identification: 
+    name: Team Members
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>Everyone on the operations team helps with laptop order management and can review the status of workflows.</p>
+      <table class="overview">
+          <tr>
+              <td><strong>JANE</strong></td>
+              <td>Initial assignee for laptop approvals. </td>
+          </tr>
+          <tr>
+              <td><strong>STEVE</strong></td>
+              <td>Second assignee for laptop approvals when first approval expires.</td>
+          </tr>
+          <tr>
+              <td><strong>BO</strong></td>
+              <td>Third assignee for laptop approvals when second approval expires.</td>
+          </tr>
+          <tr>
+              <td><strong>PAT</strong></td>
+              <td>Workflow and task administrator.</td>
+          </tr>
+      </table>
+
+  layout: 
+    sequence: 20
+    parent-region: Right Side # 1565183820370342666
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Right Side ==================================
+  id: 1565183820370342666
+  identification: 
+    name: Right Side
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 8
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P24_SELECTED_USERNAME ====================
+  id: 1482592014598331875
+  identification: 
+    name: P24_SELECTED_USERNAME
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 60
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P24_SELECTED_EMPNO =======================
+  id: 1515032013950611543
+  identification: 
+    name: P24_SELECTED_EMPNO
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: LOGIN =======================================
+  id: 1482592269831331877
+  identification: 
+    button-name: LOGIN
+    label: Login
+
+  layout: 
+    sequence: 80
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Right
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - margin-top-md
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    static-id: loginButton
+
+dynamic-actions: 
+- # ====== Dynamic Action: When Node Changed ===================
+  id: 1482591798881331873
+  identification: 
+    name: When Node Changed
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: NATIVE_JSTREE|REGION TYPE|treeviewselectionchange
+    selection-type: Region
+    region: Demo Purposes Only Login # 1482591778918331872
+
+  actions: 
+  - # ====== Action: Save Selected Emp in Page Item ==============
+    id: 1482591895602331874
+    identification: 
+      name: Save Selected Emp in Page Item
+      action: Set Value
+
+    settings: 
+      set-type: JavaScript Expression
+      javascript-expression: apex.region("userTree").call("getSelectedNodes")[0]?.label
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P24_SELECTED_USERNAME
+
+    execution: 
+      sequence: 10
+      event: When Node Changed # 1482591798881331873
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Hide Login Button for Current User ==========
+    id: 1482592118154331876
+    identification: 
+      name: Hide Login Button for Current User
+      action: Hide
+
+    affected-elements: 
+      selection-type: Button
+      button: LOGIN # 1482592269831331877
+
+    execution: 
+      sequence: 30
+      event: When Node Changed # 1482591798881331873
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+    client-side-condition: 
+      type: Item = Value
+      item: P24_SELECTED_USERNAME
+      value: '&APP_USER.'
+
+  - # ====== Action: Show Login Button for Other User ============
+    id: 1482592325702331878
+    identification: 
+      name: Show Login Button for Other User
+      action: Show
+
+    affected-elements: 
+      selection-type: Button
+      button: LOGIN # 1482592269831331877
+
+    execution: 
+      sequence: 40
+      event: When Node Changed # 1482591798881331873
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+
+    client-side-condition: 
+      type: Item != Value
+      item: P24_SELECTED_USERNAME
+      value: '&APP_USER.'
+
+  - # ====== Action: Refresh Login Button ========================
+    id: 1482592452540331879
+    identification: 
+      name: Refresh Login Button
+      action: Show
+
+    affected-elements: 
+      selection-type: jQuery Selector
+      jquery-selector: '#loginButton'
+
+    execution: 
+      sequence: 60
+      event: When Node Changed # 1482591798881331873
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+    client-side-condition: 
+      type: Item != Value
+      item: P24_SELECTED_USERNAME
+      value: '&APP_USER.'
+
+  - # ====== Action: Update Login Button Label ===================
+    id: 1515031802296611541
+    identification: 
+      name: Update Login Button Label
+      action: Execute JavaScript Code
+
+    settings: 
+      code: $("#loginButton span").text('Login as '+$v('P24_SELECTED_USERNAME'));
+
+    execution: 
+      sequence: 50
+      event: When Node Changed # 1482591798881331873
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+    client-side-condition: 
+      type: Item != Value
+      item: P24_SELECTED_USERNAME
+      value: '&APP_USER.'
+
+- # ====== Dynamic Action: Expand Tree =========================
+  id: 1515031644346611539
+  identification: 
+    name: Expand Tree
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Expand Tree =================================
+    id: 1515031745573611540
+    identification: 
+      name: Expand Tree
+      action: Expand Tree
+
+    affected-elements: 
+      selection-type: Region
+      region: Demo Purposes Only Login # 1482591778918331872
+
+    execution: 
+      sequence: 10
+      event: Expand Tree # 1515031644346611539
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P24_SELECTED_EMPNO =====================
+  id: 1515032114091611544
+  identification: 
+    item-name: P24_SELECTED_EMPNO
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: Item
+    item-name: CURRENT_USER_EMPNO
+
+- # ====== Computation: P24_SELECTED_USERNAME ==================
+  id: 1515032210638611545
+  identification: 
+    item-name: P24_SELECTED_USERNAME
+
+  execution: 
+    sequence: 20
+    point: Before Header
+
+  computation: 
+    type: Static Value
+    static-value: '&APP_USER.'
+
+  server-side-condition: 
+    type: User is the Public User (user has not authenticated)
+
+processes: 
+- # ====== Process: Set Username Cookie ========================
+  id: 1482592547576331880
+  identification: 
+    name: Set Username Cookie
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_AUTHENTICATION
+    procedure-or-function: SEND_LOGIN_USERNAME_COOKIE
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  parameters: 
+  - # ====== Parameter: p_username ===============================
+    id: 1482592654488331881
+    identification: 
+      name: p_username
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: 'lower( :P24_SELECTED_USERNAME )'
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_cookie_name ============================
+    id: 1482592709350331882
+    identification: 
+      name: p_cookie_name
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_consent ================================
+    id: 1482592847743331883
+    identification: 
+      name: p_consent
+
+    parameter: 
+      direction: In
+      data-type: BOOLEAN
+      has-default: true
+
+    value: 
+      type: Static Value
+      static-value: False
+
+    advanced: 
+      display-sequence: 30
+
+- # ====== Process: Login ======================================
+  id: 1482592943578331884
+  identification: 
+    name: Login
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_AUTHENTICATION
+    procedure-or-function: LOGIN
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  parameters: 
+  - # ====== Parameter: p_username ===============================
+    id: 1482593056038331885
+    identification: 
+      name: p_username
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P24_SELECTED_USERNAME
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_password ===============================
+    id: 1482593122652331886
+    identification: 
+      name: p_password
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Null
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_uppercase_username =====================
+    id: 1515031478791611537
+    identification: 
+      name: p_uppercase_username
+
+    parameter: 
+      direction: In
+      data-type: BOOLEAN
+      has-default: true
+
+    value: 
+      type: Static Value
+      static-value: True
+
+    advanced: 
+      display-sequence: 30
+
+  - # ====== Parameter: p_set_persistent_auth ====================
+    id: 1515031547392611538
+    identification: 
+      name: p_set_persistent_auth
+
+    parameter: 
+      direction: In
+      data-type: BOOLEAN
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 40
+

@@ -1,0 +1,259 @@
+---
+# ====== Page: Global Page - Desktop =========================
+id: 0
+identification: 
+  name: Global Page - Desktop
+
+regions: 
+- # ====== Region: Airport Data ================================
+  id: 755459753331836439
+  identification: 
+    name: Airport Data
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>&AIRPORT_DATA.<br />
+      &US_STATES_DATA.</p>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_05
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 2355183043372782721
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 1575511939779929802
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Current Page is NOT in comma delimited list
+    pages: 
+    - 1
+    - 2
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Only minimal data is installed ==============
+  id: 2369661116010880525
+  identification: 
+    name: Only minimal data is installed
+    type: Static Content
+
+  source: 
+    html-code: '<p>Only the minimal dataset is currently installed in this application, so demo pages are limited. To install the full <strong>Airports</strong> and <strong>US States</strong> data, navigate to the <a href="f?p=&APP_ID.:501:&SESSION.::&DEBUG."><strong><span class="fa fa-download"></span> Data Loading</strong></a> page.</p>'
+
+  layout: 
+    sequence: 5
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Alert
+    template-options: 
+    - '#DEFAULT#'
+    - t-Alert--horizontal
+    - t-Alert--defaultIcons
+    - t-Alert--warning
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select 1 from eba_sample_map_states
+      union all
+      select 1 from sys.dual where :APP_PAGE_ID in ( 501,9999 )
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: RESET =======================================
+  id: 805987289991959767
+  identification: 
+    button-name: RESET
+    label: Reset
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 2355183043372782721
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconLeft
+    icon: fa-refresh
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:&APP_PAGE_ID.:&SESSION.::&DEBUG.:RR,&APP_PAGE_ID.::'
+      page: '&APP_PAGE_ID.'
+      clear-cache: RR,&APP_PAGE_ID.
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Current Page is NOT in comma delimited list
+    pages: 
+    - 501
+    - 9999
+
+- # ====== Button: HELP ========================================
+  id: 805987663284959770
+  identification: 
+    button-name: HELP
+    label: About This Page
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 2355183043372782721
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+    - t-Button--iconLeft
+    icon: fa-question-circle-o
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+  advanced: 
+    static-id: help_button
+
+  server-side-condition: 
+    type: Current Page is NOT in comma delimited list
+    pages: 
+    - 2
+    - 9999
+
+dynamic-actions: 
+- # ====== Dynamic Action: Toggle Help =========================
+  id: 805989952572969893
+  identification: 
+    name: Toggle Help
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: HELP # 805987663284959770
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 805990347911969898
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.theme.openRegion("about_this_page");
+
+    execution: 
+      sequence: 10
+      event: Toggle Help # 805989952572969893
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

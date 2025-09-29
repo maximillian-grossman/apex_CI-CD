@@ -1,0 +1,475 @@
+---
+- # ====== List of Values: WORKFLOW_CHARTS.LOV.TIME_UNIT =======
+  id: 35401201523526321
+  identification: 
+    name: WORKFLOW_CHARTS.LOV.TIME_UNIT
+
+  subscription: 
+    version-number: 813923021
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Seconds ======================================
+    id: 35401443397526322
+    entry: 
+      sequence: 1
+      display: Seconds
+      return: SEC
+
+  - # ====== Entry: Minutes ======================================
+    id: 35401910200526325
+    entry: 
+      sequence: 2
+      display: Minutes
+      return: MIN
+
+  - # ====== Entry: Hours ========================================
+    id: 35402317025526326
+    entry: 
+      sequence: 3
+      display: Hours
+      return: HOUR
+
+  - # ====== Entry: Days =========================================
+    id: 35402684907526326
+    entry: 
+      sequence: 4
+      display: Days
+      return: DAY
+
+- # ====== List of Values: DESKTOP THEME STYLES ================
+  id: 982121447275984040
+  identification: 
+    name: DESKTOP THEME STYLES
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select s.name d,
+             s.theme_style_id r
+        from apex_application_theme_styles s,
+             apex_application_themes t
+       where s.application_id = :app_id
+         and t.application_id = s.application_id
+         and t.theme_number   = s.theme_number
+         and t.ui_type_name   = 'DESKTOP'
+         and t.is_current     = 'Yes'
+       order by 1
+
+  column-mapping: 
+    return: R
+    display: D
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: USER_THEME_PREFERENCE ===============
+  id: 982121990886984057
+  identification: 
+    name: USER_THEME_PREFERENCE
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Allow End Users to choose Theme Style ========
+    id: 982122362662984057
+    entry: 
+      sequence: 1
+      display: Allow End Users to choose Theme Style
+      return: Yes
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.DUE ===========
+  id: 1198681156444186427
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.DUE
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Overdue ======================================
+    id: 1198681429681186432
+    entry: 
+      sequence: 1
+      display: Overdue
+      return: '|0'
+
+  - # ====== Entry: Next hour ====================================
+    id: 1198681780550186442
+    entry: 
+      sequence: 2
+      display: Next hour
+      return: 0|1
+
+  - # ====== Entry: Next 24 hours ================================
+    id: 1198682183792186442
+    entry: 
+      sequence: 3
+      display: Next 24 hours
+      return: 1|24
+
+  - # ====== Entry: Next 7 days ==================================
+    id: 1198682658026186442
+    entry: 
+      sequence: 4
+      display: Next 7 days
+      return: 24|168
+
+  - # ====== Entry: Next 30 days =================================
+    id: 1198683046604186442
+    entry: 
+      sequence: 5
+      display: Next 30 days
+      return: 168|720
+
+  - # ====== Entry: More than 30 days ============================
+    id: 1198683383775186443
+    entry: 
+      sequence: 6
+      display: More than 30 days
+      return: 720|
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.PRIORITY ======
+  id: 1198684623284186444
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.PRIORITY
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      
+      select disp, 
+             val 
+        from table ( apex_approval.get_lov_priority )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.STATE =========
+  id: 1198685373505186444
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.STATE
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      
+      select disp, 
+             val 
+        from table ( apex_approval.get_lov_state )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.INITIATED =====
+  id: 1198686858558186451
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.INITIATED
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Last hour ====================================
+    id: 1198687009115186451
+    entry: 
+      sequence: 1
+      display: Last hour
+      return: '|1'
+
+  - # ====== Entry: Last 24 hours ================================
+    id: 1198687392800186451
+    entry: 
+      sequence: 2
+      display: Last 24 hours
+      return: 1|24
+
+  - # ====== Entry: Last 7 days ==================================
+    id: 1198687806090186452
+    entry: 
+      sequence: 3
+      display: Last 7 days
+      return: 24|168
+
+  - # ====== Entry: Last 30 days =================================
+    id: 1198688256841186452
+    entry: 
+      sequence: 4
+      display: Last 30 days
+      return: 168|720
+
+  - # ====== Entry: Older than 30 days ===========================
+    id: 1198688663807186452
+    entry: 
+      sequence: 5
+      display: Older than 30 days
+      return: 720|
+
+- # ====== List of Values: UNIFIED_TASK_LIST.LOV.TYPE ==========
+  id: 1246891560174468332
+  identification: 
+    name: UNIFIED_TASK_LIST.LOV.TYPE
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select disp,
+             val
+        from table ( apex_approval.get_lov_type )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: EMP.ENAME ===========================
+  id: 1278905357860724903
+  identification: 
+    name: EMP.ENAME
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EMP
+
+  column-mapping: 
+    return: EMPNO
+    display: ENAME
+    default-sort: ENAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: DEPT.DNAME ==========================
+  id: 1278907208176724908
+  identification: 
+    name: DEPT.DNAME
+
+  subscription: 
+    version-number: 738866192
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: DEPT
+
+  column-mapping: 
+    return: DEPTNO
+    display: DNAME
+    default-sort: DNAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: AVAILABLE_LAPTOP_TYPES ==============
+  id: 1282373792368606595
+  identification: 
+    name: AVAILABLE_LAPTOP_TYPES
+
+  subscription: 
+    version-number: 738866192
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: MacBook Pro 14" ==============================
+    id: 1282374139557606596
+    entry: 
+      sequence: 1
+      display: MacBook Pro 14"
+      return: MAC
+
+  - # ====== Entry: Lenovo T490 ==================================
+    id: 1282374554999606596
+    entry: 
+      sequence: 2
+      display: Lenovo T490
+      return: WIN
+
+- # ====== List of Values: APPROVAL_TASK_LOV ===================
+  id: 1289249033186242654
+  identification: 
+    name: APPROVAL_TASK_LOV
+
+  subscription: 
+    version-number: 738866192
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: 'select name,static_id from apex_appl_taskdefs where application_id = :APP_ID'
+
+  column-mapping: 
+    return: STATIC_ID
+    display: NAME
+    default-sort: NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: DISTINCT_JOB_CODES_LOV ==============
+  id: 1291073092548851296
+  identification: 
+    name: DISTINCT_JOB_CODES_LOV
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select job dv, job rv
+      from (
+          select distinct job from eba_demo_appr_emp
+      )
+      order by job
+
+  column-mapping: 
+    return: RV
+    display: DV
+    default-sort: DV
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: EBA_DEMO_CONF_EMP_LOV ===============
+  id: 1314983740356632196
+  identification: 
+    name: EBA_DEMO_CONF_EMP_LOV
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_APPR_EMP
+
+  column-mapping: 
+    return: EMPNO
+    display: ENAME
+    default-sort: ENAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: ALL_ENAMES_LOV ======================
+  id: 1516372192474200839
+  identification: 
+    name: ALL_ENAMES_LOV
+
+  subscription: 
+    version-number: 738866192
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: EBA_DEMO_APPR_EMP
+
+  column-mapping: 
+    return: ENAME
+    display: ENAME
+    default-sort: ENAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: WORKFLOW_CONSOLE.LOV.WORKFLOW_STATE =
+  id: 1531597232273015989
+  identification: 
+    name: WORKFLOW_CONSOLE.LOV.WORKFLOW_STATE
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select disp,
+             val
+        from table ( apex_workflow.get_lov_workflow_state )
+       order by insert_order
+
+  column-mapping: 
+    return: VAL
+    display: DISP
+    default-sort: Use Order By from Query
+
+- # ====== List of Values: WORKFLOW_CONSOLE.LOV.INITIATED ======
+  id: 1531598698618015991
+  identification: 
+    name: WORKFLOW_CONSOLE.LOV.INITIATED
+
+  subscription: 
+    version-number: 738866194
+
+  source: 
+    location: Static Values
+
+  entries: 
+  - # ====== Entry: Last hour ====================================
+    id: 1531599076609015991
+    entry: 
+      sequence: 1
+      display: Last hour
+      return: '|1'
+
+  - # ====== Entry: Last 24 hours ================================
+    id: 1531599464390015991
+    entry: 
+      sequence: 2
+      display: Last 24 hours
+      return: 1|24
+
+  - # ====== Entry: Last 7 days ==================================
+    id: 1531599823753015992
+    entry: 
+      sequence: 3
+      display: Last 7 days
+      return: 24|168
+
+  - # ====== Entry: Last 30 days =================================
+    id: 1531600209271015992
+    entry: 
+      sequence: 4
+      display: Last 30 days
+      return: 168|720
+
+  - # ====== Entry: Older than 30 days ===========================
+    id: 1531600676475015992
+    entry: 
+      sequence: 5
+      display: Older than 30 days
+      return: 720|
+

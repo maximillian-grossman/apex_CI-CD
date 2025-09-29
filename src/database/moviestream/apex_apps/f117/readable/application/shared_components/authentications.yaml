@@ -1,0 +1,43 @@
+---
+- # ====== Authentication: Demo Purposes Only Custom Auth Scheme
+  id: 1515024062274508628
+  identification: 
+    name: Demo Purposes Only Custom Auth Scheme
+
+  subscription: 
+    version-number: 738866237
+
+  settings: 
+    type: Custom
+    authentication-function-name: is_authenticated_for_demo
+    enable-legacy-authentication-attributes: false
+
+  source: 
+    pl/sql-code: |
+      --===========================================================
+      -- Return true for any username in eba_demo_story_users table
+      --===========================================================
+      
+      function is_authenticated_for_demo(
+          p_username in varchar2,
+          p_password in varchar2)
+          return        boolean
+      is
+      begin
+          for j in (select ename 
+                      from eba_demo_appr_emp
+                     where upper(ename) = upper(p_username)) loop
+             return true;
+          end loop;
+          return false; 
+      end;
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+

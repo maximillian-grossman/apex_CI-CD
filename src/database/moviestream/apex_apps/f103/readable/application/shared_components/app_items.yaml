@@ -1,0 +1,14 @@
+---
+- # ====== Application Item: WORKSPACE_SCHEMA ==================
+  id: 1852565391919223545
+  identification: 
+    name: WORKSPACE_SCHEMA
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 41149316691578
+

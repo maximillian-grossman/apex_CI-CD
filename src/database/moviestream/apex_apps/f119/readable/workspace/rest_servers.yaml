@@ -1,0 +1,13 @@
+---
+- # ====== REST Data Source Server: Sample Application - Github 
+  id: 750255372996446286
+  identification: 
+    name: Sample Application - Github Repositories
+
+  endpoint-url: 
+    url: 'https://api.github.com/'
+
+  advanced: 
+    static-id: Sample_Application___Github_Repositories
+    prompt-on-install: false
+

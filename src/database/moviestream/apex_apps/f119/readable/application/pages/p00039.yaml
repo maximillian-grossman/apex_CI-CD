@@ -1,0 +1,249 @@
+---
+# ====== Page: Reset Data ====================================
+id: 39
+identification: 
+  name: Reset Data
+  alias: RESET-DATA
+  title: Reset Data
+
+appearance: 
+  page-mode: Normal
+  page-template: Standard
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: No help is available for this page.
+
+regions: 
+- # ====== Region: Manage Sample Application ===================
+  id: 3175204609264213963
+  identification: 
+    name: Manage Sample Application
+    type: Static Content
+
+  source: 
+    html-code: <span class="infoTextRegion"><p>Click the reset data button to reset application state.</p></span>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 3175205304539213966
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: breadcrumbs # 3175199817478182526
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+buttons: 
+- # ====== Button: CANCEL ======================================
+  id: 3175204805748213963
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 3175205304539213966
+    slot: EDIT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.:RP::'
+      page: 35 # Administration
+      clear-cache: RP
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: reset_data ==================================
+  id: 3175205020365213964
+  identification: 
+    button-name: reset_data
+    label: Reset Data
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 3175205304539213966
+    slot: EDIT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: reset data =================================
+  id: 3175205600843213966
+  identification: 
+    name: reset data
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+      
+          delete from eba_restdemo_sample_emp;
+          delete from eba_restdemo_sample_urls;
+          delete from eba_restdemo_sample_github;
+          delete from eba_restdemo_sample_lang;
+      
+          insert into eba_restdemo_sample_urls ( name, url ) values ('Github API', 'https://api.github.com');
+          
+          insert into eba_restdemo_sample_lang values ('Java', 'James Gosling');
+          insert into eba_restdemo_sample_lang values ('PLSQL', 'Oracle Corporation');
+          insert into eba_restdemo_sample_lang values ('Ruby', 'Yukihiro Matsumoto' );
+          insert into eba_restdemo_sample_lang values ('Python', 'Guido van Rossum');
+          insert into eba_restdemo_sample_lang values ('CSS', 'Hakon Wium Lie');
+          insert into eba_restdemo_sample_lang values ('C#', 'Microsoft Corporation' );
+          insert into eba_restdemo_sample_lang values ('Go', 'Google');
+          insert into eba_restdemo_sample_lang values ('Shell', 'N/A');
+          insert into eba_restdemo_sample_lang values ('SQLPL', 'N/A');
+      
+      end;
+      
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: Application has been reset.
+
+  error: 
+    display-location: Inline in Notification
+
+branches: 
+- # ====== Branch: go back to admin ============================
+  id: 3175206597016222952
+  identification: 
+    name: go back to admin
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:35:&SESSION.::&DEBUG.:RP::&success_msg=#SUCCESS_MSG#'
+      page: 35 # Administration
+      clear-cache: RP
+

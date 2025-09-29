@@ -1,0 +1,41 @@
+---
+- # ====== List of Values: CONVERSATIONS.USERNAME ==============
+  id: 27254522636462528
+  identification: 
+    name: CONVERSATIONS.USERNAME
+
+  subscription: 
+    version-number: 41127756589499
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: CONVERSATIONS
+
+  column-mapping: 
+    return: ID
+    display: USERNAME
+    default-sort: USERNAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: HIGHSCHOOLS.BOROUGH =================
+  id: 40399248109249016
+  identification: 
+    name: HIGHSCHOOLS.BOROUGH
+
+  subscription: 
+    version-number: 41590536378789
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: HIGHSCHOOLS
+
+  column-mapping: 
+    return: ID_1
+    display: BOROUGH
+    default-sort: BOROUGH
+    sort-direction: Ascending (Nulls Last)
+

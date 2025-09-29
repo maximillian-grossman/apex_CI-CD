@@ -1,0 +1,63 @@
+---
+- # ====== Report Query: testing ===============================
+  id: 9054416445632481
+  identification: 
+    name: testing
+
+  advanced: 
+    static-id: TESTING
+
+  output: 
+    file-name: testing
+    format: PDF
+    layout: testing # 9052524551595666
+    view-file-as: Inline
+
+  session-state: 
+
+  source-queries: 
+  - # ====== Source Query: testing ===============================
+    id: 9054760353632486
+    source: 
+      location: Local Database
+      type: Table / View
+      table-owner: Parsing Schema
+      table-name: EMP
+      include-rowid-column: false
+
+    identification: 
+      name: testing
+
+    layout: 
+      sequence: 1
+
+- # ====== Report Query: Employees =============================
+  id: 22101004259496054
+  identification: 
+    name: Employees
+
+  advanced: 
+    static-id: EMPLOYEES
+
+  output: 
+    file-name: Employees
+    format: PDF
+    layout: testing # 9052524551595666
+    view-file-as: Attachment
+
+  session-state: 
+
+  source-queries: 
+  - # ====== Source Query: Employees =============================
+    id: 22101333290496063
+    source: 
+      location: Local Database
+      type: SQL Query
+      sql-query: 'select e.* from EBA_DEMO_DG_EMP e '
+
+    identification: 
+      name: Employees
+
+    layout: 
+      sequence: 1
+

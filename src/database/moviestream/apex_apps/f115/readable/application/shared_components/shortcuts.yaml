@@ -1,0 +1,25 @@
+---
+- # ====== Shortcut: OK_TO_GET_NEXT_PREV_PK_VALUE ==============
+  id: 4638074452006838670
+  identification: 
+    name: OK_TO_GET_NEXT_PREV_PK_VALUE
+
+  subscription: 
+    version-number: 1089079375
+
+  source: 
+    type: Text with JavaScript Escaped Single Quotes
+    text: Are you sure you want to leave this page without saving?
+
+- # ====== Shortcut: DELETE_CONFIRM_MSG ========================
+  id: 48377134492343062818
+  identification: 
+    name: DELETE_CONFIRM_MSG
+
+  subscription: 
+    version-number: 1089079375
+
+  source: 
+    type: Text with JavaScript Escaped Single Quotes
+    text: Would you like to perform this delete action?
+

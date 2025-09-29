@@ -1,0 +1,310 @@
+---
+# ====== Page: Workflow Diagram ==============================
+id: 31
+identification: 
+  name: Workflow Diagram
+  alias: WORKFLOW-DIAGRAM
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+  - ui-dialog--stretch
+
+dialog: 
+  width: 1000
+  height: 640
+  chained: false
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    .diagram-vstretch {
+       height: calc( 100vh - 10rem);
+    }
+
+security: 
+  authorization-scheme: Operations Team # 1275551282813086744
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Workflow Diagram ============================
+  id: 35401985480147505
+  identification: 
+    name: Workflow Diagram
+    type: Workflow Diagram
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - diagram-vstretch
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: workflow_diagram
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      workflow-id: P31_CURRENT_WORKFLOW
+      enable-navigator: false
+      initial-zoom: Zoom to Fit
+
+page-items: 
+- # ====== Page Item: P31_WORKFLOW_ID ==========================
+  id: 35402046857147506
+  identification: 
+    name: P31_WORKFLOW_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P31_WORKFLOW_TITLE =======================
+  id: 35402576912147511
+  identification: 
+    name: P31_WORKFLOW_TITLE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P31_CURRENT_WORKFLOW =====================
+  id: 41551717223777410
+  identification: 
+    name: P31_CURRENT_WORKFLOW
+    type: Select List
+
+  label: 
+    label: Workflow
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      select workflow_def_name, workflow_id
+      from apex_workflows
+      connect by prior workflow_id = parent_workflow_id
+      start with workflow_id = :P31_WORKFLOW_ID
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Item
+    item: P31_WORKFLOW_ID
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Set Dialog Title to Workflow Title ==
+  id: 35402351792147509
+  identification: 
+    name: Set Dialog Title to Workflow Title
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 35402464883147510
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        apex.util.getTopApex()
+                 .jQuery(".ui-dialog-content")
+                 .dialog("option", 
+                         "title",
+                         apex.items.P31_WORKFLOW_TITLE.value);
+
+    execution: 
+      sequence: 10
+      event: Set Dialog Title to Workflow Title # 35402351792147509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: On Change Current Workflow ==========
+  id: 41551771417777411
+  identification: 
+    name: On Change Current Workflow
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P31_CURRENT_WORKFLOW
+
+  actions: 
+  - # ====== Action: Refresh Diagram =============================
+    id: 41551866948777412
+    identification: 
+      name: Refresh Diagram
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Workflow Diagram # 35401985480147505
+
+    execution: 
+      sequence: 10
+      event: On Change Current Workflow # 41551771417777411
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P31_WORKFLOW_TITLE =====================
+  id: 35402682982147512
+  identification: 
+    item-name: P31_WORKFLOW_TITLE
+
+  execution: 
+    sequence: 10
+    point: Before Header
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select title
+      from apex_workflows
+      where workflow_id = :P31_WORKFLOW_ID
+

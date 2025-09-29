@@ -1,0 +1,21 @@
+---
+- # ====== Authorization: CREATE JOB priv available ============
+  id: 3356337372479038665
+  identification: 
+    name: CREATE JOB priv available
+
+  subscription: 
+    version-number: 1089079098
+
+  authorization-scheme: 
+    type: Exists SQL Query
+
+  settings: 
+    sql-query: select 1 from session_privs where privilege = 'CREATE JOB'
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: CREATE JOB privilege is not available.
+

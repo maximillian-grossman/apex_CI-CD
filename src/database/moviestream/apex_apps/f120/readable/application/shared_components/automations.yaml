@@ -1,0 +1,44 @@
+---
+- # ====== Automation: test ====================================
+  id: 22590978536230881
+  identification: 
+    name: test
+    static-id: test
+
+  execution: 
+    type: Scheduled
+    schedule-expression: FREQ=MINUTELY;INTERVAL=10
+    schedule-status: Disabled
+    actions-initiated-on: Rows returned
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    include-rowid-column: false
+
+  action-execution: 
+    commit: Each Row
+    action-error-handling: Ignore
+
+  actions: 
+  - # ====== Action: New Action ==================================
+    id: 22591224943230902
+    identification: 
+      name: New Action
+      type: Execute Code
+
+    source: 
+      location: Local Database
+      language: PL/SQL
+      pl/sql-code: |
+        begin
+            null;
+        end;
+
+    execution: 
+      sequence: 10
+
+    error: 
+      stop-execution-on-error: true
+

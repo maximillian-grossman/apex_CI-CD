@@ -1,0 +1,395 @@
+---
+# ====== Page: Set REST Service Endpoint =====================
+id: 6
+identification: 
+  name: Set REST Service Endpoint
+  alias: SET-REST-SERVICE-ENDPOINT
+  title: Set REST Service Endpoint
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Set REST Service endpoint URL ===============
+  id: 1852380368197012256
+  identification: 
+    name: Set REST Service endpoint URL
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Buttons =====================================
+  id: 1852380570321012258
+  identification: 
+    name: Buttons
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P6_ENDPOINT_URL ==========================
+  id: 1852380394343012257
+  identification: 
+    name: P6_ENDPOINT_URL
+    type: Text Field
+
+  label: 
+    label: REST Service URL
+    alignment: Left
+
+  settings: 
+    subtype: URL
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: Set REST Service endpoint URL # 1852380368197012256
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 3
+
+  appearance: 
+    template: Optional
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--large
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: APPLY =======================================
+  id: 1852380593665012259
+  identification: 
+    button-name: APPLY
+    label: Apply Changes
+
+  layout: 
+    sequence: 20
+    region: Buttons # 1852380570321012258
+    slot: CREATE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: CANCEL ======================================
+  id: 1852380706400012260
+  identification: 
+    button-name: CANCEL
+    label: Cancel
+
+  layout: 
+    sequence: 10
+    region: Buttons # 1852380570321012258
+    slot: CLOSE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: Cancel Dialog =======================
+  id: 1852380779478012261
+  identification: 
+    name: Cancel Dialog
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: CANCEL # 1852380706400012260
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 1852380918906012262
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: Cancel Dialog # 1852380779478012261
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+validations: 
+- # ====== Validation: Endpoint URL must start with http =======
+  id: 505889257923972615
+  identification: 
+    name: Endpoint URL must start with http
+
+  execution: 
+    sequence: 10
+
+  validation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "substr(:P6_ENDPOINT_URL, 1, 4) = 'http'"
+    always-execute: false
+
+  error: 
+    error-message: Please provide a URL that begins with, "http".
+    display-location: Inline with Field and in Notification
+    associated-item: P6_ENDPOINT_URL # 1852380394343012257
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P6_ENDPOINT_URL
+
+processes: 
+- # ====== Process: Set URL Endpoint ===========================
+  id: 1852381027521012263
+  identification: 
+    name: Set URL Endpoint
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_response       clob;
+          l_workspace_name apex_applications.workspace%type;
+      begin
+          delete from eba_restdemo_sample_urls where name = 'ORDS EMP';
+          if :P6_ENDPOINT_URL is not null then
+              insert into eba_restdemo_sample_urls ( name, url ) values ('ORDS EMP', :P6_ENDPOINT_URL);
+              :SAMPLE_ENDPOINT_URL := :P6_ENDPOINT_URL;
+          else
+              select workspace into l_workspace_name
+                from apex_applications
+               where application_id = v( 'APP_ID' );
+      
+               :SAMPLE_ENDPOINT_URL := apex_util.host_url('APEX_PATH') ||
+                   lower( l_workspace_name ) || '/' ||
+                  'hr/employees';
+          end if;
+              
+          begin
+              :SAMPLE_SERVICE_AVAILABLE := 'OK';
+      
+              l_response := apex_web_service.make_rest_request( :SAMPLE_ENDPOINT_URL, 'GET' );
+      
+              if apex_web_service.g_status_code not between 200 and 299 then
+                  :SAMPLE_SERVICE_AVAILABLE := 'HTTP-'|| apex_web_service.g_status_code;
+              end if;
+      
+          exception
+              when others then
+                if sqlcode = -29273 then
+                    if instr(sqlerrm, '24247') > 0 then 
+                        :SAMPLE_SERVICE_AVAILABLE := 'NO_ACL';
+                    elsif instr(sqlerrm, '29024') > 0 then
+                        :SAMPLE_SERVICE_AVAILABLE := 'NO_WALLET';
+                    else 
+                        :SAMPLE_SERVICE_AVAILABLE := 'NO_NETWORK';
+                   end if;
+               end if;
+          end;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  success-message: 
+    success-message: 'REST Service Endpoint set. '
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: APPLY # 1852380593665012259
+
+- # ====== Process: Get Endpoint URL ===========================
+  id: 1852381186210012265
+  identification: 
+    name: Get Endpoint URL
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      begin
+          select url 
+            into :P6_ENDPOINT_URL
+            from eba_restdemo_sample_urls
+           where name = 'ORDS EMP';
+      exception
+          when NO_DATA_FOUND then
+              :P6_ENDPOINT_URL := :SAMPLE_ENDPOINT_URL;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+branches: 
+- # ====== Branch: Go To Page 1 ================================
+  id: 1852381568794012268
+  identification: 
+    name: Go To Page 1
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:RP::&success_msg=#SUCCESS_MSG#'
+      page: 1 # Example REST Application
+      clear-cache: RP
+

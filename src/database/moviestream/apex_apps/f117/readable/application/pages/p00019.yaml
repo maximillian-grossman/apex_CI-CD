@@ -1,0 +1,1352 @@
+---
+# ====== Page: Workflow Status ===============================
+id: 19
+identification: 
+  name: Workflow Status
+  alias: WORKFLOW-STATUS
+  title: Workflow Status
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: About this page =============================
+  id: 37603425236975311
+  identification: 
+    name: About this page
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          This page shows the workflows in which the current user is a participant. Use the search box to filter the list. 
+          Toggle between seeing the workflows ordered by Create Date or Last Updated using the order by page item. 
+          The page was created using the <strong>Create Page</strong> wizard, choosing <strong>Workflow Console</strong>
+          page type, and picking a <strong>Report Context</strong> of "My Workflows". Both workflows in the sample list
+          all members of the OPERATIONS department (40) as workflow participants (BO, JANE, STEVE, PAT), and specify PAT
+          as the workflow admin.
+      </p>
+      
+      <p>
+          By default the workflow console shows workflow instances for all applications in the workspace, but this page
+          has customized the query of the report region to pass in the <code>p_application_id</code> parameter to the
+          pipelined table function <code>apex_workflow.get_workflows()</code> to show only the workflows
+          related to the current application.
+      </p>
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - js-useLocalStorage
+    - is-collapsed
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: Operations Team # 1275551282813086744
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Breadcrumb ==================================
+  id: 40529606509512637
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 1275353707076086477
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: My Workflows - Smart Filters ================
+  id: 40530628026512643
+  identification: 
+    name: My Workflows - Smart Filters
+    type: Smart Filters
+
+  source: 
+    filtered-region: My Workflows - Report # 40530816623512643
+
+  layout: 
+    sequence: 10
+    parent-region: Breadcrumb # 40529606509512637
+    slot: SMART_FILTERS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      maximum-suggestion-chips: 0
+      more-filters-suggestion-chip: false
+      compact-numbers-threshold: 10000
+      show-total-row-count: No
+
+  facets: 
+  - # ====== Facet: P19_SEARCH ===================================
+    id: 40531154247512649
+    identification: 
+      name: P19_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      input-field: Top of Faceted Search Region
+
+    layout: 
+      sequence: 10
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Facet: P19_TYPE =====================================
+    id: 40531539079512650
+    identification: 
+      name: P19_TYPE
+      type: Checkbox Group
+
+    label: 
+      label: Type
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 20
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: WORKFLOW_DEF_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P19_STATE ====================================
+    id: 40531960478512651
+    identification: 
+      name: P19_STATE
+      type: Checkbox Group
+
+    label: 
+      label: State
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 50
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: WORKFLOW_CONSOLE.LOV.WORKFLOW_STATE # 1531597232273015989
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: STATE_CODE
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P19_APPLICATION ==============================
+    id: 40532339688512652
+    identification: 
+      name: P19_APPLICATION
+      type: Checkbox Group
+
+    label: 
+      label: Application
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 70
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: WORKFLOW_DEF_APP_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P19_INITIATOR ================================
+    id: 40532782386512653
+    identification: 
+      name: P19_INITIATOR
+      type: Checkbox Group
+
+    label: 
+      label: Initiator
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 80
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: INITIATOR
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P19_INITIATED ================================
+    id: 40533157734512654
+    identification: 
+      name: P19_INITIATED
+      type: Range
+
+    label: 
+      label: Initiated
+      show-label-for-current-facet: true
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 90
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: WORKFLOW_CONSOLE.LOV.INITIATED # 1531598698618015991
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: false
+
+    advanced: 
+      collapsible: false
+
+    source: 
+      database-column: CREATED_AGO_HOURS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  filters: 
+  - # ====== Filter: P19_SEARCH ==================================
+    id: 40531154247512649
+    identification: 
+      name: P19_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      collapsed-search-field: false
+
+    layout: 
+      sequence: 10
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Filter: P19_TYPE ====================================
+    id: 40531539079512650
+    identification: 
+      name: P19_TYPE
+      type: Checkbox Group
+
+    label: 
+      label: Type
+
+    layout: 
+      sequence: 20
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: WORKFLOW_DEF_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P19_STATE ===================================
+    id: 40531960478512651
+    identification: 
+      name: P19_STATE
+      type: Checkbox Group
+
+    label: 
+      label: State
+
+    layout: 
+      sequence: 50
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: WORKFLOW_CONSOLE.LOV.WORKFLOW_STATE # 1531597232273015989
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: STATE_CODE
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P19_APPLICATION =============================
+    id: 40532339688512652
+    identification: 
+      name: P19_APPLICATION
+      type: Checkbox Group
+
+    label: 
+      label: Application
+
+    layout: 
+      sequence: 70
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: WORKFLOW_DEF_APP_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P19_INITIATOR ===============================
+    id: 40532782386512653
+    identification: 
+      name: P19_INITIATOR
+      type: Checkbox Group
+
+    label: 
+      label: Initiator
+
+    layout: 
+      sequence: 80
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: true
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: INITIATOR
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P19_INITIATED ===============================
+    id: 40533157734512654
+    identification: 
+      name: P19_INITIATED
+      type: Range
+
+    label: 
+      label: Initiated
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 90
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: WORKFLOW_CONSOLE.LOV.INITIATED # 1531598698618015991
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: Dynamic
+      show-label: true
+
+    source: 
+      database-column: CREATED_AGO_HOURS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+- # ====== Region: My Workflows - Report =======================
+  id: 40530816623512643
+  identification: 
+    name: My Workflows - Report
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select workflow_id,
+             workflow_def_name,
+             workflow_def_app_name,
+             title,
+             initiator,
+             state_code,
+             created_on,
+             created_ago,
+             created_ago_hours,
+             last_updated_on,
+             badge_text,
+             badge_state,
+             apex_page.get_url(
+               p_page => 31,
+               p_items => 'P31_WORKFLOW_ID',
+               p_values => WORKFLOW_ID) as map_url
+        from table ( apex_workflow.get_workflows (
+                         p_context => 'MY_WORKFLOWS'
+                         --, p_application_id => :APP_ID
+                         ) )
+    optimizer-hint: APEX$USE_NO_GROUPING_SETS
+
+  order-by: 
+    type: Item
+    item: 
+      item-name: P19_SORT_BY
+      order-bys: 
+      - key: CREATED_ON
+        clause: created_on desc
+
+      - key: LAST_UPDATED_ON
+        clause: last_updated_on desc
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: '&TITLE.'
+      description: |
+        <strong>&WORKFLOW_DEF_NAME!HTML.</strong>
+        {if INITIATOR/}
+            <span role="separator" aria-label="&middot;"> &middot; </span>
+            &{APEX.WORKFLOW.INITIATED_BY_USER_SINCE 0=&INITIATOR!HTML. 1=&CREATED_AGO.}.
+        {endif/}
+        <span role="separator" aria-label="&middot;"> &middot; </span>
+        <a class="u-align-self-center" title="View workflow status in a diagram" href="&MAP_URL!ATTR."><span class="fa fa-workflow"></span></a>
+      display-avatar: false
+      display-badge: true
+
+    badge: 
+      label: State
+      value: BADGE_TEXT
+      state: BADGE_STATE
+      display-label: false
+      style: Default
+      shape: Default
+      size: Default
+      column-width: Medium
+      position: START
+      alignment: START
+
+    appearance: 
+      apply-theme-colors: false
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    entity-title: 
+      singular: workflow
+      plural: workflows
+
+    messages: 
+      when-no-data-found: No Workflows
+      no-data-found-icon: fa-workflow fa-lg
+
+  columns: 
+  - # ====== Column: WORKFLOW_ID =================================
+    id: 40533848025512659
+    identification: 
+      name: WORKFLOW_ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: WORKFLOW_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: WORKFLOW_DEF_NAME ===========================
+    id: 40534352960512660
+    identification: 
+      name: WORKFLOW_DEF_NAME
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: WORKFLOW_DEF_NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: WORKFLOW_DEF_APP_NAME =======================
+    id: 40534827685512660
+    identification: 
+      name: WORKFLOW_DEF_APP_NAME
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: WORKFLOW_DEF_APP_NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: TITLE =======================================
+    id: 40535381785512660
+    identification: 
+      name: TITLE
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: TITLE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: true
+
+    appearance: 
+      group: false
+
+  - # ====== Column: INITIATOR ===================================
+    id: 40535902997512661
+    identification: 
+      name: INITIATOR
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: INITIATOR
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: STATE_CODE ==================================
+    id: 40536394265512661
+    identification: 
+      name: STATE_CODE
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: STATE_CODE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CREATED_ON ==================================
+    id: 40536881860512661
+    identification: 
+      name: CREATED_ON
+
+    layout: 
+      sequence: 70
+
+    source: 
+      type: Database Column
+      database-column: CREATED_ON
+      data-type: TIMESTAMP WITH TIME ZONE
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+      group: false
+
+  - # ====== Column: CREATED_AGO =================================
+    id: 40537360760512661
+    identification: 
+      name: CREATED_AGO
+
+    layout: 
+      sequence: 80
+
+    source: 
+      type: Database Column
+      database-column: CREATED_AGO
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CREATED_AGO_HOURS ===========================
+    id: 40537872259512662
+    identification: 
+      name: CREATED_AGO_HOURS
+
+    layout: 
+      sequence: 90
+
+    source: 
+      type: Database Column
+      database-column: CREATED_AGO_HOURS
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: LAST_UPDATED_ON =============================
+    id: 40538415243512662
+    identification: 
+      name: LAST_UPDATED_ON
+
+    layout: 
+      sequence: 100
+
+    source: 
+      type: Database Column
+      database-column: LAST_UPDATED_ON
+      data-type: TIMESTAMP WITH TIME ZONE
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: SINCE
+      group: false
+
+  - # ====== Column: BADGE_TEXT ==================================
+    id: 40538859848512662
+    identification: 
+      name: BADGE_TEXT
+
+    layout: 
+      sequence: 110
+
+    source: 
+      type: Database Column
+      database-column: BADGE_TEXT
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: BADGE_STATE =================================
+    id: 40539339816512662
+    identification: 
+      name: BADGE_STATE
+
+    layout: 
+      sequence: 120
+
+    source: 
+      type: Database Column
+      database-column: BADGE_STATE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: MAP_URL =====================================
+    id: 41551532651777409
+    identification: 
+      name: MAP_URL
+
+    layout: 
+      sequence: 130
+
+    source: 
+      type: Database Column
+      database-column: MAP_URL
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Title Link ==================================
+    id: 40539833951512662
+    identification: 
+      position: Title Link # 348722977165395441
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:26:&SESSION.::&DEBUG.:RP,:P26_WORKFLOW_ID:&WORKFLOW_ID.'
+        page: 26 # Workflow Details
+        clear-cache: RP
+        values: 
+          p26_workflow_id: '&WORKFLOW_ID.'
+
+  - # ====== Action: Terminate ===================================
+    id: 40540352051512664
+    identification: 
+      position: Primary Actions # 362316004162771045
+      template: Button # 362316605839802174
+      label: Terminate
+
+    layout: 
+      sequence: 40
+
+    link: 
+      type: Redirect to URL
+      target: '#'
+      link-attributes: data-id="&WORKFLOW_ID."
+
+    appearance: 
+      display-type: Text with Icon
+      icon: fa-times u-danger-text
+      hot: false
+      show-as-disabled: false
+      css-classes: 
+      - terminate
+
+    server-side-condition: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":state_code in ('ACTIVE','FAULTED','SUSPENDED')"
+      execute-condition: For Each Row
+
+page-items: 
+- # ====== Page Item: P19_WORKFLOW_ID ==========================
+  id: 40530270019512641
+  identification: 
+    name: P19_WORKFLOW_ID
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P19_SORT_BY ==============================
+  id: 40540895559512666
+  identification: 
+    name: P19_SORT_BY
+    type: Select List
+
+  label: 
+    label: Sort By
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: My Workflows - Report # 40530816623512643
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-sort-amount-desc
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC2:Create Date;CREATED_ON,Last Update;LAST_UPDATED_ON'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    css-classes: 
+    - mnw160
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Static Value
+    static-value: LAST_UPDATED_ON
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per User (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Terminate ===========================
+  id: 40541231554512669
+  identification: 
+    name: Terminate
+
+  execution: 
+    sequence: 30
+    event-scope: Dynamic
+    static-container-(jquery-selector): body
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: jQuery Selector
+    jquery-selector: a.terminate
+
+  actions: 
+  - # ====== Action: Set Value ===================================
+    id: 40541657090512670
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: JavaScript Expression
+      javascript-expression: this.triggeringElement.dataset.id
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P19_WORKFLOW_ID
+
+    execution: 
+      sequence: 10
+      event: Terminate # 40541231554512669
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 40542162683512670
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        apex_workflow.terminate (
+            p_instance_id => :P19_WORKFLOW_ID );
+      items-to-submit: 
+      - P19_WORKFLOW_ID
+
+    execution: 
+      sequence: 20
+      event: Terminate # 40541231554512669
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 40542677891512671
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.message.showPageSuccess('Workflow terminated');
+
+    execution: 
+      sequence: 30
+      event: Terminate # 40541231554512669
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 40543134737512672
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: My Workflows - Smart Filters # 40530628026512643
+
+    execution: 
+      sequence: 40
+      event: Terminate # 40541231554512669
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 40543703134512672
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: My Workflows - Report # 40530816623512643
+
+    execution: 
+      sequence: 50
+      event: Terminate # 40541231554512669
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Refresh - My Workflows - Report =====
+  id: 40544183317512673
+  identification: 
+    name: Refresh - My Workflows - Report
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed or Canceled
+    selection-type: Region
+    region: My Workflows - Report # 40530816623512643
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 40544602464512673
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: My Workflows - Report # 40530816623512643
+
+    execution: 
+      sequence: 10
+      event: Refresh - My Workflows - Report # 40544183317512673
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 40545077844512674
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: My Workflows - Smart Filters # 40530628026512643
+
+    execution: 
+      sequence: 20
+      event: Refresh - My Workflows - Report # 40544183317512673
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

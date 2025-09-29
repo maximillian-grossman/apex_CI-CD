@@ -1,0 +1,268 @@
+---
+# ====== Page: upload ========================================
+id: 8
+identification: 
+  name: upload
+  alias: UPLOAD
+  title: upload
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Always
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 22146719692773490
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 21796624565459576
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+page-items: 
+- # ====== Page Item: P8_NEW ===================================
+  id: 19704924598956808
+  identification: 
+    name: P8_NEW
+    type: File Upload
+
+  label: 
+    label: New
+    alignment: Left
+
+  display: 
+    display-as: Inline File Browse
+    capture-using: NONE
+
+  storage:: 
+    type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: false
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 22146719692773490
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: New =========================================
+  id: 19704962961956809
+  identification: 
+    button-name: New
+    label: New
+
+  layout: 
+    sequence: 20
+    region: Breadcrumb # 22146719692773490
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: New =================================
+  id: 19705728532956816
+  identification: 
+    name: New
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P8_NEW
+
+processes: 
+- # ====== Process: New ========================================
+  id: 19705376770956813
+  identification: 
+    name: New
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      declare
+          l_file      apex_application_static_files%rowtype;
+          l_file_2    blob;
+          l_id        number;
+          l_pdf       blob;
+          l_json      clob;
+          l_data      sys.json_object_t := sys.json_object_t();
+      begin
+      
+          select *
+            into l_file
+            from apex_application_static_files
+           where file_name = 'templates/employees.docx' and application_id = :APP_ID;
+      /*
+         l_file_2 := DBMS_CLOUD.GET_OBJECT(
+           credential_name => 'OCI$RESOURCE_PRINCIPAL',
+           object_uri => 'https://natdcshjumpstartprod.objectstorage.us-ashburn-1.oci.customer-oci.com/n/natdcshjumpstartprod/b/doc_gen/o/template%2Femployees.docx'); 
+      */
+          l_id := apex_print.upload_template(
+                      p_template => l_file.file_content);
+      
+          select json_object( 
+              'currentDate'   value to_char( sysdate, 'DD MON YYYY' ),
+              'employees'     value
+                  json_arrayagg( 
+                      json_object('name'      value e.ename,
+                                 'job'        value e.job,
+                                 'hiredate'   value to_char( e.hiredate, 'DD MON YYYY'),
+                                 'salary'     value e.sal,
+                                 'commission' value nvl(e.comm,0),
+                                 'department' value d.dname,
+                                 'location'   value d.loc,
+                                 'manager'    value nvl(m.ename,'-') ) pretty ) returning clob) into l_json
+        from eba_demo_dg_emp e
+        join eba_demo_dg_dept d
+          on e.deptno = d.deptno
+        left join eba_demo_dg_emp m
+          on e.mgr = m.empno;
+          l_data := JSON_OBJECT_T.PARSE(l_json);
+          
+          l_pdf := apex_print.generate_document(
+                  p_data          => l_data.to_clob,
+                  p_template_id   => l_id );
+      
+      
+      
+       /* Some processing producing BLOB data and populating my_blob_data */
+      DBMS_CLOUD.PUT_OBJECT(
+           credential_name => 'OCI$RESOURCE_PRINCIPAL',
+           object_uri => 'https://natdcshjumpstartprod.objectstorage.us-ashburn-1.oci.customer-oci.com/n/natdcshjumpstartprod/b/doc_gen/o/out%2Ftest.pdf',
+           contents => l_pdf); 
+      
+      
+          apex_print.remove_template( p_template_id => l_id );
+      
+      
+          apex_http.download(
+              p_blob          => l_pdf,
+              p_content_type  => 'application/pdf',
+              p_filename      => 'hello.pdf' );
+      
+          apex_application.stop_apex_engine;
+      end;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
